@@ -114,7 +114,7 @@ export default function Home() {
             </div>
             <div className="weekly-badge">
               <span className="status-dot" />
-              每周五更新
+              每周一更新
             </div>
           </div>
           <p className="section-intro">

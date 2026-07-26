@@ -354,6 +354,8 @@ export const reports: Report[] = [
   },
 ];
 
+export const companyTrackerLastChecked = "2026.07.25";
+
 export const companyUpdates: CompanyUpdate[] = [
   {
     company: "Physical Intelligence / OpenPI",

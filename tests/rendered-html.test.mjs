@@ -91,7 +91,8 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(paperHtml, /New York University/);
   assert.match(paperHtml, /patch-policy\.github\.io/);
   assert.match(companiesHtml, /Physical Intelligence/);
-  assert.match(companiesHtml, /每周五/);
+  assert.match(companiesHtml, /每周一/);
+  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.07\.25/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
   assert.match(companiesHtml, /TRACKING (?:<!-- -->)?12(?:<!-- -->)? COMPANIES/);
   assert.match(companiesHtml, /Tesla Optimus/);
