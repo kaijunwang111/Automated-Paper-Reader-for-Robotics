@@ -18,15 +18,15 @@ export async function generateMetadata(): Promise<Metadata> {
     description: "面向机器人研究者的具身智能论文日报与公司动态追踪。",
     openGraph: {
       title: "具身智能观察站",
-      description: "从论文证据到研究判断。",
+      description: "具身智能论文精读、分类检索与公司动态。",
       type: "website",
       locale: "zh_CN",
-      images: [{ url: imageUrl, width: 1712, height: 909, alt: "具身智能观察站" }],
+      images: [{ url: imageUrl, width: 1536, height: 1024, alt: "具身智能观察站" }],
     },
     twitter: {
       card: "summary_large_image",
       title: "具身智能观察站",
-      description: "从论文证据到研究判断。",
+      description: "具身智能论文精读、分类检索与公司动态。",
       images: [imageUrl],
     },
   };

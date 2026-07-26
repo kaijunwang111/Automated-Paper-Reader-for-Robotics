@@ -30,38 +30,54 @@ test("server-renders the finished research portal", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>具身智能观察站<\/title>/);
-  assert.match(html, /把每天涌现的机器人论文/);
+  assert.match(html, /跟踪具身智能的最新论文与实验进展/);
   assert.match(html, /最新论文日报/);
   assert.match(html, /机器人公司动向/);
+  assert.match(html, /检索论文数据库/);
   assert.match(html, /2026\.07\.23/);
+  assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
 });
 
-test("renders report, archive, and company routes", async () => {
-  const [archive, detail, companies] = await Promise.all([
+test("renders report, archive, database, paper, and company routes", async () => {
+  const [archive, detail, database, paper, companies] = await Promise.all([
     render("/reports"),
     render("/reports/2026-07-23"),
+    render("/papers"),
+    render("/papers/2607.18236"),
     render("/companies"),
   ]);
 
   assert.equal(archive.status, 200);
   assert.equal(detail.status, 200);
+  assert.equal(database.status, 200);
+  assert.equal(paper.status, 200);
   assert.equal(companies.status, 200);
 
-  const [archiveHtml, detailHtml, companiesHtml] = await Promise.all([
+  const [archiveHtml, detailHtml, databaseHtml, paperHtml, companiesHtml] = await Promise.all([
     archive.text(),
     detail.text(),
+    database.text(),
+    paper.text(),
     companies.text(),
   ]);
 
   assert.match(archiveHtml, /论文日报/);
   assert.match(detailHtml, /Patch Policy/);
   assert.match(detailHtml, /2607\.18236-method\.png/);
-  assert.match(detailHtml, /综合分构成/);
+  assert.match(detailHtml, /项目页/);
+  assert.match(detailHtml, /GitHub/);
+  assert.doesNotMatch(detailHtml, /综合分|评分|候选论文/);
   assert.doesNotMatch(
     detailHtml,
     /本次先从两个 arXiv 批次合并去重|运行产物与限制|配置修改|内部处理过程/,
   );
+  assert.match(databaseHtml, /搜索标题、arXiv ID、机构或技术标签/);
+  assert.match(databaseHtml, /Real2Sim2Real/);
+  assert.match(databaseHtml, /篇精读论文/);
+  assert.match(paperHtml, /返回论文数据库/);
+  assert.match(paperHtml, /New York University/);
+  assert.match(paperHtml, /patch-policy\.github\.io/);
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周五/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
@@ -70,6 +86,7 @@ test("renders report, archive, and company routes", async () => {
 test("ships original-paper figures and finished social metadata", async () => {
   const root = new URL("../", import.meta.url);
   const layout = await readFile(new URL("../app/layout.tsx", import.meta.url), "utf8");
+  const siteData = await readFile(new URL("../lib/site-data.ts", import.meta.url), "utf8");
   const packageJson = await readFile(new URL("../package.json", import.meta.url), "utf8");
 
   await Promise.all([
@@ -80,6 +97,7 @@ test("ships original-paper figures and finished social metadata", async () => {
   ]);
 
   assert.match(layout, /og\.png/);
+  assert.doesNotMatch(siteData, /\bscore(?:Breakdown)?\b/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview|_sites-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
 });

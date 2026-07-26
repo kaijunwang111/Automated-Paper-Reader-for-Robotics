@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CompanyCard, ReportCard } from "@/components/content-cards";
 import { ArrowIcon } from "@/components/site-shell";
-import { companyUpdates, reports } from "@/lib/site-data";
+import { companyUpdates, paperRecords, reports } from "@/lib/site-data";
 
 export default function Home() {
   const latest = reports[0];
@@ -16,20 +16,17 @@ export default function Home() {
               <span className="live-dot" />
               EMBODIED INTELLIGENCE RESEARCH FEED
             </div>
-            <h1>
-              把每天涌现的机器人论文，
-              <span>变成可执行的研究判断。</span>
-            </h1>
+            <h1>跟踪具身智能的最新论文与实验进展</h1>
             <p>
-              聚焦具身智能、VLA、机器人学习与真机部署。我们拆解模型、数据和实验，
-              也对过度包装的泛化结论保持警惕。
+              聚焦具身智能、VLA、机器人学习与真机部署，整理模型结构、训练数据、
+              实验设置、结果与局限。
             </p>
             <div className="hero-actions">
               <Link className="button button-primary" href={`/reports/${latest.slug}`}>
                 阅读最新日报 <ArrowIcon />
               </Link>
-              <Link className="button button-secondary" href="/companies">
-                查看公司动态
+              <Link className="button button-secondary" href="/papers">
+                检索论文数据库
               </Link>
             </div>
           </div>
@@ -42,9 +39,9 @@ export default function Home() {
               <div className="orbit orbit-one" />
               <div className="orbit orbit-two" />
               <div className="signal-core">
-                <span>TOP</span>
-                <strong>{latest.papers[0].score.toFixed(2)}</strong>
-                <small>evidence score</small>
+                <span>INDEXED</span>
+                <strong>{String(paperRecords.length).padStart(2, "0")}</strong>
+                <small>deep reads</small>
               </div>
             </div>
             <div className="console-stats">
@@ -79,20 +76,20 @@ export default function Home() {
           <div className="latest-layout">
             <ReportCard report={latest} featured />
             <aside className="trend-panel">
-              <span className="panel-label">THIS WEEK / 趋势判断</span>
-              <blockquote>“{latest.trend}”</blockquote>
+              <span className="panel-label">THIS ISSUE / 本期内容</span>
+              <blockquote>{latest.overview}</blockquote>
               <div className="trend-metrics">
                 <div>
-                  <strong>{latest.candidateCount}</strong>
-                  <span>候选论文</span>
-                </div>
-                <div>
                   <strong>{latest.papers.length}</strong>
-                  <span>PDF 精读</span>
+                  <span>精选论文</span>
                 </div>
                 <div>
                   <strong>3</strong>
                   <span>原文架构图</span>
+                </div>
+                <div>
+                  <strong>{paperRecords.length}</strong>
+                  <span>数据库收录</span>
                 </div>
               </div>
               <div className="topic-cloud">
@@ -129,30 +126,6 @@ export default function Home() {
             <Link className="button button-dark" href="/companies">
               查看完整追踪时间线 <ArrowIcon />
             </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="manifesto">
-        <div className="shell manifesto-inner">
-          <span className="section-index">OUR FILTER</span>
-          <h2>不是把摘要换一种说法。</h2>
-          <div className="manifesto-grid">
-            <div>
-              <span>01</span>
-              <h3>看证据</h3>
-              <p>真机实验、任务复杂度、试验次数与消融质量共同决定实验分。</p>
-            </div>
-            <div>
-              <span>02</span>
-              <h3>拆结构</h3>
-              <p>区分预训练、后训练与 RL，明确方法真正改变了哪一层。</p>
-            </div>
-            <div>
-              <span>03</span>
-              <h3>判断迁移</h3>
-              <p>提取能够进入下一轮实验的模块，而不是只复述作者结论。</p>
-            </div>
           </div>
         </div>
       </section>

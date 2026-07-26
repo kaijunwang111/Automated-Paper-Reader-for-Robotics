@@ -19,10 +19,10 @@ export function ReportCard({
       <h3>{report.title}</h3>
       <p>{report.summary}</p>
       <div className="report-card-bottom">
-        <div className="mini-paper-stack" aria-label="高分论文">
+        <div className="mini-paper-stack" aria-label="精选论文">
           {report.papers.slice(0, 3).map((paper) => (
             <span key={paper.arxivId}>
-              <b>{paper.score.toFixed(2)}</b>
+              <b>0{paper.rank}</b>
               {paper.title}
             </span>
           ))}
@@ -76,25 +76,20 @@ export function PaperSummaryCard({ paper }: { paper: Paper }) {
       <div className="paper-rank">0{paper.rank}</div>
       <div className="paper-summary-main">
         <div className="paper-summary-top">
-          <h3>{paper.title}</h3>
-          <span className="score-pill">{paper.score.toFixed(3)}</span>
+          <h3>
+            <Link href={`/papers/${paper.arxivId}`}>{paper.title}</Link>
+          </h3>
         </div>
         <p>{paper.signal}</p>
         <div className="tag-row">
-          {paper.tags.map((tag) => (
+          {[...new Set([...paper.categories, ...paper.tags])].map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
         </div>
       </div>
-      <a
-        className="paper-arxiv-link"
-        href={paper.url}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={`在 arXiv 查看 ${paper.title}`}
-      >
-        arXiv <ArrowIcon />
-      </a>
+      <Link className="paper-arxiv-link" href={`/papers/${paper.arxivId}`}>
+        详情 <ArrowIcon />
+      </Link>
     </article>
   );
 }

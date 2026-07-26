@@ -1,6 +1,21 @@
-export type ScoreBreakdown = {
-  label: string;
-  value: number;
+export const paperCategories = [
+  "VLA",
+  "WAM",
+  "WM",
+  "RL",
+  "多模态",
+  "真机部署优化",
+  "Real2Sim2Real",
+  "Humanoid",
+  "数据增强",
+  "UMI / Ego 数据",
+] as const;
+
+export type PaperCategory = (typeof paperCategories)[number];
+
+export type PaperResource = {
+  label: "项目页" | "GitHub" | "模型";
+  url: string;
 };
 
 export type Paper = {
@@ -9,9 +24,10 @@ export type Paper = {
   arxivId: string;
   url: string;
   institutions: string[];
-  score: number;
   signal: string;
   tags: string[];
+  categories: PaperCategory[];
+  resources?: PaperResource[];
   motivation: string;
   architecture: string;
   optimization: string;
@@ -20,7 +36,6 @@ export type Paper = {
   strengths: string;
   limitations: string;
   transfer: string;
-  scoreBreakdown: ScoreBreakdown[];
   figure?: {
     src: string;
     alt: string;
@@ -35,9 +50,13 @@ export type Report = {
   range: string;
   title: string;
   summary: string;
-  trend: string;
-  candidateCount: number;
+  overview: string;
   papers: Paper[];
+};
+
+export type PaperRecord = Paper & {
+  reportSlug: string;
+  reportDate: string;
 };
 
 export type CompanyUpdate = {
@@ -59,9 +78,13 @@ const latestPapers: Paper[] = [
     arxivId: "2607.18236",
     url: "https://arxiv.org/abs/2607.18236",
     institutions: ["New York University", "Meta FAIR", "AMI Labs"],
-    score: 4.814,
-    signal: "轻量化 dense visual token 路线，真机与泛化证据均较完整",
+    signal: "轻量化 dense visual token 路线，同时报告真机、泛化与效率对照",
     tags: ["Dense Representation", "Imitation Learning", "Real Robot"],
+    categories: ["真机部署优化"],
+    resources: [
+      { label: "项目页", url: "https://patch-policy.github.io/" },
+      { label: "GitHub", url: "https://github.com/gaoyuezhou/patch_policy" },
+    ],
     motivation:
       "机器人策略通常把视觉压缩成一个全局 token，损失精细空间信息；直接微调大规模 VLM 又会显著增加训练和控制延迟。论文验证冻结 ViT 的 dense patch feature 能否以更低成本服务精细控制。",
     architecture:
@@ -78,13 +101,6 @@ const latestPapers: Paper[] = [
       "仍是 behavior cloning；dense tokens 增加序列长度，真机结果未报告置信区间，也尚未验证 RL 或端到端视觉微调。",
     transfer:
       "适合作为“高层语义不变、下层空间细节保真”的低成本视觉基线，也可进一步与 force/contact tokens 做分层融合。",
-    scoreBreakdown: [
-      { label: "方法", value: 4.9 },
-      { label: "启发", value: 4.8 },
-      { label: "迁移", value: 4.9 },
-      { label: "实验", value: 4.8 },
-      { label: "质量", value: 4.8 },
-    ],
     figure: {
       src: "/report-assets/2026-07-23/2607.18236-method.png",
       alt: "Patch Policy 将多视角图像编码为 patch tokens，并通过逐帧因果注意力连接动作头的结构图",
@@ -99,9 +115,13 @@ const latestPapers: Paper[] = [
     arxivId: "2607.18840",
     url: "https://arxiv.org/abs/2607.18840",
     institutions: ["Manifold AI", "Tsinghua University", "Shanghai Jiao Tong University"],
-    score: 4.752,
-    signal: "长短期事件记忆 WAM，具备长程任务与视觉提示适应能力",
+    signal: "长短期事件记忆 WAM，评估长程任务与视觉提示适应",
     tags: ["World Action Model", "Long-term Memory", "Multimodal Prompt"],
+    categories: ["WAM", "WM", "多模态", "UMI / Ego 数据"],
+    resources: [
+      { label: "项目页", url: "https://manifoldai-research.github.io/WorldScape-Policy/" },
+      { label: "GitHub", url: "https://github.com/manifoldai-research/WorldScape-Policy" },
+    ],
     motivation:
       "现有 WAM 的历史窗口短、语言监督粗，并且多依赖文本条件，难以追踪长任务进度或利用目标图像与跨本体视频示范。",
     architecture:
@@ -117,14 +137,7 @@ const latestPapers: Paper[] = [
     limitations:
       "主表 94.3% 不能直接视作 OOD 泛化；5B WAM + 4B VLM 与大规模数据的复现成本很高，真机实验仍缺少置信区间。",
     transfer:
-      "最值得迁移的是“短期连续动力学 + 长期事件语义”的双层记忆，可先在小模型 VLA 中仅保存接触事件、完成谓词和恢复节点。",
-    scoreBreakdown: [
-      { label: "方法", value: 5.0 },
-      { label: "启发", value: 4.9 },
-      { label: "迁移", value: 4.8 },
-      { label: "实验", value: 4.6 },
-      { label: "质量", value: 4.5 },
-    ],
+      "“短期连续动力学 + 长期事件语义”的双层记忆可用于小模型 VLA，例如只保存接触事件、完成谓词和恢复节点。",
     figure: {
       src: "/report-assets/2026-07-23/2607.18840-method.png",
       alt: "WorldScape Policy 2.0 从多模态提示编码到长短期记忆 WAM 和真机执行的整体结构",
@@ -139,9 +152,13 @@ const latestPapers: Paper[] = [
     arxivId: "2607.18231",
     url: "https://arxiv.org/abs/2607.18231",
     institutions: ["Tsinghua University", "Microsoft Research", "Fudan University", "USTC"],
-    score: 4.636,
     signal: "用低带宽力觉历史解决视觉不可辨识的接触记忆问题",
     tags: ["Force Memory", "Contact-rich", "VLA"],
+    categories: ["VLA", "多模态", "真机部署优化"],
+    resources: [
+      { label: "项目页", url: "https://qft-333.github.io/FM-VLA-Page/" },
+      { label: "GitHub", url: "https://github.com/qft-333/FM-VLA" },
+    ],
     motivation:
       "视觉 memory 在重复按压、擦拭次数和遮挡搜索等任务中既昂贵又含糊；瞬时力输入则无法记录完整 episode 内已经发生了多少次接触。",
     architecture:
@@ -158,13 +175,6 @@ const latestPapers: Paper[] = [
       "仅三项固定任务和单一平台，没有未见物体、未见接触模式或跨传感器泛化，所有评测都与自采训练任务紧密绑定。",
     transfer:
       "可将 force memory 从完整信号重建扩展为同时预测 contact count、slip、phase 和 failure risk，并检查 latent 的跨物体可对齐性。",
-    scoreBreakdown: [
-      { label: "方法", value: 5.0 },
-      { label: "启发", value: 4.8 },
-      { label: "迁移", value: 4.9 },
-      { label: "实验", value: 4.0 },
-      { label: "质量", value: 4.4 },
-    ],
     figure: {
       src: "/report-assets/2026-07-23/2607.18231-method.png",
       alt: "FM-VLA 两阶段训练架构，包括 Force-VAE 预训练和带力觉记忆的 VLA 后训练",
@@ -178,9 +188,15 @@ const latestPapers: Paper[] = [
     arxivId: "2607.17977",
     url: "https://arxiv.org/abs/2607.17977",
     institutions: ["DAMO Academy, Alibaba Group", "Lupan Lab"],
-    score: 4.532,
     signal: "统一 3D grounding、contact point 和跨本体动作空间",
     tags: ["Foundation Model", "Cross-embodiment", "3D Grounding"],
+    categories: ["VLA", "多模态", "Humanoid"],
+    resources: [
+      {
+        label: "模型",
+        url: "https://huggingface.co/Alibaba-DAMO-Academy/RynnBrain1.1-9B",
+      },
+    ],
     motivation:
       "尝试把视频时序、空间 grounding、3D 理解、contact point 和 VLA action 统一到一组 embodied foundation models 中。",
     architecture:
@@ -197,13 +213,6 @@ const latestPapers: Paper[] = [
       "所谓 cross-embodiment 主要仍是已见本体上的联合训练，而非 held-out embodiment 零样本迁移；数据规模和置信区间缺失。",
     transfer:
       "统一 action canvas、embodiment mask 以及先做 3D/contact supervision 再迁移到 VLA 的路径值得复用。",
-    scoreBreakdown: [
-      { label: "方法", value: 4.9 },
-      { label: "启发", value: 4.7 },
-      { label: "迁移", value: 4.8 },
-      { label: "实验", value: 4.0 },
-      { label: "质量", value: 4.3 },
-    ],
   },
   {
     rank: 5,
@@ -212,9 +221,9 @@ const latestPapers: Paper[] = [
     arxivId: "2607.18016",
     url: "https://arxiv.org/abs/2607.18016",
     institutions: ["BUAA", "BZA", "TJU", "DeepCybo", "ZGCI"],
-    score: 4.514,
     signal: "让同一物理状态同时服务 action 与 verification",
     tags: ["Humanoid", "3D Object Token", "Closed-loop"],
+    categories: ["VLA", "多模态", "真机部署优化", "Humanoid"],
     motivation:
       "长时 humanoid VLA 容易出现 object-state divergence：动作模型理解的对象状态与任务管理器用于判断完成的状态并不一致。",
     architecture:
@@ -226,18 +235,11 @@ const latestPapers: Paper[] = [
     experiments:
       "八类真机任务各 10 次，从 direct GR00T 的 39/80 提升至 71/80；对 verifier、tokens 和完整系统做了拆分消融，并加入未见物体、位置变化和执行中扰动。",
     strengths:
-      "真机、消融与 controlled shift 都直接对准 object-state loop，证据链强。",
+      "真机、消融与 controlled shift 都直接评估 object-state loop 的作用。",
     limitations:
       "训练数据严重缺失、每项 shift 只有 10 次且无 CI；系统依赖 RGB-D、分割、标定与人工 predicate threshold。",
     transfer:
       "可将硬 predicate 扩展成 uncertainty-aware learned verifier，并加入 force/contact event 以覆盖视觉几何不可判别的失败。",
-    scoreBreakdown: [
-      { label: "方法", value: 4.9 },
-      { label: "启发", value: 4.6 },
-      { label: "迁移", value: 4.7 },
-      { label: "实验", value: 4.6 },
-      { label: "质量", value: 3.6 },
-    ],
   },
 ];
 
@@ -247,12 +249,11 @@ export const reports: Report[] = [
     date: "2026.07.23",
     weekday: "周四",
     range: "2026.07.21 - 2026.07.22",
-    title: "记忆、力觉与稠密视觉：执行闭环正在成为主线",
+    title: "记忆、力觉与稠密视觉：近期具身智能论文",
     summary:
-      "从轻量 dense patch policy，到长短期事件记忆 WAM，再到基于力觉的 episodic memory，本期五篇精选共同回答一个问题：机器人在执行中究竟应该保留什么状态。",
-    trend:
-      "最强趋势是把历史压缩为可验证的物理状态，而不是继续无差别堆叠视觉帧。",
-    candidateCount: 24,
+      "本期收录五篇论文，分别讨论 dense patch policy、长短期事件记忆 WAM、力觉 episodic memory、具身基础模型和 humanoid 闭环执行。",
+    overview:
+      "这些工作近期在探索稠密视觉表征、事件级记忆、力觉历史、跨本体动作空间，以及基于 3D object state 的执行验证。",
     papers: latestPapers,
   },
   {
@@ -262,45 +263,44 @@ export const reports: Report[] = [
     range: "2026.07.17 - 2026.07.19",
     title: "长上下文、接触闭环与动作表征整形",
     summary:
-      "超长时序上下文、接触/力觉闭环与动作侧表征整形构成三条互补路线；五篇精选均提供真机闭环证据，但在平台和任务覆盖上仍有限。",
-    trend:
-      "长上下文正在从更多历史帧转向可学习状态压缩，触觉监督的位置也开始成为研究对象。",
-    candidateCount: 40,
+      "本期收录三篇论文，分别关注超长时序上下文、VLA 接触阶段的力反馈，以及触觉监督在动作表征中的注入位置。",
+    overview:
+      "三篇工作都包含真机实验，方法分别使用 fast weights、reactive force injection 和 latent tactile prediction。",
     papers: [
       {
         rank: 1,
         title: "RoboTTT: Context Scaling for Robot Policies",
         arxivId: "2607.15275",
         url: "https://arxiv.org/abs/2607.15275",
-        institutions: ["Research collaboration"],
-        score: 4.925,
+        institutions: ["NVIDIA", "Stanford University", "The University of Texas at Austin"],
         signal: "通过 fast weights 将 VLA 历史上下文扩展到 8K timesteps",
         tags: ["Long Context", "Test-time Training"],
+        categories: ["VLA", "真机部署优化", "UMI / Ego 数据"],
+        resources: [{ label: "项目页", url: "https://research.nvidia.com/labs/gear/robottt/" }],
         motivation: "长时装配需要保留阶段、失败与纠正关系，简单拼接历史帧无法持续扩展。",
         architecture: "在 GR00T N1.7 的 DiT 层中插入 TTT 层，用测试时更新的 MLP fast weights 压缩长历史。",
         optimization: "sequence action forcing 与 truncated BPTT；训练和部署阶段均维护固定大小状态。",
         data: "YAM 双臂真机上三项长时装配任务，分别约 8、6、5 小时真实数据。",
-        experiments: "平均完成度 79%，单步基线为 42%；8K 上下文版本明显优于 1K 版本。",
-        strengths: "真正把长上下文落到复杂真机任务，并给出上下文长度消融。",
+        experiments: "平均完成度 79%，单步基线为 42%；8K 上下文版本高于 1K 版本。",
+        strengths: "在复杂真机任务中评估长上下文，并给出上下文长度消融。",
         limitations: "预训练使用 16 张 GB200，成本高；仍无法覆盖所有部署失败。",
         transfer: "可把 force event、失败恢复和动作 chunk 作为 fast-weight 更新信号。",
-        scoreBreakdown: [
-          { label: "方法", value: 5.0 },
-          { label: "启发", value: 5.0 },
-          { label: "迁移", value: 5.0 },
-          { label: "实验", value: 4.8 },
-          { label: "质量", value: 4.8 },
-        ],
       },
       {
         rank: 2,
         title: "Never Too Late for Force: Accelerating VLA Post-Training with Reactive Force Injection",
         arxivId: "2607.14236",
         url: "https://arxiv.org/abs/2607.14236",
-        institutions: ["Research collaboration"],
-        score: 4.83,
+        institutions: [
+          "Shanghai Jiao Tong University",
+          "Shanghai Innovation Institute",
+          "Southern University of Science and Technology",
+          "Noematrix Ltd.",
+        ],
         signal: "通过 reactive action expert 和 online DAgger 注入力反馈",
         tags: ["Force", "Post-training", "DAgger"],
+        categories: ["VLA", "多模态", "真机部署优化"],
+        resources: [{ label: "项目页", url: "https://lift-policy.github.io/" }],
         motivation: "预训练 VLA 的语义能力很强，但接触阶段的快速物理反应不足。",
         architecture: "复制 reactive action expert，并通过零初始化 cross-attention 注入短期 6D 力记忆。",
         optimization: "混合离线任务数据与在线人工纠正轨迹做 DAgger 后训练。",
@@ -309,38 +309,29 @@ export const reports: Report[] = [
         strengths: "结构简单，消融清晰，直接服务接触任务后训练。",
         limitations: "依赖人工在线纠正，只验证单臂，算力与数据吞吐成本仍高。",
         transfer: "适合作为 VLA 的旁路快速物理反馈模块。",
-        scoreBreakdown: [
-          { label: "方法", value: 4.9 },
-          { label: "启发", value: 4.9 },
-          { label: "迁移", value: 5.0 },
-          { label: "实验", value: 4.7 },
-          { label: "质量", value: 4.7 },
-        ],
       },
       {
         rank: 3,
         title: "Representation-Aligned Tactile Grounding for Contact-Rich Robotic Manipulation",
         arxivId: "2607.14609",
         url: "https://arxiv.org/abs/2607.14609",
-        institutions: ["Research collaboration"],
-        score: 4.81,
+        institutions: [
+          "Fudan University",
+          "Lenovo CTO Organization",
+          "Nanyang Technological University",
+          "TeleAI, China Telecom",
+        ],
         signal: "先诊断各层物理可预测性，再选择触觉监督位置",
         tags: ["Tactile", "Representation", "Grounding"],
+        categories: ["VLA", "多模态", "真机部署优化"],
         motivation: "直接加触觉 loss 并不保证监督落在真正决定动作的表征层。",
         architecture: "用 linear probe 选择最能预测未来触觉的 action-expert 中间层，并接入 Latent Tactile Predictor。",
         optimization: "触觉 predictor 仅训练期存在，推理时移除，不增加额外延迟。",
         data: "ARX R5 与 PaXini 触觉传感器，五项接触任务，每项 50 条专家示范。",
-        experiments: "SmolVLA 与 π0 上均明显超过基础模型和未对齐触觉接口，每项每种方法 20 次真机试验。",
+        experiments: "论文报告 SmolVLA 与 π0 上的成功率均高于基础模型和未对齐触觉接口，每项每种方法 20 次真机试验。",
         strengths: "回答了监督应该施加在哪一层，并在两个 backbone 上验证。",
         limitations: "单平台、单传感器，规模不足以证明大规模预训练下同样成立。",
         transfer: "可替换为 future-force、contact phase 或 failure-risk latent。",
-        scoreBreakdown: [
-          { label: "方法", value: 4.9 },
-          { label: "启发", value: 5.0 },
-          { label: "迁移", value: 4.9 },
-          { label: "实验", value: 4.7 },
-          { label: "质量", value: 4.7 },
-        ],
       },
     ],
   },
@@ -411,4 +402,16 @@ export const companyUpdates: CompanyUpdate[] = [
 
 export function getReport(slug: string) {
   return reports.find((report) => report.slug === slug);
+}
+
+export const paperRecords: PaperRecord[] = reports.flatMap((report) =>
+  report.papers.map((paper) => ({
+    ...paper,
+    reportSlug: report.slug,
+    reportDate: report.date,
+  })),
+);
+
+export function getPaperById(arxivId: string) {
+  return paperRecords.find((paper) => paper.arxivId === arxivId);
 }

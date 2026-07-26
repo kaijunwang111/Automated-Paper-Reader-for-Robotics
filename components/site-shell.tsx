@@ -15,6 +15,7 @@ export function SiteHeader() {
         </Link>
         <nav className="main-nav" aria-label="主导航">
           <Link href="/reports">论文日报</Link>
+          <Link href="/papers">论文数据库</Link>
           <Link href="/companies">公司动态</Link>
           <Link href="/about">关于</Link>
         </nav>
@@ -37,7 +38,7 @@ export function SiteFooter() {
       <div className="shell footer-inner">
         <div>
           <strong>具身智能观察站</strong>
-          <p>从论文证据到研究判断。</p>
+          <p>具身智能论文精读与行业动态。</p>
         </div>
         <div className="footer-meta">
           <span>论文源：arXiv</span>
