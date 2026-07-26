@@ -10,20 +10,24 @@
 - 不要切换到其他同名或旧路径项目。
 
 本地路径：
-<ABSOLUTE_PATH_TO_THIS_REPO>/paper-daily
+C:\Users\kaijun\Desktop\Code\Codex_Automated_Paper_Reader\paper-daily
 
 路径要求：
 - 所有相对路径都必须以 `paper-daily` 目录为基准。
 - 使用你的 Python 可执行文件，例如：
-  python
-  或
-  <ABSOLUTE_PATH_TO_PYTHON>
+  scripts/daily_papers.py
 
 第一步：只运行候选检索，不要让脚本生成日报：
-python scripts/daily_papers.py --config config.yaml --date today --stage fetch --force
+python scripts/daily_papers.py --config config.yaml --date today --stage fetch --force --sources arxiv
+
+数据源范围：
+- 当前只使用 arXiv，不查询 OpenReview、OpenAlex 或其他论文源。
+- 多日窗口需要按日期逐日执行 arXiv fetch，再合并 candidates、按 paper id 去重；不要只抓运行日一个批次就声称覆盖整个窗口。
+- 周一正式任务覆盖上周五至周日；周五正式任务覆盖本周一至周四。没有 arXiv 公告批次的日期可以跳过，但必须记录。
+- 示例或手动补跑以用户指定窗口为准，并在日报开头写明实际覆盖日期和 arXiv 公告批次。
 
 网络预检要求：
-- 脚本会先检测 `export.arxiv.org`、`arxiv.org`、`openreview.net`、`api2.openreview.net` 等核心网址。
+- 脚本只需检测 `export.arxiv.org` 和 `arxiv.org`。
 - 如果网络预检失败，立即停止自动化并报告网络错误。
 - 不要继续评分，不要写空日报，不要用旧候选池冒充当天结果。
 
@@ -39,12 +43,12 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 
 如果 fetch 失败或候选池为空：
 - 检查 `logs/YYYY-MM-DD.log`、`data/raw/YYYY-MM-DD.json` 和 `data/processed/YYYY-MM-DD_candidates.json`。
-- 如果原因是网络、代理、arXiv 或 OpenReview 访问失败，不要写泛化空日报。
+- 如果原因是网络、代理或 arXiv 访问失败，不要写泛化空日报。
 - 报告失败命令、错误原因、已生成文件、候选数量和建议修复方案。
 - 只有在用户明确要求 fallback 时，才可使用最近一个非空 candidates 文件生成补跑日报，并在报告开头标明来源日期。
 
 研究背景：
-<WRITE_YOUR_RESEARCH_BACKGROUND_HERE>
+主要检索具身智能领域中与操作相关的文章（基于learning的方法），包括但不限于VLA、World Action Model、World Model。大模型LLM/VLM相关的文章也可进行检索，如果里面的方案能够迁移到机器人上的话。
 
 推荐原则：
 - 优先推荐能迁移到研究问题中的通用 AI 方法论文。
@@ -53,27 +57,53 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - 对直接领域论文也要看方法贡献、实验质量和可复用价值。
 
 重点关注：
-<WRITE_YOUR_FOCUS_TOPICS_HERE>
+- 论文有具身智能机器人领域或计算机领域公司、成熟大学实验室或多机构合作支撑。
+- 对精选论文必须从 PDF 首页、作者署名或论文项目页核验机构/公司；列出机构名，并在能明确确认时列出实验室或团队名。不能从作者邮箱或个人印象猜测实验室归属；无法确认实验室时写“仅确认机构”。
+- 具身智能领域中与manipulation或全身VLA相关的文章。
+- manipulation文章中重点关注VLA、World Action Model和World Model (比如Dreamer、JEPA相关)，以及这些模型与RL结合的方法。
+- 预训练和后训练文章均需关注。如果与预训练相关，重点关注数据构成、模型结构、训练成本以及实验内容；若与后训练相关，则关注论文的核心关注点、模型改进点、数据构成以及实验内容。
+- 与真机部署优化相关的论文也可关注。
+- 重点关注方案是如何进行上层抽象特征与下层不变形特征提取，并关注如何让这些特征提高动作的泛化能力。
+- 重点关注以下会议或期刊：Science Robotics、RSS、CoRL、ICRA、IROS、TRO、IJRR、ICML、ICCV、ECCV、CVPR、NeurIPS、AAAI。
 
 负向过滤：
-<WRITE_YOUR_NEGATIVE_TOPICS_HERE>
+- 没有进行真机实验的。
+- 仿真只在LIBERO上做的。
+- 消融实验不完善的，属于明显排列组合的论文。
+- 只有成功视频或少量挑选案例、没有试验次数和失败统计的。
+- 用不同训练数据、算力或 backbone 做不公平对比，却把收益全部归因于方法模块的。
 
 评分维度，每项 0-5：
 - Methodological Relevance
 - Inspiration Value
 - Transferability to My Research
+- Experimental Evidence
 - Paper Quality
 - Novelty / Timeliness
 - Actionability
 
 综合分：
 Final Score =
-0.25 * Methodological Relevance
-+ 0.25 * Inspiration Value
-+ 0.20 * Transferability to My Research
-+ 0.15 * Paper Quality
+0.20 * Methodological Relevance
++ 0.16 * Inspiration Value
++ 0.16 * Transferability to My Research
++ 0.18 * Experimental Evidence
++ 0.12 * Paper Quality
 + 0.10 * Novelty / Timeliness
-+ 0.05 * Actionability
++ 0.08 * Actionability
+
+Experimental Evidence 评分标准：
+- 5 分：充分真机实验 + 有针对性的关键消融 + 未见条件/对象/任务/环境/embodiment 泛化或长时、多阶段、接触丰富、灵巧操作等复杂能力验证；对照公平，试验次数和成功判据清楚。
+- 4 分：有可信真机实验和有效消融，并包含一定泛化或复杂任务证据，但规模、平台或统计仍有限。
+- 3 分：有真机或高可信闭环实验，但消融、泛化、任务复杂度或统计完整性一般。
+- 2 分：主要为仿真、任务较窄、消融不充分，或真机只做少量展示。
+- 0-1 分：没有有效实验、只给宣传性案例，或实验无法支持核心结论。
+- 实验高分不能挽救方法与研究方向明显不相关的论文。
+
+实验可信度核验：
+- 核对真机平台、任务数量、每项试验次数、成功判据、训练/测试划分、基线、公平算力/数据、方差或置信区间、失败案例和消融。
+- 真机泛化优先看未见物体、未见任务、环境/光照/视角变化、跨 embodiment、扰动恢复和长时多阶段任务，而不是训练分布内重复执行。
+- 区分论文正文证据、摘要自述和项目页视频；不得把视频演示当作充分统计证据。
 
 评分输出：
 保存到：
@@ -95,10 +125,22 @@ data/processed/YYYY-MM-DD_scored.json
         "methodological_relevance": 0,
         "inspiration_value": 0,
         "transferability_to_my_research": 0,
+        "experimental_evidence": 0,
         "paper_quality": 0,
         "novelty_timeliness": 0,
         "actionability": 0,
         "final_score": 0
+      },
+      "affiliations": [],
+      "lab_or_company": [],
+      "affiliation_evidence": "pdf-first-page / project-page / not-confirmed",
+      "experimental_evidence_flags": {
+        "real_robot": "yes / no / unclear",
+        "ablation_quality": "strong / moderate / weak / unclear",
+        "generalization_evidence": "strong / moderate / weak / none / unclear",
+        "complex_task_evidence": "strong / moderate / weak / none / unclear",
+        "trial_count_reported": "yes / partial / no",
+        "variance_or_ci_reported": "yes / partial / no"
       },
       "selected_for_deep_read": false,
       "selected_for_top10": false,
@@ -111,9 +153,10 @@ data/processed/YYYY-MM-DD_scored.json
 阅读流程：
 1. 读取 candidates.json，先基于 title、abstract、venue/categories、retrieval_reason 做逐篇语义评分。
 2. 从高分候选中选择约 15 篇进一步阅读。
-3. 对最终 Top 10 尽量打开论文页面或 PDF，阅读 abstract、introduction、method、experiments、conclusion。
-4. 如果只能基于 abstract 判断，必须在 `reading_evidence` 和日报中明确写明。
-5. 不要编造候选、网页或 PDF 中无法支持的信息。
+3. 对最终 Top 10 打开 PDF，阅读首页机构、abstract、introduction、method、data/training、experiments、ablation、limitations/conclusion；不能只依赖摘要。
+4. 对每篇精选论文核对实验是否真正支持作者结论，并指出可能的宣传性表述、混杂因素或证据缺口。
+5. 如果只能基于 abstract 判断，必须在 `reading_evidence` 和日报中明确写明，且不能进入正式精选 Top 10；示例模式需明确标注例外。
+6. 不要编造候选、机构、网页或 PDF 中无法支持的信息。
 
 日报输出：
 写入：
@@ -122,7 +165,16 @@ reports/YYYY-MM-DD.md
 日报建议包含：
 - 今日概览
 - Top 10 Papers
-- 每篇论文的核心方法、迁移价值、可转化实验/模块、局限、阅读建议、证据来源
+- 每篇精选论文使用统一结构：
+  1. 机构 / 公司 / 实验室（注明证据来源）
+  2. 出发点：作者要解决什么问题，现有方法为什么不够
+  3. 模型结构：backbone、关键模块、信息流和动作表示
+  4. 优化阶段：属于预训练、后训练、RL 或其组合；训练目标、冻结/更新模块和主要优化点
+  5. 数据组成：数据量、内容、开源/自采、仿真/真机/人类视频、采集平台；未披露则明确写未披露
+  6. 实验内容与结果：只保留能支持结论的关键结果，不堆数字
+  7. 亮点和局限：特别检查消融、泛化、复杂任务、统计和过度宣传风险
+  8. 迁移价值：可迁移模块、建议实验和与当前研究的连接
+  9. 综合分构成：列出各维度分数、加权总分和实验可信度 flags
 - 今日重点趋势
 - 潜在研究 idea
 - 值得加入 related work 的论文
@@ -140,5 +192,7 @@ reports/YYYY-MM-DD.md
 - 禁止没阅读候选内容就总结。
 - 禁止生成大量重复套话。
 - 禁止因为论文命中领域关键词就给高分。
+- 禁止因为作者机构知名就自动给高分；机构只作为研究背景和资源可信度线索。
+- 禁止把“有真机视频”等同于充分真机实验。
 - 禁止编造 PDF 或正文中没有的信息。
 - 禁止自动 git push。

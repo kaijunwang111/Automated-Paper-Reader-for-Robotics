@@ -1,22 +1,67 @@
 research_profile:
   language: en
   goal: >
-    Find general AI method papers that may inspire machine learning research,
-    time-series modeling, sequence modeling, multimodal learning, adaptation,
-    calibration, uncertainty modeling, and robust deployment.
+    Find recent embodied-intelligence papers on robot manipulation and whole-body
+    control, especially VLA, world-action models, world models, reinforcement
+    learning, representation learning, and efficient real-robot deployment.
+    Also retain general AI methods when their ideas transfer clearly to robotics.
   background_topics:
-    - machine learning
+    - embodied intelligence
+    - robot manipulation
+    - whole-body control
+    - vision-language-action models
+    - world-action models
+    - world models
+    - reinforcement learning
+    - imitation learning
     - representation learning
-    - sequence modeling
-    - time-series modeling
-    - multimodal learning
-    - uncertainty modeling
-    - calibration
-    - test-time adaptation
-    - continual learning
-    - domain adaptation
-    - distribution shift
+    - real-robot deployment
   positive_keywords:
+    - embodied intelligence
+    - embodied AI
+    - robot manipulation
+    - robotic manipulation
+    - manipulation policy
+    - generalist robot policy
+    - robot learning
+    - visuomotor policy
+    - vision-language-action
+    - VLA
+    - world action model
+    - world-action model
+    - world model
+    - Dreamer
+    - JEPA
+    - action representation
+    - action tokenizer
+    - action chunking
+    - diffusion policy
+    - flow matching policy
+    - imitation learning
+    - behavior cloning
+    - offline reinforcement learning
+    - reinforcement learning
+    - sim-to-real
+    - real-world robot
+    - real robot
+    - bimanual manipulation
+    - dexterous manipulation
+    - mobile manipulation
+    - whole-body control
+    - humanoid manipulation
+    - policy generalization
+    - cross-embodiment
+    - robot foundation model
+    - multimodal policy
+    - tactile sensing
+    - force feedback
+    - contact-rich manipulation
+    - long-horizon manipulation
+    - multi-stage manipulation
+    - real-world generalization
+    - unseen object generalization
+    - cross-embodiment generalization
+    - in-context robot learning
     - representation learning
     - disentangled representation
     - invariant representation
@@ -28,41 +73,16 @@ research_profile:
     - latent variable model
     - prototype learning
     - metric learning
-    - sequence modeling
-    - temporal modeling
-    - long-context modeling
-    - state space model
-    - recurrent model
-    - temporal attention
-    - alignment modeling
-    - CTC
-    - transducer
-    - sequence-to-sequence
     - uncertainty estimation
-    - aleatoric uncertainty
-    - epistemic uncertainty
-    - calibration
-    - conformal prediction
     - robust learning
     - out-of-distribution
-    - noisy label learning
-    - confidence estimation
     - online adaptation
     - test-time adaptation
     - continual learning
     - domain adaptation
     - domain generalization
     - distribution shift
-    - representation drift
-    - non-stationary learning
-    - language model integration
-    - retrieval-augmented generation
-    - reranking
-    - sequence scoring
-    - decoding strategy
     - preference optimization
-    - weak supervision
-    - posterior inference
     - self-training
     - pseudo-labeling
     - diffusion model
@@ -71,63 +91,52 @@ research_profile:
     - attention mechanism
     - tokenization
     - spatiotemporal modeling
-    - time series
-    - irregular time series
     - foundation model
-    - scientific machine learning
     - language model
   negative_keywords:
-    - protein folding
+    - medical imaging
+    - clinical diagnosis
     - recommender system
-    - materials discovery
-    - web scraper
-    - vulnerability fixing
-    - tutoring system
     - financial forecasting
+    - molecular generation
+    - social simulation
   arxiv_categories:
+    - cs.RO
+    - cs.CV
     - cs.LG
     - cs.AI
-    - cs.CL
-    - cs.CV
-    - cs.MM
-    - cs.IR
-    - cs.SD
     - cs.NE
-    - eess.SP
+    - eess.SY
     - stat.ML
   preferred_venues:
+    - Science Robotics
+    - RSS
+    - CoRL
+    - ICRA
+    - IROS
+    - TRO
+    - IJRR
     - NeurIPS
     - ICML
-    - ICLR
     - CVPR
     - ICCV
     - ECCV
-    - ACL
-    - EMNLP
-    - NAACL
-    - COLM
-    - TMLR
     - AAAI
-    - IJCAI
-    - KDD
-    - WWW
-    - TheWebConf
-    - SIGIR
 
 sources:
   arxiv:
     enabled: true
-    lookback_days: 3
-    max_results: 200
+    lookback_days: 2
+    max_results: 120
     retries: 0
     retry_after_seconds: 20
     html_fallback_enabled: true
     max_api_failures_before_html: 1
-    html_fallback_per_category: 50
-    html_fallback_max_results: 100
+    html_fallback_per_category: 60
+    html_fallback_max_results: 120
     html_fallback_sleep_seconds: 0.25
   openreview:
-    enabled: true
+    enabled: false
     venues:
       - ICLR
       - NeurIPS
@@ -152,4 +161,34 @@ output:
   log_dir: logs
 
 retrieval:
-  candidate_limit: 100
+  candidate_limit: 60
+
+semantic_scoring:
+  weights:
+    methodological_relevance: 0.20
+    inspiration_value: 0.16
+    transferability_to_my_research: 0.16
+    experimental_evidence: 0.18
+    paper_quality: 0.12
+    novelty_timeliness: 0.10
+    actionability: 0.08
+  experimental_evidence:
+    require_real_robot_for_high_score: true
+    require_targeted_ablations_for_high_score: true
+    reward_generalization_or_complex_tasks: true
+    verify_trial_counts_and_success_criteria: true
+    penalize_demo_only_evidence: true
+    penalize_unfair_data_compute_or_backbone_comparisons: true
+  report_requirements:
+    include_affiliations_for_selected_papers: true
+    affiliation_primary_source: pdf_first_page
+    disclose_unknown_lab_names: true
+    selected_paper_sections:
+      - motivation
+      - model_structure
+      - optimization_stage
+      - data_composition
+      - experiments_and_results
+      - strengths_and_limitations
+      - transfer_value
+      - score_breakdown
