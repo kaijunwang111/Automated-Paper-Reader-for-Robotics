@@ -14,8 +14,8 @@ export default function ReportsPage() {
         <span className="section-index">PAPER DAILY / ARCHIVE</span>
         <h1>论文日报</h1>
         <p>
-          每周一与周五整理近期 arXiv 新论文。精选论文均进入 PDF，
-          从动机、架构、数据、实验与迁移价值五个层面给出判断。
+          每周一与周五整理近期 arXiv 新论文，从动机、架构、训练阶段、数据、
+          实验、亮点与局限等方面进行精读。
         </p>
       </section>
       <section className="shell archive-section">
