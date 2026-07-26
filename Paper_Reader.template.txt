@@ -22,6 +22,7 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 
 数据源范围：
 - 当前只使用 arXiv，不查询 OpenReview、OpenAlex 或其他论文源。
+- 合并去重后的候选池最多保留 300 篇；最终日报输出 15 篇论文。
 - 多日窗口需要按日期逐日执行 arXiv fetch，再合并 candidates、按 paper id 去重；不要只抓运行日一个批次就声称覆盖整个窗口。
 - 周一正式任务覆盖上周五至周日；周五正式任务覆盖本周一至周四。没有 arXiv 公告批次的日期可以跳过，但必须记录。
 - 示例或手动补跑以用户指定窗口为准，并在日报开头写明实际覆盖日期和 arXiv 公告批次。
@@ -36,8 +37,8 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
   data/processed/YYYY-MM-DD_candidates.json
 - 同时读取 `data/raw/YYYY-MM-DD.json` 中的 `recommended_action` 和 `duplicate_check`。
 - 如果 `recommended_action` 是 `write_no_new_batch_note`、`duplicate_check.recommended_action` 是 `write_no_new_batch_note`、`duplicate_check.status` 是 `duplicate_of_previous`，或当天 candidates 为空 / paper id 集合与最近一天 candidates 完全一致：
-  - 不要重复生成正常 Top 10 日报。
-  - 不要沿用旧 Top 10 冒充当天新推荐。
+  - 不要重复生成正常 Top 15 日报。
+  - 不要沿用旧 Top 15 冒充当天新推荐。
   - 写一个很短的“今日无新候选批次”说明到 `reports/YYYY-MM-DD.md`，注明候选数量、最近可见 arXiv 批次、主要原因（例如 arXiv 今日 recent-list 尚未更新、当天无公告批次、或候选池与上一批重复）。
   - 除非用户明确要求补跑/重评，不要重写 `data/processed/YYYY-MM-DD_scored.json`。
 
@@ -117,7 +118,7 @@ data/processed/YYYY-MM-DD_scored.json
   "candidate_path": "...",
   "candidate_count": 0,
   "deep_read_ids": [],
-  "top10_ids": [],
+  "top15_ids": [],
   "papers": [
     {
       "...原始候选字段": "...",
@@ -143,7 +144,7 @@ data/processed/YYYY-MM-DD_scored.json
         "variance_or_ci_reported": "yes / partial / no"
       },
       "selected_for_deep_read": false,
-      "selected_for_top10": false,
+      "selected_for_top15": false,
       "reading_evidence": "abstract-only / paper page / pdf",
       "semantic_rank": 0
     }
@@ -152,10 +153,10 @@ data/processed/YYYY-MM-DD_scored.json
 
 阅读流程：
 1. 读取 candidates.json，先基于 title、abstract、venue/categories、retrieval_reason 做逐篇语义评分。
-2. 从高分候选中选择约 15 篇进一步阅读。
-3. 对最终 Top 10 打开 PDF，阅读首页机构、abstract、introduction、method、data/training、experiments、ablation、limitations/conclusion；不能只依赖摘要。
+2. 从高分候选中选择最多 30 篇进一步打开论文页或 PDF。
+3. 对最终 Top 15 打开 PDF，阅读首页机构、abstract、introduction、method、data/training、experiments、ablation、limitations/conclusion；不能只依赖摘要。
 4. 对每篇精选论文核对实验是否真正支持作者结论，并指出可能的宣传性表述、混杂因素或证据缺口。
-5. 如果只能基于 abstract 判断，必须在 `reading_evidence` 和日报中明确写明，且不能进入正式精选 Top 10；示例模式需明确标注例外。
+5. 如果只能基于 abstract 判断，必须在 `reading_evidence` 和日报中明确写明，且不能进入正式精选 Top 15；示例模式需明确标注例外。
 6. 不要编造候选、机构、网页或 PDF 中无法支持的信息。
 
 日报输出：
@@ -164,7 +165,7 @@ reports/YYYY-MM-DD.md
 
 日报建议包含：
 - 今日概览
-- Top 10 Papers
+- Top 15 Papers
 - 每篇精选论文使用统一结构：
   1. 机构 / 公司 / 实验室（注明证据来源）
   2. 出发点：作者要解决什么问题，现有方法为什么不够
@@ -179,11 +180,20 @@ reports/YYYY-MM-DD.md
 - 潜在研究 idea
 - 值得加入 related work 的论文
 
+网站同步：
+- 本地 `reports/YYYY-MM-DD.md` 保留检索批次、运行、评分与排查信息。
+- 公开网站只发布论文内容，不展示内部评分、Prompt、配置或处理过程。
+- 将新日报置于 `website/lib/site-data.ts` 的最新位置，并将 15 篇论文加入可检索数据库。
+- 每篇论文最多使用两幅 Method / Architecture 图片，优先截取 arXiv 原论文并存入 `website/public/report-assets/YYYY-MM-DD/`。
+- 保留可核验的项目页、GitHub 或模型链接；没有可靠链接时不要猜测。
+- 运行网站测试并使用 `website/.openai/hosting.json` 对应的现有 Sites 项目发布；禁止创建新站点。
+
 最后回复用户：
 - 今日候选数量
-- Top 10 标题
+- Top 15 标题
 - scored.json 路径
 - 日报路径
+- 网站发布结果和公开网址
 - 任何失败源、网络/代理问题或 abstract-only 限制
 
 禁止：

@@ -43,7 +43,7 @@ export function SiteFooter() {
         <div className="footer-meta">
           <span>论文源：arXiv</span>
           <span>日报：周一 / 周五</span>
-          <span>公司动态：每周五</span>
+          <span>公司动态：每周一</span>
         </div>
       </div>
     </footer>

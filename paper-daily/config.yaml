@@ -127,13 +127,13 @@ sources:
   arxiv:
     enabled: true
     lookback_days: 2
-    max_results: 120
+    max_results: 300
     retries: 0
     retry_after_seconds: 20
     html_fallback_enabled: true
     max_api_failures_before_html: 1
-    html_fallback_per_category: 60
-    html_fallback_max_results: 120
+    html_fallback_per_category: 100
+    html_fallback_max_results: 300
     html_fallback_sleep_seconds: 0.25
   openreview:
     enabled: false
@@ -161,7 +161,11 @@ output:
   log_dir: logs
 
 retrieval:
-  candidate_limit: 60
+  candidate_limit: 300
+
+reporting:
+  selected_paper_count: 15
+  full_text_review_limit: 30
 
 semantic_scoring:
   weights:

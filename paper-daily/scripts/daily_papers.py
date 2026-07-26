@@ -1,7 +1,7 @@
 """Fetch candidate papers for Codex-assisted daily literature review.
 
 This script intentionally stops at candidate retrieval. It does not choose the
-final Top 10 and does not write a Markdown report; Codex should do that after
+final Top 15 and does not write a Markdown report; Codex should do that after
 reading and scoring the candidate pool.
 """
 
@@ -72,10 +72,10 @@ def main() -> None:
             f"{duplicate_check.get('duplicate_of_date')} "
             f"({duplicate_check.get('shared_count', 0)} unchanged ids)"
         )
-        print("Action: write a no-new-batch note instead of repeating Top 10")
+        print("Action: write a no-new-batch note instead of repeating Top 15")
     elif result.get("recommended_action") == "write_no_new_batch_note":
         print("No new candidates for the target date.")
-        print("Action: write a no-new-batch note instead of a Top 10 report")
+        print("Action: write a no-new-batch note instead of a Top 15 report")
 
 
 def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
@@ -167,7 +167,7 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
     duplicate_check = compare_with_previous_candidates(candidates, paths["processed_dir"], report_date)
     if duplicate_check.get("status") == "duplicate_of_previous":
         logger.warning(
-            "Candidate set is identical to %s; downstream report should not repeat Top 10.",
+            "Candidate set is identical to %s; downstream report should not repeat Top 15.",
             duplicate_check.get("duplicate_of_date"),
         )
     recommended_action = recommended_downstream_action(candidates, duplicate_check)

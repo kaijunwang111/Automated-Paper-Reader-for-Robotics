@@ -51,11 +51,16 @@ logs/YYYY-MM-DD.log
 
 Runtime outputs are ignored by Git.
 
+The production configuration keeps at most 300 merged candidates. The Codex
+automation reviews up to 30 full texts and publishes up to 15 selected papers.
+For multi-day Monday/Friday windows, use `scripts/merge_candidates.py` to merge
+the per-day candidate files before semantic review.
+
 The raw JSON includes a `duplicate_check` block. If `status` is
 `duplicate_of_previous`, today's final candidate pool has the same paper IDs as
 the most recent previous candidate file. In that case, `recommended_action` is
 `write_no_new_batch_note`, and Codex should write a short "no new candidate
-batch today" note instead of repeating the prior Top 10.
+batch today" note instead of repeating the prior Top 15.
 
 For arXiv, CAPR treats the HTML recent-list heading date as the authoritative
 daily announcement date. If no papers are listed for the target date, it does

@@ -60,7 +60,7 @@ retrieval:
     assert candidates_path.exists()
     assert (tmp_path / "data" / "raw" / "2026-05-14.json").exists()
     assert not (tmp_path / "reports" / "2026-05-14.md").exists()
-    assert not (tmp_path / "data" / "processed" / "2026-05-14_top10.json").exists()
+    assert not (tmp_path / "data" / "processed" / "2026-05-14_top15.json").exists()
 
 
 def test_write_json_atomic_falls_back_when_replace_is_blocked(tmp_path, monkeypatch):

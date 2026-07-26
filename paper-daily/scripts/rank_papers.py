@@ -107,7 +107,7 @@ def build_candidate_pool(
     target_date: date,
     candidate_limit: int = 80,
 ) -> list[dict[str, Any]]:
-    """Return a 50-100 item candidate pool with retrieval metadata."""
+    """Return up to the configured number of candidates with retrieval metadata."""
 
     scored = [
         score_candidate_rules(validate_paper_schema(paper), research_profile, target_date)

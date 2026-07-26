@@ -116,7 +116,7 @@ This command only creates the candidate pool. It does not write the final daily 
 `duplicate_of_previous`, today's candidate pool is identical to the most recent
 previous pool and `recommended_action` is `write_no_new_batch_note`, so Codex
 should write a short "no new candidate batch today" note instead of repeating
-the Top 10 report.
+the Top 15 report.
 For arXiv, CAPR prefers the HTML recent-list announcement date. If the target
 date has no new announcement batch, the workflow does not reuse an older batch.
 
@@ -140,7 +140,9 @@ cp ../Paper_Reader.template.en.txt ../Paper_Reader.txt
 - Set the Python executable used by your machine.
 - Customize your research background and scoring criteria.
 
-3. Schedule the prompt as a Codex automation.
+3. The production schedule runs the paper report at 09:00 every Monday and Friday,
+   and the company tracker at 09:00 every Monday. Operational and publishing
+   instructions live in `automation/`.
 
 The local `Paper_Reader.txt` file is ignored by Git because it usually contains machine-specific paths and private screening preferences. The public repository only includes the Chinese and English template files.
 

@@ -115,7 +115,7 @@ logs/YYYY-MM-DD.log
 `data/raw/YYYY-MM-DD.json` 会包含 `duplicate_check`。如果状态是
 `duplicate_of_previous`，对应的 `recommended_action` 会是
 `write_no_new_batch_note`，说明当天候选池与最近一次候选池完全相同；Codex 应写一段
-“今日无新候选批次”说明，而不是重复生成 Top 10 日报。
+“今日无新候选批次”说明，而不是重复生成 Top 15 日报。
 arXiv 日报优先使用 HTML recent-list 的公告日期；如果目标日期没有新公告批次，流程不会复用旧批次。
 
 ## 🤖 Codex 自动化用法
@@ -138,7 +138,8 @@ cp ../Paper_Reader.template.en.txt ../Paper_Reader.txt
 - 设置运行环境中的 Python 可执行文件。
 - **填写你的研究背景、关注方向和评分偏好。**
 
-3. 在 Codex 中创建定时自动化任务，例如每天早上 8:00 运行一次。
+3. 当前正式任务为每周一、周五 09:00 生成论文日报；公司动态在每周一 09:00 更新。
+   两个任务的完整运行与网站发布说明位于 `automation/`。
 
 `Paper_Reader.txt` 默认被 `.gitignore` 忽略，因为它通常包含机器相关路径和私有筛选偏好。公开仓库只保留中英文模板文件。
 
@@ -192,6 +193,7 @@ cp ../Paper_Reader.template.en.txt ../Paper_Reader.txt
 - arXiv 分类
 - OpenReview venue
 - 候选数量上限
+- 最终日报论文数量
 - arXiv retry 和 HTML fallback 行为
 - 输出目录
 

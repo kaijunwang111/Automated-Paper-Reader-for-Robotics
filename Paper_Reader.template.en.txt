@@ -32,8 +32,8 @@ Candidate file:
   data/processed/YYYY-MM-DD_candidates.json
 - Also read `recommended_action` and `duplicate_check` from `data/raw/YYYY-MM-DD.json`.
 - If `recommended_action` is `write_no_new_batch_note`, `duplicate_check.recommended_action` is `write_no_new_batch_note`, `duplicate_check.status` is `duplicate_of_previous`, or today's candidates are empty / today's candidate paper-id set is identical to the most recent previous candidate file:
-  - Do not write a normal repeated Top 10 report.
-  - Do not reuse an old Top 10 as if it were a new recommendation.
+  - Do not write a normal repeated Top 15 report.
+  - Do not reuse an old Top 15 as if it were a new recommendation.
   - Write only a short "no new candidate batch today" note to `reports/YYYY-MM-DD.md`, including the candidate count, latest visible arXiv batch, and likely reason such as today's arXiv recent-list not being updated yet, no announcement batch for the target date, or a repeated candidate pool.
   - Unless the user explicitly asks for a backfill/rescore, do not rewrite `data/processed/YYYY-MM-DD_scored.json`.
 
@@ -85,7 +85,7 @@ Suggested schema:
   "candidate_path": "...",
   "candidate_count": 0,
   "deep_read_ids": [],
-  "top10_ids": [],
+  "top15_ids": [],
   "papers": [
     {
       "...original candidate fields": "...",
@@ -99,7 +99,7 @@ Suggested schema:
         "final_score": 0
       },
       "selected_for_deep_read": false,
-      "selected_for_top10": false,
+      "selected_for_top15": false,
       "reading_evidence": "abstract-only / paper page / pdf",
       "semantic_rank": 0
     }
@@ -108,8 +108,8 @@ Suggested schema:
 
 Reading workflow:
 1. Read candidates.json and score each paper using title, abstract, venue/categories, and retrieval_reason.
-2. Select about 15 high-scoring papers for deeper reading.
-3. For the final Top 10, open the paper page or PDF when possible and inspect abstract, introduction, method, experiments, and conclusion.
+2. Select up to 30 high-scoring papers for paper-page or PDF review.
+3. For the final Top 15, open the paper page or PDF and inspect the affiliation page, abstract, introduction, method, data/training, experiments, ablations, limitations, and conclusion.
 4. If only abstract-level evidence is available, state this explicitly in `reading_evidence` and in the report.
 5. Do not invent information that is not supported by the candidate metadata, web page, or PDF.
 
@@ -119,7 +119,7 @@ reports/YYYY-MM-DD.md
 
 The report should include:
 - Overview
-- Top 10 Papers
+- Top 15 Papers
 - For each paper: method, transfer value, actionable experiment/module, limitation, reading advice, evidence source
 - Trends of the day
 - Potential research ideas
@@ -127,7 +127,7 @@ The report should include:
 
 Final response:
 - Candidate count
-- Top 10 titles
+- Top 15 titles
 - scored.json path
 - report path
 - Any network/source/read-depth limitations
