@@ -4,6 +4,8 @@
 
 CAPR 是一个用 Codex 自动化完成每日论文候选检索、语义筛选和学术日报生成的轻量级工作流。
 
+🌐 [查看具身智能观察站](https://embodied-observatory.kaijunwang111.chatgpt.site)
+
 它把任务拆成两个层次：
 
 1. `paper-daily` 脚本只负责从 arXiv / OpenReview / 可选 OpenAlex 抓取候选论文、统一元数据、去重和粗排序。
@@ -43,6 +45,7 @@ Codex_Automated_Paper_Reader/
 ├── Paper_Reader.template.txt       # 中文自动化 prompt 模板
 ├── Paper_Reader.template.en.txt    # English automation prompt template
 ├── LICENSE
+├── website/                       # 公开论文日报与公司动态网站
 └── paper-daily/
     ├── config.yaml
     ├── requirements.txt

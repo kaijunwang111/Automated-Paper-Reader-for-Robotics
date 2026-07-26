@@ -4,6 +4,8 @@
 
 CAPR is a lightweight workflow for building a customizable daily academic-paper reader with Codex.
 
+🌐 [Visit the Embodied Intelligence Observatory](https://embodied-observatory.kaijunwang111.chatgpt.site)
+
 It separates the job into two parts:
 
 1. `paper-daily` fetches, normalizes, deduplicates, and coarsely ranks candidate papers from arXiv, OpenReview, and optional OpenAlex.
@@ -43,6 +45,7 @@ Codex_Automated_Paper_Reader/
 ├── Paper_Reader.template.txt       # Chinese automation prompt template
 ├── Paper_Reader.template.en.txt    # English automation prompt template
 ├── LICENSE
+├── website/                       # Public paper reports and company tracker
 └── paper-daily/
     ├── config.yaml
     ├── requirements.txt
