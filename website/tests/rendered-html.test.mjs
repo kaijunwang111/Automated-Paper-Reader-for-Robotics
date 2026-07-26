@@ -40,13 +40,14 @@ test("server-renders the finished research portal", async () => {
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
 });
 
-test("renders report, archive, database, paper, and company routes", async () => {
-  const [archive, detail, database, paper, companies] = await Promise.all([
+test("renders report, archive, database, paper, company, and about routes", async () => {
+  const [archive, detail, database, paper, companies, about] = await Promise.all([
     render("/reports"),
     render("/reports/2026-07-23"),
     render("/papers"),
     render("/papers/2607.18236"),
     render("/companies"),
+    render("/about"),
   ]);
 
   assert.equal(archive.status, 200);
@@ -54,14 +55,17 @@ test("renders report, archive, database, paper, and company routes", async () =>
   assert.equal(database.status, 200);
   assert.equal(paper.status, 200);
   assert.equal(companies.status, 200);
+  assert.equal(about.status, 200);
 
-  const [archiveHtml, detailHtml, databaseHtml, paperHtml, companiesHtml] = await Promise.all([
-    archive.text(),
-    detail.text(),
-    database.text(),
-    paper.text(),
-    companies.text(),
-  ]);
+  const [archiveHtml, detailHtml, databaseHtml, paperHtml, companiesHtml, aboutHtml] =
+    await Promise.all([
+      archive.text(),
+      detail.text(),
+      database.text(),
+      paper.text(),
+      companies.text(),
+      about.text(),
+    ]);
 
   assert.match(archiveHtml, /论文日报/);
   assert.match(detailHtml, /Patch Policy/);
@@ -78,6 +82,10 @@ test("renders report, archive, database, paper, and company routes", async () =>
   assert.match(databaseHtml, /篇收录论文/);
   assert.match(databaseHtml, /Memory/);
   assert.match(databaseHtml, /Subtask/);
+  assert.match(databaseHtml, /CoT \(Chain of Thought\)/);
+  assert.match(databaseHtml, /Pre-training/);
+  assert.match(databaseHtml, /Post-training/);
+  assert.match(databaseHtml, /数据质量/);
   assert.match(databaseHtml, /其他/);
   assert.match(paperHtml, /返回论文数据库/);
   assert.match(paperHtml, /New York University/);
@@ -85,6 +93,17 @@ test("renders report, archive, database, paper, and company routes", async () =>
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周五/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
+  assert.match(companiesHtml, /TRACKING (?:<!-- -->)?12(?:<!-- -->)? COMPANIES/);
+  assert.match(companiesHtml, /Tesla Optimus/);
+  assert.match(companiesHtml, /宇树科技/);
+  assert.match(companiesHtml, /逐际动力/);
+  assert.match(companiesHtml, /星动纪元/);
+  assert.match(companiesHtml, /众擎机器人/);
+  assert.match(companiesHtml, /Genesis AI/);
+  assert.match(companiesHtml, /Sharpa/);
+  assert.match(aboutHtml, /范围、分类与公开边界/);
+  assert.match(aboutHtml, /CoT/);
+  assert.match(aboutHtml, /官方博客或官方仓库/);
 });
 
 test("ships original-paper figures and finished social metadata", async () => {

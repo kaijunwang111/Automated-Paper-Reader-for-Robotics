@@ -4,7 +4,7 @@ import { companyUpdates } from "@/lib/site-data";
 
 export const metadata: Metadata = {
   title: "公司动态",
-  description: "OpenPI、NVIDIA、自变量、智元与 LingBot 的机器人动态追踪。",
+  description: "具身智能公司在模型、数据、硬件、开源与部署方面的官方动态追踪。",
 };
 
 export default function CompaniesPage() {
@@ -25,7 +25,7 @@ export default function CompaniesPage() {
 
       <section className="shell tracker-section">
         <div className="tracker-legend">
-          <span>TRACKING 05 COMPANIES</span>
+          <span>TRACKING {String(companyUpdates.length).padStart(2, "0")} COMPANIES</span>
           <div>
             <span>模型</span>
             <span>数据</span>
@@ -37,7 +37,7 @@ export default function CompaniesPage() {
         <div className="company-timeline">
           {companyUpdates.map((update, index) => (
             <div className="timeline-item" key={update.company}>
-              <div className="timeline-index">0{index + 1}</div>
+              <div className="timeline-index">{String(index + 1).padStart(2, "0")}</div>
               <CompanyCard update={update} />
             </div>
           ))}
