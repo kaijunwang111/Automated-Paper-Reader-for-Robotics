@@ -38,7 +38,7 @@ export function SiteFooter() {
       <div className="shell footer-inner">
         <div>
           <strong>具身智能观察站</strong>
-          <p>具身智能论文精读与行业动态。</p>
+          <p>具身智能论文概览与行业动态。</p>
         </div>
         <div className="footer-meta">
           <span>论文源：arXiv</span>

@@ -54,7 +54,7 @@ export default async function ReportDetailPage({
             </div>
             <div>
               <span>精选</span>
-              <strong>{report.papers.length} deep reads</strong>
+              <strong>{report.papers.length} paper overviews</strong>
             </div>
             <div>
               <span>数据源</span>

@@ -30,7 +30,8 @@ test("server-renders the finished research portal", async () => {
 
   const html = await response.text();
   assert.match(html, /<title>具身智能观察站<\/title>/);
-  assert.match(html, /跟踪具身智能的最新论文与实验进展/);
+  assert.match(html, /跟踪具身智能最新/);
+  assert.match(html, /论文与实验进展/);
   assert.match(html, /最新论文日报/);
   assert.match(html, /机器人公司动向/);
   assert.match(html, /检索论文数据库/);
@@ -74,7 +75,10 @@ test("renders report, archive, database, paper, and company routes", async () =>
   );
   assert.match(databaseHtml, /搜索标题、arXiv ID、机构或技术标签/);
   assert.match(databaseHtml, /Real2Sim2Real/);
-  assert.match(databaseHtml, /篇精读论文/);
+  assert.match(databaseHtml, /篇收录论文/);
+  assert.match(databaseHtml, /Memory/);
+  assert.match(databaseHtml, /Subtask/);
+  assert.match(databaseHtml, /其他/);
   assert.match(paperHtml, /返回论文数据库/);
   assert.match(paperHtml, /New York University/);
   assert.match(paperHtml, /patch-policy\.github\.io/);

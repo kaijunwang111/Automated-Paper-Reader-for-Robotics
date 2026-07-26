@@ -15,7 +15,7 @@ export default function ReportsPage() {
         <h1>论文日报</h1>
         <p>
           每周一与周五整理近期 arXiv 新论文，从动机、架构、训练阶段、数据、
-          实验、亮点与局限等方面进行精读。
+          实验、亮点与局限等方面整理为结构化概览。
         </p>
       </section>
       <section className="shell archive-section">

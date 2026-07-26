@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { CompanyCard, ReportCard } from "@/components/content-cards";
 import { ArrowIcon } from "@/components/site-shell";
-import { companyUpdates, paperRecords, reports } from "@/lib/site-data";
+import { companyUpdates, paperCategories, paperRecords, reports } from "@/lib/site-data";
 
 export default function Home() {
   const latest = reports[0];
@@ -16,7 +16,10 @@ export default function Home() {
               <span className="live-dot" />
               EMBODIED INTELLIGENCE RESEARCH FEED
             </div>
-            <h1>跟踪具身智能的最新论文与实验进展</h1>
+            <h1>
+              <span>跟踪具身智能最新</span>
+              <span>论文与实验进展</span>
+            </h1>
             <p>
               聚焦具身智能、VLA、机器人学习与真机部署，整理模型结构、训练数据、
               实验设置、结果与局限。
@@ -39,23 +42,23 @@ export default function Home() {
               <div className="orbit orbit-one" />
               <div className="orbit orbit-two" />
               <div className="signal-core">
-                <span>INDEXED</span>
-                <strong>{String(paperRecords.length).padStart(2, "0")}</strong>
-                <small>deep reads</small>
+                <span>DATA SOURCE</span>
+                <strong>arXiv</strong>
+                <small>MON / FRI</small>
               </div>
             </div>
             <div className="console-stats">
               <div>
-                <span>DATA SOURCE</span>
-                <strong>arXiv</strong>
+                <span>PAPERS</span>
+                <strong>{String(paperRecords.length).padStart(2, "0")}</strong>
               </div>
               <div>
                 <span>REPORTS</span>
-                <strong>MON / FRI</strong>
+                <strong>{String(reports.length).padStart(2, "0")}</strong>
               </div>
               <div>
-                <span>PRIORITY</span>
-                <strong>REAL ROBOT</strong>
+                <span>CATEGORIES</span>
+                <strong>{paperCategories.length}</strong>
               </div>
             </div>
           </div>

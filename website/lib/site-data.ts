@@ -3,12 +3,15 @@ export const paperCategories = [
   "WAM",
   "WM",
   "RL",
+  "Memory",
+  "Subtask",
   "多模态",
   "真机部署优化",
   "Real2Sim2Real",
   "Humanoid",
   "数据增强",
   "UMI / Ego 数据",
+  "其他",
 ] as const;
 
 export type PaperCategory = (typeof paperCategories)[number];
@@ -116,8 +119,8 @@ const latestPapers: Paper[] = [
     url: "https://arxiv.org/abs/2607.18840",
     institutions: ["Manifold AI", "Tsinghua University", "Shanghai Jiao Tong University"],
     signal: "长短期事件记忆 WAM，评估长程任务与视觉提示适应",
-    tags: ["World Action Model", "Long-term Memory", "Multimodal Prompt"],
-    categories: ["WAM", "WM", "多模态", "UMI / Ego 数据"],
+    tags: ["World Action Model", "Long-term Memory", "Short-term Memory", "Multimodal Prompt"],
+    categories: ["WAM", "WM", "Memory", "Subtask", "多模态", "UMI / Ego 数据"],
     resources: [
       { label: "项目页", url: "https://manifoldai-research.github.io/WorldScape-Policy/" },
       { label: "GitHub", url: "https://github.com/manifoldai-research/WorldScape-Policy" },
@@ -153,8 +156,8 @@ const latestPapers: Paper[] = [
     url: "https://arxiv.org/abs/2607.18231",
     institutions: ["Tsinghua University", "Microsoft Research", "Fudan University", "USTC"],
     signal: "用低带宽力觉历史解决视觉不可辨识的接触记忆问题",
-    tags: ["Force Memory", "Contact-rich", "VLA"],
-    categories: ["VLA", "多模态", "真机部署优化"],
+    tags: ["Force Memory", "Episodic Memory", "Contact-rich", "VLA"],
+    categories: ["VLA", "Memory", "多模态", "真机部署优化"],
     resources: [
       { label: "项目页", url: "https://qft-333.github.io/FM-VLA-Page/" },
       { label: "GitHub", url: "https://github.com/qft-333/FM-VLA" },
@@ -274,8 +277,8 @@ export const reports: Report[] = [
         url: "https://arxiv.org/abs/2607.15275",
         institutions: ["NVIDIA", "Stanford University", "The University of Texas at Austin"],
         signal: "通过 fast weights 将 VLA 历史上下文扩展到 8K timesteps",
-        tags: ["Long Context", "Test-time Training"],
-        categories: ["VLA", "真机部署优化", "UMI / Ego 数据"],
+        tags: ["Long Context", "Long-term Memory", "Test-time Training"],
+        categories: ["VLA", "Memory", "真机部署优化", "UMI / Ego 数据"],
         resources: [{ label: "项目页", url: "https://research.nvidia.com/labs/gear/robottt/" }],
         motivation: "长时装配需要保留阶段、失败与纠正关系，简单拼接历史帧无法持续扩展。",
         architecture: "在 GR00T N1.7 的 DiT 层中插入 TTT 层，用测试时更新的 MLP fast weights 压缩长历史。",
