@@ -29,7 +29,7 @@ export default function AboutPage() {
           <span>02</span>
           <h2>收录</h2>
           <p>
-            每期从近期 arXiv 论文中选择少量精读内容。筛选过程在本地完成，
+            每期从近期 arXiv 论文中选择少量内容并整理为结构化概览。筛选过程在本地完成，
             公开网站不展示内部评分。
           </p>
         </article>

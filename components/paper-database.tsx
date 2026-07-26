@@ -64,7 +64,7 @@ export function PaperDatabase({
         </label>
         <div className="database-count" aria-live="polite">
           <strong>{filteredPapers.length}</strong>
-          <span>篇精读论文</span>
+          <span>篇收录论文</span>
         </div>
       </div>
 
@@ -109,7 +109,7 @@ export function PaperDatabase({
                 </div>
                 <div className="database-links">
                   <Link href={`/papers/${paper.arxivId}`}>
-                    精读详情 <ArrowIcon />
+                    论文概览 <ArrowIcon />
                   </Link>
                   <a href={paper.url} target="_blank" rel="noreferrer">
                     arXiv <ArrowIcon />
