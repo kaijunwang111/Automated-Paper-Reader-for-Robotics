@@ -25,6 +25,12 @@ export type PaperResource = {
   url: string;
 };
 
+export type PaperFigure = {
+  src: string;
+  alt: string;
+  caption: string;
+};
+
 export type Paper = {
   rank: number;
   title: string;
@@ -43,11 +49,7 @@ export type Paper = {
   strengths: string;
   limitations: string;
   transfer: string;
-  figure?: {
-    src: string;
-    alt: string;
-    caption: string;
-  };
+  figures: PaperFigure[];
 };
 
 export type Report = {
@@ -105,6 +107,14 @@ const paperDaily20260727: Paper[] = [
       "接触区域必须在 RGB 中可见；重遮挡和训练数据覆盖不足会造成伪触觉失真，20 次试验也不足以区分小差异。",
     transfer:
       "可将完整压力图重建替换为 contact phase、slip 或 failure-risk latent，并检查跨物体与跨传感器迁移。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.20683-architecture.png",
+        alt: "FELT 从腕部 RGB 提取视觉特征并通过双指 query decoder 生成触觉表征的模型结构图",
+        caption:
+          "Figure 2 · FELT 触觉生成框架：冻结 DINOv2、双指查询解码器、跨指信息交换和触觉读出头。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 2,
@@ -131,6 +141,14 @@ const paperDaily20260727: Paper[] = [
       "单个 switch ratio 共享所有控制轴，标签依赖人工 force bounds，且只验证两类刚性接触任务。",
     transfer:
       "可扩展成轴向或任务阶段相关的 controller-mode token，并与 VLA action chunk 联合预测。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.20912-architecture.png",
+        alt: "URF 同时预测虚拟目标、刚度和控制切换比例的网络及控制框架",
+        caption:
+          "Figure 1 · URF 网络与控制框架：策略联合输出动作目标、刚度和 impedance-admittance 切换量。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 3,
@@ -161,6 +179,14 @@ const paperDaily20260727: Paper[] = [
       "二维少量关键点难覆盖深度、重遮挡和可变结构；首帧人工纠正也意味着系统并非完全自主。",
     transfer:
       "可升级为 3D object/contact tokens，并只在注意不确定性超过阈值时请求一次纠正。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.21049-architecture.jpg",
+        alt: "GuidedAttention 从多视角图像预测注意关键点并条件化扩散动作策略的结构图",
+        caption:
+          "Figure 2 · GuidedAttention 策略结构：关键点注意编码器连接状态特征与去噪扩散动作生成。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 4,
@@ -188,6 +214,14 @@ const paperDaily20260727: Paper[] = [
       "factor 空间人工离散且任务受控，尚未证明开放词汇、多步任务或自动发现 factor 时仍有效。",
     transfer:
       "可先测 verb、object、spatial、force-level 与 contact-phase 弱项，再定向采集失败组合。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.21582-overview.png",
+        alt: "语言因素分解、因素偏置诊断和偏置感知数据采集的整体流程",
+        caption:
+          "Figure 1 · 从 instruction factors、factor bias 到 FDR/FDH 评估及偏置感知采集的完整思路。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 5,
@@ -214,6 +248,14 @@ const paperDaily20260727: Paper[] = [
       "只有 12 个 episode，材料类别和对象范围仍窄；主动探索主要展示置信度变化，并未闭环优化策略。",
     transfer:
       "可把置信度接入主动操作策略，优先触碰材料不确定区域，并用接触事件门控残差模型。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.20653-overview.png",
+        alt: "PhysCoRe 从 RGB-D 观测推断材料并用残差模块修正 MPM 动力学的整体结构",
+        caption:
+          "Figure 1 · PhysCoRe 总览：Material-from-Motion 推断材料，Residual-from-Dynamics 修正 MPM rollout。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 6,
@@ -245,6 +287,14 @@ const paperDaily20260727: Paper[] = [
       "训练数据只来自牛肋骨，头骨样本仅六个；宏观无碳化不能替代组织学热安全验证。",
     transfer:
       "可复用“不可观测物理状态重建 + offline RL 调参 + 在线轨迹连续化”的分层闭环。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.21113-overview.png",
+        alt: "RL-MACRO 从多模态温度重建到离线强化学习决策和轨迹执行的闭环框架",
+        caption:
+          "Figure 1 · RL-MACRO 感知—决策—执行闭环：隐藏温度观测、离线 RL 调参与在线轨迹执行。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 7,
@@ -272,6 +322,14 @@ const paperDaily20260727: Paper[] = [
       "只处理平面运输、等间距缆绳与固定高度，且规模扩展场景并非全部严格可比。",
     transfer:
       "“低维任务抽象 + 可证明安全裕度 + domain randomization”可迁移到多臂协同或移动操作。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.20665-overview.png",
+        alt: "多无人机载荷运输的二维动力学抽象、安全强化学习决策和连续执行结构",
+        caption:
+          "Figure 1 · 多无人机安全运输框架：低维耦合抽象、DGPPO/图 CBF 决策与真机执行层。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 8,
@@ -299,6 +357,14 @@ const paperDaily20260727: Paper[] = [
       "真机样本很少且假设物体 pose/geometry 完美，真实感知噪声、接触动力学和失败恢复未验证。",
     transfer:
       "可把 VLA 生成的高层 key poses 作为先验，再用能量或安全梯度做 inference-time refinement。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.21341-overview.png",
+        alt: "BiCompoDiff 通过抓取扩散先验和双臂能量模型迭代优化动作姿态的流程",
+        caption:
+          "Figure 2 · BiCompoDiff 流程：初始化姿态、组合能量引导的迭代扩散优化与后续运动规划。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 9,
@@ -325,6 +391,14 @@ const paperDaily20260727: Paper[] = [
       "能力只充分比较 wheeled/legged，semantic grouping 错误仍会破坏空间细节，感知和 planner 尚未联合优化。",
     transfer:
       "可把 embodiment profile 做成 VLA 条件 token，让不同机器人共享高层任务但保持能力一致的动作约束。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.20679-architecture.png",
+        alt: "能力感知可通行性模型融合 RGB 深度语义地形和机器人能力向量的结构图",
+        caption:
+          "Figure 2 · Capability-Aware Traversability：多模态特征经 robot profile 调制后形成能力相关的可通行性估计。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 10,
@@ -355,6 +429,14 @@ const paperDaily20260727: Paper[] = [
       "系统成功率混合了感知、抓取合成和控制误差，没有隔离各模块的因果贡献。",
     transfer:
       "可作为实验室操作 perception stress test，并研究多视角不变表征如何改善透明物体 VLA。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.21071-overview.png",
+        alt: "TransBiolab 透明生物医学物体数据集的多对象多视角场景概览",
+        caption:
+          "Figure 1 · TransBiolab 数据集总览：多对象、多视角及不同遮挡和杂乱程度的采集示例。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 11,
@@ -382,6 +464,14 @@ const paperDaily20260727: Paper[] = [
       "仅有 ex vivo 小样本，缺乏出血、搏动和软组织运动等扰动，也未做组织学验证。",
     transfer:
       "对精密插入和接触任务，可复用“事件检测后重锚定剩余轨迹”，避免持续累积偏差。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.21058-overview.png",
+        alt: "机器人开颅系统从术前规划到术中监测和轨迹调整的总体架构",
+        caption:
+          "Figure 1 · 自主开颅系统总览：术前轨迹与注册、术中多模态监测、突破后的剩余轨迹调整。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 12,
@@ -417,6 +507,20 @@ const paperDaily20260727: Paper[] = [
       "每环境仅一组 episodic/sequential trial，统计很小；任务为 EQA 而非 manipulation。",
     transfer:
       "VLA 长时任务应结构化保存事件、对象状态和空间锚点，而不是只增大 history window。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.21571-episodic.png",
+        alt: "每个问题后清空记忆并重复探索的 episodic EQA 评估流程",
+        caption:
+          "Figure 1a · Episodic Evaluation：每道问题后重置记忆，后续问题需要重新探索。图片截取自 arXiv 原论文。",
+      },
+      {
+        src: "/report-assets/2026-07-27/2607.21571-sequential.png",
+        alt: "跨问题保留环境记忆并直接复用已有知识的 sequential EQA 评估流程",
+        caption:
+          "Figure 1b · Sequential Evaluation：记忆跨问题保留，后续任务可复用已探索的空间知识。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 13,
@@ -444,6 +548,14 @@ const paperDaily20260727: Paper[] = [
       "只做持续压持而非真实冲击破碎，单视角无法判断支撑稳定性，缩比结果不能直接外推矿井。",
     transfer:
       "可复用 robot self-filtering 与 target-pose viability，并将支撑稳定性纳入 learned affordance。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.20748-pipeline.png",
+        alt: "矿用冲击锤从 RGB-D 和机器人模型生成岩石分割与敲击目标位姿的感知流程",
+        caption:
+          "Figure 1 · RGB-D 感知管线：机器人自过滤、岩石分割、几何处理与目标位姿排序。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 14,
@@ -471,6 +583,14 @@ const paperDaily20260727: Paper[] = [
       "proof-of-concept 只做有色水溶液；部分对比的历史数据量不一致，不能视作严格独立比较。",
     transfer:
       "适合研究“真机自治 + 可观察数字孪生 + 人类紧急接管”的工程闭环。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.20662-overview.jpg",
+        alt: "RAINBOT 液体处理硬件、数字孪生、闭环实验流程和平台架构概览",
+        caption:
+          "Figure 1 · RAINBOT 平台总览：低成本移液硬件、浏览器数字孪生与闭环实验选择。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 15,
@@ -502,6 +622,14 @@ const paperDaily20260727: Paper[] = [
       "真机只有代表案例、没有试验次数或失败统计，主要结论仍依赖仿真。",
     transfer:
       "可借鉴 VLM 目标确认与连续控制解耦的部署架构，但不应据此宣称已证明真机泛化。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-27/2607.21025-overview.png",
+        alt: "ZONDA 从多视图目标确认到多层全局规划和动态局部避障的框架图",
+        caption:
+          "Figure 1 · ZONDA 总览：语义地图、多层规划、多视图 VLM 目标确认与动态行人避障。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
 ];
 
@@ -535,12 +663,14 @@ const latestPapers: Paper[] = [
       "仍是 behavior cloning；dense tokens 增加序列长度，真机结果未报告置信区间，也尚未验证 RL 或端到端视觉微调。",
     transfer:
       "适合作为“高层语义不变、下层空间细节保真”的低成本视觉基线，也可进一步与 force/contact tokens 做分层融合。",
-    figure: {
-      src: "/report-assets/2026-07-23/2607.18236-method.png",
-      alt: "Patch Policy 将多视角图像编码为 patch tokens，并通过逐帧因果注意力连接动作头的结构图",
-      caption:
-        "Figure 2 · Patch Policy architecture。图片截取自 arXiv 原论文，展示 dense patch observation trunk、frame-wise attention mask 与 action head。",
-    },
+    figures: [
+      {
+        src: "/report-assets/2026-07-23/2607.18236-method.png",
+        alt: "Patch Policy 将多视角图像编码为 patch tokens，并通过逐帧因果注意力连接动作头的结构图",
+        caption:
+          "Figure 2 · Patch Policy architecture。图片截取自 arXiv 原论文，展示 dense patch observation trunk、frame-wise attention mask 与 action head。",
+      },
+    ],
   },
   {
     rank: 2,
@@ -582,12 +712,14 @@ const latestPapers: Paper[] = [
       "主表 94.3% 不能直接视作 OOD 泛化；5B WAM + 4B VLM 与大规模数据的复现成本很高，真机实验仍缺少置信区间。",
     transfer:
       "“短期连续动力学 + 长期事件语义”的双层记忆可用于小模型 VLA，例如只保存接触事件、完成谓词和恢复节点。",
-    figure: {
-      src: "/report-assets/2026-07-23/2607.18840-method.png",
-      alt: "WorldScape Policy 2.0 从多模态提示编码到长短期记忆 WAM 和真机执行的整体结构",
-      caption:
-        "Figure 2 · WorldScape Policy 2.0 overview。图片截取自 arXiv 原论文，展示多模态提示、长短期记忆与 causal world action model。",
-    },
+    figures: [
+      {
+        src: "/report-assets/2026-07-23/2607.18840-method.png",
+        alt: "WorldScape Policy 2.0 从多模态提示编码到长短期记忆 WAM 和真机执行的整体结构",
+        caption:
+          "Figure 2 · WorldScape Policy 2.0 overview。图片截取自 arXiv 原论文，展示多模态提示、长短期记忆与 causal world action model。",
+      },
+    ],
   },
   {
     rank: 3,
@@ -619,12 +751,14 @@ const latestPapers: Paper[] = [
       "仅三项固定任务和单一平台，没有未见物体、未见接触模式或跨传感器泛化，所有评测都与自采训练任务紧密绑定。",
     transfer:
       "可将 force memory 从完整信号重建扩展为同时预测 contact count、slip、phase 和 failure risk，并检查 latent 的跨物体可对齐性。",
-    figure: {
-      src: "/report-assets/2026-07-23/2607.18231-method.png",
-      alt: "FM-VLA 两阶段训练架构，包括 Force-VAE 预训练和带力觉记忆的 VLA 后训练",
-      caption:
-        "Figure 2 · FM-VLA training pipeline。图片截取自 arXiv 原论文，展示 Force-VAE 预训练以及 force/state token 向 action expert 的注入方式。",
-    },
+    figures: [
+      {
+        src: "/report-assets/2026-07-23/2607.18231-method.png",
+        alt: "FM-VLA 两阶段训练架构，包括 Force-VAE 预训练和带力觉记忆的 VLA 后训练",
+        caption:
+          "Figure 2 · FM-VLA training pipeline。图片截取自 arXiv 原论文，展示 Force-VAE 预训练以及 force/state token 向 action expert 的注入方式。",
+      },
+    ],
   },
   {
     rank: 4,
@@ -657,6 +791,14 @@ const latestPapers: Paper[] = [
       "所谓 cross-embodiment 主要仍是已见本体上的联合训练，而非 held-out embodiment 零样本迁移；数据规模和置信区间缺失。",
     transfer:
       "统一 action canvas、embodiment mask 以及先做 3D/contact supervision 再迁移到 VLA 的路径值得复用。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-23/2607.17977-architecture.png",
+        alt: "RynnBrain-VLA 将语言、多视角观察、机器人状态和噪声动作映射到统一动作空间的结构图",
+        caption:
+          "Figure 3 · RynnBrain-VLA：单流 DiT、flow matching 与跨本体统一动作空间。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
   {
     rank: 5,
@@ -684,6 +826,14 @@ const latestPapers: Paper[] = [
       "训练数据严重缺失、每项 shift 只有 10 次且无 CI；系统依赖 RGB-D、分割、标定与人工 predicate threshold。",
     transfer:
       "可将硬 predicate 扩展成 uncertainty-aware learned verifier，并加入 force/contact event 以覆盖视觉几何不可判别的失败。",
+    figures: [
+      {
+        src: "/report-assets/2026-07-23/2607.18016-overview.jpg",
+        alt: "POT-VLA 持久三维对象记忆连接动作预测、执行和状态验证的闭环系统",
+        caption:
+          "Figure 1 · POT-VLA 总览：持久 3D object tokens 同时条件化动作头，并在执行后刷新状态完成验证与恢复。图片截取自 arXiv 原论文。",
+      },
+    ],
   },
 ];
 
@@ -741,6 +891,14 @@ export const reports: Report[] = [
         strengths: "在复杂真机任务中评估长上下文，并给出上下文长度消融。",
         limitations: "预训练使用 16 张 GB200，成本高；仍无法覆盖所有部署失败。",
         transfer: "可把 force event、失败恢复和动作 chunk 作为 fast-weight 更新信号。",
+        figures: [
+          {
+            src: "/report-assets/2026-07-20/2607.15275-architecture.png",
+            alt: "RoboTTT 在 DiT 动作头中插入跨时间 TTT 层并维护 fast weights 的训练与推理结构",
+            caption:
+              "Figure 2 · RoboTTT 模型、训练与推理：注意力处理帧内信息，TTT 层以 fast weights 压缩跨帧历史。图片截取自 arXiv 原论文。",
+          },
+        ],
       },
       {
         rank: 2,
@@ -765,6 +923,14 @@ export const reports: Report[] = [
         strengths: "结构简单，消融清晰，直接服务接触任务后训练。",
         limitations: "依赖人工在线纠正，只验证单臂，算力与数据吞吐成本仍高。",
         transfer: "适合作为 VLA 的旁路快速物理反馈模块。",
+        figures: [
+          {
+            src: "/report-assets/2026-07-20/2607.14236-architecture.png",
+            alt: "LIFT 在预训练 VLA 旁加入 reactive action expert 并通过交叉注意力注入力记忆的结构",
+            caption:
+              "Figure 2 · LIFT 架构：保留原视觉语言主干，复制 reactive action expert，并用零初始化 cross-attention 注入力记忆。图片截取自 arXiv 原论文。",
+          },
+        ],
       },
       {
         rank: 3,
@@ -788,6 +954,14 @@ export const reports: Report[] = [
         strengths: "回答了监督应该施加在哪一层，并在两个 backbone 上验证。",
         limitations: "单平台、单传感器，规模不足以证明大规模预训练下同样成立。",
         transfer: "可替换为 future-force、contact phase 或 failure-risk latent。",
+        figures: [
+          {
+            src: "/report-assets/2026-07-20/2607.14609-overview.png",
+            alt: "在训练阶段从动作专家中间表征预测未来触觉并对齐接触动力学的框架",
+            caption:
+              "Figure 3 · Future latent tactile grounding：在最具接触可预测性的 action-expert 中间层施加触觉监督，推理时移除预测头。图片截取自 arXiv 原论文。",
+          },
+        ],
       },
     ],
   },

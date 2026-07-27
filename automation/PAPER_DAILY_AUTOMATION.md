@@ -50,8 +50,9 @@
 2. 公开内容只保留论文出发点、模型结构、训练优化、数据组成、实验结果、亮点与局限、迁移价值、机构及资源链接；删除评分、Prompt、配置和运行过程。
 3. 为论文标注现有数据库分类；只有论文证据支持时才增加 CoT、Pre-training、Post-training、数据质量等标签。
 4. 项目页、GitHub、模型链接必须真实可访问；没有可靠链接时省略。
-5. Method / Architecture 图片优先截取 arXiv 原论文，每篇最多两幅，存入
-   `website/public/report-assets/RUN_DATE/`，并标明原论文图号和含义。
+5. 每篇论文必须配一至两幅能帮助理解方法的 Overview / Method / Architecture 图片，
+   优先截取 arXiv 原论文并存入 `website/public/report-assets/RUN_DATE/`，同时标明原论文图号和含义；
+   不得用纯结果表或无关实验照片凑数。
 6. 不得把作者的“最佳”“human-level”“通用”等表述改写成独立验证事实。
 7. 在 `website` 目录运行完整测试。测试通过后，按照 Sites 技能使用现有
    `website/.openai/hosting.json` 项目发布到当前公开网址。
@@ -66,4 +67,3 @@
 ## 完成回报
 
 报告覆盖日期、候选数量、最终论文数量、本地日报路径、限制或失败项、网站发布结果和公开网址。
-

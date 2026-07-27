@@ -5,9 +5,9 @@
 
 ## 定时任务
 
-1. 论文日报：每周一、周五 09:00（Asia/Shanghai），执行
+1. 论文日报：每周一、周五 09:30（Asia/Shanghai），执行
    [PAPER_DAILY_AUTOMATION.md](PAPER_DAILY_AUTOMATION.md)。
-2. 公司动态：每周一 09:00（Asia/Shanghai），执行
+2. 公司动态：每周一 09:30（Asia/Shanghai），执行
    [COMPANY_TRACKER_AUTOMATION.md](COMPANY_TRACKER_AUTOMATION.md)。
 
 ## 共同约束
@@ -19,4 +19,3 @@
 - 周一两个任务可能同时被触发。若发现同一项目已有自动化运行、Git 锁或正在变化的目标文件，应等待前一个任务完成后重新读取最新文件，再继续；不得并发覆盖 `website/lib/site-data.ts`。
 - 本地日报允许保留检索、Prompt、评分与运行信息；公开网站不得展示这些内部内容。
 - 发布失败不能伪装成成功。最终结果必须分别说明本地内容、测试和线上发布状态。
-
