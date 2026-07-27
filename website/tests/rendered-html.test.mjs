@@ -35,7 +35,7 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /最新论文日报/);
   assert.match(html, /机器人公司动向/);
   assert.match(html, /检索论文数据库/);
-  assert.match(html, /2026\.07\.23/);
+  assert.match(html, /2026\.07\.27/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
 });
@@ -43,9 +43,9 @@ test("server-renders the finished research portal", async () => {
 test("renders report, archive, database, paper, company, and about routes", async () => {
   const [archive, detail, database, paper, companies, about] = await Promise.all([
     render("/reports"),
-    render("/reports/2026-07-23"),
+    render("/reports/2026-07-27"),
     render("/papers"),
-    render("/papers/2607.18236"),
+    render("/papers/2607.20683"),
     render("/companies"),
     render("/about"),
   ]);
@@ -68,10 +68,9 @@ test("renders report, archive, database, paper, company, and about routes", asyn
     ]);
 
   assert.match(archiveHtml, /论文日报/);
-  assert.match(detailHtml, /Patch Policy/);
-  assert.match(detailHtml, /2607\.18236-method\.png/);
+  assert.match(detailHtml, /FELT/);
+  assert.match(detailHtml, /felt-tactile\.github\.io/);
   assert.match(detailHtml, /项目页/);
-  assert.match(detailHtml, /GitHub/);
   assert.doesNotMatch(detailHtml, /综合分|评分|候选论文/);
   assert.doesNotMatch(
     detailHtml,
@@ -88,11 +87,13 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(databaseHtml, /数据质量/);
   assert.match(databaseHtml, /其他/);
   assert.match(paperHtml, /返回论文数据库/);
-  assert.match(paperHtml, /New York University/);
-  assert.match(paperHtml, /patch-policy\.github\.io/);
+  assert.match(paperHtml, /University of Southern California/);
+  assert.match(paperHtml, /felt-tactile\.github\.io/);
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周一/);
-  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.07\.25/);
+  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.07\.27/);
+  assert.match(companiesHtml, /开源 GPU 加速医疗机器人物理仿真框架/);
+  assert.match(companiesHtml, /Fremont 开始 Optimus 工厂施工与产线安装/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
   assert.match(companiesHtml, /TRACKING (?:<!-- -->)?12(?:<!-- -->)? COMPANIES/);
   assert.match(companiesHtml, /Tesla Optimus/);
