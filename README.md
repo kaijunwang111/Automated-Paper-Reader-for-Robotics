@@ -27,5 +27,5 @@ npm test
 
 - 本地完整日报保留检索和运行信息。
 - 网站只发布清理后的论文内容。
-- Method / Architecture 图片优先截取自 arXiv 原论文，每篇最多两幅。
+- 每篇论文使用一至两幅能帮助理解方法的 Overview / Method / Architecture 图片，优先截取自 arXiv 原论文。
 - 公司动态当前每周一从官方来源更新。

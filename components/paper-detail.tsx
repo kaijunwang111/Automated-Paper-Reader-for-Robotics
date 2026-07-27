@@ -39,19 +39,25 @@ export function PaperDetail({
         </div>
       </div>
 
-      {paper.figure ? (
-        <figure className="method-figure">
-          <div className="figure-frame">
-            <img src={paper.figure.src} alt={paper.figure.alt} />
-          </div>
-          <figcaption>
-            <span>{paper.figure.caption}</span>
-            <a href={paper.url} target="_blank" rel="noreferrer">
-              原论文 <ArrowIcon />
-            </a>
-          </figcaption>
-        </figure>
-      ) : null}
+      <div
+        className={`method-figures ${
+          paper.figures.length === 1 ? "method-figures-single" : ""
+        }`}
+      >
+        {paper.figures.map((figure) => (
+          <figure className="method-figure" key={figure.src}>
+            <div className="figure-frame">
+              <img src={figure.src} alt={figure.alt} loading="lazy" />
+            </div>
+            <figcaption>
+              <span>{figure.caption}</span>
+              <a href={paper.url} target="_blank" rel="noreferrer">
+                原论文 <ArrowIcon />
+              </a>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
 
       <div className="paper-analysis-grid">
         <section>
@@ -63,7 +69,7 @@ export function PaperDetail({
           <p>{paper.architecture}</p>
         </section>
         <section>
-          <span className="analysis-label">03 / 优化阶段</span>
+          <span className="analysis-label">03 / 训练与优化</span>
           <p>{paper.optimization}</p>
         </section>
         <section>
