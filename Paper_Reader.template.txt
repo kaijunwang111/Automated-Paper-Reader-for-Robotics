@@ -56,6 +56,9 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - 不要只因为论文包含领域关键词就给高分。
 - 相邻领域论文只要方法可迁移，也可以高分。
 - 对直接领域论文也要看方法贡献、实验质量和可复用价值。
+- 最终数量上限为 15 篇，不设最低数量。质量不足时宁可少选，不得为了凑满 15 篇降低标准。
+- `C:\Users\kaijun\Desktop\Code\ref` 中的内容样例用于学习选题粒度、方法信息密度与表达方式，不得照抄其中表述。
+- OpenPI、NVIDIA Robotics、自变量、智元、LingBot、Optimus、宇树科技、逐际动力、星动纪元、众擎机器人、Genesis AI、Sharpa 等跟踪公司的论文可作为高质量正向参考，但公司或机构身份不能替代方法和实验核验。
 
 重点关注：
 - 论文有具身智能机器人领域或计算机领域公司、成熟大学实验室或多机构合作支撑。
@@ -73,6 +76,8 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - 消融实验不完善的，属于明显排列组合的论文。
 - 只有成功视频或少量挑选案例、没有试验次数和失败统计的。
 - 用不同训练数据、算力或 backbone 做不公平对比，却把收益全部归因于方法模块的。
+- 医疗/手术、矿山、实验室自动化、液体处理等场景型系统论文原则上排除。这类论文只有在提出了清晰、通用、可迁移的 learning 方法并具有充分验证时才可作为例外。
+- 纯导航、纯系统集成或硬件产品介绍若与 manipulation、全身控制或通用机器人学习缺乏直接方法联系，不进入正式日报。
 
 评分维度，每项 0-5：
 - Methodological Relevance
@@ -143,8 +148,8 @@ data/processed/YYYY-MM-DD_scored.json
         "trial_count_reported": "yes / partial / no",
         "variance_or_ci_reported": "yes / partial / no"
       },
-      "selected_for_deep_read": false,
-      "selected_for_top15": false,
+      "selected_for_full_text_review": false,
+      "selected_for_report": false,
       "reading_evidence": "abstract-only / paper page / pdf",
       "semantic_rank": 0
     }
@@ -154,10 +159,21 @@ data/processed/YYYY-MM-DD_scored.json
 阅读流程：
 1. 读取 candidates.json，先基于 title、abstract、venue/categories、retrieval_reason 做逐篇语义评分。
 2. 从高分候选中选择最多 30 篇进一步打开论文页或 PDF。
-3. 对最终 Top 15 打开 PDF，阅读首页机构、abstract、introduction、method、data/training、experiments、ablation、limitations/conclusion；不能只依赖摘要。
-4. 对每篇精选论文核对实验是否真正支持作者结论，并指出可能的宣传性表述、混杂因素或证据缺口。
-5. 如果只能基于 abstract 判断，必须在 `reading_evidence` 和日报中明确写明，且不能进入正式精选 Top 15；示例模式需明确标注例外。
+3. 对最终入选论文打开 PDF，阅读首页机构、abstract、introduction、related work、method、data/training、experiments、ablation、limitations/conclusion；不能只依赖摘要。
+4. 对每篇入选论文核对实验是否真正支持作者结论，并指出可能的宣传性表述、混杂因素或证据缺口。
+5. 如果只能基于 abstract 判断，必须在 `reading_evidence` 和日报中明确写明，且不能进入正式日报；示例模式需明确标注例外。
 6. 不要编造候选、机构、网页或 PDF 中无法支持的信息。
+7. 每篇论文按照主要贡献归类。论文中出现过的训练阶段、模态或数据形式不能自动成为分类标签。
+
+分类规则：
+- 研究方向只能选择一个主分类：VLA、WAM、WM、表征学习、Memory、CoT、Subtask、其他。
+- Memory 只作为研究方向。Context/Sequence、Episodic、Spatial/Semantic 等实现形式，以及长时/短时，仅写入单篇详情属性，不作为数据库分类。
+- 训练与优化只能选择一个主分类：Pre-training、Post-training、BC、RL、Test-time Adaptation。Fine-tuning 并入 Post-training；Supervised Learning 不单列；论文以预训练为主要贡献、只在实验中附带后训练时仍归 Pre-training。
+- DAgger 不作为训练分类，写入“在线数据 / 人工纠正”数据方法；Planning/Search 与 Inference Optimization 只作为详情技术词，不作为主分类。
+- RGB 和 Language 是常见默认输入，不作为模态筛选项。只标注论文创新直接发生的 Depth/RGB-D、Point Cloud/3D、Force/Torque、Tactile、Audio、Mask/Segmentation、State/Proprioception 或其他模态。
+- 数据方法只在数据本身是核心贡献时标注：数据质量/筛选、数据增强、合成/仿真数据、在线数据/人工纠正、UMI/Ego/Human Video、跨本体数据、其他数据方法。
+- 机器人平台使用可组合部件：机械臂、Humanoid、轮式底盘、灵巧手、夹爪、其他。任务类型不作为数据库分类。
+- 真机部署优化、Sim2Real、Real2Sim、Real2Sim2Real、跨本体迁移保留为独立的部署与迁移维度。
 
 日报输出：
 写入：
@@ -165,32 +181,35 @@ reports/YYYY-MM-DD.md
 
 日报建议包含：
 - 今日概览
-- Top 15 Papers
-- 每篇精选论文使用统一结构：
+- 入选论文（最多 15 篇）
+- 每篇论文使用统一结构：
   1. 机构 / 公司 / 实验室（注明证据来源）
-  2. 出发点：作者要解决什么问题，现有方法为什么不够
-  3. 模型结构：backbone、关键模块、信息流和动作表示
-  4. 训练与优化：说明属于预训练、后训练、RL 或其组合，以及训练目标、冻结/更新模块和主要优化点
-  5. 数据组成：数据量、内容、开源/自采、仿真/真机/人类视频、采集平台；未披露则明确写未披露
-  6. 实验内容与结果：只保留能支持结论的关键结果，不堆数字
-  7. 亮点和局限：特别检查消融、泛化、复杂任务、统计和过度宣传风险
-  8. 迁移价值：可迁移模块、建议实验和与当前研究的连接
-  9. 综合分构成：列出各维度分数、加权总分和实验可信度 flags
-- 今日重点趋势
-- 潜在研究 idea
-- 值得加入 related work 的论文
+  2. 一句话概览：克制地概括论文实际完成的工作，不使用“最强趋势”“彻底解决”“human-level”等未经独立验证的结论
+  3. 出发点：作者要解决什么问题，现有方法为什么不够
+  4. 模型结构：backbone、关键模块、信息流和动作表示
+  5. 训练与优化：只把主要贡献归入一个训练类别，并说明训练目标、冻结/更新模块和具体优化点
+  6. 数据组成：数据量、内容、开源/自采、仿真/真机/人类视频、采集平台；未披露则明确写未披露
+  7. 实验内容与结果：只保留能支持结论的关键结果，不堆数字
+  8. 相对已有工作的新颖性：说明论文相对最直接基线或已有路线改变了什么，并核对比较是否公平
+  9. 亮点和局限：特别检查消融、泛化、复杂任务、统计和过度宣传风险
+  10. 复现信息：代码、模型、数据、训练资源和关键超参数；论文未披露时不要补造
+  11. 迁移价值：只说明可迁移的方法或模块，不生成空泛的“建议动作”
+  12. 本地综合分构成：列出各维度分数、加权总分和实验可信度 flags；该项不得上传网站
+- 单篇开头使用简洁卡片，后接一段比卡片稍详细的原文解读，重点解释方法、关键技术细节、直接基线与主要实验结果。
+- 日报只负责快速跟踪最新论文，不强制做跨论文横向比较、主题综合、趋势判断或研究建议。
 
 网站同步：
 - 本地 `reports/YYYY-MM-DD.md` 保留检索批次、运行、评分与排查信息。
 - 公开网站只发布论文内容，不展示内部评分、Prompt、配置或处理过程。
-- 将新日报置于 `website/lib/site-data.ts` 的最新位置，并将 15 篇论文加入可检索数据库。
+- 将新日报置于 `website/lib/site-data.ts` 的最新位置，并将实际入选论文加入可检索数据库，不得用低质量论文凑满 15 篇。
+- 网站按研究方向、训练与优化、创新模态、数据方法、机器人平台、部署与迁移分维度筛选；Memory 的实现形式与时间跨度只能出现在详情属性中。
 - 每篇论文必须使用一至两幅能帮助理解方法的 Overview / Method / Architecture 图片，优先截取 arXiv 原论文并存入 `website/public/report-assets/YYYY-MM-DD/`；不得用纯结果表或无关实验照片凑数。
 - 保留可核验的项目页、GitHub 或模型链接；没有可靠链接时不要猜测。
 - 运行网站测试并使用 `website/.openai/hosting.json` 对应的现有 Sites 项目发布；禁止创建新站点。
 
 最后回复用户：
 - 今日候选数量
-- Top 15 标题
+- 最终入选数量和标题
 - scored.json 路径
 - 日报路径
 - 网站发布结果和公开网址

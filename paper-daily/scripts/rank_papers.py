@@ -150,11 +150,14 @@ def score_candidate_rules(
 
     negative_matches = []
     penalty = 0.0
+    negative_keyword_penalty = float(
+        research_profile.get("negative_keyword_penalty", -3.0)
+    )
     for keyword in negative_keywords:
         keyword_l = str(keyword).lower()
         if keyword_l and contains_keyword(text, keyword_l):
             negative_matches.append(str(keyword))
-            penalty -= 3.0
+            penalty += negative_keyword_penalty
 
     category_score = sum(
         0.25

@@ -1,24 +1,68 @@
-export const paperCategories = [
-  "VLA",
-  "WAM",
-  "WM",
-  "RL",
-  "CoT (Chain of Thought)",
-  "Pre-training",
-  "Post-training",
-  "数据质量",
-  "Memory",
-  "Subtask",
-  "多模态",
-  "真机部署优化",
-  "Real2Sim2Real",
-  "Humanoid",
-  "数据增强",
-  "UMI / Ego 数据",
-  "其他",
-] as const;
+export const paperTaxonomy = {
+  research: {
+    label: "研究方向",
+    values: ["VLA", "WAM", "WM", "表征学习", "Memory", "CoT", "Subtask", "其他"],
+  },
+  training: {
+    label: "训练与优化",
+    values: ["Pre-training", "Post-training", "BC", "RL", "Test-time Adaptation"],
+  },
+  modality: {
+    label: "创新模态",
+    values: [
+      "Depth / RGB-D",
+      "Point Cloud / 3D",
+      "Force / Torque",
+      "Tactile",
+      "Audio",
+      "Mask / Segmentation",
+      "State / Proprioception",
+      "其他模态",
+    ],
+  },
+  data: {
+    label: "数据方法",
+    values: [
+      "数据质量 / 筛选",
+      "数据增强",
+      "合成 / 仿真数据",
+      "在线数据 / 人工纠正",
+      "UMI / Ego / Human Video",
+      "跨本体数据",
+      "其他数据方法",
+    ],
+  },
+  platform: {
+    label: "机器人平台",
+    values: ["机械臂", "Humanoid", "轮式底盘", "灵巧手", "夹爪", "其他平台"],
+  },
+  deployment: {
+    label: "部署与迁移",
+    values: ["真机部署优化", "Sim2Real", "Real2Sim", "Real2Sim2Real", "跨本体迁移"],
+  },
+} as const;
 
-export type PaperCategory = (typeof paperCategories)[number];
+export type TaxonomyDimension = keyof typeof paperTaxonomy;
+export type ResearchDirection = (typeof paperTaxonomy.research.values)[number];
+export type TrainingCategory = (typeof paperTaxonomy.training.values)[number];
+export type ModalityCategory = (typeof paperTaxonomy.modality.values)[number];
+export type DataCategory = (typeof paperTaxonomy.data.values)[number];
+export type PlatformCategory = (typeof paperTaxonomy.platform.values)[number];
+export type DeploymentCategory = (typeof paperTaxonomy.deployment.values)[number];
+
+export type PaperClassification = {
+  research: ResearchDirection;
+  training?: TrainingCategory;
+  modalities?: ModalityCategory[];
+  data?: DataCategory;
+  platforms?: PlatformCategory[];
+  deployment?: DeploymentCategory;
+};
+
+export type PaperDetailAttributes = {
+  memoryImplementation?: string;
+  memoryHorizon?: string;
+};
 
 export type PaperResource = {
   label: "项目页" | "GitHub" | "模型";
@@ -39,13 +83,17 @@ export type Paper = {
   institutions: string[];
   signal: string;
   tags: string[];
-  categories: PaperCategory[];
+  classification: PaperClassification;
+  detailAttributes?: PaperDetailAttributes;
   resources?: PaperResource[];
   motivation: string;
   architecture: string;
   optimization: string;
   data: string;
   experiments: string;
+  novelty?: string;
+  reproducibility?: string;
+  readingNotes?: string;
   strengths: string;
   limitations: string;
   transfer: string;
@@ -80,7 +128,18 @@ export type CompanyUpdate = {
   source: string;
 };
 
-const paperDaily20260727: Paper[] = [
+export function getPaperClassificationLabels(paper: Paper) {
+  return [
+    paper.classification.research,
+    paper.classification.training,
+    ...(paper.classification.modalities ?? []),
+    paper.classification.data,
+    ...(paper.classification.platforms ?? []),
+    paper.classification.deployment,
+  ].filter((value): value is string => Boolean(value));
+}
+
+const paperDaily20260727Archive: Paper[] = [
   {
     rank: 1,
     title: "FELT: Generating Tactile Signals from Vision for Visuo-Tactile Manipulation",
@@ -89,7 +148,14 @@ const paperDaily20260727: Paper[] = [
     institutions: ["University of Southern California", "Columbia University", "Starpilot"],
     signal: "从 RGB 合成触觉图像或 latent，在无触觉传感器部署时改善接触任务",
     tags: ["Tactile Generation", "Diffusion Policy", "Contact-rich"],
-    categories: ["Post-training", "多模态", "真机部署优化", "数据增强"],
+    classification: {
+      research: "表征学习",
+      training: "Post-training",
+      modalities: ["Tactile"],
+      data: "数据增强",
+      platforms: ["机械臂", "夹爪"],
+      deployment: "真机部署优化",
+    },
     resources: [{ label: "项目页", url: "https://felt-tactile.github.io/" }],
     motivation:
       "真实触觉数据昂贵、易损且难标准化，视觉策略又难处理遮挡和接触歧义。FELT 尝试从腕部 RGB 生成双指压力表征，为视觉-only 数据补上接触信息。",
@@ -124,7 +190,13 @@ const paperDaily20260727: Paper[] = [
     institutions: ["Sungkyunkwan University"],
     signal: "策略同时预测动作、刚度与 impedance-admittance 控制模式",
     tags: ["Contact Control", "Diffusion Policy", "Force"],
-    categories: ["Post-training", "多模态", "真机部署优化"],
+    classification: {
+      research: "其他",
+      training: "BC",
+      modalities: ["Force / Torque"],
+      platforms: ["机械臂", "夹爪"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "刚性接触中，策略与底层控制器分离会让同一目标导致振荡、工具损坏或安全停机；URF 将控制模式纳入策略输出。",
     architecture:
@@ -159,7 +231,12 @@ const paperDaily20260727: Paper[] = [
     institutions: ["CNRS-AIST Joint Robotics Laboratory", "AIST"],
     signal: "首帧一次性纠正注意关键点，随后自动跟踪以恢复 OOD 操作",
     tags: ["Guided Attention", "Human Correction", "OOD"],
-    categories: ["Post-training", "多模态", "真机部署优化"],
+    classification: {
+      research: "表征学习",
+      training: "BC",
+      platforms: ["机械臂", "夹爪"],
+      deployment: "真机部署优化",
+    },
     resources: [
       { label: "项目页", url: "https://mmurooka.github.io/guided-attention-project-page" },
     ],
@@ -197,7 +274,13 @@ const paperDaily20260727: Paper[] = [
     institutions: ["Northeastern University", "NVIDIA"],
     signal: "诊断语言 factor bias，并把固定采集预算投向弱 grounding 因素",
     tags: ["Compositional Generalization", "Data Selection", "Language Grounding"],
-    categories: ["Post-training", "数据质量", "真机部署优化"],
+    classification: {
+      research: "VLA",
+      training: "Post-training",
+      data: "数据质量 / 筛选",
+      platforms: ["机械臂", "夹爪"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "增加数据不保证策略真正 grounding 语言；模型可能只依赖颜色等显著因素而忽略 verb、size 或 spatial attribute。",
     architecture:
@@ -231,7 +314,13 @@ const paperDaily20260727: Paper[] = [
     institutions: ["Georgia Institute of Technology"],
     signal: "保留 MPM 物理结构，同时学习材料、残差和逐粒子置信度",
     tags: ["World Model", "Deformable Object", "Uncertainty"],
-    categories: ["WM", "Pre-training", "真机部署优化"],
+    classification: {
+      research: "WM",
+      training: "Pre-training",
+      modalities: ["Depth / RGB-D", "Point Cloud / 3D"],
+      platforms: ["机械臂", "夹爪"],
+      deployment: "Real2Sim",
+    },
     motivation:
       "解析模型需要逐物体优化，纯学习模型又容易违背物理并在分布外失效。PhysCoRe 用学习模块校正而不是替代物理。",
     architecture:
@@ -270,7 +359,13 @@ const paperDaily20260727: Paper[] = [
     ],
     signal: "多模态隐藏温度重建、offline RL 与轨迹执行组成接触闭环",
     tags: ["Offline RL", "Multimodal State", "Adaptive Control"],
-    categories: ["RL", "Post-training", "多模态", "真机部署优化"],
+    classification: {
+      research: "其他",
+      training: "RL",
+      modalities: ["Force / Torque", "Audio"],
+      platforms: ["机械臂", "其他平台"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "骨切削温度在工具遮挡下不可直接测量，force、temperature 与效率又相互耦合，固定参数策略难以跨组织差异安全工作。",
     architecture:
@@ -305,7 +400,12 @@ const paperDaily20260727: Paper[] = [
     institutions: ["Massachusetts Institute of Technology"],
     signal: "低维耦合抽象、分布式安全 RL 与零样本多机真机迁移",
     tags: ["Safe RL", "Control Barrier Function", "Multi-Robot"],
-    categories: ["RL", "Pre-training", "Real2Sim2Real", "真机部署优化"],
+    classification: {
+      research: "其他",
+      training: "RL",
+      platforms: ["其他平台"],
+      deployment: "Sim2Real",
+    },
     motivation:
       "多机吊运的耦合动力学、团队规模变化和动态障碍使集中式规划难扩展，安全证书还要跨离散策略与连续硬件执行。",
     architecture:
@@ -340,7 +440,11 @@ const paperDaily20260727: Paper[] = [
     institutions: ["Hong Kong University of Science and Technology", "Shenzhen Loop Area Institute"],
     signal: "用组合能量梯度同时优化抓取、交接、重抓与双臂轨迹",
     tags: ["Bimanual", "Diffusion", "Energy-Based Optimization"],
-    categories: ["Post-training", "真机部署优化"],
+    classification: {
+      research: "其他",
+      platforms: ["机械臂", "夹爪"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "双臂重定向必须联合决定抓取、handover、regrasp 与放置，传统 sample-and-filter 组合爆炸且难优化轨迹。",
     architecture:
@@ -374,7 +478,12 @@ const paperDaily20260727: Paper[] = [
     institutions: ["University of São Paulo"],
     signal: "把机器人能力直接编码进空间表征，而不是只做轨迹后过滤",
     tags: ["Embodiment", "Traversability", "Representation"],
-    categories: ["多模态", "真机部署优化", "Humanoid"],
+    classification: {
+      research: "表征学习",
+      modalities: ["Depth / RGB-D"],
+      platforms: ["轮式底盘", "其他平台"],
+      deployment: "跨本体迁移",
+    },
     motivation:
       "同一地形对轮式和足式机器人含义不同，后处理过滤无法让视觉表征本身理解 embodiment 能力。",
     architecture:
@@ -412,7 +521,14 @@ const paperDaily20260727: Paper[] = [
     ],
     signal: "透明实验室物体的大规模多视角数据与系统级抓取验证",
     tags: ["Transparent Objects", "Multi-view", "Laboratory Robotics"],
-    categories: ["Pre-training", "数据质量", "多模态", "真机部署优化"],
+    classification: {
+      research: "其他",
+      training: "Pre-training",
+      modalities: ["Depth / RGB-D", "Mask / Segmentation"],
+      data: "数据质量 / 筛选",
+      platforms: ["机械臂", "灵巧手", "夹爪"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "透明耗材在遮挡、反射和重复实例下仍是 autonomous lab 的感知瓶颈，现有透明物体数据与真实流程差距较大。",
     architecture:
@@ -447,7 +563,12 @@ const paperDaily20260727: Paper[] = [
     institutions: ["Dalian University of Technology", "The University of Tokyo"],
     signal: "突破检测后用实测事件重锚定剩余切削轨迹",
     tags: ["Multimodal Perception", "Trajectory Adjustment", "Surgical Robot"],
-    categories: ["多模态", "真机部署优化"],
+    classification: {
+      research: "其他",
+      modalities: ["Force / Torque", "Audio"],
+      platforms: ["机械臂", "其他平台"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "CT 轨迹无法补偿注册误差、骨厚变化和术中位移，开环切削可能过冲并伤及硬脑膜。",
     architecture:
@@ -486,7 +607,16 @@ const paperDaily20260727: Paper[] = [
     ],
     signal: "持久状态不等于知识积累，结构化 3D memory 才能减少重复探索",
     tags: ["Sequential Evaluation", "3D Memory", "Embodied QA"],
-    categories: ["Memory", "多模态", "真机部署优化"],
+    classification: {
+      research: "Memory",
+      modalities: ["Point Cloud / 3D"],
+      platforms: ["其他平台"],
+      deployment: "真机部署优化",
+    },
+    detailAttributes: {
+      memoryImplementation: "显式 3D spatial-semantic memory",
+      memoryHorizon: "跨连续问题长期保留",
+    },
     resources: [
       { label: "项目页", url: "https://sequential-eqa.github.io/" },
       { label: "GitHub", url: "https://github.com/jangablox/sequential-eqa" },
@@ -531,7 +661,12 @@ const paperDaily20260727: Paper[] = [
     institutions: ["University of Chile"],
     signal: "大型机器人自过滤、岩石分割与可执行目标 pose 的嵌入式闭环感知",
     tags: ["RGB-D", "Robot Self-filtering", "Deployment"],
-    categories: ["多模态", "真机部署优化"],
+    classification: {
+      research: "其他",
+      modalities: ["Depth / RGB-D", "Mask / Segmentation"],
+      platforms: ["其他平台"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "矿山破碎锤依赖远程操作，机器人自身遮挡和钢格背景使岩石分割与可执行敲击 pose 生成困难。",
     architecture:
@@ -566,7 +701,12 @@ const paperDaily20260727: Paper[] = [
     institutions: ["University of Toronto", "AISCIA Informatics", "Hamad Bin Khalifa University"],
     signal: "低成本液体处理、浏览器数字孪生与闭环实验选择",
     tags: ["Digital Twin", "Self-driving Lab", "Human-in-the-loop"],
-    categories: ["真机部署优化", "数据质量"],
+    classification: {
+      research: "其他",
+      data: "数据质量 / 筛选",
+      platforms: ["机械臂", "夹爪"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "商业液体处理平台昂贵且封闭，低成本装置通常缺少可监督、可干预的实时数字孪生与闭环实验选择。",
     architecture:
@@ -605,7 +745,12 @@ const paperDaily20260727: Paper[] = [
     ],
     signal: "多层零样本导航、多视图目标确认和动态行人避障",
     tags: ["ObjectNav", "VLM Verification", "Dynamic Avoidance"],
-    categories: ["多模态", "真机部署优化", "Humanoid"],
+    classification: {
+      research: "其他",
+      modalities: ["Depth / RGB-D"],
+      platforms: ["轮式底盘"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "ObjectNav 往往只处理单层静态场景，单视图目标确认容易误检，机器人专用 PointNav 又难迁移到新硬件。",
     architecture:
@@ -633,6 +778,19 @@ const paperDaily20260727: Paper[] = [
   },
 ];
 
+const paperDaily20260727ExcludedFromPublic = new Set([
+  "2607.21113",
+  "2607.21071",
+  "2607.21058",
+  "2607.20748",
+  "2607.20662",
+  "2607.21025",
+]);
+
+const paperDaily20260727: Paper[] = paperDaily20260727Archive
+  .filter((paper) => !paperDaily20260727ExcludedFromPublic.has(paper.arxivId))
+  .map((paper, index) => ({ ...paper, rank: index + 1 }));
+
 const latestPapers: Paper[] = [
   {
     rank: 1,
@@ -642,7 +800,12 @@ const latestPapers: Paper[] = [
     institutions: ["New York University", "Meta FAIR", "AMI Labs"],
     signal: "轻量化 dense visual token 路线，同时报告真机、泛化与效率对照",
     tags: ["Dense Representation", "Imitation Learning", "Real Robot"],
-    categories: ["Post-training", "真机部署优化"],
+    classification: {
+      research: "表征学习",
+      training: "BC",
+      platforms: ["机械臂", "夹爪"],
+      deployment: "真机部署优化",
+    },
     resources: [
       { label: "项目页", url: "https://patch-policy.github.io/" },
       { label: "GitHub", url: "https://github.com/gaoyuezhou/patch_policy" },
@@ -681,17 +844,17 @@ const latestPapers: Paper[] = [
     institutions: ["Manifold AI", "Tsinghua University", "Shanghai Jiao Tong University"],
     signal: "长短期事件记忆 WAM，评估长程任务与视觉提示适应",
     tags: ["World Action Model", "Long-term Memory", "Short-term Memory", "Multimodal Prompt"],
-    categories: [
-      "WAM",
-      "WM",
-      "Pre-training",
-      "Post-training",
-      "数据质量",
-      "Memory",
-      "Subtask",
-      "多模态",
-      "UMI / Ego 数据",
-    ],
+    classification: {
+      research: "WAM",
+      training: "Pre-training",
+      data: "UMI / Ego / Human Video",
+      platforms: ["机械臂"],
+      deployment: "真机部署优化",
+    },
+    detailAttributes: {
+      memoryImplementation: "连续视觉上下文与事件级语义记忆并行",
+      memoryHorizon: "短时与长时并用",
+    },
     resources: [
       { label: "项目页", url: "https://manifoldai-research.github.io/WorldScape-Policy/" },
       { label: "GitHub", url: "https://github.com/manifoldai-research/WorldScape-Policy" },
@@ -730,7 +893,17 @@ const latestPapers: Paper[] = [
     institutions: ["Tsinghua University", "Microsoft Research", "Fudan University", "USTC"],
     signal: "用低带宽力觉历史解决视觉不可辨识的接触记忆问题",
     tags: ["Force Memory", "Episodic Memory", "Contact-rich", "VLA"],
-    categories: ["VLA", "Pre-training", "Post-training", "Memory", "多模态", "真机部署优化"],
+    classification: {
+      research: "Memory",
+      training: "Post-training",
+      modalities: ["Force / Torque"],
+      platforms: ["Humanoid", "夹爪"],
+      deployment: "真机部署优化",
+    },
+    detailAttributes: {
+      memoryImplementation: "将完整六轴力历史压缩为可检索 latent tokens",
+      memoryHorizon: "单个 episode 内长期保留",
+    },
     resources: [
       { label: "项目页", url: "https://qft-333.github.io/FM-VLA-Page/" },
       { label: "GitHub", url: "https://github.com/qft-333/FM-VLA" },
@@ -768,7 +941,14 @@ const latestPapers: Paper[] = [
     institutions: ["DAMO Academy, Alibaba Group", "Lupan Lab"],
     signal: "统一 3D grounding、contact point 和跨本体动作空间",
     tags: ["Foundation Model", "Cross-embodiment", "3D Grounding"],
-    categories: ["VLA", "Pre-training", "Post-training", "多模态", "Humanoid"],
+    classification: {
+      research: "VLA",
+      training: "Pre-training",
+      modalities: ["Point Cloud / 3D"],
+      data: "跨本体数据",
+      platforms: ["Humanoid"],
+      deployment: "跨本体迁移",
+    },
     resources: [
       {
         label: "模型",
@@ -809,7 +989,13 @@ const latestPapers: Paper[] = [
     institutions: ["BUAA", "BZA", "TJU", "DeepCybo", "ZGCI"],
     signal: "让同一物理状态同时服务 action 与 verification",
     tags: ["Humanoid", "3D Object Token", "Closed-loop"],
-    categories: ["VLA", "Post-training", "多模态", "真机部署优化", "Humanoid"],
+    classification: {
+      research: "VLA",
+      training: "Post-training",
+      modalities: ["Depth / RGB-D", "Point Cloud / 3D"],
+      platforms: ["Humanoid", "灵巧手"],
+      deployment: "真机部署优化",
+    },
     motivation:
       "长时 humanoid VLA 容易出现 object-state divergence：动作模型理解的对象状态与任务管理器用于判断完成的状态并不一致。",
     architecture:
@@ -837,6 +1023,152 @@ const latestPapers: Paper[] = [
   },
 ];
 
+const paperSupplements: Record<
+  string,
+  Pick<Paper, "novelty" | "reproducibility" | "readingNotes">
+> = {
+  "2607.20683": {
+    novelty:
+      "相对直接把触觉传感器读数送入策略的路线，FELT 把“触觉缺失”改写为条件生成问题，并显式建模左右指面的结构关系；关键比较是视觉-only、真实触觉、生成触觉以及去除跨指交互的消融。",
+    reproducibility:
+      "项目页已公开，论文披露生成器与策略数据量、四项任务和每项 20 次真机试验；当前条目未确认代码、权重或完整训练配置已发布。",
+    readingNotes:
+      "方法先用配对 RGB—压力图训练触觉生成器，再把生成图像或 latent 接入 Diffusion Policy。结果说明收益并非只来自增加网络容量：双指结构和生成表征消融均影响成功率。不过实验仍集中在视觉可看到接触区域的四项任务，不能据此推断对严重遮挡或新型触觉传感器同样有效。",
+  },
+  "2607.20912": {
+    novelty:
+      "常见 force-conditioned policy 只预测末端动作，URF 进一步让策略输出刚度和 impedance-admittance 切换量，使接触模式成为策略决策的一部分；固定控制模式和标准 force-DP 是最直接基线。",
+    reproducibility:
+      "论文披露机器人、传感器、150 条示范、任务设置及每方法每任务 20 次试验；当前未确认公开代码、数据或训练权重。",
+    readingNotes:
+      "URF 的核心不是增加一种输入模态，而是让动作生成和底层柔顺控制共享同一输出接口。两个刚性接触任务中标准 force-DP 失败，说明只感知力并不足以解决控制器不匹配；但任务数量和控制轴建模仍有限，尚不能证明该切换机制适用于更丰富的接触几何。",
+  },
+  "2607.21049": {
+    novelty:
+      "相对不可解释的端到端 Diffusion Policy，这项工作暴露可编辑的视觉关键点，并只要求用户在首帧纠正一次，之后由跟踪模块传播；比较重点是无纠正策略、人工 override 路径和不同 OOD 条件。",
+    reproducibility:
+      "项目页已公开，论文给出三项真机任务、每任务 32 条示范以及 3 seeds × 10 rollouts 的评测结构；当前未确认代码或数据已发布。",
+    readingNotes:
+      "训练阶段同时走预测关键点和人工 override 两条路径，让动作策略在部署时能接收纠正后的表征。OOD 提升与一次性纠正直接相关，但它仍依赖用户知道应点击哪里，且二维关键点无法表达深度、遮挡关系和可变形物体的完整状态。",
+  },
+  "2607.21582": {
+    novelty:
+      "区别于均匀增加示范，论文先用 Factor Dominance Rate/Hierarchy 识别语言因素偏置，再把固定预算投向弱项；主要基线是随机采样和相同或更大数据预算的常规后训练。",
+    reproducibility:
+      "论文披露因素划分、采样预算、六种仿真 foundation policy，以及真机任务中每个 checkpoint 的 48 次 rollout；当前未确认代码和数据采集工具发布。",
+    readingNotes:
+      "这是一篇数据选择工作，而不是新的 VLA 架构。它把 verb、object、size、spatial attribute 等因素两两对照，从偏置诊断推导下一批采集分配。真机结果支持“固定预算下定向补弱项”这一命题，但因素需要人工离散，开放词汇和长程任务中的因素发现仍未解决。",
+  },
+  "2607.20653": {
+    novelty:
+      "相对逐对象优化的 PhysTwin 和完全学习式动力学，PhysCoRe 保留 MPM rollout，只学习材料估计与动力学残差，并给出逐粒子不确定性；直接证据来自材料、残差和置信度模块消融。",
+    reproducibility:
+      "论文披露对象类型、12 个真实 episode、主动探测平台和主要速度/误差比较；当前未确认代码、模型或采集数据已公开，材料覆盖规模较小。",
+    readingNotes:
+      "Material-from-Motion 先从 RGB-D 序列估计材料参数，Residual-from-Dynamics 再修正 MPM 的系统误差。相对 PhysTwin 的速度和误差改善说明混合物理模型有价值，但训练样本很少，主动探索只展示不确定性下降，没有证明机器人能据此选择更有效的操作。",
+  },
+  "2607.20665": {
+    novelty:
+      "论文把多机载荷耦合压缩为低维任务模型，再把分布式图策略与控制障碍函数结合；相对普通 domain-randomized RL，新增的是显式安全约束和团队规模外推。",
+    reproducibility:
+      "论文给出 3–5 机仿真训练、3–6 机 Crazyflie 真机设置、失败场景和安全裕度处理；当前未确认代码、仿真环境或策略权重发布。",
+    readingNotes:
+      "训练只在低维仿真中进行，真实执行由底层控制器跟踪抽象动作，并通过收紧障碍边界吸收跟踪误差。硬件结果支持零样本 Sim2Real 和团队规模扩展，但验证限于固定高度和平面运输，因此这里把它作为可迁移的安全 RL 方法，而不是通用多机器人结论。",
+  },
+  "2607.21341": {
+    novelty:
+      "区别于先大量采样再过滤抓取与交接组合，BiCompoDiff 把碰撞、可达性和平滑约束写成能量梯度，直接在扩散反演中联合优化；ReorientBot 和去除能量/MCMC 的版本构成直接比较。",
+    reproducibility:
+      "论文披露 60 个仿真任务、双 UR12e 真机平台及主要消融；真机仅两个代表场景，当前未确认代码、对象集合或预训练 grasp diffusion 权重发布。",
+    readingNotes:
+      "该方法的主要贡献发生在推理阶段，因此没有强行归入 Post-training。预训练抓取扩散给出可行先验，能量模型在采样过程中持续修正双臂约束。仿真提升较清楚，但真机样本很少且依赖准确物体几何与位姿，尚未覆盖感知误差和接触失败恢复。",
+  },
+  "2607.20679": {
+    novelty:
+      "相对先生成通用地形表征、再按机器人类型后过滤，论文用 robot profile 直接调制空间特征，使可通行性表示随 embodiment 改变；Spot 与 TerraSentia 的跨平台测试是核心证据。",
+    reproducibility:
+      "论文披露 NaviTrace/held-out 轨迹划分、两种真机平台、部署频率及结构消融；当前未确认训练代码、数据划分或模型权重公开。",
+    readingNotes:
+      "DINOv3、深度和语义地形特征经过 SPADE 调制后形成机器人能力相关的 prototype。两种本体上的结果说明平台条件化比统一后过滤更合理，但实验主要区分轮式与足式能力，仍不足以覆盖机械臂或 humanoid 的细粒度动作约束。",
+  },
+  "2607.21571": {
+    novelty:
+      "论文主要贡献是把 EQA 从每题重置改为连续问题评估，并区分持久 state 与真正可复用的结构化 memory；它比较短期 buffer、隐式策略记忆和显式 3D spatial-semantic memory。",
+    reproducibility:
+      "项目页和 GitHub 已公开；论文提供模拟协议及 Unitree Go2 场景，但每个真机环境只有很少的 episodic/sequential 对照，统计结论应谨慎。",
+    readingNotes:
+      "Sequential-EQA 不额外训练被测 agent，而是保持环境与内部状态连续，观察后续问题能否复用已经探索的信息。显式 3D memory 的改善支持“持久化不等于知识积累”，但任务仍是问答而非 manipulation，因此网站只把它作为 Memory 架构参考。",
+  },
+  "2607.18236": {
+    novelty:
+      "相对把每帧视觉压成单个 global token，Patch Policy 保留冻结视觉编码器的 dense patch tokens，并用帧内充分交互、帧间因果的 attention mask连接动作头；主要对照保持策略框架一致，只改变视觉表征。",
+    reproducibility:
+      "项目页和 GitHub 已公开；论文披露仿真与三项 Franka 任务、未见物体测试、视觉 backbone、压缩率和延迟消融，真机置信区间仍未报告。",
+    readingNotes:
+      "这项工作的价值在于用较小策略读取冻结 ViT 的空间细节，而不是端到端微调整个 VLM。多组结构和效率比较支持 dense representation 的贡献；同时 token 数增加带来的时延和内存成本仍需按控制频率权衡。",
+  },
+  "2607.18840": {
+    novelty:
+      "相对短窗口 WAM，WorldScape Policy 2.0 同时维护近期视觉动力学和由 VLM 组织的事件级长期记忆，并支持文本、目标图像和跨本体视频提示；直接消融覆盖 memory components、训练阶段和 semantic forcing。",
+    reproducibility:
+      "项目页和 GitHub 已公开，论文披露 ManipEvent-5M 的规模、来源和三阶段训练；5B WAM、4B VLM 与大规模混合数据使完整复现成本较高。",
+    readingNotes:
+      "共享 video-action DiT 负责预测未来视觉与动作，短期记忆保留连续动力学，长期模块把历史压成事件边界与局部活动状态。RoboTwin 主表很高，但更严格的 clean-to-randomized 结果明显较低，因此应把它理解为大规模训练和事件记忆的联合收益，而非已解决开放环境泛化。",
+  },
+  "2607.18231": {
+    novelty:
+      "相对瞬时力输入或视觉历史，FM-VLA 用 Force-VAE 将完整六轴力序列压成少量 tokens，再注入 π0.5 action expert；无记忆、短期力、视觉记忆和不同 encoder/token 数是直接基线。",
+    reproducibility:
+      "项目页和 GitHub 已公开；论文披露 750 条示范、三项任务、每方法 18 次真机试验和多组消融，未验证跨传感器或跨平台复现。",
+    readingNotes:
+      "第一阶段预训练 Force-VAE 重建力历史，第二阶段冻结该编码器并后训练 VLA。结果支持低带宽力历史能区分重复接触次数和遮挡状态，但任务与训练数据高度同分布，83.3% 平均成功率不能外推到未见接触模式。",
+  },
+  "2607.17977": {
+    novelty:
+      "RynnBrain 1.1 将 3D grounding、contact point 和 VLA action 放入统一具身预训练体系，并用 shared action canvas 与 embodiment mask 兼容不同机器人；主要比较是相同 recipe 下的通用 Qwen-VLA 初始化。",
+    reproducibility:
+      "模型权重已在 Hugging Face 提供；论文披露主要模型结构和多平台测试，但完整训练 mixture、真机示范数量和置信区间未公开。",
+    readingNotes:
+      "论文先做具身多模态自回归预训练，再用单流 DiT 生成动作。多平台真机结果说明具身初始化有收益，但所谓 cross-embodiment 主要是已见本体联合训练，不等同于在未见机器人上零样本迁移。",
+  },
+  "2607.18016": {
+    novelty:
+      "相对只依赖 VLA 隐状态或外部任务管理器，POT-VLA 让同一组持久 3D object tokens 同时条件化动作生成和几何验证，从而减少动作模型与完成判据的状态分歧。",
+    reproducibility:
+      "论文披露 Unitree G1、八类任务各 10 次及 verifier/token/system 消融，但示范数量、训练时长、代码和关键 predicate 配置未公开。",
+    readingNotes:
+      "系统每执行一个短 action chunk 就重新观察、更新对象记录并判断继续、重试或重规划。71/80 对 39/80 的结果支持闭环验证价值，但系统依赖 RGB-D、分割、标定和人工阈值，当前证据不能把全部收益归因于 VLA 本身。",
+  },
+  "2607.15275": {
+    novelty:
+      "相对拼接固定长度历史，RoboTTT 在动作模型中加入可在线更新的 fast weights，用固定状态容量压缩最长 8K timesteps；1K/8K 上下文与普通单步策略是核心比较。",
+    reproducibility:
+      "NVIDIA GEAR 项目页已公开，论文披露 YAM 三项任务的数据时长、上下文长度和 GB200 训练规模；当前未确认完整代码和训练权重发布。",
+    readingNotes:
+      "TTT 层在序列推进时持续更新内部 MLP，把长历史写入参数化状态，而注意力仍处理当前帧内信息。复杂装配完成度明显提高，但训练成本很高，且 fast weights 仍会丢失部分早期事件，因此这里将其归为 Test-time Adaptation，并把长时上下文作为详情属性。",
+  },
+  "2607.14236": {
+    novelty:
+      "相对直接把力拼接到预训练 VLA，LIFT 增加独立 reactive action expert，并用零初始化 cross-attention 注入力历史；离线-only、无力反馈和无在线纠正版本构成关键消融。",
+    reproducibility:
+      "项目页已公开，论文披露 Flexiv 平台、三项接触任务和在线纠正流程；当前未确认代码、纠正数据或模型权重发布，数千条在线样本的具体组成仍有限。",
+    readingNotes:
+      "主干保留语义与慢速动作能力，旁路 expert 负责接触阶段的快速物理响应，DAgger 纠正失败状态的分布偏移。方法适合看作 VLA 后训练与在线数据闭环，而不是新的预训练方案；人工纠正和数据吞吐成本是主要限制。",
+  },
+  "2607.14609": {
+    novelty:
+      "区别于在任意层增加触觉预测 loss，论文先用 linear probe 找到最能预测未来触觉的 action-expert 层，再把训练期 tactile predictor 对齐到该位置；不同层、无对齐接口和两个 backbone 是直接比较。",
+    reproducibility:
+      "论文披露 ARX R5、PaXini 传感器、五项任务每项 50 条示范以及每方法 20 次真机试验；当前未确认代码、数据或权重发布。",
+    readingNotes:
+      "触觉头只在训练阶段提供辅助监督，部署时被移除，因此收益来自表征整形而不是新增在线传感输入。两个 VLA backbone 上的结果支持层选择的重要性，但单平台单传感器规模仍不足以说明该层级规律可普遍迁移。",
+  },
+};
+
+function enrichPaper(paper: Paper): Paper {
+  return { ...paper, ...(paperSupplements[paper.arxivId] ?? {}) };
+}
+
 export const reports: Report[] = [
   {
     slug: "2026-07-27",
@@ -845,10 +1177,10 @@ export const reports: Report[] = [
     range: "2026.07.24 - 2026.07.26",
     title: "触觉 latent、接触控制与偏置感知数据采集",
     summary:
-      "本期收录十五篇经 PDF 核验的论文，重点覆盖触觉生成、接触控制、组合泛化、物理 world model、安全 RL 与真机部署。",
+      "本期收录九篇经 PDF 核验的论文，覆盖触觉生成、接触控制、组合泛化、物理 world model、安全 RL、机器人能力表征与 Memory 评估。",
     overview:
-      "近期工作正把接触表征、底层控制模式和数据采集策略纳入学习闭环，同时更明确地报告真机次数、失败模式和跨条件泛化边界。",
-    papers: paperDaily20260727,
+      "本期论文分别讨论生成式触觉、接触控制、偏置感知数据采集、混合物理 world model、安全 RL、双臂推理优化、跨本体空间表征和结构化 Memory。",
+    papers: paperDaily20260727.map(enrichPaper),
   },
   {
     slug: "2026-07-23",
@@ -860,7 +1192,7 @@ export const reports: Report[] = [
       "本期收录五篇论文，分别讨论 dense patch policy、长短期事件记忆 WAM、力觉 episodic memory、具身基础模型和 humanoid 闭环执行。",
     overview:
       "这些工作近期在探索稠密视觉表征、事件级记忆、力觉历史、跨本体动作空间，以及基于 3D object state 的执行验证。",
-    papers: latestPapers,
+    papers: latestPapers.map(enrichPaper),
   },
   {
     slug: "2026-07-20",
@@ -881,7 +1213,16 @@ export const reports: Report[] = [
         institutions: ["NVIDIA", "Stanford University", "The University of Texas at Austin"],
         signal: "通过 fast weights 将 VLA 历史上下文扩展到 8K timesteps",
         tags: ["Long Context", "Long-term Memory", "Test-time Training"],
-        categories: ["VLA", "Pre-training", "Memory", "真机部署优化", "UMI / Ego 数据"],
+        classification: {
+          research: "Memory",
+          training: "Test-time Adaptation",
+          platforms: ["机械臂", "夹爪"],
+          deployment: "真机部署优化",
+        },
+        detailAttributes: {
+          memoryImplementation: "TTT fast weights 压缩连续动作与观测历史",
+          memoryHorizon: "最高 8K timesteps 长时上下文",
+        },
         resources: [{ label: "项目页", url: "https://research.nvidia.com/labs/gear/robottt/" }],
         motivation: "长时装配需要保留阶段、失败与纠正关系，简单拼接历史帧无法持续扩展。",
         architecture: "在 GR00T N1.7 的 DiT 层中插入 TTT 层，用测试时更新的 MLP fast weights 压缩长历史。",
@@ -913,7 +1254,14 @@ export const reports: Report[] = [
         ],
         signal: "通过 reactive action expert 和 online DAgger 注入力反馈",
         tags: ["Force", "Post-training", "DAgger"],
-        categories: ["VLA", "Post-training", "多模态", "真机部署优化"],
+        classification: {
+          research: "VLA",
+          training: "Post-training",
+          modalities: ["Force / Torque"],
+          data: "在线数据 / 人工纠正",
+          platforms: ["机械臂", "夹爪"],
+          deployment: "真机部署优化",
+        },
         resources: [{ label: "项目页", url: "https://lift-policy.github.io/" }],
         motivation: "预训练 VLA 的语义能力很强，但接触阶段的快速物理反应不足。",
         architecture: "复制 reactive action expert，并通过零初始化 cross-attention 注入短期 6D 力记忆。",
@@ -945,7 +1293,13 @@ export const reports: Report[] = [
         ],
         signal: "先诊断各层物理可预测性，再选择触觉监督位置",
         tags: ["Tactile", "Representation", "Grounding"],
-        categories: ["VLA", "Post-training", "多模态", "真机部署优化"],
+        classification: {
+          research: "表征学习",
+          training: "Post-training",
+          modalities: ["Tactile"],
+          platforms: ["机械臂", "夹爪"],
+          deployment: "真机部署优化",
+        },
         motivation: "直接加触觉 loss 并不保证监督落在真正决定动作的表征层。",
         architecture: "用 linear probe 选择最能预测未来触觉的 action-expert 中间层，并接入 Latent Tactile Predictor。",
         optimization: "触觉 predictor 仅训练期存在，推理时移除，不增加额外延迟。",
@@ -963,7 +1317,7 @@ export const reports: Report[] = [
           },
         ],
       },
-    ],
+    ].map(enrichPaper),
   },
 ];
 

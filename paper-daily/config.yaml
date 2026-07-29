@@ -53,6 +53,15 @@ research_profile:
     - cross-embodiment
     - robot foundation model
     - multimodal policy
+    - chain of thought
+    - embodied reasoning
+    - subtask decomposition
+    - hierarchical policy
+    - robot memory
+    - episodic memory
+    - long-term memory
+    - spatial memory
+    - semantic memory
     - tactile sensing
     - force feedback
     - contact-rich manipulation
@@ -83,6 +92,20 @@ research_profile:
     - domain generalization
     - distribution shift
     - preference optimization
+    - post-training
+    - pre-training
+    - behavior cloning
+    - data curation
+    - data quality
+    - data selection
+    - data augmentation
+    - synthetic robot data
+    - online correction
+    - human correction
+    - DAgger
+    - UMI
+    - egocentric video
+    - human video
     - self-training
     - pseudo-labeling
     - diffusion model
@@ -96,10 +119,40 @@ research_profile:
   negative_keywords:
     - medical imaging
     - clinical diagnosis
+    - medical robot
+    - medical robotics
+    - surgical robot
+    - surgical robotics
+    - robotic surgery
+    - craniotomy
+    - healthcare robotics
+    - biomedical laboratory
+    - laboratory automation
+    - autonomous laboratory
+    - autonomous liquid handling
+    - liquid handling robot
+    - mining robot
+    - mining robotics
+    - autonomous mining
+    - impact hammer
     - recommender system
     - financial forecasting
     - molecular generation
     - social simulation
+  negative_keyword_penalty: -8.0
+  positive_reference_organizations:
+    - Physical Intelligence / OpenPI
+    - NVIDIA Robotics
+    - Tesla Optimus
+    - X Square Robot
+    - AGIBOT
+    - LingBot
+    - Unitree Robotics
+    - LimX Dynamics
+    - RobotEra
+    - EngineAI
+    - Genesis AI
+    - Sharpa
   arxiv_categories:
     - cs.RO
     - cs.CV
@@ -166,6 +219,91 @@ retrieval:
 reporting:
   selected_paper_count: 15
   full_text_review_limit: 30
+  allow_fewer_than_target: true
+  minimum_quality_over_quota: true
+
+selection_policy:
+  primary_contribution_only: true
+  organization_is_positive_prior_not_auto_accept: true
+  reference_examples_dir: ../../ref
+  reject_scenario_specific_system_papers:
+    - medical and surgical systems
+    - mining systems
+    - laboratory automation
+  require_clear_method_transfer_for_adjacent_fields: true
+  website_hides_internal_scores: true
+
+paper_taxonomy:
+  research_direction:
+    single_primary: true
+    values:
+      - VLA
+      - WAM
+      - WM
+      - Representation Learning
+      - Memory
+      - CoT
+      - Subtask
+      - Other
+    memory_details_are_not_categories: true
+    memory_detail_fields:
+      - implementation_form
+      - time_horizon
+  training_and_optimization:
+    single_primary: true
+    values:
+      - Pre-training
+      - Post-training
+      - BC
+      - RL
+      - Test-time Adaptation
+    rules:
+      fine_tuning: Post-training
+      supervised_robot_action_learning: BC
+      dagger: Online Data / Human Correction
+      planning_and_search: detail_only
+      inference_optimization: detail_only
+  innovation_modality:
+    classify_only_if_central_to_novelty: true
+    omit_default_modalities:
+      - RGB
+      - Language
+    values:
+      - Depth / RGB-D
+      - Point Cloud / 3D
+      - Force / Torque
+      - Tactile
+      - Audio
+      - Mask / Segmentation
+      - State / Proprioception
+      - Other Modality
+  data_method:
+    classify_only_if_central_to_novelty: true
+    values:
+      - Data Quality / Selection
+      - Data Augmentation
+      - Synthetic / Simulation Data
+      - Online Data / Human Correction
+      - UMI / Ego / Human Video
+      - Cross-embodiment Data
+      - Other Data Method
+  robot_platform:
+    combinable: true
+    values:
+      - Manipulator
+      - Humanoid
+      - Wheeled Base
+      - Dexterous Hand
+      - Gripper
+      - Other Platform
+  deployment_and_transfer:
+    single_primary: true
+    values:
+      - Real-robot Deployment Optimization
+      - Sim2Real
+      - Real2Sim
+      - Real2Sim2Real
+      - Cross-embodiment Transfer
 
 semantic_scoring:
   weights:
@@ -188,11 +326,14 @@ semantic_scoring:
     affiliation_primary_source: pdf_first_page
     disclose_unknown_lab_names: true
     selected_paper_sections:
+      - concise_summary
       - motivation
       - model_structure
-      - optimization_stage
+      - training_and_optimization
       - data_composition
       - experiments_and_results
+      - novelty_against_prior_work
+      - reproducibility_information
       - strengths_and_limitations
       - transfer_value
       - score_breakdown
