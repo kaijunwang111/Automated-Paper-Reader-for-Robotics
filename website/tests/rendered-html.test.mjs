@@ -41,12 +41,13 @@ test("server-renders the finished research portal", async () => {
 });
 
 test("renders report, archive, database, paper, company, and about routes", async () => {
-  const [archive, detail, database, paper, excludedPaper, memoryPaper, companies, about] =
+  const [archive, detail, database, paper, contactPaper, excludedPaper, memoryPaper, companies, about] =
     await Promise.all([
     render("/reports"),
     render("/reports/2026-07-27"),
     render("/papers"),
     render("/papers/2607.20683"),
+    render("/papers/2607.20912"),
     render("/papers/2607.20748"),
     render("/papers/2607.18231"),
     render("/companies"),
@@ -57,17 +58,19 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.equal(detail.status, 200);
   assert.equal(database.status, 200);
   assert.equal(paper.status, 200);
+  assert.equal(contactPaper.status, 200);
   assert.equal(excludedPaper.status, 404);
   assert.equal(memoryPaper.status, 200);
   assert.equal(companies.status, 200);
   assert.equal(about.status, 200);
 
-  const [archiveHtml, detailHtml, databaseHtml, paperHtml, memoryPaperHtml, companiesHtml, aboutHtml] =
+  const [archiveHtml, detailHtml, databaseHtml, paperHtml, contactPaperHtml, memoryPaperHtml, companiesHtml, aboutHtml] =
     await Promise.all([
       archive.text(),
       detail.text(),
       database.text(),
       paper.text(),
+      contactPaper.text(),
       memoryPaper.text(),
       companies.text(),
       about.text(),
@@ -78,8 +81,16 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(detailHtml, /felt-tactile\.github\.io/);
   assert.match(detailHtml, /项目页/);
   assert.match(detailHtml, /相对已有工作/);
-  assert.match(detailHtml, /复现信息/);
-  assert.match(detailHtml, /原文解读/);
+  assert.match(detailHtml, /实验依据/);
+  assert.match(detailHtml, /复现线索/);
+  assert.match(detailHtml, /已确认资源/);
+  assert.match(detailHtml, /实现线索/);
+  assert.match(detailHtml, /仍缺少/);
+  assert.match(detailHtml, /详细解读/);
+  assert.match(detailHtml, /关键公式/);
+  assert.match(detailHtml, /实验结果怎么读/);
+  assert.match(detailHtml, /进一步思考/);
+  assert.match(detailHtml, /DINOv2-B\/14/);
   assert.doesNotMatch(detailHtml, /综合分|评分|候选论文/);
   assert.doesNotMatch(detailHtml, /ZONDA|Impact Hammers in Mining|Robotic Craniotomy|Liquid Handling/);
   assert.doesNotMatch(
@@ -108,6 +119,9 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(paperHtml, /返回论文数据库/);
   assert.match(paperHtml, /University of Southern California/);
   assert.match(paperHtml, /felt-tactile\.github\.io/);
+  assert.match(paperHtml, /真机部署优化/);
+  assert.match(contactPaperHtml, /URF: A Unified Robot Control-Policy Framework/);
+  assert.doesNotMatch(contactPaperHtml, /真机部署优化/);
   assert.match(memoryPaperHtml, /Memory 实现/);
   assert.match(memoryPaperHtml, /Memory 时间跨度/);
   assert.match(memoryPaperHtml, /单个 episode 内长期保留/);

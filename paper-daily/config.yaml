@@ -298,12 +298,65 @@ paper_taxonomy:
       - Other Platform
   deployment_and_transfer:
     single_primary: true
+    classify_only_if_central_to_contribution: true
     values:
       - Real-robot Deployment Optimization
       - Sim2Real
       - Real2Sim
       - Real2Sim2Real
       - Cross-embodiment Transfer
+    real_robot_deployment_optimization:
+      requires_direct_experiment: true
+      real_robot_evaluation_alone_is_insufficient: true
+      qualifying_contributions:
+        - on-device latency or throughput
+        - model compression or inference acceleration
+        - control-frequency optimization
+        - sensor removal or deployment-time sensor reduction
+        - compute or memory reduction
+        - online recovery or safety degradation handling
+
+content_policy:
+  quick_cards:
+    - motivation
+    - method_structure
+    - learning_method
+    - data_composition
+    - experiment_conclusion
+    - novelty_vs_direct_baseline
+  experiment_evidence:
+    required_fields:
+      - setup
+      - comparisons
+      - key_results
+      - evidence_boundary
+    include_when_reported:
+      - task_and_dataset
+      - robot_platform
+      - trial_count
+      - success_criterion
+      - ablations
+      - generalization_split
+      - variance_or_confidence_interval
+    never_infer_exact_values_from_plots: true
+  reproducibility:
+    sections:
+      - verified_resources
+      - implementation_details
+      - missing_information
+    verify_links_before_publishing: true
+    do_not_pad_missing_details: true
+  detailed_reading:
+    position: after_strengths_limitations_transfer
+    format: connected_short_article
+    cover:
+      - information_flow_and_key_modules
+      - training_objective_or_inference_process
+      - important_equations_when_present_and_useful
+      - experiment_setup_and_key_numbers
+      - ablations_failure_modes_and_evidence_limits
+      - evidence_based_reflections
+    require_traceable_source_for_every_number_formula_and_architecture_detail: true
 
 semantic_scoring:
   weights:
