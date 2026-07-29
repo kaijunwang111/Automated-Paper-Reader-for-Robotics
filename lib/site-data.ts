@@ -1,3 +1,5 @@
+import { paperEditorialSupplements } from "./paper-editorial-supplements";
+
 export const paperTaxonomy = {
   research: {
     label: "研究方向",
@@ -75,6 +77,40 @@ export type PaperFigure = {
   caption: string;
 };
 
+export type PaperExperimentBlock = {
+  title: string;
+  setup: string;
+  comparisons: string;
+  results: string[];
+  evidenceNote?: string;
+};
+
+export type PaperReproducibilityDetails = {
+  status: "资源较完整" | "部分可复现" | "信息不足";
+  verifiedResources: string[];
+  implementation: string[];
+  missing: string[];
+};
+
+export type PaperEquation = {
+  name: string;
+  expression: string;
+  explanation: string;
+};
+
+export type PaperDeepDiveSection = {
+  title: string;
+  paragraphs: string[];
+};
+
+export type PaperDeepDive = {
+  lead: string;
+  sections: PaperDeepDiveSection[];
+  equations?: PaperEquation[];
+  experimentReading: string[];
+  reflections: string[];
+};
+
 export type Paper = {
   rank: number;
   title: string;
@@ -94,6 +130,9 @@ export type Paper = {
   novelty?: string;
   reproducibility?: string;
   readingNotes?: string;
+  experimentDetails?: PaperExperimentBlock[];
+  reproducibilityDetails?: PaperReproducibilityDetails;
+  deepDive?: PaperDeepDive;
   strengths: string;
   limitations: string;
   transfer: string;
@@ -787,8 +826,25 @@ const paperDaily20260727ExcludedFromPublic = new Set([
   "2607.21025",
 ]);
 
+const paperDaily20260727Priority = [
+  "2607.20683",
+  "2607.21582",
+  "2607.21049",
+  "2607.20912",
+  "2607.21571",
+  "2607.20653",
+  "2607.21341",
+  "2607.20665",
+  "2607.20679",
+];
+
 const paperDaily20260727: Paper[] = paperDaily20260727Archive
   .filter((paper) => !paperDaily20260727ExcludedFromPublic.has(paper.arxivId))
+  .sort(
+    (paperA, paperB) =>
+      paperDaily20260727Priority.indexOf(paperA.arxivId) -
+      paperDaily20260727Priority.indexOf(paperB.arxivId),
+  )
   .map((paper, index) => ({ ...paper, rank: index + 1 }));
 
 const latestPapers: Paper[] = [
@@ -849,7 +905,6 @@ const latestPapers: Paper[] = [
       training: "Pre-training",
       data: "UMI / Ego / Human Video",
       platforms: ["机械臂"],
-      deployment: "真机部署优化",
     },
     detailAttributes: {
       memoryImplementation: "连续视觉上下文与事件级语义记忆并行",
@@ -898,7 +953,6 @@ const latestPapers: Paper[] = [
       training: "Post-training",
       modalities: ["Force / Torque"],
       platforms: ["Humanoid", "夹爪"],
-      deployment: "真机部署优化",
     },
     detailAttributes: {
       memoryImplementation: "将完整六轴力历史压缩为可检索 latent tokens",
@@ -1166,7 +1220,11 @@ const paperSupplements: Record<
 };
 
 function enrichPaper(paper: Paper): Paper {
-  return { ...paper, ...(paperSupplements[paper.arxivId] ?? {}) };
+  return {
+    ...paper,
+    ...(paperSupplements[paper.arxivId] ?? {}),
+    ...(paperEditorialSupplements[paper.arxivId] ?? {}),
+  };
 }
 
 export const reports: Report[] = [
@@ -1175,11 +1233,11 @@ export const reports: Report[] = [
     date: "2026.07.27",
     weekday: "周一",
     range: "2026.07.24 - 2026.07.26",
-    title: "触觉 latent、接触控制与偏置感知数据采集",
+    title: "触觉生成、偏置感知采集与可纠正视觉注意",
     summary:
-      "本期收录九篇经 PDF 核验的论文，覆盖触觉生成、接触控制、组合泛化、物理 world model、安全 RL、机器人能力表征与 Memory 评估。",
+      "本期保留九篇经原文核验的论文，按研究相关性与实验证据排序，覆盖触觉生成、数据筛选、可纠正注意、接触控制、Memory、物理 world model 与安全 RL。",
     overview:
-      "本期论文分别讨论生成式触觉、接触控制、偏置感知数据采集、混合物理 world model、安全 RL、双臂推理优化、跨本体空间表征和结构化 Memory。",
+      "本期九篇分别研究无触觉传感器部署、偏置诊断与定向采集、OOD 视觉纠正、柔顺接触控制、连续 EQA 的结构化记忆、混合物理动力学、双臂组合优化、多机安全 RL 与能力条件化地形表征。",
     papers: paperDaily20260727.map(enrichPaper),
   },
   {
@@ -1217,7 +1275,6 @@ export const reports: Report[] = [
           research: "Memory",
           training: "Test-time Adaptation",
           platforms: ["机械臂", "夹爪"],
-          deployment: "真机部署优化",
         },
         detailAttributes: {
           memoryImplementation: "TTT fast weights 压缩连续动作与观测历史",
@@ -1260,7 +1317,6 @@ export const reports: Report[] = [
           modalities: ["Force / Torque"],
           data: "在线数据 / 人工纠正",
           platforms: ["机械臂", "夹爪"],
-          deployment: "真机部署优化",
         },
         resources: [{ label: "项目页", url: "https://lift-policy.github.io/" }],
         motivation: "预训练 VLA 的语义能力很强，但接触阶段的快速物理反应不足。",
