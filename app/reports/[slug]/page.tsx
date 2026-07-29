@@ -53,7 +53,7 @@ export default async function ReportDetailPage({
               <strong>{report.range}</strong>
             </div>
             <div>
-              <span>精选</span>
+              <span>收录</span>
               <strong>{report.papers.length} paper overviews</strong>
             </div>
             <div>

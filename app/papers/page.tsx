@@ -20,9 +20,9 @@ export default async function PapersPage({
         <span className="section-index">PAPER DATABASE / INDEX</span>
         <h1>论文数据库</h1>
         <p>
-          每期收录论文都会进入数据库。可按 VLA、WAM、WM、RL、Memory、Subtask、
-          多模态、真机部署优化、Real2Sim2Real、Humanoid、数据增强、UMI / Ego 数据
-          与其他方向分类检索。
+          每期达到收录标准的论文都会进入数据库。可分别按研究方向、主要训练方式、
+          创新模态、数据方法、机器人平台以及部署迁移方式组合检索；常规 RGB 与语言输入
+          不作为模态标签。
         </p>
       </section>
       <section className="shell database-section">

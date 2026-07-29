@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { CompanyUpdate, Paper, Report } from "@/lib/site-data";
+import { getPaperClassificationLabels } from "@/lib/site-data";
 import { ArrowIcon } from "./site-shell";
 
 export function ReportCard({
@@ -14,12 +15,12 @@ export function ReportCard({
       <div className="report-card-meta">
         <span className="mono">{report.date}</span>
         <span>{report.weekday}</span>
-        <span>{report.papers.length} 篇精选</span>
+        <span>{report.papers.length} 篇收录</span>
       </div>
       <h3>{report.title}</h3>
       <p>{report.summary}</p>
       <div className="report-card-bottom">
-        <div className="mini-paper-stack" aria-label="精选论文">
+        <div className="mini-paper-stack" aria-label="收录论文">
           {report.papers.slice(0, 3).map((paper) => (
             <span key={paper.arxivId}>
               <b>0{paper.rank}</b>
@@ -82,7 +83,7 @@ export function PaperSummaryCard({ paper }: { paper: Paper }) {
         </div>
         <p>{paper.signal}</p>
         <div className="tag-row">
-          {[...new Set([...paper.categories, ...paper.tags])].map((tag) => (
+          {getPaperClassificationLabels(paper).map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
         </div>

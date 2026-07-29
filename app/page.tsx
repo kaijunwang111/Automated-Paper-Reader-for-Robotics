@@ -1,10 +1,23 @@
 import Link from "next/link";
 import { CompanyCard, ReportCard } from "@/components/content-cards";
 import { ArrowIcon } from "@/components/site-shell";
-import { companyUpdates, paperCategories, paperRecords, reports } from "@/lib/site-data";
+import {
+  companyUpdates,
+  getPaperClassificationLabels,
+  paperRecords,
+  paperTaxonomy,
+  reports,
+} from "@/lib/site-data";
 
 export default function Home() {
   const latest = reports[0];
+  const latestFigureCount = latest.papers.reduce(
+    (total, paper) => total + paper.figures.length,
+    0,
+  );
+  const latestTopics = [
+    ...new Set(latest.papers.flatMap((paper) => getPaperClassificationLabels(paper))),
+  ].slice(0, 5);
 
   return (
     <>
@@ -57,8 +70,8 @@ export default function Home() {
                 <strong>{String(reports.length).padStart(2, "0")}</strong>
               </div>
               <div>
-                <span>CATEGORIES</span>
-                <strong>{paperCategories.length}</strong>
+                <span>FILTERS</span>
+                <strong>{String(Object.keys(paperTaxonomy).length).padStart(2, "0")}</strong>
               </div>
             </div>
           </div>
@@ -84,11 +97,11 @@ export default function Home() {
               <div className="trend-metrics">
                 <div>
                   <strong>{latest.papers.length}</strong>
-                  <span>精选论文</span>
+                  <span>收录论文</span>
                 </div>
                 <div>
-                  <strong>3</strong>
-                  <span>原文架构图</span>
+                  <strong>{latestFigureCount}</strong>
+                  <span>原论文方法图</span>
                 </div>
                 <div>
                   <strong>{paperRecords.length}</strong>
@@ -96,7 +109,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="topic-cloud">
-                {["VLA", "WAM", "Force Memory", "Dense Tokens", "Real Robot"].map((topic) => (
+                {latestTopics.map((topic) => (
                   <span key={topic}>{topic}</span>
                 ))}
               </div>
