@@ -1,8 +1,68 @@
 import type { Paper } from "./site-data";
 
-export const paperDaily20260801: Paper[] = [
+const paperCandidates20260801: Paper[] = [
   {
     rank: 1,
+    title: "τ0-VLA: a Hierarchical Robot Foundation Model with World-Model-Guided Test-Time Computation",
+    arxivId: "tau0-vla",
+    source: "official",
+    url: "https://tau0-vla.github.io/tau0-vla.pdf",
+    institutions: ["Shanghai Innovation Institute", "Agibot Finch", "The Chinese University of Hong Kong"],
+    signal: "在长时任务的子任务边界按不确定性分配推理预算，用世界模型预测候选后果后再决定下一步",
+    tags: ["Hierarchical VLA", "Test-time Computation", "Execution Memory"],
+    classification: { research: "Subtask", training: "Post-training", data: "跨本体数据", platforms: ["Humanoid", "轮式底盘", "机械臂", "夹爪"], deployment: "跨本体迁移" },
+    detailAttributes: { memoryImplementation: "可纠正的文本 execution memory", memoryHorizon: "单个长时 episode 内跨 13–25 个步骤持续更新" },
+    resources: [
+      { label: "项目页", url: "https://tau0-vla.github.io/" },
+      { label: "GitHub", url: "https://github.com/sii-research/tau-0-vla" },
+      { label: "模型", url: "https://huggingface.co/sii-research/tau-0-vla" },
+    ],
+    motivation: "长时任务中的主要错误不一定来自低层动作，而可能来自在错误阶段选择了错误子任务；常见分层 VLA 又通常用一次前向直接提交决定。",
+    methodSummary: "高层策略维护 execution memory；置信度足够时直接输出子任务，不确定时由 proposal model 生成候选、world model 预测完成后的图像、value model 评分，并通过 beam search 与 reflection 决定最终子任务。",
+    architecture: "高层使用 Qwen3.5-9B 系列的 proposal/value/reflection 模块和 Step1X-Edit 初始化的 world model；低层由 Qwen3.5-2B 视觉语言 backbone 与 MoT action expert 组成，通过统一 40 维状态/动作接口控制固定、双臂和移动平台。",
+    optimization: "低层先做 knowledge-isolated 多模态与机器人数据协同训练，再端到端协同训练并面向目标平台后训练；高层用任务阶段、可执行子任务和分段示范自动构造监督，并加入 memory perturbation 学习进度纠正。",
+    data: "低层训练使用 40,115 小时异构真机数据，包含人工示范、自主 policy rollout 和 UMI 记录，覆盖固定、移动与双臂本体；同时混合视觉语言、空间、深度和机器人感知数据。",
+    experiments: "四项 13–25 步长时真机任务每个方法-任务组合 10 次；分层 Plan Once 的平均成功率为 45.0%，直接执行为 27.5%。TTC 在三项闭环任务上分别把成功次数从 5/10、6/10、5/10 提至 7/10、9/10、7/10。",
+    novelty: "相对一次性高层预测或只做一步 Best-of-N，它在提交子任务前递归预测多条候选路径的物理后果，并把真实执行结果重新写回可纠正 memory。",
+    experimentDetails: [
+      {
+        title: "分层执行与长时真机任务",
+        setup: "AGIBOT G1 上的 Clean Room、Prepare Ingredients、Tomato and Egg Stir Fry 与 Make Milk Tea，分别包含 25、14、22、13 个里程碑；每格 10 次独立真机试验。",
+        comparisons: "直接执行与分层 Plan Once 固定相同低层 policy、观察和动作接口；同时列出 GR00T N1.7、LingBot-VLA 与 π0.5 的直接执行结果。",
+        results: ["τ0-VLA 直接执行平均成功率 27.5%、进度 80.10%；分层 Plan Once 为 45.0%、87.85%。", "分层版本在 Stir Fry 上从 0/10 提升到 4/10，在 Prepare Ingredients 上从 2/10 提升到 4/10。", "四项任务的最长试验时限为 10–20 分钟，成功必须完成全部必需里程碑。"],
+        evidenceNote: "Plan Once 对照用于隔离显式子任务与进度记忆的作用；该组实验未启用 beam search。",
+      },
+      {
+        title: "世界模型引导的测试时计算",
+        setup: "在 Make Milk Tea、Clean Room 和 Book Organization 上比较 open-loop next-subtask accuracy 与闭环真机结果；闭环每格 10 次。",
+        comparisons: "Plan Once、使用同一 world/value model 的一步 Best-of-N，以及多步 beam expansion + reflection 的 TTC。",
+        results: ["OOD Book Organization 的 next-subtask accuracy：50.0%（Plan Once）、57.5%（Best-of-N）、74.0%（TTC）。", "闭环 Milk Tea：5/10→7/10；Book Organization：6/10→9/10；Clean Room：5/10→7/10。", "增加计算量后 accuracy 先快速上升再趋于饱和，支持按置信度选择性触发。"],
+        evidenceNote: "TTC 的收益在固定低层 policy 下验证；每格 10 次仍不足以精确估计较小的成功率差异。",
+      },
+    ],
+    reproducibilityDetails: {
+      status: "资源较完整",
+      verifiedResources: ["官方 GitHub 已公开训练、部署与 open-loop evaluation 代码，Hugging Face 提供模型权重，并附 AgiBot World 示例数据和 post-training 配置。"],
+      implementation: ["官方参考环境为 Python 3.11、CUDA 12.8、PyTorch 2.7.1；低层 action horizon H=30，推理使用 10 次均匀 Euler 更新；统一动作接口通过 mask 屏蔽不同本体未使用的维度。"],
+      missing: ["完整 40,115 小时训练语料没有随仓库公开；公开 v1 serving 仅支持 joint-control checkpoint，EEF serving 尚未提供。"],
+    },
+    deepDive: {
+      lead: "τ0-VLA 把子任务选择从一次分类变成可按难度扩展预算的决策过程，并用执行后的真实观察持续校正进度记录。",
+      sections: [
+        { title: "高层决策闭环", paragraphs: ["proposal model 根据任务、当前多视角观察、上一子任务与 execution memory 生成直接候选，并用 token confidence 决定走快速路径还是 TTC 路径。", "TTC 对每条保留分支生成候选子任务，world model 预测终止图像，value model 以全局任务、候选和预测结果评分；Top-B 分支递归展开到深度 D，reflection model 最终提交子任务。搜索内部 memory 只属于各自分支，不覆盖真实执行 memory。"] },
+        { title: "低层执行与跨本体接口", paragraphs: ["低层 policy 接收多视角 RGB、本体状态、子任务和 embodiment/control metadata，MoT action expert 用 conditional flow matching 生成 action chunk。", "40 维接口覆盖双臂末端位姿、夹爪、腰部、底盘速度和双臂关节；不同机器人使用状态与动作 mask 激活可用槽位。AGIBOT G1、ARX AC One 与双 Franka 平台据此共享接口。"] },
+      ],
+      equations: [{ name: "候选后果预测与评分", expression: "ô = W(õ, z),   v = V(ℓ, z, ô)", explanation: "world model W 根据当前或分支预测图像 õ 与候选子任务 z 生成终止图像 ô；value model V 再根据全局任务 ℓ、候选与预测后果输出分支分数 v。" }],
+      experimentReading: ["Plan Once 与直接执行的差异来自是否显式提供有界子任务和进度记忆；TTC 对照则进一步固定高层输入，只改变决策时推理过程。", "OOD Book Organization 与三项闭环试验共同表明，next-subtask accuracy 的提升能够传递到实际执行，但每格 10 次限制了统计精度。"],
+      reflections: [],
+    },
+    strengths: "同一低层 policy 下分别验证层级接口、memory、TTC 与跨本体执行，并公开了代码、权重和后训练示例。",
+    limitations: "每个真机条件仅 10 次；完整预训练数据未公开，45.0% 的长时任务平均成功率也说明接触执行与高层决策仍有明显失败空间。",
+    transfer: "可借鉴的核心是把 subtask 作为低频推理接口：只在不确定边界调用世界模型搜索，常规阶段继续由高频 VLA 执行。",
+    figures: [{ src: "/report-assets/2026-08-01/tau0-vla-overview.png", alt: "τ0-VLA 的高层 execution memory、世界模型引导搜索和低层 MoT VLA 执行架构", caption: "Figure 2 · τ0-VLA 分层架构与 world-model-guided test-time computation。图片来自官方论文与项目页。" }],
+  },
+  {
+    rank: 2,
     title: "HiFi-UMI: Learning Deployable Manipulation Policies from High-Fidelity UMI Data Alone",
     arxivId: "2607.25895",
     url: "https://arxiv.org/abs/2607.25895",
@@ -93,7 +153,7 @@ export const paperDaily20260801: Paper[] = [
     rank: 12, title: "Route by Kinematics, Act by Observation: Kinematics-Supervised Expert Routing in MoE-Augmented VLA", arxivId: "2607.26807", url: "https://arxiv.org/abs/2607.26807", institutions: ["Tsinghua University", "Pengcheng Laboratory"], signal: "训练期按动作运动学聚类监督 MoE router，推理期仅凭视觉语言路由", tags: ["Mixture of Experts", "Kinematics", "VLA"], classification: { research: "VLA", training: "Post-training", platforms: ["机械臂", "夹爪"] },
     motivation: "语义相似不等于运动学相似，隐式 MoE router 会把稀有双臂或精细动作压在主流模式中。", methodSummary: "用 action+velocity trajectory 聚类成 kinematic archetypes，把 cluster ID 作为 router 标签；推理时 router 从观察中预测 archetype，shared branch 始终激活。", architecture: "VLA backbone + always-on shared expert + Top-1 routed expert；balanced sampling 改善稀有 archetype。", optimization: "在 π0/π0.5/OpenVLA/AdaMoE 上做 supervised post-training。", data: "RoboTwin 与低成本 DIYRobot 五项真机任务。", experiments: "DIYRobot 每任务以 100 次计数，KinRT-Full 平均 35.6，π0.5-Full 29.6、最佳隐式 MoE 21.4。", novelty: "把只在训练期可见的动作运动学蒸馏成推理期观察路由。",
     experimentDetails: [{ title: "运动学路由", setup: "RoboTwin clean/random 与 DIYRobot 的 handover、reorient、press、pull、rotate。", comparisons: "dense VLA、implicit MoE、不同 backbone 和 router label 来源。", results: ["RoboTwin KinRT-LoRA 40.8/38.8，π0.5-LoRA 33.1/34.1。", "DIYRobot KinRT-Full 35.6，π0.5-Full 29.6。", "action+velocity label 40.8，VLM feature label 21.8。"], evidenceNote: "论文用 success count 汇总，任务数和平台仍有限；开源为未来时表述。" }],
-    reproducibilityDetails: { status: "信息不足", verifiedResources: ["正文给出 router、聚类和 DIYRobot 硬件图。"], implementation: ["Top-1 四专家、α=0.5 balanced sampling、action+velocity clustering。"], missing: ["代码和平台文件尚未确认公开。"] }, deepDive: { lead: "KinRT 用动作空间定义专家分工，再训练观察空间去预测这种分工。", sections: [{ title: "不对称路由桥", paragraphs: ["训练时动作与速度能明确区分 lift、rotate、handover 等 archetype，cluster ID 直接监督 router。", "推理时动作尚未产生，router 只能从视觉语言预测 cluster，因此 shared branch 保留通用能力、routed expert 承担专门运动。"] }], experimentReading: ["VLM feature clustering 明显失败，直接支持语义/运动学错位假设。", "DIY 平台数据域偏离预训练时 full fine-tuning 优于 LoRA，说明 adaptation capacity 仍关键。"], reflections: ["可把接触相位、控制频率与 embodiment 参数加入 archetype，而非只聚类动作轨迹。"] }, strengths: "跨 backbone、label source 消融和真机计数完整。", limitations: "固定专家数与离线 k-means 可能不适合持续新增任务。", transfer: "适合多任务 VLA 的运动学专家划分与稀有模式重采样。", figures: [{ src: "/report-assets/2026-08-01/2607.26807-overview.png", alt: "KinRT 运动学聚类、监督式 router 和 DIYRobot 评测框架", caption: "Figure 2 · KinRT 训练期运动学监督与推理期观察路由。图片截取自 arXiv 原论文。" }],
+    reproducibilityDetails: { status: "信息不足", verifiedResources: ["正文给出 router、聚类和 DIYRobot 硬件图。"], implementation: ["Top-1 四专家、α=0.5 balanced sampling、action+velocity clustering。"], missing: ["代码和平台文件尚未确认公开。"] }, deepDive: { lead: "KinRT 用动作空间定义专家分工，再训练观察空间去预测这种分工。", sections: [{ title: "不对称路由桥", paragraphs: ["训练时动作与速度能明确区分 lift、rotate、handover 等 archetype，cluster ID 直接监督 router。", "推理时动作尚未产生，router 只能从视觉语言预测 cluster，因此 shared branch 保留通用能力、routed expert 承担专门运动。"] }], experimentReading: ["VLM feature clustering 明显失败，直接支持语义/运动学错位假设。", "DIY 平台数据域偏离预训练时 full fine-tuning 优于 LoRA，说明 adaptation capacity 仍关键。"], reflections: ["可把接触相位、控制频率与 embodiment 参数加入 archetype，而非只聚类动作轨迹。"] }, strengths: "跨 backbone、label source 消融和真机计数完整。", limitations: "固定专家数与离线 k-means 可能不适合持续新增任务。", transfer: "适合多任务 VLA 的运动学专家划分与稀有模式重采样。", figures: [{ src: "/report-assets/2026-08-01/2607.26807-overview.jpg", alt: "KinRT 从动作与速度聚类运动学原型、监督 MoE router 到 DIYRobot 评测的完整框架", caption: "Figure 2 · KinRT 训练期运动学监督、推理期观察路由与 DIYRobot 平台。图片来自 arXiv HTML 提供的原论文独立 Figure。" }],
   },
   {
     rank: 13, title: "Practice Makes Policies: Bootstrapping and Consolidating Robotic Capabilities from Zero Human Demonstrations", arxivId: "2607.26809", url: "https://arxiv.org/abs/2607.26809", institutions: ["Shanghai Jiao Tong University", "University of Sussex"], signal: "把零样本推理、经验迁移和闭环策略组织成自主采集与能力固化循环", tags: ["Self-improving", "Zero Human Demonstrations", "Orchestration"], classification: { research: "Subtask", training: "BC", data: "在线数据 / 人工纠正", platforms: ["机械臂", "夹爪"] }, resources: [{ label: "项目页", url: "https://hero-agent.github.io/" }],
@@ -114,3 +174,76 @@ export const paperDaily20260801: Paper[] = [
     reproducibilityDetails: { status: "部分可复现", verifiedResources: ["正文给出 20 rollout/格、50 Hz、三项动力学指标和盲评协议。"], implementation: ["absolute-joint spatial stream、DCT-delta temporal stream、residual VQ。"], missing: ["代码/数据未确认；mode label 仍需示范者定义。"] }, deepDive: { lead: "MoMo 尝试把“做什么”和“怎么做”分开，但论文也承认这种分解并不完全。", sections: [{ title: "双 token 流", paragraphs: ["空间流保留任务几何，时间流强调速度、加速度和平滑性；两者最终仍共同决定动作。", "连续 scaler 不是简单混合输出动作，而是改变 code 选择，使未见 task-mode 组合向已学 mode 分布移动。"] }], experimentReading: ["单调动力学、latent 可视化和盲评三种证据方向一致。", "push 的接触退化说明 style transfer 可能破坏任务约束。"], reflections: ["可把 mode 扩展为安全/柔顺/快速等有物理含义的控制条件，并加入成功约束。"] }, strengths: "360 次真机 rollout、盲评和未见组合实验清楚。", limitations: "模式空间只有两个原型，一个机器人；因素分离是近似的。", transfer: "可把 VLA 动作 token 分成任务几何与执行动态，用于可控速度、平滑度和接触方式。", figures: [{ src: "/report-assets/2026-08-01/2607.26315-overview.png", alt: "MoMo 的空间时间动作 tokenizer、mode 插值和跨任务 mode 迁移", caption: "Figure 1 · MoMo 时空动作 token 与 mode 控制。图片截取自 arXiv 原论文。" }],
   },
 ];
+
+const correctedFigures20260801: Partial<Record<string, Paper["figures"]>> = {
+  "2607.25516": [{
+    src: "/report-assets/2026-08-01/2607.25516-overview.png",
+    alt: "IDR 对冻结 VLA 进行事实与反事实推理、诊断视觉因果效应并以门控残差修正动作",
+    caption: "Figure 2 · IDR infer-diagnose-refine 完整流程。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+  }],
+  "2607.25593": [{
+    src: "/report-assets/2026-08-01/2607.25593-overview.png",
+    alt: "跨硬件配置协同训练收益随新配置独立成功率变化的三阶段曲线",
+    caption: "Figure 2 · Legacy data 从 representation vacuum 到 synergistic bloom，再到 diminishing saturation 的三阶段结果。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+  }],
+  "2607.26807": [{
+    src: "/report-assets/2026-08-01/2607.26807-overview.jpg",
+    alt: "KinRT 从动作与速度聚类运动学原型、监督 MoE router 到 DIYRobot 评测的完整框架",
+    caption: "Figure 2 · KinRT 训练期运动学监督、推理期观察路由与 DIYRobot 平台。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+  }],
+  "2607.26809": [
+    {
+      src: "/report-assets/2026-08-01/2607.26809-bootstrap.png",
+      alt: "HERO 的 L1 从 VLM 标注、三维 grounding 到机器人 primitive 执行的冷启动流程",
+      caption: "Figure 1 · HERO L1 heuristic bootstrapper 的四类 primitive 与执行流程。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+    },
+    {
+      src: "/report-assets/2026-08-01/2607.26809-overview.png",
+      alt: "HERO 随自主训练数据增加从 L1 reasoning、L2 exemplar 到 L3 policy 的能力演化",
+      caption: "Figure 4 · HERO 通过自主经验积累提升 subtask coverage 与 L3 task success。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+    },
+  ],
+  "2607.26991": [{
+    src: "/report-assets/2026-08-01/2607.26991-overview.png",
+    alt: "RL²-VLA 提取 action expert latent、检测失败状态、组合 RL 与 VLA flow 并用 verifier 选动作",
+    caption: "Figure 4 · RL²-VLA 的 latent compositional steering、failure detection 与 candidate verification。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+  }],
+  "2607.25397": [{
+    src: "/report-assets/2026-08-01/2607.25397-overview.png",
+    alt: "DR-LfD 离线拆解示范并训练技能流，在线转换 PDDL、规划、执行和接触触发验证的完整流程",
+    caption: "Figure 2 · DR-LfD 的离线 skill acquisition 与在线 TAMP 重组流程。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+  }],
+  "2607.26315": [{
+    src: "/report-assets/2026-08-01/2607.26315-overview.png",
+    alt: "MoMo 两阶段训练中的空间与时间编码器、独立 RVQ、融合解码器和条件 code prediction",
+    caption: "Figure 2 · MoMo 时空 action tokenization 与 motion-mode 条件策略训练。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+  }],
+};
+
+const selectedPaperIds20260801 = [
+  "2607.25895",
+  "tau0-vla",
+  "2607.25918",
+  "2607.26055",
+  "2607.27205",
+  "2607.25912",
+  "2607.25516",
+  "2607.26513",
+  "2607.27138",
+  "2607.25593",
+  "2607.26657",
+  "2607.26991",
+  "2607.26807",
+  "2607.26809",
+  "2607.25397",
+];
+
+export const paperDaily20260801: Paper[] = selectedPaperIds20260801.map((paperId, index) => {
+  const paper = paperCandidates20260801.find((candidate) => candidate.arxivId === paperId);
+  if (!paper) throw new Error(`Missing selected paper: ${paperId}`);
+  return {
+    ...paper,
+    rank: index + 1,
+    figures: correctedFigures20260801[paper.arxivId] ?? paper.figures,
+  };
+});

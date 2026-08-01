@@ -27,7 +27,7 @@ export function PaperDetail({
         <div>
           <span className="paper-detail-rank">
             {standalone
-              ? `ARXIV / ${paper.arxivId}`
+              ? `${paper.source === "official" ? "OFFICIAL PAPER" : "ARXIV"} / ${paper.arxivId}`
               : `PAPER / ${String(paper.rank).padStart(2, "0")}`}
           </span>
           <TitleTag>{paper.title}</TitleTag>
@@ -220,7 +220,7 @@ export function PaperDetail({
 
       <div className="paper-resource-links">
         <a href={paper.url} target="_blank" rel="noreferrer">
-          arXiv 原文 <ArrowIcon />
+          论文原文 <ArrowIcon />
         </a>
         {paper.resources?.map((resource) => (
           <a key={resource.url} href={resource.url} target="_blank" rel="noreferrer">
