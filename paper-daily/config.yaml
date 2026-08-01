@@ -188,6 +188,45 @@ sources:
     html_fallback_per_category: 100
     html_fallback_max_results: 300
     html_fallback_sleep_seconds: 0.25
+  official_organization_channels:
+    enabled: true
+    check_each_run: true
+    role: supplemental_candidate_feed
+    organizations:
+      - Physical Intelligence / OpenPI
+      - NVIDIA Robotics
+      - Tesla Optimus
+      - X Square Robot
+      - AGIBOT
+      - LingBot
+      - Unitree Robotics
+      - LimX Dynamics
+      - RobotEra
+      - EngineAI
+      - Genesis AI
+      - Sharpa
+    accepted_channels:
+      - official research or publication page
+      - official project page with a direct paper PDF
+      - official GitHub organization or repository release
+      - official Hugging Face organization model card linked to a paper
+    discovery_only_channels:
+      - search engine results
+      - news media
+      - social reposts
+    acceptance_rules:
+      require_full_paper_or_technical_report: true
+      require_authors_and_affiliations: true
+      require_publication_date_in_window: true
+      require_method_and_experiment_details: true
+      product_announcement_without_paper_is_not_candidate: true
+      organization_is_positive_prior_not_auto_accept: true
+    deduplication:
+      prefer_arxiv_as_canonical_when_available: true
+      match_on_title_authors_and_project_url: true
+      preserve_official_project_code_and_model_links: true
+    merge_before_candidate_cap: true
+    official_non_arxiv_id_prefix: "official:"
   openreview:
     enabled: false
     venues:
@@ -221,6 +260,28 @@ reporting:
   full_text_review_limit: 30
   allow_fewer_than_target: true
   minimum_quality_over_quota: true
+
+figure_quality:
+  figures_per_selected_paper:
+    minimum: 1
+    maximum: 2
+  source_priority:
+    - arxiv HTML standalone figure asset
+    - arxiv source package original figure asset
+    - official paper or project-page figure asset
+    - exact PDF figure bounding-box crop
+  minimum_width_px: 700
+  minimum_height_px: 180
+  reject_if:
+    - paper title authors or page number are visible
+    - any panel label legend or diagram branch is clipped
+    - figure is mostly body text caption or whitespace
+    - figure number or caption does not match the source paper
+    - image is a results-only table or unrelated rollout photo
+  require_source_url_and_figure_number: true
+  require_contact_sheet_visual_review: true
+  require_quality_manifest: true
+  on_failure: do_not_publish_the_figure_or_paper_entry
 
 selection_policy:
   primary_contribution_only: true

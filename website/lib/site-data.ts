@@ -116,6 +116,7 @@ export type Paper = {
   rank: number;
   title: string;
   arxivId: string;
+  source?: "arxiv" | "official";
   url: string;
   institutions: string[];
   signal: string;
@@ -1235,11 +1236,11 @@ export const reports: Report[] = [
     date: "2026.08.01",
     weekday: "周六补跑",
     range: "2026.07.27 - 2026.07.30",
-    title: "高保真 UMI、动态中心 WAM 与实时 VLA 执行",
+    title: "τ0-VLA、世界模型推理与高保真机器人数据",
     summary:
-      "本期收录十五篇经 PDF 与实验核验的论文，覆盖高保真跨本体数据、动态中心 world-action model、实时流策略、轻量 VLA、测试时适配和长时技能重组。",
+      "本期收录十五篇经原文与实验核验的论文，覆盖 τ0-VLA 的长时子任务推理、高保真跨本体数据、动态中心 world-action model、实时流策略、轻量 VLA 和长时技能重组。",
     overview:
-      "本期聚焦高保真跨本体数据、动态中心 world-action model、实时与轻量 VLA、预测表征、跨硬件数据复用、按需 RL steering 和长时技能重组。每篇均整理方法信息流、训练数据、真机对照、消融与证据边界。",
+      "本期包含一篇来自受关注公司官方渠道、尚未进入 arXiv 的 τ0-VLA，并与窗口内 arXiv 论文统一排序。内容覆盖高层 subtask test-time computation、高保真跨本体数据、动态中心 world-action model、实时与轻量 VLA、预测表征、按需 RL steering 和长时技能重组。",
     papers: paperDaily20260801.map(enrichPaper),
   },
   {

@@ -41,11 +41,12 @@ test("server-renders the finished research portal", async () => {
 });
 
 test("renders report, archive, database, paper, company, and about routes", async () => {
-  const [archive, latestDetail, latestPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, about] =
+  const [archive, latestDetail, latestPaper, officialPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, about] =
     await Promise.all([
     render("/reports"),
     render("/reports/2026-08-01"),
     render("/papers/2607.25895"),
+    render("/papers/tau0-vla"),
     render("/reports/2026-07-27"),
     render("/papers"),
     render("/papers/2607.20683"),
@@ -61,6 +62,7 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.equal(archive.status, 200);
   assert.equal(latestDetail.status, 200);
   assert.equal(latestPaper.status, 200);
+  assert.equal(officialPaper.status, 200);
   assert.equal(detail.status, 200);
   assert.equal(database.status, 200);
   assert.equal(paper.status, 200);
@@ -72,11 +74,12 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.equal(companies.status, 200);
   assert.equal(about.status, 200);
 
-  const [archiveHtml, latestDetailHtml, latestPaperHtml, detailHtml, databaseHtml, paperHtml, contactPaperHtml, memoryPaperHtml, companiesHtml, aboutHtml] =
+  const [archiveHtml, latestDetailHtml, latestPaperHtml, officialPaperHtml, detailHtml, databaseHtml, paperHtml, contactPaperHtml, memoryPaperHtml, companiesHtml, aboutHtml] =
     await Promise.all([
       archive.text(),
       latestDetail.text(),
       latestPaper.text(),
+      officialPaper.text(),
       detail.text(),
       database.text(),
       paper.text(),
@@ -88,10 +91,15 @@ test("renders report, archive, database, paper, company, and about routes", asyn
 
   assert.match(archiveHtml, /论文日报/);
   assert.match(latestDetailHtml, /HiFi-UMI/);
+  assert.match(latestDetailHtml, /τ0-VLA/);
   assert.match(latestDetailHtml, /960 次真机 rollout/);
+  assert.doesNotMatch(latestDetailHtml, /MoMo: Dial Motion Mode/);
   assert.doesNotMatch(latestDetailHtml, /综合分|候选论文|内部评分/);
   assert.match(latestPaperHtml, /Simple AI/);
   assert.match(latestPaperHtml, /跨本体迁移/);
+  assert.match(officialPaperHtml, /OFFICIAL PAPER/);
+  assert.match(officialPaperHtml, /40,115 小时/);
+  assert.match(officialPaperHtml, /github\.com\/sii-research\/tau-0-vla/);
   assert.match(detailHtml, /FELT/);
   assert.match(detailHtml, /felt-tactile\.github\.io/);
   assert.match(detailHtml, /项目页/);
@@ -186,4 +194,60 @@ test("ships original-paper figures and finished social metadata", async () => {
   assert.doesNotMatch(siteData, /\bscore(?:Breakdown)?\b/);
   assert.doesNotMatch(layout, /Starter Project|codex-preview|_sites-preview/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
+});
+
+function imageDimensions(buffer) {
+  if (buffer.subarray(1, 4).toString("ascii") === "PNG") {
+    return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+  }
+
+  if (buffer[0] === 0xff && buffer[1] === 0xd8) {
+    let offset = 2;
+    while (offset + 8 < buffer.length) {
+      if (buffer[offset] !== 0xff) {
+        offset += 1;
+        continue;
+      }
+      const marker = buffer[offset + 1];
+      const length = buffer.readUInt16BE(offset + 2);
+      if ([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf].includes(marker)) {
+        return { width: buffer.readUInt16BE(offset + 7), height: buffer.readUInt16BE(offset + 5) };
+      }
+      offset += 2 + length;
+    }
+  }
+
+  throw new Error("Unsupported image format");
+}
+
+test("enforces the selected-paper figure quality manifest", async () => {
+  const root = new URL("../", import.meta.url);
+  const manifest = JSON.parse(
+    await readFile(new URL("../quality/figure-manifests/2026-08-01.json", import.meta.url), "utf8"),
+  );
+  const reportResponse = await render("/reports/2026-08-01");
+  const reportHtml = await reportResponse.text();
+
+  assert.equal(manifest.papers.length, 15);
+  assert.equal(new Set(manifest.papers.map((paper) => paper.paperId)).size, 15);
+  assert.ok(manifest.papers.some((paper) => paper.paperId === "tau0-vla"));
+
+  for (const paper of manifest.papers) {
+    assert.ok(paper.figures.length >= 1 && paper.figures.length <= 2, `${paper.paperId} must have 1-2 figures`);
+    for (const figure of paper.figures) {
+      assert.match(figure.sourceUrl, /^https:\/\/(?:arxiv\.org|tau0-vla\.github\.io)\//);
+      assert.match(figure.figureNumber, /^\d+[a-z]?$/i);
+      assert.equal(figure.visualReview, "passed");
+      assert.equal(figure.containsPageHeader, false);
+      assert.equal(figure.completeFrame, true);
+
+      const assetUrl = new URL(`public/report-assets/2026-08-01/${figure.file}`, root);
+      const buffer = await readFile(assetUrl);
+      const dimensions = imageDimensions(buffer);
+      assert.deepEqual(dimensions, { width: figure.width, height: figure.height });
+      assert.ok(dimensions.width >= 700, `${figure.file} is too narrow`);
+      assert.ok(dimensions.height >= 180, `${figure.file} is too short`);
+      assert.match(reportHtml, new RegExp(figure.file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    }
+  }
 });

@@ -14,7 +14,9 @@
 - 周五运行：覆盖本周一、周二、周三、周四。
 - 使用 Asia/Shanghai 的运行日期确定窗口。
 - 对窗口内每个自然日分别执行一次 arXiv fetch，并使用 `--lookback-days 1`；没有公告批次的日期记录后跳过。
-- 只使用 arXiv。不要查询 OpenReview、OpenAlex、搜索聚合站或其他论文源。
+- 主论文源仍为 arXiv；另外必须逐一检查下述受关注公司的官方研究页、项目页、官方 GitHub 和官方 Hugging Face，补充同一日期窗口内尚未进入 arXiv 的正式论文或技术报告：Physical Intelligence / OpenPI、NVIDIA Robotics、Tesla Optimus、自变量机器人、智元机器人、LingBot、宇树科技、逐际动力、星动纪元、众擎机器人、Genesis AI、Sharpa。
+- 搜索引擎、媒体和社交转发只用于发现线索，不能作为论文来源。非 arXiv 候选必须能在公司官方渠道定位到完整论文或技术报告、作者/机构、发布日期、方法和实验；单纯产品宣传或视频不进入论文候选池。
+- 若官方论文随后已有 arXiv 条目，以 arXiv 为主记录，并保留官方项目页、GitHub 与模型链接；按标题、作者和项目页去重。官方补充候选必须在 300 篇上限前合并并参加同一套语义评分，机构只作为正向先验，不得自动入选。
 
 ## 获取与合并
 
@@ -71,10 +73,12 @@
 3. 按上述六个维度写入分类。分类必须符合主贡献规则，Memory 的具体形式不得进入筛选器。
 4. 项目页、GitHub、模型链接必须真实可访问；没有可靠链接时省略。
 5. 每篇论文原则上配一至两幅能帮助理解方法的 Overview / Method / Architecture 图片，
-   优先截取 arXiv 原论文并存入 `website/public/report-assets/RUN_DATE/`，同时标明原论文图号和含义；
-   不得用纯结果表或无关实验照片凑数。原论文没有合适方法图时不要强行添加。
-6. 不得把作者的“最佳”“human-level”“通用”等表述改写成独立验证事实。
-7. 在 `website` 目录运行完整测试。测试通过后，按照 Sites 技能使用现有
+   来源优先级依次为 arXiv HTML 独立 Figure、arXiv source 原始图片、官方论文/项目页原图、PDF 精确 figure bounding-box；
+   禁止再用整页渲染后的估计矩形或自动去白边代替 Figure 抽取。图片存入 `website/public/report-assets/RUN_DATE/`，并标明原论文图号、含义和直接来源 URL。
+6. 图片发布门槛：完整包含所有 panel、框图分支、标签和 legend；不得出现论文标题、作者、页码或大段正文；不得裁边、以 caption/空白为主体、图号与图注错配，也不得用纯结果表或无关 rollout 照片凑数。建议分辨率不低于 700×180；不满足时先换图，仍无合格图则不发布该图，必要时暂缓该论文条目。
+7. 发布前为本期全部图片生成 contact sheet 并逐张视觉检查，同时保存包含 paper id、figure number、source URL、像素尺寸和 QA 结论的质量清单。网站测试必须检查清单、文件、1–2 幅数量限制与最小尺寸，不能只检查 HTTP 200 或文件存在。
+8. 不得把作者的“最佳”“human-level”“通用”等表述改写成独立验证事实。
+9. 在 `website` 目录运行完整测试。测试通过后，按照 Sites 技能使用现有
    `website/.openai/hosting.json` 项目发布到当前公开网址。
 
 ## 无新批次与失败处理
