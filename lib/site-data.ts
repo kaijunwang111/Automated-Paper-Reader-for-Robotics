@@ -1,4 +1,5 @@
 import { paperEditorialSupplements } from "./paper-editorial-supplements";
+import { paperDaily20260801 } from "./paper-daily-2026-08-01";
 
 export const paperTaxonomy = {
   research: {
@@ -1229,6 +1230,18 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-08-01",
+    date: "2026.08.01",
+    weekday: "周六补跑",
+    range: "2026.07.27 - 2026.07.30",
+    title: "高保真 UMI、动态中心 WAM 与实时 VLA 执行",
+    summary:
+      "本期收录十五篇经 PDF 与实验核验的论文，覆盖高保真跨本体数据、动态中心 world-action model、实时流策略、轻量 VLA、测试时适配和长时技能重组。",
+    overview:
+      "本期聚焦高保真跨本体数据、动态中心 world-action model、实时与轻量 VLA、预测表征、跨硬件数据复用、按需 RL steering 和长时技能重组。每篇均整理方法信息流、训练数据、真机对照、消融与证据边界。",
+    papers: paperDaily20260801.map(enrichPaper),
+  },
   {
     slug: "2026-07-27",
     date: "2026.07.27",

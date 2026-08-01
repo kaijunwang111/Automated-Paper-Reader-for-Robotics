@@ -35,15 +35,17 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /最新论文日报/);
   assert.match(html, /机器人公司动向/);
   assert.match(html, /检索论文数据库/);
-  assert.match(html, /2026\.07\.27/);
+  assert.match(html, /2026\.08\.01/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
 });
 
 test("renders report, archive, database, paper, company, and about routes", async () => {
-  const [archive, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, about] =
+  const [archive, latestDetail, latestPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, about] =
     await Promise.all([
     render("/reports"),
+    render("/reports/2026-08-01"),
+    render("/papers/2607.25895"),
     render("/reports/2026-07-27"),
     render("/papers"),
     render("/papers/2607.20683"),
@@ -57,6 +59,8 @@ test("renders report, archive, database, paper, company, and about routes", asyn
     ]);
 
   assert.equal(archive.status, 200);
+  assert.equal(latestDetail.status, 200);
+  assert.equal(latestPaper.status, 200);
   assert.equal(detail.status, 200);
   assert.equal(database.status, 200);
   assert.equal(paper.status, 200);
@@ -68,9 +72,11 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.equal(companies.status, 200);
   assert.equal(about.status, 200);
 
-  const [archiveHtml, detailHtml, databaseHtml, paperHtml, contactPaperHtml, memoryPaperHtml, companiesHtml, aboutHtml] =
+  const [archiveHtml, latestDetailHtml, latestPaperHtml, detailHtml, databaseHtml, paperHtml, contactPaperHtml, memoryPaperHtml, companiesHtml, aboutHtml] =
     await Promise.all([
       archive.text(),
+      latestDetail.text(),
+      latestPaper.text(),
       detail.text(),
       database.text(),
       paper.text(),
@@ -81,6 +87,11 @@ test("renders report, archive, database, paper, company, and about routes", asyn
     ]);
 
   assert.match(archiveHtml, /论文日报/);
+  assert.match(latestDetailHtml, /HiFi-UMI/);
+  assert.match(latestDetailHtml, /960 次真机 rollout/);
+  assert.doesNotMatch(latestDetailHtml, /综合分|候选论文|内部评分/);
+  assert.match(latestPaperHtml, /Simple AI/);
+  assert.match(latestPaperHtml, /跨本体迁移/);
   assert.match(detailHtml, /FELT/);
   assert.match(detailHtml, /felt-tactile\.github\.io/);
   assert.match(detailHtml, /项目页/);
@@ -168,6 +179,7 @@ test("ships original-paper figures and finished social metadata", async () => {
     access(new URL("public/report-assets/2026-07-23/2607.18236-method.png", root)),
     access(new URL("public/report-assets/2026-07-23/2607.18840-method.png", root)),
     access(new URL("public/report-assets/2026-07-23/2607.18231-method.png", root)),
+    access(new URL("public/report-assets/2026-08-01/2607.25895-overview.png", root)),
   ]);
 
   assert.match(layout, /og\.png/);
