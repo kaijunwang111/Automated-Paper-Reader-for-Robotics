@@ -1622,6 +1622,106 @@ img {
   margin-top: 14px;
 }
 
+.paper-detailed-content {
+  max-width: 900px;
+  margin-top: 48px;
+  padding-top: 38px;
+  border-top: 1px solid var(--line);
+}
+
+.detailed-content-header h3 {
+  margin: 9px 0 0;
+  color: var(--ink);
+  font-size: 30px;
+  font-weight: 640;
+  letter-spacing: -0.035em;
+}
+
+.detailed-section {
+  padding: 38px 0;
+  border-bottom: 1px solid #e5e8ee;
+}
+
+.detailed-section > h4 {
+  margin: 0 0 24px;
+  color: #273247;
+  font-size: 21px;
+  font-weight: 680;
+  letter-spacing: -0.02em;
+}
+
+.technical-subsection + .technical-subsection,
+.experiment-prose + .experiment-prose,
+.formula-list,
+.reproducibility-prose p + p {
+  margin-top: 28px;
+}
+
+.technical-subsection h5,
+.experiment-prose h5,
+.formula-item h5 {
+  margin: 0 0 12px;
+  color: #333e52;
+  font-size: 15px;
+  font-weight: 680;
+}
+
+.technical-subsection p,
+.experiment-prose p,
+.reproducibility-prose p,
+.detailed-section > p,
+.formula-item p {
+  margin: 12px 0 0;
+  color: #4d596d;
+  font-size: 15px;
+  line-height: 2;
+}
+
+.experiment-prose + .experiment-prose {
+  padding-top: 28px;
+  border-top: 1px dashed #d9dde5;
+}
+
+.experiment-prose strong,
+.reproducibility-prose strong {
+  color: #333e52;
+  font-weight: 680;
+}
+
+.experiment-prose ul {
+  margin: 14px 0 0;
+  padding-left: 20px;
+  color: #4d596d;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.experiment-prose li + li {
+  margin-top: 8px;
+}
+
+.formula-list {
+  padding-top: 26px;
+  border-top: 1px dashed #d9dde5;
+}
+
+.formula-item + .formula-item {
+  margin-top: 24px;
+}
+
+.formula-expression {
+  overflow-x: auto;
+  margin: 8px 0 0;
+  padding: 13px 16px;
+  border-left: 3px solid #8a7ee3;
+  background: #f7f6fc;
+  color: #28244e;
+  font-family: "Cambria Math", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.55;
+  white-space: nowrap;
+}
+
 .paper-resource-links {
   display: flex;
   flex-wrap: wrap;

@@ -230,6 +230,12 @@ selection_policy:
     - medical and surgical systems
     - mining systems
     - laboratory automation
+  reject_navigation_only_papers:
+    - embodied question answering navigation
+    - object navigation
+    - traversability mapping
+    - navigation-only representation learning
+  transferable_memory_or_representation_alone_is_not_an_exception: true
   require_clear_method_transfer_for_adjacent_fields: true
   website_hides_internal_scores: true
 
@@ -319,11 +325,15 @@ paper_taxonomy:
 content_policy:
   quick_cards:
     - motivation
-    - method_structure
-    - learning_method
+    - method
+    - model_structure
     - data_composition
-    - experiment_conclusion
-    - novelty_vs_direct_baseline
+    - experiments_and_conclusion
+    - improvement_over_baseline
+  summary_cards:
+    - strengths
+    - limitations
+    - transferable_ideas
   experiment_evidence:
     required_fields:
       - setup
@@ -340,22 +350,27 @@ content_policy:
       - variance_or_confidence_interval
     never_infer_exact_values_from_plots: true
   reproducibility:
-    sections:
-      - verified_resources
-      - implementation_details
-      - missing_information
+    format: continuous_prose
+    include:
+      - network_and_hyperparameter_details
+      - verified_code_model_and_data_status
+      - information_not_disclosed_by_paper
     verify_links_before_publishing: true
     do_not_pad_missing_details: true
   detailed_reading:
     position: after_strengths_limitations_transfer
-    format: connected_short_article
-    cover:
+    format: vertical_prose_without_card_grid
+    sections:
+      - technical_details
+      - experiments_and_ablations
+      - reproducibility
+    technical_details_cover:
       - information_flow_and_key_modules
       - training_objective_or_inference_process
       - important_equations_when_present_and_useful
-      - experiment_setup_and_key_numbers
-      - ablations_failure_modes_and_evidence_limits
-      - evidence_based_reflections
+    formulas_use_readable_math_not_raw_latex: true
+    source_facts_only_no_editorial_opinion: true
+    hide_generation_instructions_and_disclaimers_from_website: true
     require_traceable_source_for_every_number_formula_and_architecture_detail: true
 
 semantic_scoring:
@@ -381,12 +396,13 @@ semantic_scoring:
     selected_paper_sections:
       - concise_summary
       - motivation
+      - method
       - model_structure
-      - training_and_optimization
       - data_composition
       - experiments_and_results
-      - novelty_against_prior_work
+      - improvement_over_baseline
+      - strengths_limitations_and_transfer
+      - technical_details
+      - experiments_and_ablations
       - reproducibility_information
-      - strengths_and_limitations
-      - transfer_value
       - score_breakdown

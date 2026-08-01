@@ -41,7 +41,7 @@ test("server-renders the finished research portal", async () => {
 });
 
 test("renders report, archive, database, paper, company, and about routes", async () => {
-  const [archive, detail, database, paper, contactPaper, excludedPaper, memoryPaper, companies, about] =
+  const [archive, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, about] =
     await Promise.all([
     render("/reports"),
     render("/reports/2026-07-27"),
@@ -49,6 +49,8 @@ test("renders report, archive, database, paper, company, and about routes", asyn
     render("/papers/2607.20683"),
     render("/papers/2607.20912"),
     render("/papers/2607.20748"),
+    render("/papers/2607.21571"),
+    render("/papers/2607.20679"),
     render("/papers/2607.18231"),
     render("/companies"),
     render("/about"),
@@ -60,6 +62,8 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.equal(paper.status, 200);
   assert.equal(contactPaper.status, 200);
   assert.equal(excludedPaper.status, 404);
+  assert.equal(navigationPaper.status, 404);
+  assert.equal(traversabilityPaper.status, 404);
   assert.equal(memoryPaper.status, 200);
   assert.equal(companies.status, 200);
   assert.equal(about.status, 200);
@@ -80,19 +84,25 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(detailHtml, /FELT/);
   assert.match(detailHtml, /felt-tactile\.github\.io/);
   assert.match(detailHtml, /项目页/);
-  assert.match(detailHtml, /相对已有工作/);
-  assert.match(detailHtml, /实验依据/);
-  assert.match(detailHtml, /复现线索/);
-  assert.match(detailHtml, /已确认资源/);
-  assert.match(detailHtml, /实现线索/);
-  assert.match(detailHtml, /仍缺少/);
-  assert.match(detailHtml, /详细解读/);
-  assert.match(detailHtml, /关键公式/);
-  assert.match(detailHtml, /实验结果怎么读/);
-  assert.match(detailHtml, /进一步思考/);
+  assert.match(detailHtml, /01 \/ 出发点/);
+  assert.match(detailHtml, /02 \/ 方法/);
+  assert.match(detailHtml, /03 \/ 模型结构/);
+  assert.match(detailHtml, /04 \/ 数据组成/);
+  assert.match(detailHtml, /05 \/ 实验内容和结论/);
+  assert.match(detailHtml, /06 \/ 相比 baseline 的改进点/);
+  assert.match(detailHtml, /亮点/);
+  assert.match(detailHtml, /局限/);
+  assert.match(detailHtml, /可借鉴点/);
+  assert.match(detailHtml, /详细内容/);
+  assert.match(detailHtml, /技术细节/);
+  assert.match(detailHtml, /实验和消融测试/);
+  assert.match(detailHtml, /可复现性/);
+  assert.match(detailHtml, /触觉生成联合目标/);
   assert.match(detailHtml, /DINOv2-B\/14/);
   assert.doesNotMatch(detailHtml, /综合分|评分|候选论文/);
-  assert.doesNotMatch(detailHtml, /ZONDA|Impact Hammers in Mining|Robotic Craniotomy|Liquid Handling/);
+  assert.doesNotMatch(detailHtml, /实验依据|复现线索|详细解读|进一步思考/);
+  assert.doesNotMatch(detailHtml, /只记录原文能够确认|未报告的试验次数或误差范围不会补写/);
+  assert.doesNotMatch(detailHtml, /Beyond Episodic Evaluation|Capability-Aware Traversability|ZONDA|Impact Hammers in Mining|Robotic Craniotomy|Liquid Handling/);
   assert.doesNotMatch(
     detailHtml,
     /本次先从两个 arXiv 批次合并去重|运行产物与限制|配置修改|内部处理过程/,
@@ -116,6 +126,7 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(databaseHtml, /机械臂/);
   assert.match(databaseHtml, /其他/);
   assert.doesNotMatch(databaseHtml, />多模态</);
+  assert.doesNotMatch(databaseHtml, /Beyond Episodic Evaluation|Capability-Aware Traversability/);
   assert.match(paperHtml, /返回论文数据库/);
   assert.match(paperHtml, /University of Southern California/);
   assert.match(paperHtml, /felt-tactile\.github\.io/);
