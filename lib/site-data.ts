@@ -123,6 +123,7 @@ export type Paper = {
   detailAttributes?: PaperDetailAttributes;
   resources?: PaperResource[];
   motivation: string;
+  methodSummary?: string;
   architecture: string;
   optimization: string;
   data: string;
@@ -824,6 +825,8 @@ const paperDaily20260727ExcludedFromPublic = new Set([
   "2607.20748",
   "2607.20662",
   "2607.21025",
+  "2607.21571",
+  "2607.20679",
 ]);
 
 const paperDaily20260727Priority = [
@@ -831,11 +834,9 @@ const paperDaily20260727Priority = [
   "2607.21582",
   "2607.21049",
   "2607.20912",
-  "2607.21571",
   "2607.20653",
   "2607.21341",
   "2607.20665",
-  "2607.20679",
 ];
 
 const paperDaily20260727: Paper[] = paperDaily20260727Archive
@@ -1235,9 +1236,9 @@ export const reports: Report[] = [
     range: "2026.07.24 - 2026.07.26",
     title: "触觉生成、偏置感知采集与可纠正视觉注意",
     summary:
-      "本期保留九篇经原文核验的论文，按研究相关性与实验证据排序，覆盖触觉生成、数据筛选、可纠正注意、接触控制、Memory、物理 world model 与安全 RL。",
+      "本期保留七篇经原文核验的论文，按研究相关性与实验证据排序，覆盖触觉生成、数据筛选、可纠正注意、接触控制、物理 world model、双臂组合优化与安全 RL。",
     overview:
-      "本期九篇分别研究无触觉传感器部署、偏置诊断与定向采集、OOD 视觉纠正、柔顺接触控制、连续 EQA 的结构化记忆、混合物理动力学、双臂组合优化、多机安全 RL 与能力条件化地形表征。",
+      "本期七篇分别研究无触觉传感器部署、偏置诊断与定向采集、OOD 视觉纠正、柔顺接触控制、混合物理动力学、双臂组合优化与多机安全 RL。具身问答导航和纯地形导航工作不再纳入正式日报。",
     papers: paperDaily20260727.map(enrichPaper),
   },
   {

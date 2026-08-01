@@ -13,6 +13,10 @@ export function PaperDetail({
   standalone?: boolean;
 }) {
   const TitleTag = standalone ? "h1" : "h2";
+  const technicalSections =
+    paper.deepDive?.sections.filter(
+      (section) => !section.title.includes("实验") && !section.title.includes("结果"),
+    ) ?? [];
 
   return (
     <article
@@ -89,114 +93,26 @@ export function PaperDetail({
           <p>{paper.motivation}</p>
         </section>
         <section>
-          <span className="analysis-label">02 / 方法结构</span>
-          <p>{paper.architecture}</p>
+          <span className="analysis-label">02 / 方法</span>
+          <p>{paper.methodSummary ?? paper.optimization}</p>
         </section>
         <section>
-          <span className="analysis-label">03 / 学习方式</span>
-          <p>{paper.optimization}</p>
+          <span className="analysis-label">03 / 模型结构</span>
+          <p>{paper.architecture}</p>
         </section>
         <section>
           <span className="analysis-label">04 / 数据组成</span>
           <p>{paper.data}</p>
         </section>
         <section>
-          <span className="analysis-label">05 / 实验结论</span>
+          <span className="analysis-label">05 / 实验内容和结论</span>
           <p>{paper.experiments}</p>
         </section>
-        {paper.novelty ? (
-          <section>
-            <span className="analysis-label">06 / 相对已有工作</span>
-            <p>{paper.novelty}</p>
-          </section>
-        ) : null}
+        <section>
+          <span className="analysis-label">06 / 相比 baseline 的改进点</span>
+          <p>{paper.novelty ?? "原文未提供足够明确的直接 baseline 对照。"}</p>
+        </section>
       </div>
-
-      <section className="paper-experiment-evidence">
-        <div className="experiment-evidence-head">
-          <div>
-            <span className="section-kicker">EXPERIMENT EVIDENCE</span>
-            <h3>实验依据</h3>
-          </div>
-          <p>只记录原文能够确认的设置、对照与结果；未报告的试验次数或误差范围不会补写。</p>
-        </div>
-        {paper.experimentDetails?.length ? (
-          <div className="experiment-block-grid">
-            {paper.experimentDetails.map((experiment) => (
-              <article className="experiment-block" key={experiment.title}>
-                <h4>{experiment.title}</h4>
-                <dl className="experiment-block-meta">
-                  <div>
-                    <dt>设置</dt>
-                    <dd>{experiment.setup}</dd>
-                  </div>
-                  <div>
-                    <dt>对照</dt>
-                    <dd>{experiment.comparisons}</dd>
-                  </div>
-                </dl>
-                <ul className="experiment-results">
-                  {experiment.results.map((result) => (
-                    <li key={result}>{result}</li>
-                  ))}
-                </ul>
-                {experiment.evidenceNote ? (
-                  <p className="evidence-note">{experiment.evidenceNote}</p>
-                ) : null}
-              </article>
-            ))}
-          </div>
-        ) : (
-          <p className="experiment-fallback">{paper.experiments}</p>
-        )}
-      </section>
-
-      <section className="repro-panel">
-        <div className="repro-head">
-          <div>
-            <span className="section-kicker">REPRODUCIBILITY</span>
-            <h3>复现线索</h3>
-          </div>
-          {paper.reproducibilityDetails ? (
-            <span className={`repro-status repro-status-${paper.reproducibilityDetails.status}`}>
-              {paper.reproducibilityDetails.status}
-            </span>
-          ) : null}
-        </div>
-        {paper.reproducibilityDetails ? (
-          <div className="repro-grid">
-            <div>
-              <h4>已确认资源</h4>
-              <ul>
-                {paper.reproducibilityDetails.verifiedResources.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4>实现线索</h4>
-              <ul>
-                {paper.reproducibilityDetails.implementation.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4>仍缺少</h4>
-              <ul>
-                {paper.reproducibilityDetails.missing.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        ) : (
-          <p className="repro-fallback">
-            {paper.reproducibility ??
-              "原文未提供足以组成复现清单的公开信息，请以论文附录和项目页为准。"}
-          </p>
-        )}
-      </section>
 
       <div className="judgement-grid">
         <section className="judgement-card judgement-positive">
@@ -213,72 +129,93 @@ export function PaperDetail({
         </section>
       </div>
 
-      <section className="paper-deep-dive">
-        <header className="deep-dive-header">
-          <span className="section-kicker">DEEP DIVE</span>
-          <h3>详细解读</h3>
-          <p className="deep-dive-lead">
-            {paper.deepDive?.lead ??
-              paper.readingNotes ??
-              "下面按方法机制、实验结果和可迁移启发继续展开。"}
-          </p>
+      <section className="paper-detailed-content">
+        <header className="detailed-content-header">
+          <span className="section-kicker">DETAILED READING</span>
+          <h3>详细内容</h3>
         </header>
 
-        <div className="deep-dive-body">
-          {(paper.deepDive?.sections ?? [
-            {
-              title: "方法是怎样工作的",
-              paragraphs: [paper.architecture, paper.optimization],
-            },
-            {
-              title: "数据与实验",
-              paragraphs: [paper.data, paper.experiments],
-            },
-          ]).map((section) => (
-            <section className="deep-dive-section" key={section.title}>
-              <h4>{section.title}</h4>
-              {section.paragraphs.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-            </section>
-          ))}
-
-          {paper.deepDive?.equations?.length ? (
-            <section className="deep-dive-section">
-              <h4>关键公式</h4>
-              <div className="equation-stack">
-                {paper.deepDive.equations.map((equation) => (
-                  <article className="equation-card" key={equation.name}>
-                    <span>{equation.name}</span>
-                    <code>{equation.expression}</code>
-                    <p>{equation.explanation}</p>
-                  </article>
+        <section className="detailed-section">
+          <h4>技术细节</h4>
+          {technicalSections.length ? (
+            technicalSections.map((section) => (
+              <div className="technical-subsection" key={section.title}>
+                <h5>{section.title}</h5>
+                {section.paragraphs.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
                 ))}
               </div>
-            </section>
-          ) : null}
+            ))
+          ) : (
+            <div className="technical-subsection">
+              <p>{paper.architecture}</p>
+              <p>{paper.optimization}</p>
+            </div>
+          )}
 
-          <div className="deep-dive-insights">
-            <section>
-              <h4>实验结果怎么读</h4>
-              <ul>
-                {(paper.deepDive?.experimentReading ?? [paper.experiments]).map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
-            <section>
-              <h4>进一步思考</h4>
-              <ul>
-                {(paper.deepDive?.reflections ?? [paper.transfer, paper.limitations]).map(
-                  (item) => (
-                    <li key={item}>{item}</li>
-                  ),
-                )}
-              </ul>
-            </section>
-          </div>
-        </div>
+          {paper.deepDive?.equations?.length ? (
+            <div className="formula-list">
+              {paper.deepDive.equations.map((equation) => (
+                <div className="formula-item" key={equation.name}>
+                  <h5>{equation.name}</h5>
+                  <div className="formula-expression">{equation.expression}</div>
+                  <p>{equation.explanation}</p>
+                </div>
+              ))}
+            </div>
+          ) : null}
+        </section>
+
+        <section className="detailed-section">
+          <h4>实验和消融测试</h4>
+          {paper.experimentDetails?.length ? (
+            paper.experimentDetails.map((experiment) => (
+              <div className="experiment-prose" key={experiment.title}>
+                <h5>{experiment.title}</h5>
+                <p>
+                  <strong>实验设置：</strong>
+                  {experiment.setup}
+                </p>
+                <p>
+                  <strong>对比方法：</strong>
+                  {experiment.comparisons}
+                </p>
+                <ul>
+                  {experiment.results.map((result) => (
+                    <li key={result}>{result}</li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          ) : (
+            <p>{paper.experiments}</p>
+          )}
+        </section>
+
+        <section className="detailed-section">
+          <h4>可复现性</h4>
+          {paper.reproducibilityDetails ? (
+            <div className="reproducibility-prose">
+              <p>
+                <strong>网络结构与实现设置：</strong>
+                {paper.reproducibilityDetails.implementation.join("；")}
+              </p>
+              <p>
+                <strong>代码、模型与数据：</strong>
+                {paper.reproducibilityDetails.verifiedResources.join("；")}
+              </p>
+              <p>
+                <strong>原文尚未披露：</strong>
+                {paper.reproducibilityDetails.missing.join("；")}
+              </p>
+            </div>
+          ) : (
+            <p>
+              {paper.reproducibility ??
+                "原文未披露足够的网络实现、训练超参数或公开资源信息。"}
+            </p>
+          )}
+        </section>
       </section>
 
       <div className="paper-resource-links">

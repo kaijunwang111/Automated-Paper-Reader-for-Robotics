@@ -9,6 +9,8 @@ export const paperEditorialSupplements = {
       platforms: ["机械臂", "夹爪"],
       deployment: "真机部署优化",
     },
+    methodSummary:
+      "先用配对的腕部 RGB 与双指压力图训练视觉到触觉生成器，再把生成压力图或中间空间 latent 接入 Diffusion Policy；部署时不再需要真实触觉传感器。",
     experiments:
       "论文同时验证“触觉能否预测”和“预测触觉是否真的帮助控制”。FELT 在独立 xArm 测试集上取得 0.816 的接触帧准确率；四项真机任务每种方法各运行 20 次，FELT latent 将 Triangle Peg 最终插入成功率从视觉基线的 50% 提升到 90%，但不同任务上的优势并不完全一致。",
     experimentDetails: [
@@ -116,6 +118,8 @@ export const paperEditorialSupplements = {
       modalities: ["Force / Torque"],
       platforms: ["机械臂", "夹爪"],
     },
+    methodSummary:
+      "让 Diffusion Policy 联合预测 virtual target、刚度矩阵和 impedance-admittance 切换比例，使策略能随接触状态改变底层柔顺控制模式。",
     resources: [{ label: "项目页", url: "https://jiyou384.github.io/urf_project_page/" }],
     experiments:
       "URF 在两项刚性接触真机任务中，每个方法各执行 20 次。Box Flipping 成功率为 90%，而 force-DP、ACP 和固定切换比例版本分别为 0%、25%、50–60%；Line Pressing 达到 100%，固定比例为 70%，ACP 为 0%。结果同时报告了危险失败、力增长率、接触维持率和力振荡。",
@@ -222,6 +226,8 @@ export const paperEditorialSupplements = {
       training: "BC",
       platforms: ["机械臂", "夹爪"],
     },
+    methodSummary:
+      "把动作策略依赖的视觉证据压缩成可见关键点；部署时用户只需在首帧修正错误关键点，随后由视觉跟踪器传播纠正结果。",
     experiments:
       "三项仿真和三项真机任务共同评估位置、外观及组合 OOD。仿真最难的 Pos+App-OOD 中，默认 GuidedAttention 从 34.4% 提升到一次人工纠正后的 67.8%，普通 DP 为 28.9%；真机每个条件使用 3 个随机种子、每种子 10 次，人工纠正带来约 20–40 个百分点的额外提升。",
     experimentDetails: [
@@ -328,6 +334,8 @@ export const paperEditorialSupplements = {
       data: "数据质量 / 筛选",
       platforms: ["机械臂", "夹爪"],
     },
+    methodSummary:
+      "先用 Factor Dominance Rate 与 Factor Dominance Hierarchy 找出语言条件中的强弱 grounding 因素，再把固定的数据采集预算优先分配给弱因素组合。",
     experiments:
       "论文先在六种 VLA/WAM backbone 上用 400 次 OOD rollout/因素对测量语言捷径，再在 π0、π0.5、GR00T-N1.7 上验证定向采集。真机 UR5 的三个任务中，每个 checkpoint 评估 48 次；V 策略平均比 L 高 28.7 个百分点、比随机采样高 16.7 个百分点，并在 Bun 上用 100 条示范超过两个使用 200 条示范的基线。",
     experimentDetails: [
@@ -434,6 +442,8 @@ export const paperEditorialSupplements = {
       data: "合成 / 仿真数据",
       platforms: ["机械臂", "夹爪"],
     },
+    methodSummary:
+      "从 RGB-D 运动序列估计材料参数，以 MPM 进行物理 rollout，再用学习式残差逐粒子修正仿真误差并预测置信度。",
     experiments:
       "在 12 条真实可变形物体轨迹上，PhysCoRe 用前半段识别材料、预测后半段。相对逐物体优化的 PhysTwin，弹性/弹塑性对象的 Chamfer 距离分别降低 43.7%/30.5%，识别时间从 930 s 降至 11.4 s；RfD 消融再带来 13.1%/17.8% 的 Chamfer 改善。真机主动探索仅展示置信度随局部形变上升，并未闭环比较探索策略。",
     experimentDetails: [
@@ -541,6 +551,8 @@ export const paperEditorialSupplements = {
       platforms: ["其他平台"],
       deployment: "Sim2Real",
     },
+    methodSummary:
+      "将多无人机悬挂载荷压缩为低维耦合动力学，用分布式图策略学习协同控制，并通过图控制障碍函数在执行时约束安全集合。",
     experiments:
       "策略只在 2D 抽象仿真中训练，并零样本部署到 3–6 架 Crazyflie。训练团队规模为 3–5 架，真机额外测试未见的 6 架编队；除一个 6 机 Hard 场景停在目标附近外均完成。两组 5+3 架无人机还能把对方视作动态障碍完成各自运输，但论文未报告大规模重复次数。",
     experimentDetails: [
@@ -645,6 +657,8 @@ export const paperEditorialSupplements = {
       modalities: ["Point Cloud / 3D"],
       platforms: ["机械臂", "夹爪"],
     },
+    methodSummary:
+      "用抓取扩散模型提供候选先验，再把碰撞、可达性和平滑等约束写成能量，在反向扩散后段通过带梯度的 MCMC 联合优化抓取、交接和重抓轨迹。",
     experiments:
       "60 个仿真重定向任务覆盖 easy/medium/hard。BiCompoDiff-HO 在 200 个抓取对设置下成功率 70.0%，NoEBM 为 41.7%；与改造的 ReorientBot 比较时为 81.7% 对 58.3%。两组双 UR12e 真机场景只报告轨迹关节位移改善 59.7%/46.4%，且假设物体位姿与几何完全已知。",
     experimentDetails: [
