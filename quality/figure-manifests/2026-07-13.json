@@ -1,0 +1,14 @@
+{
+  "report": "2026-07-13",
+  "reviewedAt": "2026-08-02",
+  "papers": [
+    { "paperId": "2607.10369", "figures": [{ "file": "2607.10369-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.10369v1/x1.png", "sourceType": "arxiv_html_figure", "width": 793, "height": 249, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
+    { "paperId": "2607.09185", "figures": [{ "file": "2607.09185-overview.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.09185v1/x1.png", "sourceType": "arxiv_html_figure", "width": 996, "height": 417, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
+    { "paperId": "2607.10655", "figures": [{ "file": "2607.10655-overview.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.10655v1/x2.png", "sourceType": "arxiv_html_figure", "width": 793, "height": 225, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
+    { "paperId": "2607.10706", "figures": [{ "file": "2607.10706-overview.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.10706v1/x1.png", "sourceType": "arxiv_html_figure", "width": 947, "height": 417, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
+    { "paperId": "2607.09866", "figures": [{ "file": "2607.09866-overview.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.09866v1/x2.png", "sourceType": "arxiv_html_figure", "width": 997, "height": 432, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
+    { "paperId": "2607.09218", "figures": [{ "file": "2607.09218-overview.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.09218v2/figures/figure_2_method.png", "sourceType": "arxiv_html_figure", "width": 6101, "height": 2419, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
+    { "paperId": "2607.09191", "figures": [{ "file": "2607.09191-overview.jpg", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.09191v1/12.jpg", "sourceType": "arxiv_html_figure", "width": 15360, "height": 8640, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
+    { "paperId": "2607.10504", "figures": [{ "file": "2607.10504-overview.jpg", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.10504v1/figures/visual_1_copy_12.jpg", "sourceType": "arxiv_html_figure", "width": 3099, "height": 945, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] }
+  ]
+}

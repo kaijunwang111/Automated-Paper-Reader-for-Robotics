@@ -1,4 +1,6 @@
 import { paperEditorialSupplements } from "./paper-editorial-supplements";
+import { paperDaily20260713 } from "./paper-daily-2026-07-13";
+import { paperDaily20260717 } from "./paper-daily-2026-07-17";
 import { paperDaily20260720 } from "./paper-daily-2026-07-20";
 import { paperDaily20260724 } from "./paper-daily-2026-07-24";
 import { paperDaily20260801 } from "./paper-daily-2026-08-01";
@@ -1394,6 +1396,30 @@ export const reports: Report[] = [
         ],
       },
     ].map(enrichPaper),
+  },
+  {
+    slug: "2026-07-17",
+    date: "2026.07.17",
+    weekday: "周五",
+    range: "2026.07.13 - 2026.07.16",
+    title: "规模化 VLA、动作表征与结构化探索",
+    summary:
+      "本期收录十篇经原文与实验核验的论文，覆盖 Lumo-2、Xiaomi-Robotics-1/U0、环境依赖动作表征、光流 WAM、结构化 RL 探索与机器人中心几何。",
+    overview:
+      "本期论文关注三条具体进展：用大规模人类/跨本体数据训练 VLA 与 world-action model，用未来视觉或人类语义改造动作表征，以及用 experience token、稠密奖励和多坐标系扩散提高操作学习效率。",
+    papers: paperDaily20260717.map(enrichPaper),
+  },
+  {
+    slug: "2026-07-13",
+    date: "2026.07.13",
+    weekday: "周一",
+    range: "2026.07.10 - 2026.07.12",
+    title: "生成策略强化学习、接触感知与视觉泛化",
+    summary:
+      "本期收录八篇经原文与实验核验的论文，覆盖生成式策略在线 RL、潜动作去偏、视觉捷径抑制、动作热图、全臂触觉与视频到真机几何迁移。",
+    overview:
+      "本期论文分别研究可微流策略、动作条件世界模型去偏、任务条件视觉掩码、多视角动作分类、离线到在线价值学习、全臂接触控制、生成视频几何验证与不确定性残差流。",
+    papers: paperDaily20260713.map(enrichPaper),
   },
 ];
 
