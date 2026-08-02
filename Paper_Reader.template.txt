@@ -3,6 +3,7 @@
 项目定位：
 - `paper-daily` 只是候选检索脚本工具，不是日报生成器。
 - Codex 必须作为科研助理阅读候选、语义评分、排序、总结，并写入最终日报。
+- 每次正式运行必须通过 `automation/PAPER_DAILY_QUALITY_GATES.md`；不能因为生成了 Markdown 或网站能够构建就视为完成。
 
 运行方式：
 - 使用 Codex standalone automation。
@@ -74,7 +75,7 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - 重点关注以下会议或期刊：Science Robotics、RSS、CoRL、ICRA、IROS、TRO、IJRR、ICML、ICCV、ECCV、CVPR、NeurIPS、AAAI。
 
 负向过滤：
-- 没有进行真机实验的。
+- 没有进行真机实验的原则上降级或排除。预训练、世界模型评测或相邻领域通用方法只有在迁移价值显著、闭环或多基准证据充分、对照与消融可信时才可例外；必须在本地记录无真机及降权原因。
 - 仿真只在LIBERO上做的。
 - 消融实验不完善的，属于明显排列组合的论文。
 - 只有成功视频或少量挑选案例、没有试验次数和失败统计的。
@@ -154,6 +155,22 @@ data/processed/YYYY-MM-DD_scored.json
       "selected_for_full_text_review": false,
       "selected_for_report": false,
       "reading_evidence": "abstract-only / paper page / pdf",
+      "selection_decision": "selected / rejected",
+      "selection_reason": "可核验的入选或排除原因",
+      "source_evidence": {
+        "full_text_url": "...",
+        "affiliation_source": "...",
+        "verified_resource_urls": [],
+        "key_claim_locations": []
+      },
+      "content_quality_checks": {
+        "six_quick_cards_distinct": false,
+        "experiment_has_setup_baseline_result_boundary": false,
+        "technical_details_traceable": false,
+        "reproducibility_has_effective_details": false,
+        "taxonomy_rechecked": false,
+        "figure_manifest_passed": false
+      },
       "semantic_rank": 0
     }
   ]
@@ -167,6 +184,8 @@ data/processed/YYYY-MM-DD_scored.json
 5. 如果只能基于 abstract 判断，必须在 `reading_evidence` 和日报中明确写明，且不能进入正式日报；示例模式需明确标注例外。
 6. 不要编造候选、机构、网页或 PDF 中无法支持的信息。
 7. 每篇论文按照主要贡献归类。论文中出现过的训练阶段、模态或数据形式不能自动成为分类标签。
+8. 为每篇最终入选论文记录可追溯证据：全文版本、机构来源、关键数字/公式/结构所在章节或表图、已验证资源链接和 Figure 来源；不要求把这份内部证据表发布到网站。
+9. 对进入全文复核但未入选的主要候选记录具体排除原因，不能只写“综合质量一般”。
 
 分类规则：
 - 研究方向只能选择一个主分类：VLA、WAM、WM、表征学习、Memory、CoT、Subtask、其他。
@@ -205,18 +224,21 @@ reports/YYYY-MM-DD.md
 - 详细内容三部分只陈述原文及其直接支持的结论，不加入个人评价、趋势判断、建议动作或启发性思考。公式必须转换为网页可直接阅读的 Unicode/数学排版，不展示未渲染的 LaTeX 源码。
 - 每个数字、公式和结构细节都必须能定位到原文正文、表格、图注或附录。原文没有报告时明确写“未报告”，不得根据图形大致估算后伪装成精确值。
 - 日报只负责快速跟踪最新论文，不强制做跨论文横向比较、主题综合、趋势判断或研究建议。
+- 完稿后逐篇执行内容门禁：六张速览卡片互不重复；实验卡片含设置、直接基线、关键结果和证据边界；详细实验含消融/泛化或明确说明缺失；可复现性含有效结构或设置而不是套话；分类经过主贡献反查。
 
 网站同步：
 - 本地 `reports/YYYY-MM-DD.md` 保留检索批次、运行、评分与排查信息。
 - 公开网站只发布论文内容，不展示内部评分、Prompt、配置、处理过程，也不展示“只记录原文能够确认”“不得补写”等写作指令或免责声明。
 - 公开日报的日期与星期使用该批内容原定的周一或周五更新时间；实际延迟执行或补跑信息仅保留在本地日报和日志，不进入公开页面。
-- 将新日报置于 `website/lib/site-data.ts` 的最新位置，并将实际入选论文加入可检索数据库，不得用低质量论文凑满 15 篇。
+- 按计划发布日期倒序将新日报置于 `website/lib/site-data.ts` 的正确位置，并将实际入选论文加入可检索数据库；历史补跑不得放错日期顺序，也不得用低质量论文凑满 15 篇。
 - 网站按研究方向、训练与优化、创新模态、数据方法、机器人平台、部署与迁移分维度筛选；Memory 的实现形式与时间跨度只能出现在详情属性中。
 - 每篇论文必须使用一至两幅能帮助理解方法的 Overview / Method / Architecture 图片。优先直接保存 arXiv HTML 独立 Figure，其次使用 arXiv source 原始图片、官方论文/项目页原图；只有前三者都不可用时，才按 PDF 的精确 figure bounding-box 裁图。禁止用整页截图加估计裁剪。
 - 图片必须完整显示全部 panel、框图分支、标签和 legend，图号与图注和原文一致；不得包含论文标题、作者、页码或大段正文，不得裁边、以空白/caption 为主体，也不得用结果表或无关实验照片代替。建议最小 700×180；失败时换图，仍失败则不发布该图并视情况暂缓论文条目。
 - 发布前生成本期图片 contact sheet 逐张检查，并保存图片质量清单，记录 paper id、figure number、source URL、尺寸、是否完整和是否通过。网站测试需要检查该清单和 1–2 幅数量限制，不能只验证图片文件存在。
+- 必须把本期 manifest 注册到 `website/tests/rendered-html.test.mjs` 的图片质量用例；manifest、公开论文 id、图片目录和最终收录数必须完全一致。
 - 保留可核验的项目页、GitHub 或模型链接；没有可靠链接时不要猜测。
-- 运行网站测试并使用 `website/.openai/hosting.json` 对应的现有 Sites 项目发布；禁止创建新站点。
+- 运行 `paper-daily` 的 Python 测试、`website` 的完整测试与 `git diff --check`。使用 `website/.openai/hosting.json` 对应的现有 Sites 项目发布；禁止创建新站点。
+- Sites 发布必须使用经过验证的精确 `website` 源码树和同一提交生成的部署包，轮询到 `succeeded`，再核对 Sites 最新版本、日报路由和至少一条论文详情路由。未完成线上核对不得声称发布成功。
 
 最后回复用户：
 - 今日候选数量

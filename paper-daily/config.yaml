@@ -285,6 +285,67 @@ reporting:
   allow_fewer_than_target: true
   minimum_quality_over_quota: true
 
+quality_monitoring:
+  required_artifacts:
+    - window_candidates
+    - scored_review_record
+    - local_report
+    - public_paper_module
+    - figure_assets
+    - figure_manifest
+    - contact_sheet
+  candidate_and_selection:
+    require_daily_window_fetch: true
+    require_official_channel_check: true
+    require_deduplication_before_cap: true
+    require_selection_and_rejection_reasons: true
+    abstract_only_cannot_be_selected: true
+    real_robot_default_expectation: true
+    no_real_robot_exception_requires:
+      - strong_transfer_value
+      - sufficient_closed_loop_or_multi_benchmark_evidence
+      - credible_baselines_and_ablations
+      - explicit_local_downgrade_note
+  selected_paper_evidence:
+    require_full_text_version: true
+    require_affiliation_source: true
+    require_key_claim_locations: true
+    require_verified_resource_links: true
+    require_method_data_experiment_and_limitation_review: true
+  content_gates:
+    six_quick_cards_must_be_distinct: true
+    experiment_card_requires:
+      - setup
+      - direct_baseline
+      - key_result
+      - evidence_boundary
+    detailed_experiment_requires:
+      - trials_or_explicitly_not_reported
+      - success_criterion_or_explicitly_not_reported
+      - ablations_or_explicitly_missing
+      - generalization_or_explicitly_missing
+    reproducibility_requires_effective_details_not_boilerplate: true
+    exact_claims_must_be_source_traceable: true
+    taxonomy_requires_primary_contribution_recheck: true
+  cross_artifact_consistency:
+    selected_ids_equal_public_paper_ids: true
+    selected_ids_equal_manifest_paper_ids: true
+    selected_count_equal_report_count: true
+    manifest_must_be_registered_in_website_test: true
+  validation:
+    require_python_tests: true
+    require_website_tests: true
+    require_git_diff_check: true
+    require_contact_sheet_visual_review: true
+  deployment:
+    reuse_existing_sites_project: true
+    exact_validated_website_tree: true
+    archive_matches_pushed_commit: true
+    poll_until_terminal: true
+    require_succeeded_status: true
+    verify_report_and_paper_routes_after_publish: true
+    never_push_github_origin: true
+
 figure_quality:
   figures_per_selected_paper:
     minimum: 1
