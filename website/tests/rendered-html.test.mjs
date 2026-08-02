@@ -37,13 +37,15 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /检索论文数据库/);
   assert.match(html, /查看更多公司动态/);
   assert.equal((html.match(/<article class="company-card company-card-compact">/g) ?? []).length, 5);
-  assert.match(html, /2026\.08\.01/);
+  assert.match(html, /2026\.07\.31/);
+  assert.match(html, /周五/);
+  assert.doesNotMatch(html, /周六补跑|补跑|href="\/about"/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
 });
 
-test("renders report, archive, database, paper, company, and about routes", async () => {
-  const [archive, latestDetail, latestPaper, officialPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, about] =
+test("renders public report, database, paper, and company routes", async () => {
+  const [archive, latestDetail, latestPaper, officialPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, removedAbout] =
     await Promise.all([
     render("/reports"),
     render("/reports/2026-08-01"),
@@ -74,9 +76,9 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.equal(traversabilityPaper.status, 404);
   assert.equal(memoryPaper.status, 200);
   assert.equal(companies.status, 200);
-  assert.equal(about.status, 200);
+  assert.equal(removedAbout.status, 404);
 
-  const [archiveHtml, latestDetailHtml, latestPaperHtml, officialPaperHtml, detailHtml, databaseHtml, paperHtml, contactPaperHtml, memoryPaperHtml, companiesHtml, aboutHtml] =
+  const [archiveHtml, latestDetailHtml, latestPaperHtml, officialPaperHtml, detailHtml, databaseHtml, paperHtml, contactPaperHtml, memoryPaperHtml, companiesHtml] =
     await Promise.all([
       archive.text(),
       latestDetail.text(),
@@ -88,10 +90,13 @@ test("renders report, archive, database, paper, company, and about routes", asyn
       contactPaper.text(),
       memoryPaper.text(),
       companies.text(),
-      about.text(),
     ]);
 
   assert.match(archiveHtml, /论文日报/);
+  assert.match(archiveHtml, /2026\.07\.31/);
+  assert.match(archiveHtml, /2026\.07\.24/);
+  assert.doesNotMatch(archiveHtml, /周六补跑|补跑/);
+  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/07\/31/);
   assert.match(latestDetailHtml, /HiFi-UMI/);
   assert.match(latestDetailHtml, /τ0-VLA/);
   assert.match(latestDetailHtml, /960 次真机 rollout/);
@@ -178,11 +183,6 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(companiesHtml, /星海图 Galaxea AI/);
   assert.match(companiesHtml, /腾讯 Robotics X/);
   assert.doesNotMatch(companiesHtml, /官方信号优先|SOURCE POLICY/);
-  assert.match(aboutHtml, /范围、分类与公开边界/);
-  assert.match(aboutHtml, /CoT/);
-  assert.match(aboutHtml, /Memory 的/);
-  assert.match(aboutHtml, /不为凑满固定篇数降低标准/);
-  assert.match(aboutHtml, /官方博客或\s*官方仓库/);
 });
 
 test("ships original-paper figures and finished social metadata", async () => {
