@@ -106,7 +106,7 @@
 2. 核对公开日报论文数、论文数据库条目、manifest paper id 与图片目录完全一致。
 3. 核对 arXiv、项目页、GitHub、模型和数据链接；无法确认的链接直接省略。
 4. 运行 `python -m pytest -q`、`npm run lint`、`npm test`、`npm run test:pages` 和 `git diff --check`。任何失败都必须先修复；不能跳过图片测试、静态导出测试或只运行构建。
-5. 只提交本次任务相关文件，保留无关用户改动；不得提交本地评分数据、日志、完整本地日报和临时目录。提交前后检查 `origin/main`；只允许安全整合并普通 push，禁止 force-push、reset 或覆盖另一任务的提交。
+5. 只提交本次运行相关文件，保留无关用户改动；不得提交本地评分数据、日志、完整本地日报和临时目录。周一的论文与公司改动必须进入同一个提交。提交前后检查 `origin/main`；只允许安全整合并普通 push，禁止 force-push、reset 或覆盖其他进程的提交。
 6. 将最终提交推送到 `origin/main`，确认本次 `head_sha` 对应的 GitHub Pages workflow run 成功完成。旧 run、仅有 HTTP 200 或本地静态导出不能替代本次 Pages 部署确认。
 7. 读取 `website/.openai/hosting.json` 并复用现有 Sites 项目。从同一根提交对应的精确 `website` 源码树生成 Sites 源提交和部署包，保存新版本、部署并轮询到 `succeeded`。
 8. 发布后分别确认 GitHub Pages 和 ChatGPT Sites 的主页、当期日报、至少一条论文详情与代表性图片资源可访问。任一目标失败时明确说明各站点实际版本，不得声称已同步。

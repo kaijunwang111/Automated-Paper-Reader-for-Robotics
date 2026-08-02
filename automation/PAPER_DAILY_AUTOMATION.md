@@ -87,20 +87,16 @@
 7. 发布前为本期全部图片生成 contact sheet 并逐张视觉检查，同时保存包含 paper id、figure number、source URL、像素尺寸和 QA 结论的质量清单。网站测试必须检查清单、文件、1–2 幅数量限制与最小尺寸，不能只检查 HTTP 200 或文件存在。
    当期 manifest 必须注册到 `website/tests/rendered-html.test.mjs` 的质量清单，确保测试真正覆盖本期。
 8. 不得把作者的“最佳”“human-level”“通用”等表述改写成独立验证事实。
-9. 在 `website` 目录依次运行 `npm run lint`、`npm test` 和 `npm run test:pages`，同时运行 `paper-daily` Python 测试与 `git diff --check`。任一失败都必须先修复。
-10. 只暂存本次相关文件，排除本地评分数据、日志、完整本地日报、`tmp/`、`website/.sites/` 和其他临时产物。创建本地提交后获取 `origin/main`；若远端由另一个自动化推进，只在工作区干净且无冲突时安全整合。禁止 force-push、reset 或覆盖用户/另一任务的提交。
-11. 将最终提交推送到 `origin/main`，定位 `head_sha` 与该提交一致的 GitHub Pages workflow run，等待其完成且 `conclusion=success`。Pages 失败时先检查构建日志并在同一任务内修复、重新测试和推送；不能引用旧 run 声称成功。
-12. 按照 Sites 技能复用 `website/.openai/hosting.json` 中的现有项目，把同一根提交对应的精确 `website` 源码树推送、打包、保存为新版本并部署，轮询到 `succeeded`；禁止创建新 Sites 项目。
-13. 发布后分别检查 GitHub Pages 与 ChatGPT Sites 的主页、当期日报路由、至少一篇论文详情路由和一项代表性图片资源。两个站点均对应本次内容且可访问后，才能回报“双站点已同步”。
+9. 论文内容阶段到此结束。周一返回 [README.md](README.md) 继续顺序执行公司阶段；周五或公司阶段完成后，统一执行 README 中的双目标测试、单次提交与双站点发布。论文阶段不得提前提交、push 或单独发布网站。
 
 ## 无新批次与失败处理
 
 - 窗口内没有任何新候选：只写本地“无新候选批次”说明，不新增空的网站日报，不重复旧论文。
 - PDF 或机构无法核验：不得进入正式 15 篇，除非合格论文不足，并在本地明确记录限制。
-- 网站或 Python 测试失败：修复后重试；无法修复则不提交发布并报告。
-- GitHub push、Pages 或 Sites 任一步失败：保留本地日报和已验证源码，明确报告两个站点各自仍处于哪个版本；不得声称已同步，也不得通过强推或覆盖历史绕过冲突。
+- 论文质量门禁失败：修复后重试；无法修复则不把不完整论文内容带入统一提交和发布。
+- 统一测试、GitHub push、Pages 或 Sites 失败：按 [README.md](README.md) 的共同失败规则处理。
 
 ## 完成回报
 
 报告覆盖日期、候选/全文复核/最终论文数量、官方非 arXiv 补充数量、评分与本地日报路径、
-图片数量和质检状态、Python/双目标网站测试、本地提交与 GitHub push、Pages workflow、Sites 版本、两个公开链接以及限制或失败项。
+图片数量和质检状态、限制或失败项；统一测试、提交、Pages、Sites 与两个公开链接由主任务在全部当天阶段结束后汇总。

@@ -90,11 +90,10 @@ The website checks 24 robotics companies or research organizations each week. Fi
 
 The default timezone is `Asia/Shanghai`:
 
-| Job | Schedule | Coverage |
+| Branch | Schedule | Work performed |
 | --- | --- | --- |
-| Paper report | Monday 09:30 | Previous Friday through Sunday |
-| Paper report | Friday 09:30 | Monday through Thursday |
-| Company tracker | Monday 09:30 | Latest official organization signals |
+| Monday maintenance | Monday 09:30 | Previous Friday–Sunday papers plus the latest official company signals |
+| Friday maintenance | Friday 09:30 | Monday–Thursday papers; company tracking is skipped |
 
 Operational instructions live in [`automation/`](automation/README.md), and the production quality gates are documented in [`automation/PAPER_DAILY_QUALITY_GATES.md`](automation/PAPER_DAILY_QUALITY_GATES.md).
 
@@ -225,7 +224,7 @@ npm run lint
 | ChatGPT Sites | `vinext build` | Reuses the existing project in `website/.openai/hosting.json` |
 | GitHub Pages | Next.js static export | Deployed by `.github/workflows/pages.yml` after a push to `main` |
 
-GitHub Actions only builds and hosts the static website. It does not run paper retrieval and requires no OpenAI API key. After both build targets pass, the local Codex automations commit and push the relevant changes: GitHub Pages deploys the matching `main` commit, while ChatGPT Sites publishes the exact `website` source tree from that same commit. A run reports synchronization only after both public sites have been verified.
+GitHub Actions only builds and hosts the static website. It does not run paper retrieval and requires no OpenAI API key. A single local Codex automation now runs both schedules: Monday performs the paper and company phases sequentially, while Friday runs the paper phase only. It then tests, commits, and publishes once. GitHub Pages deploys the matching `main` commit, while ChatGPT Sites publishes the exact `website` source tree from that same commit. A run reports synchronization only after both public sites have been verified.
 
 ## Configuration and Privacy
 

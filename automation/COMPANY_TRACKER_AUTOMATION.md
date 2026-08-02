@@ -45,18 +45,15 @@
 3. 将 `companyTrackerLastChecked` 更新为本次成功检查日期，即使部分公司没有新消息。
 4. 文案保持简短、事实化：先说发布或变更，再说值得跟踪的技术/部署信号；避免营销化结论。
 5. 更新后检查公司数量、编号、链接和页面文案，不得误删未更新的公司。
-6. 在 `website` 目录运行 `npm run lint`、`npm test` 和 `npm run test:pages`，并在仓库根目录运行 `git diff --check`。测试失败必须修复，不能只验证一个托管目标。
-7. 只暂存公司动态任务相关文件并创建本地提交；不得提交私有配置、日志、完整本地日报或临时目录。获取 `origin/main` 最新状态，若论文任务先完成，只在工作区干净且无冲突时安全整合。禁止 force-push、reset 或覆盖另一任务的提交。
-8. 将最终提交推送到 `origin/main`，定位本次提交对应的 GitHub Pages workflow run 并等待 `conclusion=success`。
-9. 按照 Sites 技能复用 `website/.openai/hosting.json` 中的现有项目，从同一根提交对应的精确 `website` 源码树保存并部署新版本，轮询到 `succeeded`；禁止创建新站点。
-10. 分别检查 GitHub Pages 与 ChatGPT Sites 的主页和公司动态页，确认 `companyTrackerLastChecked` 与更新卡片在两边一致后，才能回报“双站点已同步”。
+6. 公司内容阶段到此结束。返回 [README.md](README.md)，把周一的论文与公司改动作为一个整体统一测试、创建一个提交，并向 GitHub Pages 与 ChatGPT Sites 各发布一次。不得为公司阶段单独提交、push 或发布网站。
 
 ## 失败处理
 
 - 单家公司官网不可访问：保留该公司上次成功内容，并在完成回报中列出失败来源。
 - 多数官方来源或网络不可用：不批量覆盖旧内容，不发布“无更新”结论。
-- 测试、GitHub push、Pages 或 Sites 任一步失败：保留可恢复的本地提交并分别报告两个站点的实际版本；不得声称已经同步，也不得强推绕过冲突。
+- 公司来源或内容核验失败：保留原卡片并报告，不得把未经确认的更新带入统一发布。
+- 统一测试、GitHub push、Pages 或 Sites 失败：按 [README.md](README.md) 的共同失败规则处理。
 
 ## 完成回报
 
-报告成功检查的公司数、实际更新的公司、保留旧内容的公司、失败来源、测试结果、本地提交与 GitHub push、Pages workflow、Sites 版本和两个公开网址。
+报告成功检查的公司数、实际更新的公司、保留旧内容的公司和失败来源；统一测试、提交、Pages、Sites 与两个公开网址由主任务在周一全部阶段结束后汇总。

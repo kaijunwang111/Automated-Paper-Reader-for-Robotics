@@ -90,11 +90,10 @@ flowchart LR
 
 默认时区为 `Asia/Shanghai`：
 
-| 任务 | 时间 | 覆盖范围 |
+| 任务分支 | 时间 | 执行内容 |
 | --- | --- | --- |
-| 论文日报 | 每周一 09:30 | 上周五至周日 |
-| 论文日报 | 每周五 09:30 | 本周一至周四 |
-| 公司动态 | 每周一 09:30 | 各公司最新官方信号 |
+| 周一维护 | 每周一 09:30 | 上周五至周日论文 + 公司最新官方信号 |
+| 周五维护 | 每周五 09:30 | 本周一至周四论文；不执行公司追踪 |
 
 完整运行手册位于 [`automation/`](automation/README.md)，论文质量门禁见 [`automation/PAPER_DAILY_QUALITY_GATES.md`](automation/PAPER_DAILY_QUALITY_GATES.md)。
 
@@ -225,7 +224,7 @@ npm run lint
 | ChatGPT Sites | `vinext build` | 复用 `website/.openai/hosting.json` 中的现有 Sites 项目 |
 | GitHub Pages | Next.js static export | 推送 `main` 后由 `.github/workflows/pages.yml` 部署 |
 
-GitHub Actions 只负责静态网站构建和 Pages 托管，不运行论文检索，也不需要 OpenAI API Key。当前本地 Codex 自动化会在内容通过双目标测试后提交并推送相关变更：GitHub Pages 由 `main` 上对应提交触发，ChatGPT Sites 使用同一提交下的精确 `website` 源码树发布；任务只有在两个公开站点均完成验证后才会报告同步成功。
+GitHub Actions 只负责静态网站构建和 Pages 托管，不运行论文检索，也不需要 OpenAI API Key。当前使用一个本地 Codex 自动化：周一顺序完成论文与公司阶段，周五只执行论文阶段，然后统一测试、提交并发布一次。GitHub Pages 由 `main` 上对应提交触发，ChatGPT Sites 使用同一提交下的精确 `website` 源码树发布；任务只有在两个公开站点均完成验证后才会报告同步成功。
 
 ## 配置与隐私
 
