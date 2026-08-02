@@ -43,22 +43,6 @@ export default function CompaniesPage() {
           ))}
         </div>
       </section>
-
-      <section className="shell source-policy">
-        <div>
-          <span className="section-index">SOURCE POLICY</span>
-          <h2>官方信号优先</h2>
-        </div>
-        <div className="source-policy-copy">
-          <p>
-            首版只收录公司官网、官方技术博客与官方 GitHub。新闻稿中的性能数字会被标记为公司口径，
-            不自动等价于独立验证结果。
-          </p>
-          <p>
-            来源抓取失败时保留上次成功内容并显示更新时间，避免空数据被误读为“本周没有动态”。
-          </p>
-        </div>
-      </section>
     </div>
   );
 }

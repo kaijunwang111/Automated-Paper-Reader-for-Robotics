@@ -35,6 +35,8 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /最新论文日报/);
   assert.match(html, /机器人公司动向/);
   assert.match(html, /检索论文数据库/);
+  assert.match(html, /查看更多公司动态/);
+  assert.equal((html.match(/<article class="company-card company-card-compact">/g) ?? []).length, 5);
   assert.match(html, /2026\.08\.01/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
@@ -169,6 +171,7 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(companiesHtml, /众擎机器人/);
   assert.match(companiesHtml, /Genesis AI/);
   assert.match(companiesHtml, /Sharpa/);
+  assert.doesNotMatch(companiesHtml, /官方信号优先|SOURCE POLICY/);
   assert.match(aboutHtml, /范围、分类与公开边界/);
   assert.match(aboutHtml, /CoT/);
   assert.match(aboutHtml, /Memory 的/);
