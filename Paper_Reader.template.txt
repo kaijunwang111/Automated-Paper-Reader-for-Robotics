@@ -61,7 +61,7 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - 对直接领域论文也要看方法贡献、实验质量和可复用价值。
 - 最终数量上限为 15 篇，不设最低数量。质量不足时宁可少选，不得为了凑满 15 篇降低标准。
 - `C:\Users\kaijun\Desktop\Code\ref` 中的内容样例用于学习选题粒度、方法信息密度与表达方式，不得照抄其中表述。
-- OpenPI、NVIDIA Robotics、自变量、智元、LingBot、Optimus、宇树科技、逐际动力、星动纪元、众擎机器人、Genesis AI、Sharpa 等跟踪公司的论文可作为高质量正向参考，但公司或机构身份不能替代方法和实验核验。
+- `paper-daily/config.yaml` 中 `positive_reference_organizations` 所列跟踪机构的论文可作为高质量正向参考，但公司或机构身份不能替代方法和实验核验；名单更新以后以配置文件为准，不沿用旧的硬编码数量或名称。
 
 重点关注：
 - 论文有具身智能机器人领域或计算机领域公司、成熟大学实验室或多机构合作支撑。

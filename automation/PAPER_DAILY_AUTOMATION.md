@@ -14,7 +14,7 @@
 - 周五运行：覆盖本周一、周二、周三、周四。
 - 使用 Asia/Shanghai 的运行日期确定窗口。
 - 对窗口内每个自然日分别执行一次 arXiv fetch，并使用 `--lookback-days 1`；没有公告批次的日期记录后跳过。
-- 主论文源仍为 arXiv；另外必须逐一检查下述受关注公司的官方研究页、项目页、官方 GitHub 和官方 Hugging Face，补充同一日期窗口内尚未进入 arXiv 的正式论文或技术报告：Physical Intelligence / OpenPI、NVIDIA Robotics、Tesla Optimus、自变量机器人、智元机器人、LingBot、宇树科技、逐际动力、星动纪元、众擎机器人、Genesis AI、Sharpa。
+- 主论文源仍为 arXiv；另外必须逐一检查 `paper-daily/config.yaml` 中 `sources.official_organization_channels.organizations` 的全部机构，查看其官方研究页、项目页、官方 GitHub 和官方 Hugging Face，补充同一日期窗口内尚未进入 arXiv 的正式论文或技术报告。不得使用旧的硬编码数量或名单替代配置文件。
 - 搜索引擎、媒体和社交转发只用于发现线索，不能作为论文来源。非 arXiv 候选必须能在公司官方渠道定位到完整论文或技术报告、作者/机构、发布日期、方法和实验；单纯产品宣传或视频不进入论文候选池。
 - 若官方论文随后已有 arXiv 条目，以 arXiv 为主记录，并保留官方项目页、GitHub 与模型链接；按标题、作者和项目页去重。官方补充候选必须在 300 篇上限前合并并参加同一套语义评分，机构只作为正向先验，不得自动入选。
 

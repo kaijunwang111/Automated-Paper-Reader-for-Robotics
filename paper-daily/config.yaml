@@ -153,6 +153,18 @@ research_profile:
     - EngineAI
     - Genesis AI
     - Sharpa
+    - Figure AI
+    - 1X Technologies
+    - Skild AI
+    - Generalist AI
+    - Boston Dynamics
+    - Galbot
+    - Spirit AI
+    - Astribot
+    - Galaxea AI
+    - PsiBot
+    - WUJI Technology
+    - Tencent Robotics X
   arxiv_categories:
     - cs.RO
     - cs.CV
@@ -205,6 +217,18 @@ sources:
       - EngineAI
       - Genesis AI
       - Sharpa
+      - Figure AI
+      - 1X Technologies
+      - Skild AI
+      - Generalist AI
+      - Boston Dynamics
+      - Galbot
+      - Spirit AI
+      - Astribot
+      - Galaxea AI
+      - PsiBot
+      - WUJI Technology
+      - Tencent Robotics X
     accepted_channels:
       - official research or publication page
       - official project page with a direct paper PDF

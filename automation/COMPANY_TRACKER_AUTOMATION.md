@@ -16,6 +16,18 @@
 - 众擎机器人
 - Genesis AI
 - Sharpa
+- Figure AI
+- 1X Technologies
+- Skild AI
+- Generalist AI
+- Boston Dynamics
+- 银河通用 Galbot
+- 千寻智能 Spirit AI
+- 星尘智能 Astribot
+- 星海图 Galaxea AI
+- 灵初智能 PsiBot
+- 舞肌科技 WUJI
+- 腾讯 Robotics X（企业研究实验室）
 
 ## 来源规则
 
@@ -24,6 +36,7 @@
 3. 对每家公司比较 `website/lib/site-data.ts` 中现有日期，只在发现更新且与模型、数据、硬件、开源、制造或真实部署直接相关时替换卡片。
 4. 没有更可靠的新消息时保留原卡片，不为“看起来有更新”而采用活动宣传、转载或未经核验的消息。
 5. 公司披露的产能、成功率、泛化、human-level 或量产计划必须明确写成公司口径，不得当作独立事实。
+6. Tencent Robotics X 按企业研究实验室跟踪；舞肌科技按灵巧手与数据采集部件公司跟踪，不将二者的信号误写成整机出货。
 
 ## 更新流程
 
@@ -44,4 +57,3 @@
 ## 完成回报
 
 报告成功检查的公司数、实际更新的公司、保留旧内容的公司、失败来源、网站发布结果和公开网址。
-
