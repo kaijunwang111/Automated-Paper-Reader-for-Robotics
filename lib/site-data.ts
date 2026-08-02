@@ -1,4 +1,6 @@
 import { paperEditorialSupplements } from "./paper-editorial-supplements";
+import { paperDaily20260629 } from "./paper-daily-2026-06-29";
+import { paperDaily20260703 } from "./paper-daily-2026-07-03";
 import { paperDaily20260706 } from "./paper-daily-2026-07-06";
 import { paperDaily20260710 } from "./paper-daily-2026-07-10";
 import { paperDaily20260713 } from "./paper-daily-2026-07-13";
@@ -1446,6 +1448,30 @@ export const reports: Report[] = [
     overview:
       "本期重点是让动作模型获得更可靠的三维、记忆和接触信息，并通过真机适配、低成本本体反馈和标准化基准检查这些表示是否真正改善执行。",
     papers: paperDaily20260706.map(enrichPaper),
+  },
+  {
+    slug: "2026-07-03",
+    date: "2026.07.03",
+    weekday: "周五",
+    range: "2026.06.29 - 2026.07.02",
+    title: "触觉预训练、真实机器人 RL 与可迁移具身数据",
+    summary:
+      "本期收录十五篇经原文与实验核验的论文，覆盖大规模触觉预训练、世界模型评测与真机 RL、VLA 强化学习后训练、humanoid 人类数据、长期记忆、具身 CoT 和轻量世界变化先验。",
+    overview:
+      "这些工作分别研究如何用人类触觉与 ego-exo 视频扩展训练数据，如何让 world model 服务策略评估和真实在线学习，以及如何通过语义技能、长期历史、力觉持续适配和接触仿真改善闭环执行。",
+    papers: paperDaily20260703.map(enrichPaper),
+  },
+  {
+    slug: "2026-06-29",
+    date: "2026.06.29",
+    weekday: "周一",
+    range: "2026.06.26 - 2026.06.28",
+    title: "触觉与事件感知、跨本体动力学和高效 VLA 部署",
+    summary:
+      "本期收录十二篇经原文与实验核验的论文，覆盖触觉视觉提示、事件相机 VLA、混合质量数据筛选、跨本体世界模型、人类动作迁移、行为编辑、物理视频对齐与推理加速。",
+    overview:
+      "这些论文关注接触和弱光条件下的真实感知、从人类视频或多本体轨迹提取可迁移监督，以及在不牺牲闭环结果的前提下编辑、压缩或加速现有策略。",
+    papers: paperDaily20260629.map(enrichPaper),
   },
 ];
 
