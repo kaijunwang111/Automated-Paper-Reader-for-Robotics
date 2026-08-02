@@ -4,7 +4,8 @@
 
 CAPR 是一个用 Codex 自动化完成每日论文候选检索、语义筛选和学术日报生成的轻量级工作流。
 
-🌐 [查看具身智能观察站](https://embodied-observatory.kaijunwang111.chatgpt.site)
+🌐 [ChatGPT Sites](https://embodied-observatory.kaijunwang111.chatgpt.site) ·
+[GitHub Pages](https://kaijunwang111.github.io/Automated-Paper-Reader-for-Robotics/)
 
 它把任务拆成两个层次：
 
@@ -138,7 +139,7 @@ cp ../Paper_Reader.template.en.txt ../Paper_Reader.txt
 - 设置运行环境中的 Python 可执行文件。
 - **填写你的研究背景、关注方向和评分偏好。**
 
-3. 当前正式任务为每周一、周五 09:00 生成论文日报；公司动态在每周一 09:00 更新。
+3. 当前正式任务为每周一、周五 09:30 生成论文日报；公司动态在每周一 09:30 更新。
    两个任务的完整运行与网站发布说明位于 `automation/`。
 
 `Paper_Reader.txt` 默认被 `.gitignore` 忽略，因为它通常包含机器相关路径和私有筛选偏好。公开仓库只保留中英文模板文件。

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Paper } from "@/lib/site-data";
 import { getPaperClassificationLabels } from "@/lib/site-data";
+import { withSiteBasePath } from "@/lib/site-url";
 import { ArrowIcon } from "./site-shell";
 
 export function PaperDetail({
@@ -73,9 +74,11 @@ export function PaperDetail({
         }`}
       >
         {paper.figures.map((figure) => (
-          <figure className="method-figure" key={figure.src}>
-            <div className="figure-frame">
-              <img src={figure.src} alt={figure.alt} loading="lazy" />
+            <figure className="method-figure" key={figure.src}>
+              <div className="figure-frame">
+                {/* The original paper figures are published as static report assets. */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={withSiteBasePath(figure.src)} alt={figure.alt} loading="lazy" />
             </div>
             <figcaption>
               <span>{figure.caption}</span>

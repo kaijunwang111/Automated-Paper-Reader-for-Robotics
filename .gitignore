@@ -32,3 +32,5 @@ paper-daily/reports/
 *.tmp
 *.bak
 *.swp
+tmp/
+website/.sites/

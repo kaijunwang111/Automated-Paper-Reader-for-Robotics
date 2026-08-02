@@ -7,13 +7,7 @@ export const metadata: Metadata = {
   description: "按研究方向、标题、arXiv ID 与机构检索具身智能论文概览。",
 };
 
-export default async function PapersPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ category?: string }>;
-}) {
-  const { category = "" } = await searchParams;
-
+export default function PapersPage() {
   return (
     <div className="page-shell">
       <section className="page-hero shell paper-database-hero">
@@ -26,7 +20,7 @@ export default async function PapersPage({
         </p>
       </section>
       <section className="shell database-section">
-        <PaperDatabase papers={paperRecords} initialCategory={category} />
+        <PaperDatabase papers={paperRecords} />
       </section>
     </div>
   );
