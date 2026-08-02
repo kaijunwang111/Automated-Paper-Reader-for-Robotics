@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { PaperRecord, TaxonomyDimension } from "@/lib/site-data";
 import {
   getPaperClassificationLabels,
@@ -40,15 +40,20 @@ function initialFilters(category: string) {
 
 export function PaperDatabase({
   papers,
-  initialCategory = "",
 }: {
   papers: PaperRecord[];
-  initialCategory?: string;
 }) {
   const [query, setQuery] = useState("");
-  const [filters, setFilters] = useState<Partial<Record<TaxonomyDimension, string>>>(
-    initialFilters(initialCategory),
-  );
+  const [filters, setFilters] = useState<Partial<Record<TaxonomyDimension, string>>>({});
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      const category = new URLSearchParams(window.location.search).get("category") ?? "";
+      setFilters(initialFilters(category));
+    }, 0);
+
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   const categoryCounts = useMemo(
     () =>

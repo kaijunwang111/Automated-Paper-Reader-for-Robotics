@@ -179,15 +179,17 @@ export type CompanyUpdate = {
   source: string;
 };
 
-export function getPaperClassificationLabels(paper: Paper) {
-  return [
+export function getPaperClassificationLabels(paper: Paper): string[] {
+  const values: Array<string | undefined> = [
     paper.classification.research,
     paper.classification.training,
     ...(paper.classification.modalities ?? []),
     paper.classification.data,
     ...(paper.classification.platforms ?? []),
     paper.classification.deployment,
-  ].filter((value): value is string => Boolean(value));
+  ];
+
+  return values.filter((value): value is string => typeof value === "string");
 }
 
 const paperDaily20260727Archive: Paper[] = [
@@ -1288,7 +1290,7 @@ export const reports: Report[] = [
     overview:
       "本期论文分别研究 fast-weight 历史压缩、接触阶段的力觉旁路与定向采样、大规模 humanoid 运动预训练、动作导向人类视频、样本高效真机评测、触觉监督位置、隐式力线索、流式 VLA 与 action-only 后门。",
     papers: paperDaily20260720.map(enrichPaper),
-    archivedTestPapers: [
+    archivedTestPapers: ([
       {
         rank: 1,
         title: "RoboTTT: Context Scaling for Robot Policies",
@@ -1399,7 +1401,7 @@ export const reports: Report[] = [
           },
         ],
       },
-    ].map(enrichPaper),
+    ] satisfies Paper[]).map(enrichPaper),
   },
   {
     slug: "2026-07-17",

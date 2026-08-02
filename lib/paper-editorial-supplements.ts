@@ -1,6 +1,6 @@
 import type { Paper } from "./site-data";
 
-export const paperEditorialSupplements = {
+export const paperEditorialSupplements: Record<string, Partial<Paper>> = {
   "2607.20683": {
     classification: {
       research: "表征学习",
@@ -968,4 +968,4 @@ export const paperEditorialSupplements = {
       ],
     },
   },
-} satisfies Record<string, Partial<Paper>>;
+};

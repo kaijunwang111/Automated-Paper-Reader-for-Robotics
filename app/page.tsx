@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CompanyCard, ReportCard } from "@/components/content-cards";
+import { CompanyShowcase } from "@/components/company-showcase";
+import { ReportCard } from "@/components/content-cards";
 import { ArrowIcon } from "@/components/site-shell";
 import {
   companyUpdates,
@@ -9,22 +10,8 @@ import {
   reports,
 } from "@/lib/site-data";
 
-export const dynamic = "force-dynamic";
-
-function sampleCompanyUpdates(count: number) {
-  const pool = [...companyUpdates];
-
-  for (let index = pool.length - 1; index > 0; index -= 1) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
-    [pool[index], pool[randomIndex]] = [pool[randomIndex], pool[index]];
-  }
-
-  return pool.slice(0, Math.min(count, pool.length));
-}
-
 export default function Home() {
   const latest = reports[0];
-  const featuredCompanyUpdates = sampleCompanyUpdates(5);
   const latestFigureCount = latest.papers.reduce(
     (total, paper) => total + paper.figures.length,
     0,
@@ -147,11 +134,7 @@ export default function Home() {
           <p className="section-intro">
             只跟踪官方博客、产品发布与开源仓库，区分模型、数据、硬件和规模化部署信号。
           </p>
-          <div className="company-grid">
-            {featuredCompanyUpdates.map((update) => (
-              <CompanyCard key={update.company} update={update} compact />
-            ))}
-          </div>
+          <CompanyShowcase updates={companyUpdates} count={5} />
           <div className="section-cta">
             <Link className="button button-dark" href="/companies">
               查看更多公司动态 <ArrowIcon />
