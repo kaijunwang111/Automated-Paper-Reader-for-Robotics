@@ -1,0 +1,36 @@
+Automated Paper Reader for Robotics
+
+Upstream attribution
+--------------------
+
+This project is based on Codex Automated Paper Reader (CAPR), originally
+developed by Jia Yao (@Jurio0304):
+
+https://github.com/Jurio0304/Codex_Automated_Paper_Reader
+
+The upstream software was released under the MIT License. Its copyright and
+permission notice are preserved in the repository's LICENSE file.
+
+Kaijun Wang maintains the modifications and additions in this repository,
+including the embodied-intelligence editorial workflow, automation quality
+gates, public paper database, company tracker, figure quality-control pipeline,
+website, and dual-hosting support.
+
+Third-party materials
+---------------------
+
+The MIT License applies to project code and original project documentation. It
+does not grant rights to third-party material stored in or linked from this
+repository.
+
+In particular, figures and screenshots under website/public/report-assets/
+are excerpts from the academic papers or official project pages identified by
+their surrounding captions, source URLs, and figure manifests. Copyright in
+those materials remains with the respective authors, publishers, or other
+rights holders. Review the source work and its license before redistributing or
+reusing those assets outside the context of this project.
+
+Bibliographic metadata is provided for identification. Organization and product
+names, logos, and trademarks may be protected by applicable law; their inclusion
+is for identification and research commentary and does not imply endorsement or
+affiliation.
