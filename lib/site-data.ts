@@ -1392,7 +1392,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.07.27";
+export const companyTrackerLastChecked = "2026.08.02";
 
 export const companyUpdates: CompanyUpdate[] = [
   {
@@ -1538,6 +1538,150 @@ export const companyUpdates: CompanyUpdate[] = [
       "Sharpa 宣布将带触觉的 Wave 五指灵巧手集成到 Isaac GR00T 参考人形平台，重点信号是灵巧手、触觉感知与机器人模型开发流程的标准化衔接。",
     url: "https://www.sharpa.com/blogs/news/sharpa-brings-dexterous-tactile-manipulation-to-the-nvidia",
     source: "Sharpa News",
+  },
+  {
+    company: "Figure AI",
+    shortName: "FI",
+    color: "#1f2937",
+    date: "2026.06.30",
+    category: "Industrial Deployment",
+    title: "Figure 03 搭载 Helix 02 进入 BMW 物流工序",
+    summary:
+      "Figure 展示了 Figure 03 在 BMW Spartanburg 工厂执行零件排序与搬运：同一像素到动作策略协调手、臂、躯干和步态，在抓放薄壁零件与拖动重型料车之间切换；当前公开材料属于工厂演示，尚未披露规模化运行数据。",
+    url: "https://www.figure.ai/news/f-03-at-bmw",
+    source: "Figure News",
+  },
+  {
+    company: "1X Technologies",
+    shortName: "1X",
+    color: "#111827",
+    date: "2026.07.09",
+    category: "Dexterous Hand",
+    title: "发布 NEO 25 自由度力控触觉手",
+    summary:
+      "1X 公布 NEO 量产版本使用的腱驱灵巧手：手指与掌部 22 个主动自由度、腕部 3 个自由度，采用低减速比反驱结构，并集成法向力、接触位置与剪切触觉；耐久、精度和产能数字均为公司测试口径。",
+    url: "https://www.1x.tech/discover/neos-hands",
+    source: "1X Discover",
+  },
+  {
+    company: "Skild AI",
+    shortName: "SK",
+    color: "#5850a8",
+    date: "2026.04.15",
+    category: "Warehouse Deployment",
+    title: "收购 Zebra 机器人业务，推进 Skild Brain 仓储部署",
+    summary:
+      "Skild AI 收购原 Fetch Robotics 业务，计划把跨本体 Skild Brain 接入既有仓储机器人与 Symmetry 调度平台；这为模型带来真实部署与数据闭环入口，但跨本体迁移效果仍需后续运行指标验证。",
+    url: "https://www.skild.ai/blogs/skild-zebra",
+    source: "Skild AI Blog",
+  },
+  {
+    company: "Generalist AI",
+    shortName: "GN",
+    color: "#d4532b",
+    date: "2026.07.23",
+    category: "Cross-Embodiment",
+    title: "GEN-1 扩展到多种灵巧手与专用末端",
+    summary:
+      "Generalist 报告 GEN-1 已在超过 50 万小时真实交互数据和约 9,000 种末端变体上训练，并展示中途更换末端后的策略适配；公开内容给出了权重变化分析，但未提供统一成功率表或独立复核。",
+    url: "https://generalistai.com/blog/towards-machines-with-a-thousand-hands",
+    source: "Generalist AI Blog",
+  },
+  {
+    company: "Boston Dynamics",
+    shortName: "BD",
+    color: "#f2a900",
+    date: "2026.01.05",
+    category: "Humanoid Production",
+    title: "发布产品版 Atlas，并启动 2026 年客户部署",
+    summary:
+      "Boston Dynamics 公布产品版全电 Atlas：56 自由度、支持自主换电，并可通过自主、遥操作或平板三种方式控制；公司称 2026 年设备将部署至 Hyundai 与 Google DeepMind，后续重点关注基础模型接入后的真实任务数据。",
+    url: "https://bostondynamics.com/blog/boston-dynamics-unveils-new-atlas-robot-to-revolutionize-industry/",
+    source: "Boston Dynamics Blog",
+  },
+  {
+    company: "银河通用 Galbot",
+    shortName: "GB",
+    color: "#3154a5",
+    date: "2026.01.18",
+    category: "Heavy-Duty Humanoid",
+    title: "推出双臂重载机器人 Galbot S1",
+    summary:
+      "银河通用将 S1 定位为工业重载具身机器人，双臂面向搬运和持续作业；公开口径强调零遥操、自主运行与 50 kg 双臂负载，仍需用具体产线任务、连续运行日志和失败恢复数据判断实际能力。",
+    url: "https://www.galbot.com/s1",
+    source: "Galbot Official",
+  },
+  {
+    company: "千寻智能 Spirit AI",
+    shortName: "SP",
+    color: "#1b8f76",
+    date: "2026.02.25",
+    category: "VLA & Deployment",
+    title: "Spirit v1.5 开源并进入电池产线验证",
+    summary:
+      "千寻智能披露 Spirit v1.5 采用多样化人类视频与可穿戴交互数据训练，并把 VLA 用于电池线束插接；公司报告已积累 20 万小时交互数据及 99% 以上产线成功率，这些指标目前主要来自官方材料。",
+    url: "https://www.spirit-ai.com/en/news/30",
+    source: "Spirit AI News",
+  },
+  {
+    company: "星尘智能 Astribot",
+    shortName: "AS",
+    color: "#7c3aed",
+    date: "2025.12.09",
+    category: "Embodied Reasoning",
+    title: "发布具身推理 VLA 模型 Lumo-1",
+    summary:
+      "Lumo-1 通过视觉语言继续预训练、跨本体联合训练、S1 真机动作训练与强化学习，将文本/视觉推理和连续控制对齐；官方技术报告给出空间动作 token、泛化抓放与长时操作结果，代码和权重开放程度仍需持续跟踪。",
+    url: "https://www.astribot.com/research/Lumo1/",
+    source: "Astribot Research",
+  },
+  {
+    company: "星海图 Galaxea AI",
+    shortName: "GX",
+    color: "#2463eb",
+    date: "2026.01.05",
+    category: "VLA Platform",
+    title: "发布 G0 Plus 与开箱即用 VLA 方案",
+    summary:
+      "星海图把 G0 Plus 双系统 VLA、R1 Lite 本体、遥操作采集与部署环境组合为一体化方案，并展示开放环境零样本抓取；官方平台同时提供 GForge 后训练工具，实际泛化边界仍要结合公开评测与复现实验判断。",
+    url: "https://galaxea-ai.com/cn/platform",
+    source: "Galaxea AI Platform",
+  },
+  {
+    company: "灵初智能 PsiBot",
+    shortName: "PS",
+    color: "#0f766e",
+    date: "2026.04.22",
+    category: "World Action Model",
+    title: "发布 Psi-R2、Psi-W0 与千小时人类操作数据",
+    summary:
+      "灵初智能以 10 万小时级人类手部数据预训练 Psi-R2，并用动作条件世界模型 Psi-W0 评估、生成和筛选策略数据；首批开源 1,000 小时视觉、语言、关节与触觉数据，官方称少于 100 条真机轨迹即可适配长程精细任务。",
+    url: "https://www.psibot.ai/%E7%81%B5%E5%88%9D%E6%99%BA%E8%83%BD%E6%96%B0%E4%B8%80%E4%BB%A3%E5%85%B7%E8%BA%AB%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B8%83%EF%BC%8C%E5%85%A8%E7%90%83%E6%9C%80%E5%A4%A7%E4%BA%BA%E7%B1%BB%E6%89%8B%E9%83%A8/",
+    source: "PsiBot News",
+  },
+  {
+    company: "舞肌科技 WUJI",
+    shortName: "WJ",
+    color: "#d33b32",
+    date: "2026.07.23",
+    category: "Dexterous Hand",
+    title: "Wuji Hand 2 Beta 1 补齐仿真与机械集成资源",
+    summary:
+      "舞肌更新第二代 20 主动自由度灵巧手资源，提供重新标定的 URDF、MuJoCo MJCF、Isaac Sim USD、STL 与整机 STEP，并固定解剖学关节命名；当前仍是 Beta 1，驱动增益与物理参数后续还会更新。",
+    url: "https://docs.wuji.tech/docs/zh/wuji-hand/latest/release-notes/",
+    source: "WUJI Docs",
+  },
+  {
+    company: "腾讯 Robotics X",
+    shortName: "TX",
+    color: "#1466c3",
+    date: "2026.07.19",
+    category: "Open Platform",
+    title: "Tairos 增加 Hy-Embodied 模型与智能体能力",
+    summary:
+      "腾讯 Robotics X 的 Tairos 平台整合 Hy-Embodied VLM、VLA 与 RxBrain、具身智能体、RoboFusion 通信和 Isaac Sim 验证环境，面向不同本体提供模型与开发工具；它属于企业研究平台信号，不按整机出货公司解读。",
+    url: "https://tairos.tencent.com/",
+    source: "Tencent Robotics X / Tairos",
   },
 ];
 

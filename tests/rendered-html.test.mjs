@@ -159,11 +159,11 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(memoryPaperHtml, /单个 episode 内长期保留/);
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周一/);
-  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.07\.27/);
+  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.08\.02/);
   assert.match(companiesHtml, /开源 GPU 加速医疗机器人物理仿真框架/);
   assert.match(companiesHtml, /Fremont 开始 Optimus 工厂施工与产线安装/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
-  assert.match(companiesHtml, /TRACKING (?:<!-- -->)?12(?:<!-- -->)? COMPANIES/);
+  assert.match(companiesHtml, /TRACKING (?:<!-- -->)?24(?:<!-- -->)? COMPANIES/);
   assert.match(companiesHtml, /Tesla Optimus/);
   assert.match(companiesHtml, /宇树科技/);
   assert.match(companiesHtml, /逐际动力/);
@@ -171,6 +171,12 @@ test("renders report, archive, database, paper, company, and about routes", asyn
   assert.match(companiesHtml, /众擎机器人/);
   assert.match(companiesHtml, /Genesis AI/);
   assert.match(companiesHtml, /Sharpa/);
+  assert.match(companiesHtml, /Figure AI/);
+  assert.match(companiesHtml, /1X Technologies/);
+  assert.match(companiesHtml, /Boston Dynamics/);
+  assert.match(companiesHtml, /银河通用 Galbot/);
+  assert.match(companiesHtml, /星海图 Galaxea AI/);
+  assert.match(companiesHtml, /腾讯 Robotics X/);
   assert.doesNotMatch(companiesHtml, /官方信号优先|SOURCE POLICY/);
   assert.match(aboutHtml, /范围、分类与公开边界/);
   assert.match(aboutHtml, /CoT/);
