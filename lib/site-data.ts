@@ -1,4 +1,6 @@
 import { paperEditorialSupplements } from "./paper-editorial-supplements";
+import { paperDaily20260706 } from "./paper-daily-2026-07-06";
+import { paperDaily20260710 } from "./paper-daily-2026-07-10";
 import { paperDaily20260713 } from "./paper-daily-2026-07-13";
 import { paperDaily20260717 } from "./paper-daily-2026-07-17";
 import { paperDaily20260720 } from "./paper-daily-2026-07-20";
@@ -1420,6 +1422,30 @@ export const reports: Report[] = [
     overview:
       "本期论文分别研究可微流策略、动作条件世界模型去偏、任务条件视觉掩码、多视角动作分类、离线到在线价值学习、全臂接触控制、生成视频几何验证与不确定性残差流。",
     papers: paperDaily20260713.map(enrichPaper),
+  },
+  {
+    slug: "2026-07-10",
+    date: "2026.07.10",
+    weekday: "周五",
+    range: "2026.07.06 - 2026.07.09",
+    title: "世界动作模型、触觉闭环与生成式策略适配",
+    summary:
+      "本期收录十三篇经原文与实验核验的论文，覆盖双系统 WAM、预测—反应触觉、少样本人机纠正、人类视频迁移、数字遥操作、三维 VLA、原生记忆与推理加速。",
+    overview:
+      "这些工作分别从大规模世界动作预训练、真实接触反馈、潜空间纠正、数据筛选和部署系统优化切入；每篇均保留任务协议、关键对照、复现边界和原论文方法图。",
+    papers: paperDaily20260710.map(enrichPaper),
+  },
+  {
+    slug: "2026-07-06",
+    date: "2026.07.06",
+    weekday: "周一",
+    range: "2026.07.03 - 2026.07.05",
+    title: "三维世界动作预训练、在线纠偏与接触表征",
+    summary:
+      "本期收录十二篇经原文与实验核验的论文，覆盖 3D-centric WAM、精密操作在线 RL、触觉残差、层次记忆、小型 VLA、灵巧世界模型与统一仿真—真机评测。",
+    overview:
+      "本期重点是让动作模型获得更可靠的三维、记忆和接触信息，并通过真机适配、低成本本体反馈和标准化基准检查这些表示是否真正改善执行。",
+    papers: paperDaily20260706.map(enrichPaper),
   },
 ];
 
