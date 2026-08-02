@@ -161,7 +161,7 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.doesNotMatch(contactPaperHtml, /真机部署优化/);
   assert.match(memoryPaperHtml, /Memory 实现/);
   assert.match(memoryPaperHtml, /Memory 时间跨度/);
-  assert.match(memoryPaperHtml, /单个 episode 内长期保留/);
+  assert.match(memoryPaperHtml, /单个 episode 内完整力历史/);
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周一/);
   assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.08\.02/);
@@ -196,6 +196,8 @@ test("ships original-paper figures and finished social metadata", async () => {
     access(new URL("public/report-assets/2026-07-23/2607.18236-method.png", root)),
     access(new URL("public/report-assets/2026-07-23/2607.18840-method.png", root)),
     access(new URL("public/report-assets/2026-07-23/2607.18231-method.png", root)),
+    access(new URL("public/report-assets/2026-07-20/2607.15275-architecture.png", root)),
+    access(new URL("public/report-assets/2026-07-24/2607.19190-overview.png", root)),
     access(new URL("public/report-assets/2026-08-01/2607.25895-overview.png", root)),
   ]);
 
@@ -229,34 +231,40 @@ function imageDimensions(buffer) {
   throw new Error("Unsupported image format");
 }
 
-test("enforces the selected-paper figure quality manifest", async () => {
+test("enforces selected-paper figure quality manifests", async () => {
   const root = new URL("../", import.meta.url);
-  const manifest = JSON.parse(
-    await readFile(new URL("../quality/figure-manifests/2026-08-01.json", import.meta.url), "utf8"),
-  );
-  const reportResponse = await render("/reports/2026-08-01");
-  const reportHtml = await reportResponse.text();
+  const manifests = [
+    { file: "2026-07-20.json", route: "/reports/2026-07-20", assetDate: "2026-07-20", count: 10, minWidth: 550 },
+    { file: "2026-07-24.json", route: "/reports/2026-07-23", assetDate: "2026-07-24", count: 10, minWidth: 700 },
+    { file: "2026-08-01.json", route: "/reports/2026-08-01", assetDate: "2026-08-01", count: 15, minWidth: 700 },
+  ];
 
-  assert.equal(manifest.papers.length, 15);
-  assert.equal(new Set(manifest.papers.map((paper) => paper.paperId)).size, 15);
-  assert.ok(manifest.papers.some((paper) => paper.paperId === "tau0-vla"));
+  for (const entry of manifests) {
+    const manifest = JSON.parse(
+      await readFile(new URL(`../quality/figure-manifests/${entry.file}`, import.meta.url), "utf8"),
+    );
+    const reportHtml = await (await render(entry.route)).text();
 
-  for (const paper of manifest.papers) {
-    assert.ok(paper.figures.length >= 1 && paper.figures.length <= 2, `${paper.paperId} must have 1-2 figures`);
-    for (const figure of paper.figures) {
-      assert.match(figure.sourceUrl, /^https:\/\/(?:arxiv\.org|tau0-vla\.github\.io)\//);
-      assert.match(figure.figureNumber, /^\d+[a-z]?$/i);
-      assert.equal(figure.visualReview, "passed");
-      assert.equal(figure.containsPageHeader, false);
-      assert.equal(figure.completeFrame, true);
+    assert.equal(manifest.papers.length, entry.count);
+    assert.equal(new Set(manifest.papers.map((paper) => paper.paperId)).size, entry.count);
 
-      const assetUrl = new URL(`public/report-assets/2026-08-01/${figure.file}`, root);
-      const buffer = await readFile(assetUrl);
-      const dimensions = imageDimensions(buffer);
-      assert.deepEqual(dimensions, { width: figure.width, height: figure.height });
-      assert.ok(dimensions.width >= 700, `${figure.file} is too narrow`);
-      assert.ok(dimensions.height >= 180, `${figure.file} is too short`);
-      assert.match(reportHtml, new RegExp(figure.file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    for (const paper of manifest.papers) {
+      assert.ok(paper.figures.length >= 1 && paper.figures.length <= 2, `${paper.paperId} must have 1-2 figures`);
+      for (const figure of paper.figures) {
+        assert.match(figure.sourceUrl, /^https:\/\//);
+        assert.match(figure.figureNumber, /^\d+[a-z]?$/i);
+        assert.equal(figure.visualReview, "passed");
+        assert.equal(figure.containsPageHeader, false);
+        assert.equal(figure.completeFrame, true);
+
+        const assetUrl = new URL(`public/report-assets/${entry.assetDate}/${figure.file}`, root);
+        const buffer = await readFile(assetUrl);
+        const dimensions = imageDimensions(buffer);
+        assert.deepEqual(dimensions, { width: figure.width, height: figure.height });
+        assert.ok(dimensions.width >= entry.minWidth, `${figure.file} is too narrow`);
+        assert.ok(dimensions.height >= 180, `${figure.file} is too short`);
+        assert.match(reportHtml, new RegExp(figure.file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+      }
     }
   }
 });

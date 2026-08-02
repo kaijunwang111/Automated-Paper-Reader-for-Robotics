@@ -9,6 +9,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
+import fetch_arxiv as fetch_arxiv_module
 from fetch_arxiv import fetch_arxiv_html_recent
 from daily_papers import compare_with_previous_candidates, run_pipeline
 from utils import NetworkPreflightError, network_preflight_urls, write_json_atomic
@@ -389,6 +390,35 @@ def test_arxiv_html_fallback_does_not_reuse_old_batch(monkeypatch):
 
     assert warnings == []
     assert papers == []
+
+
+def test_historical_arxiv_fetch_uses_submitted_date_api_instead_of_recent_html(monkeypatch):
+    captured = {}
+
+    def fake_fetch_arxiv_query(query, max_results, target_date, lookback_days, **kwargs):
+        captured.update(query=query, max_results=max_results, target_date=target_date, lookback_days=lookback_days)
+        return [paper_fixture("2001.00001", "Historical Embodied Policy")]
+
+    monkeypatch.setattr(fetch_arxiv_module, "fetch_arxiv_query", fake_fetch_arxiv_query)
+    monkeypatch.setattr(
+        fetch_arxiv_module,
+        "fetch_arxiv_html_recent",
+        lambda *args, **kwargs: (_ for _ in ()).throw(AssertionError("recent HTML must not serve old backfills")),
+    )
+
+    papers, warnings = fetch_arxiv_module.fetch_arxiv(
+        {"max_results": 300, "historical_api_after_days": 7},
+        {"arxiv_categories": ["cs.RO"], "positive_keywords": ["robot manipulation"]},
+        date(2020, 1, 3),
+        3,
+        logging.getLogger("historical_backfill"),
+    )
+
+    assert warnings == []
+    assert [paper["id"] for paper in papers] == ["2001.00001"]
+    assert captured["max_results"] == 300
+    assert captured["target_date"] == date(2020, 1, 3)
+    assert "submittedDate" in captured["query"]
 
 
 def paper_fixture(paper_id, title):

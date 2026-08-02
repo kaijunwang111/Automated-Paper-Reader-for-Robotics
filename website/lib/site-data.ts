@@ -1,4 +1,6 @@
 import { paperEditorialSupplements } from "./paper-editorial-supplements";
+import { paperDaily20260720 } from "./paper-daily-2026-07-20";
+import { paperDaily20260724 } from "./paper-daily-2026-07-24";
 import { paperDaily20260801 } from "./paper-daily-2026-08-01";
 
 export const paperTaxonomy = {
@@ -151,6 +153,7 @@ export type Report = {
   summary: string;
   overview: string;
   papers: Paper[];
+  archivedTestPapers?: Paper[];
 };
 
 export type PaperRecord = Paper & {
@@ -1259,25 +1262,27 @@ export const reports: Report[] = [
     slug: "2026-07-23",
     date: "2026.07.24",
     weekday: "周五",
-    range: "2026.07.21 - 2026.07.22",
-    title: "记忆、力觉与稠密视觉：近期具身智能论文",
+    range: "2026.07.20 - 2026.07.23",
+    title: "稠密视觉、双层记忆与可验证具身执行",
     summary:
-      "本期收录五篇论文，分别讨论 dense patch policy、长短期事件记忆 WAM、力觉 episodic memory、具身基础模型和 humanoid 闭环执行。",
+      "本期正式收录十篇经原文与实验核验的论文，覆盖 dense patch policy、事件与力觉记忆、跨本体 VLA、异构策略编排、WAM 测试时验证、Real2Sim 与 Sim2Real。",
     overview:
-      "这些工作近期在探索稠密视觉表征、事件级记忆、力觉历史、跨本体动作空间，以及基于 3D object state 的执行验证。",
-    papers: latestPapers.map(enrichPaper),
+      "本期论文分别研究视觉表征保真、长短期事件记忆、接触历史、统一具身预训练、humanoid 对象状态闭环、policy handoff、世界模型候选验证、中间表征数据、交互式数字孪生与隐藏动力学翻译。",
+    papers: paperDaily20260724.map(enrichPaper),
+    archivedTestPapers: latestPapers.map(enrichPaper),
   },
   {
     slug: "2026-07-20",
     date: "2026.07.20",
     weekday: "周一",
     range: "2026.07.17 - 2026.07.19",
-    title: "长上下文、接触闭环与动作表征整形",
+    title: "长上下文、接触数据与实时 VLA 推理",
     summary:
-      "本期收录三篇论文，分别关注超长时序上下文、VLA 接触阶段的力反馈，以及触觉监督在动作表征中的注入位置。",
+      "本期正式收录十篇经原文与实验核验的论文，覆盖长上下文 VLA、力觉后训练、humanoid 行为基础模型、接触数据、Ego 数据、主动真机评测、触觉表征、实时推理与 WAM 安全。",
     overview:
-      "三篇工作都包含真机实验，方法分别使用 fast weights、reactive force injection 和 latent tactile prediction。",
-    papers: [
+      "本期论文分别研究 fast-weight 历史压缩、接触阶段的力觉旁路与定向采样、大规模 humanoid 运动预训练、动作导向人类视频、样本高效真机评测、触觉监督位置、隐式力线索、流式 VLA 与 action-only 后门。",
+    papers: paperDaily20260720.map(enrichPaper),
+    archivedTestPapers: [
       {
         rank: 1,
         title: "RoboTTT: Context Scaling for Robot Policies",

@@ -34,6 +34,41 @@ def fetch_arxiv(
     max_results = int(source_config.get("max_results", 100))
     logger.info("Fetching arXiv papers, max_results=%s", max_results)
 
+    # The HTML ``recent`` pages are the most reliable source for the live
+    # announcement batch, but they only retain a short rolling window.  A
+    # historical backfill must use arXiv's submitted-date API query instead;
+    # otherwise an old target date silently produces an empty batch once it
+    # has fallen off the recent page.
+    historical_after_days = int(source_config.get("historical_api_after_days", 7))
+    historical_cutoff = date.today() - timedelta(days=historical_after_days)
+    if target_date < historical_cutoff:
+        logger.info(
+            "Target %s is older than the recent-list window; using one broad historical API query",
+            target_date.isoformat(),
+        )
+        historical_query = build_arxiv_query(
+            research_profile.get("arxiv_categories", []),
+            [],
+            target_date,
+            lookback_days,
+        )
+        try:
+            papers = fetch_arxiv_query(
+                historical_query,
+                max_results,
+                target_date,
+                lookback_days,
+                retries=int(source_config.get("retries", 2)),
+                retry_after_seconds=int(source_config.get("retry_after_seconds", 60)),
+            )
+            papers = _dedupe_arxiv_results(papers)[:max_results]
+            logger.info("Fetched %s historical arXiv papers after date filtering", len(papers))
+            return papers, warnings
+        except Exception as exc:
+            warning = f"arXiv historical API query failed: {exc}"
+            warnings.append(warning)
+            logger.warning(warning)
+
     if source_config.get("html_recent_authoritative", True) and source_config.get("html_fallback_enabled", True):
         logger.info("Using arxiv.org HTML recent-list as the authoritative daily source")
         html_papers, html_warnings = fetch_arxiv_html_recent(
