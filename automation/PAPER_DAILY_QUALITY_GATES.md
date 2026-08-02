@@ -105,11 +105,12 @@
 1. 按计划发布日期倒序接入 `website/lib/site-data.ts`，补跑时插入正确历史位置，不使用实际补跑日期或“补跑”字样。
 2. 核对公开日报论文数、论文数据库条目、manifest paper id 与图片目录完全一致。
 3. 核对 arXiv、项目页、GitHub、模型和数据链接；无法确认的链接直接省略。
-4. 运行 `python -m pytest -q`、`npm test` 和 `git diff --check`。任何失败都必须先修复；不能跳过图片测试或只运行构建。
-5. 只提交本次任务相关文件，保留无关用户改动和临时目录；不得向 GitHub `origin` 自动推送。
-6. 读取 `website/.openai/hosting.json` 并复用现有 Sites 项目。推送经过验证的精确 `website` 源码树，使用同一提交生成部署包，保存新版本、部署并轮询到 `succeeded`。
-7. 发布后确认 Sites 最新版本号、公开主网址，以及当期日报路由与至少一条论文详情路由可访问。发布失败时明确说明线上仍是旧版本。
+4. 运行 `python -m pytest -q`、`npm run lint`、`npm test`、`npm run test:pages` 和 `git diff --check`。任何失败都必须先修复；不能跳过图片测试、静态导出测试或只运行构建。
+5. 只提交本次任务相关文件，保留无关用户改动；不得提交本地评分数据、日志、完整本地日报和临时目录。提交前后检查 `origin/main`；只允许安全整合并普通 push，禁止 force-push、reset 或覆盖另一任务的提交。
+6. 将最终提交推送到 `origin/main`，确认本次 `head_sha` 对应的 GitHub Pages workflow run 成功完成。旧 run、仅有 HTTP 200 或本地静态导出不能替代本次 Pages 部署确认。
+7. 读取 `website/.openai/hosting.json` 并复用现有 Sites 项目。从同一根提交对应的精确 `website` 源码树生成 Sites 源提交和部署包，保存新版本、部署并轮询到 `succeeded`。
+8. 发布后分别确认 GitHub Pages 和 ChatGPT Sites 的主页、当期日报、至少一条论文详情与代表性图片资源可访问。任一目标失败时明确说明各站点实际版本，不得声称已同步。
 
 ## 9. 完成回报
 
-最终结果必须分别说明：覆盖窗口、候选/全文复核/最终收录数量、官方非 arXiv 补充数量、本地评分与日报路径、图片数量和 QA 状态、测试结果、本地提交、Sites 版本与公开链接，以及任何失败或降级项。
+最终结果必须分别说明：覆盖窗口、候选/全文复核/最终收录数量、官方非 arXiv 补充数量、本地评分与日报路径、图片数量和 QA 状态、Python 与双目标网站测试、本地提交与 GitHub push、Pages workflow、Sites 版本、两个公开链接，以及任何失败或降级项。

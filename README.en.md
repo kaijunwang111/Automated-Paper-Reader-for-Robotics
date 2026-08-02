@@ -225,7 +225,7 @@ npm run lint
 | ChatGPT Sites | `vinext build` | Reuses the existing project in `website/.openai/hosting.json` |
 | GitHub Pages | Next.js static export | Deployed by `.github/workflows/pages.yml` after a push to `main` |
 
-GitHub Actions only builds and hosts the static website. It does not run paper retrieval and requires no OpenAI API key. The current local Codex automations publish ChatGPT Sites but do not automatically push to GitHub `origin`; GitHub Pages updates after relevant website changes reach `main`.
+GitHub Actions only builds and hosts the static website. It does not run paper retrieval and requires no OpenAI API key. After both build targets pass, the local Codex automations commit and push the relevant changes: GitHub Pages deploys the matching `main` commit, while ChatGPT Sites publishes the exact `website` source tree from that same commit. A run reports synchronization only after both public sites have been verified.
 
 ## Configuration and Privacy
 

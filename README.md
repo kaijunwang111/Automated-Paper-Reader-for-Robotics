@@ -225,7 +225,7 @@ npm run lint
 | ChatGPT Sites | `vinext build` | 复用 `website/.openai/hosting.json` 中的现有 Sites 项目 |
 | GitHub Pages | Next.js static export | 推送 `main` 后由 `.github/workflows/pages.yml` 部署 |
 
-GitHub Actions 只负责静态网站构建和 Pages 托管，不运行论文检索，也不需要 OpenAI API Key。当前本地 Codex 自动化会更新并发布 ChatGPT Sites，但不会自动向 GitHub `origin` 推送；GitHub Pages 会在相关网站变更提交到 `main` 后同步更新。
+GitHub Actions 只负责静态网站构建和 Pages 托管，不运行论文检索，也不需要 OpenAI API Key。当前本地 Codex 自动化会在内容通过双目标测试后提交并推送相关变更：GitHub Pages 由 `main` 上对应提交触发，ChatGPT Sites 使用同一提交下的精确 `website` 源码树发布；任务只有在两个公开站点均完成验证后才会报告同步成功。
 
 ## 配置与隐私
 
