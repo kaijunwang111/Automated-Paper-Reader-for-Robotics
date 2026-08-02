@@ -457,8 +457,7 @@ img {
 }
 
 .section-heading h2,
-.manifesto h2,
-.source-policy h2 {
+.manifesto h2 {
   margin: 0;
   font-size: clamp(31px, 4vw, 48px);
   font-weight: 620;
@@ -2087,30 +2086,6 @@ img {
   grid-row: 2;
 }
 
-.source-policy {
-  display: grid;
-  grid-template-columns: 0.7fr 1.3fr;
-  gap: 80px;
-  margin-bottom: 110px;
-  padding: 50px;
-  border-radius: 24px;
-  background: var(--ink);
-  color: white;
-}
-
-.source-policy-copy {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-}
-
-.source-policy-copy p {
-  margin: 0;
-  color: #b2bdcd;
-  font-size: 14px;
-  line-height: 1.85;
-}
-
 .about-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2217,10 +2192,6 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .source-policy {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
 }
 
 @media (max-width: 680px) {
@@ -2313,8 +2284,7 @@ img {
   .manifesto-grid,
   .report-archive-grid,
   .judgement-grid,
-  .about-grid,
-  .source-policy-copy {
+  .about-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2442,10 +2412,6 @@ img {
   .timeline-item .company-card {
     display: block;
     padding: 18px;
-  }
-
-  .source-policy {
-    padding: 30px;
   }
 
   .about-grid article {
