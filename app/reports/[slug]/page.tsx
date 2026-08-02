@@ -42,7 +42,7 @@ export default async function ReportDetailPage({
             ← 返回日报归档
           </Link>
           <div className="report-kicker">
-            <span>REPORT {report.slug.replaceAll("-", "/")}</span>
+            <span>REPORT {report.date.replaceAll(".", "/")}</span>
             <span>{report.weekday}</span>
           </div>
           <h1>{report.title}</h1>

@@ -17,7 +17,6 @@ export function SiteHeader() {
           <Link href="/reports">论文日报</Link>
           <Link href="/papers">论文数据库</Link>
           <Link href="/companies">公司动态</Link>
-          <Link href="/about">关于</Link>
         </nav>
         <a
           className="header-github"

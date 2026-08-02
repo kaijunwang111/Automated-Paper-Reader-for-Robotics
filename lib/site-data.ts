@@ -1233,8 +1233,8 @@ function enrichPaper(paper: Paper): Paper {
 export const reports: Report[] = [
   {
     slug: "2026-08-01",
-    date: "2026.08.01",
-    weekday: "周六补跑",
+    date: "2026.07.31",
+    weekday: "周五",
     range: "2026.07.27 - 2026.07.30",
     title: "τ0-VLA、世界模型推理与高保真机器人数据",
     summary:
@@ -1257,8 +1257,8 @@ export const reports: Report[] = [
   },
   {
     slug: "2026-07-23",
-    date: "2026.07.23",
-    weekday: "周四",
+    date: "2026.07.24",
+    weekday: "周五",
     range: "2026.07.21 - 2026.07.22",
     title: "记忆、力觉与稠密视觉：近期具身智能论文",
     summary:
