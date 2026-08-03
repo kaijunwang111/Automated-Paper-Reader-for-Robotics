@@ -37,8 +37,8 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /检索论文数据库/);
   assert.match(html, /查看更多公司动态/);
   assert.equal((html.match(/<article class="company-card company-card-compact">/g) ?? []).length, 5);
-  assert.match(html, /2026\.07\.31/);
-  assert.match(html, /周五/);
+  assert.match(html, /2026\.08\.03/);
+  assert.match(html, /周一/);
   assert.doesNotMatch(html, /周六补跑|补跑|href="\/about"/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
@@ -48,8 +48,8 @@ test("renders public report, database, paper, and company routes", async () => {
   const [archive, latestDetail, latestPaper, officialPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, removedAbout] =
     await Promise.all([
     render("/reports"),
-    render("/reports/2026-08-01"),
-    render("/papers/2607.25895"),
+    render("/reports/2026-08-03"),
+    render("/papers/2607.27549"),
     render("/papers/tau0-vla"),
     render("/reports/2026-07-27"),
     render("/papers"),
@@ -93,16 +93,16 @@ test("renders public report, database, paper, and company routes", async () => {
     ]);
 
   assert.match(archiveHtml, /论文日报/);
-  assert.match(archiveHtml, /2026\.07\.31/);
+  assert.match(archiveHtml, /2026\.08\.03/);
   assert.match(archiveHtml, /2026\.07\.24/);
   assert.doesNotMatch(archiveHtml, /周六补跑|补跑/);
-  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/07\/31/);
-  assert.match(latestDetailHtml, /HiFi-UMI/);
-  assert.match(latestDetailHtml, /τ0-VLA/);
-  assert.match(latestDetailHtml, /960 次真机 rollout/);
+  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/08\/03/);
+  assert.match(latestDetailHtml, /Cross-Embodiment Transfer/);
+  assert.match(latestDetailHtml, /RedFlow/);
+  assert.match(latestDetailHtml, /总体任务进度提升 28%/);
   assert.doesNotMatch(latestDetailHtml, /MoMo: Dial Motion Mode/);
   assert.doesNotMatch(latestDetailHtml, /综合分|候选论文|内部评分/);
-  assert.match(latestPaperHtml, /Simple AI/);
+  assert.match(latestPaperHtml, /Stanford University/);
   assert.match(latestPaperHtml, /跨本体迁移/);
   assert.match(officialPaperHtml, /OFFICIAL PAPER/);
   assert.match(officialPaperHtml, /40,115 小时/);
@@ -164,7 +164,7 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(memoryPaperHtml, /单个 episode 内完整力历史/);
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周一/);
-  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.08\.02/);
+  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.08\.03/);
   assert.match(companiesHtml, /开源 GPU 加速医疗机器人物理仿真框架/);
   assert.match(companiesHtml, /Fremont 开始 Optimus 工厂施工与产线安装/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
@@ -243,6 +243,7 @@ test("enforces selected-paper figure quality manifests", async () => {
     { file: "2026-07-20.json", route: "/reports/2026-07-20", assetDate: "2026-07-20", count: 10, minWidth: 550 },
     { file: "2026-07-24.json", route: "/reports/2026-07-23", assetDate: "2026-07-24", count: 10, minWidth: 700 },
     { file: "2026-08-01.json", route: "/reports/2026-08-01", assetDate: "2026-08-01", count: 15, minWidth: 700 },
+    { file: "2026-08-03.json", route: "/reports/2026-08-03", assetDate: "2026-08-03", count: 10, minWidth: 700 },
   ];
 
   for (const entry of manifests) {
