@@ -8,6 +8,7 @@ import { paperDaily20260717 } from "./paper-daily-2026-07-17";
 import { paperDaily20260720 } from "./paper-daily-2026-07-20";
 import { paperDaily20260724 } from "./paper-daily-2026-07-24";
 import { paperDaily20260801 } from "./paper-daily-2026-08-01";
+import { paperDaily20260803 } from "./paper-daily-2026-08-03";
 
 export const paperTaxonomy = {
   research: {
@@ -1243,6 +1244,18 @@ function enrichPaper(paper: Paper): Paper {
 
 export const reports: Report[] = [
   {
+    slug: "2026-08-03",
+    date: "2026.08.03",
+    weekday: "周一",
+    range: "2026.07.31 - 2026.08.02",
+    title: "跨本体表征、失败纠偏与接触感知",
+    summary:
+      "本期收录十篇经全文与实验核验的论文，覆盖跨本体行为表征、VLA 失败纠偏、多频接触策略、触觉 WAM、动态物体操作与人形全身安全。",
+    overview:
+      "本期论文分别研究跨本体行为对齐、flow policy 的动作级失败重定向、接触前后自适应频率、criticality 驱动的难例采集、力学触觉预测、零样本对象对应、移动目标增强、灵巧示范采集、弧形触觉硬件与人形躲避。",
+    papers: paperDaily20260803.map(enrichPaper),
+  },
+  {
     slug: "2026-08-01",
     date: "2026.07.31",
     weekday: "周五",
@@ -1477,7 +1490,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.08.02";
+export const companyTrackerLastChecked = "2026.08.03";
 
 export const companyUpdates: CompanyUpdate[] = [
   {

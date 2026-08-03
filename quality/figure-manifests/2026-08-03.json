@@ -1,0 +1,166 @@
+{
+  "report": "2026-08-03",
+  "reviewedAt": "2026-08-03",
+  "papers": [
+    {
+      "paperId": "2607.27549",
+      "figures": [
+        {
+          "file": "2607.27549-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.27549v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 439,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.27782",
+      "figures": [
+        {
+          "file": "2607.27782-overview.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2607.27782v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 753,
+          "height": 238,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.28596",
+      "figures": [
+        {
+          "file": "2607.28596-overview.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2607.28596v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 398,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.28251",
+      "figures": [
+        {
+          "file": "2607.28251-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.28251v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1162,
+          "height": 609,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.28391",
+      "figures": [
+        {
+          "file": "2607.28391-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.28391v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1162,
+          "height": 572,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.28382",
+      "figures": [
+        {
+          "file": "2607.28382-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.28382v1/illustrations/methodology-pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 3744,
+          "height": 968,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.27890",
+      "figures": [
+        {
+          "file": "2607.27890-overview.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2607.27890v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 753,
+          "height": 474,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.27784",
+      "figures": [
+        {
+          "file": "2607.27784-overview.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2607.27784v1/Figures/pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2200,
+          "height": 1237,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.28416",
+      "figures": [
+        {
+          "file": "2607.28416-overview.png",
+          "figureNumber": "4",
+          "sourceUrl": "https://arxiv.org/html/2607.28416v1/x4.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 794,
+          "height": 331,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.28623",
+      "figures": [
+        {
+          "file": "2607.28623-overview.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2607.28623v1/Figure/main.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 3950,
+          "height": 1705,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}
