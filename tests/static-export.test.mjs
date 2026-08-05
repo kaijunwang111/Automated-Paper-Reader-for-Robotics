@@ -53,6 +53,7 @@ test("exports every public route as static HTML", async () => {
 test("prefixes routes, scripts, metadata, and paper figures for the project site", async () => {
   const home = await readFile(`${outputRoot}/index.html`, "utf8");
   const paper = await readFile(`${outputRoot}/papers/2607.01067/index.html`, "utf8");
+  const companies = await readFile(`${outputRoot}/companies/index.html`, "utf8");
 
   assert.match(home, new RegExp(`href="${basePath}/reports/"`));
   assert.match(home, new RegExp(`src="${basePath}/_next/`));
@@ -64,6 +65,8 @@ test("prefixes routes, scripts, metadata, and paper figures for the project site
     paper,
     /https:\/\/kaijunwang111\.github\.io\/Automated-Paper-Reader-for-Robotics\/og\.png/,
   );
+  assert.match(companies, /首字母 A–Z/);
+  assert.match(companies, /data-sort-mode="date"/);
   assert.doesNotMatch(paper, /(?:href|src)="\/(?:reports|papers|companies|report-assets|_next)\//);
 });
 
