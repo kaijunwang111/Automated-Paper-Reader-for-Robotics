@@ -892,8 +892,7 @@ img {
   font-size: 10px;
 }
 
-.archive-toolbar .tag-row span,
-.tracker-legend div span {
+.archive-toolbar .tag-row span {
   border-color: var(--line);
   color: var(--muted);
 }
@@ -2029,15 +2028,58 @@ img {
   border-radius: 999px;
 }
 
-.tracker-legend div {
+.tracker-count {
   display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.tracker-count small {
+  color: var(--violet);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.company-sorter {
+  display: flex;
+  align-items: center;
   gap: 6px;
 }
 
-.tracker-legend div span {
-  padding: 5px 8px;
+.company-sort-label {
+  margin-right: 4px;
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+.company-sorter button {
+  appearance: none;
+  padding: 7px 11px;
   border: 1px solid var(--line);
   border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: 9px;
+  transition: 160ms ease;
+}
+
+.company-sorter button:hover {
+  border-color: var(--violet);
+  color: var(--violet);
+}
+
+.company-sorter button.is-active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: white;
+}
+
+.company-sorter button:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
 }
 
 .company-timeline {
@@ -2315,6 +2357,26 @@ img {
   .tracker-legend {
     align-items: start;
     flex-direction: column;
+  }
+
+  .tracker-count {
+    align-items: start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .company-sorter {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .company-sort-label {
+    width: 100%;
+    margin-bottom: 2px;
+  }
+
+  .company-sorter button {
+    flex: 1;
   }
 
   .report-detail-hero {

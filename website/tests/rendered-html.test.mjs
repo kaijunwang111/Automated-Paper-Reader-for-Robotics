@@ -182,6 +182,17 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(companiesHtml, /银河通用 Galbot/);
   assert.match(companiesHtml, /星海图 Galaxea AI/);
   assert.match(companiesHtml, /腾讯 Robotics X/);
+  assert.match(companiesHtml, /最近更新优先/);
+  assert.match(companiesHtml, /最近更新/);
+  assert.match(companiesHtml, /首字母 A–Z/);
+  assert.match(companiesHtml, /data-sort-mode="date"/);
+  const renderedCompanyDates = [
+    ...companiesHtml.matchAll(
+      /<div class="timeline-item" data-company-date="([^"]+)" data-company-name="[^"]+">/g,
+    ),
+  ].map((match) => match[1]);
+  assert.equal(renderedCompanyDates.length, 24);
+  assert.deepEqual(renderedCompanyDates, [...renderedCompanyDates].sort().reverse());
   assert.doesNotMatch(companiesHtml, /官方信号优先|SOURCE POLICY/);
 });
 

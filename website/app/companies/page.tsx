@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CompanyCard } from "@/components/content-cards";
+import { CompanyDirectory } from "@/components/company-directory";
 import { companyTrackerLastChecked, companyUpdates } from "@/lib/site-data";
 
 export const metadata: Metadata = {
@@ -24,24 +24,7 @@ export default function CompaniesPage() {
       </section>
 
       <section className="shell tracker-section">
-        <div className="tracker-legend">
-          <span>TRACKING {String(companyUpdates.length).padStart(2, "0")} COMPANIES</span>
-          <div>
-            <span>模型</span>
-            <span>数据</span>
-            <span>硬件</span>
-            <span>开源</span>
-            <span>部署</span>
-          </div>
-        </div>
-        <div className="company-timeline">
-          {companyUpdates.map((update, index) => (
-            <div className="timeline-item" key={update.company}>
-              <div className="timeline-index">{String(index + 1).padStart(2, "0")}</div>
-              <CompanyCard update={update} />
-            </div>
-          ))}
-        </div>
+        <CompanyDirectory updates={companyUpdates} />
       </section>
     </div>
   );
