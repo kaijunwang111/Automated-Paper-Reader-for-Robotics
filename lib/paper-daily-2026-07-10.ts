@@ -1,6 +1,7 @@
 import type { Paper } from "./site-data";
+import { paperDaily20260710Additions } from "./paper-daily-2026-07-10-additions";
 
-export const paperDaily20260710: Paper[] = [
+const paperCandidates20260710: Paper[] = [
   {
     rank: 1,
     title: "DSWAM: A Dual-System World Action Foundation Model for Fine-Grained Robot Manipulation",
@@ -325,3 +326,16 @@ export const paperDaily20260710: Paper[] = [
     figures: [{ src: "/report-assets/2026-07-10/2607.06559-overview.png", alt: "RynnWorld 4D 三模态世界模型与动作策略分支", caption: "Figure 4 · RynnWorld-4D 的 RGB、Depth、Flow 三分支与 policy head。图片来自 arXiv 原论文。" }],
   },
 ];
+
+const selectedPaperIds20260710 = [
+  "2607.04927", "2607.07287", "2607.08877", "2607.08436", "2607.06323", "2607.06564",
+  "2607.06678", "2607.06442", "2607.06370", "2607.04988", "2607.08639", "2607.08354",
+];
+
+const paperPool20260710 = [...paperCandidates20260710, ...paperDaily20260710Additions];
+
+export const paperDaily20260710: Paper[] = selectedPaperIds20260710.map((paperId, index) => {
+  const paper = paperPool20260710.find((candidate) => candidate.arxivId === paperId);
+  if (!paper) throw new Error(`Missing selected paper: ${paperId}`);
+  return { ...paper, rank: index + 1 };
+});

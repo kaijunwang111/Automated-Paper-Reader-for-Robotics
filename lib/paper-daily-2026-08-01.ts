@@ -183,8 +183,8 @@ const correctedFigures20260801: Partial<Record<string, Paper["figures"]>> = {
   }],
   "2607.25593": [{
     src: "/report-assets/2026-08-01/2607.25593-overview.png",
-    alt: "跨硬件配置协同训练收益随新配置独立成功率变化的三阶段曲线",
-    caption: "Figure 2 · Legacy data 从 representation vacuum 到 synergistic bloom，再到 diminishing saturation 的三阶段结果。图片来自 arXiv HTML 提供的原论文独立 Figure。",
+    alt: "两代轮式 humanoid 的相机与夹爪硬件变化以及抓取和插入任务设置",
+    caption: "Figure 1 · Legacy data 实验使用的两代硬件配置与四项真机任务。图片来自 arXiv HTML 提供的原论文独立 Figure。",
   }],
   "2607.26807": [{
     src: "/report-assets/2026-08-01/2607.26807-overview.jpg",
@@ -227,15 +227,11 @@ const selectedPaperIds20260801 = [
   "2607.26055",
   "2607.27205",
   "2607.25912",
-  "2607.25516",
   "2607.26513",
-  "2607.27138",
   "2607.25593",
   "2607.26657",
   "2607.26991",
-  "2607.26807",
   "2607.26809",
-  "2607.25397",
 ];
 
 export const paperDaily20260801: Paper[] = selectedPaperIds20260801.map((paperId, index) => {

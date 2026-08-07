@@ -1,6 +1,6 @@
 import type { Paper } from "./site-data";
 
-export const paperDaily20260807: Paper[] = [
+const paperCandidates20260807: Paper[] = [
   {
     rank: 1,
     title: "BridgeVLA++: A Data-Efficient, Generalizable, and Memory-Augmented Vision-Language-Action Framework for 3D Manipulation",
@@ -307,3 +307,14 @@ export const paperDaily20260807: Paper[] = [
     figures: [{ src: "/report-assets/2026-08-07/2608.04765-fig2.png", alt: "显式语言记忆的高层 VLM 与低层动作专家闭环", caption: "Figure 2 · 显式语言记忆、高层 subtask 与低层动作块闭环。图片来自 arXiv source 原始矢量图。" }],
   },
 ];
+
+const selectedPaperIds20260807 = [
+  "2608.03387", "2608.04196", "2608.03727", "2608.03872", "2608.03563",
+  "2608.05042", "2608.04633", "2608.04996",
+];
+
+export const paperDaily20260807: Paper[] = selectedPaperIds20260807.map((paperId, index) => {
+  const paper = paperCandidates20260807.find((candidate) => candidate.arxivId === paperId);
+  if (!paper) throw new Error(`Missing selected paper: ${paperId}`);
+  return { ...paper, rank: index + 1 };
+});
