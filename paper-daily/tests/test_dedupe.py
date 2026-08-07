@@ -3,11 +3,28 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
-from utils import dedupe_papers, normalize_title
+from utils import dedupe_papers, normalize_title, paper_display_date, stable_source_key
 
 
 def test_normalize_title_removes_case_and_punctuation():
     assert normalize_title("Sensor Forecasting: Sequence Modeling!") == "sensor forecasting sequence modeling"
+
+
+def test_stable_source_key_ignores_arxiv_version_suffix():
+    assert stable_source_key({"source": "arxiv", "id": "2607.20033v3"}) == "arxiv:2607.20033"
+    assert stable_source_key({"source": "arxiv", "id": "2607.20033"}) == "arxiv:2607.20033"
+
+
+def test_paper_display_date_repairs_legacy_next_day_midnight():
+    displayed = paper_display_date(
+        {
+            "published_at": "2026-07-17T00:00:00+00:00",
+            "updated_at": "2026-07-16T03:59:44+00:00",
+        }
+    )
+
+    assert displayed is not None
+    assert displayed.date().isoformat() == "2026-07-16"
 
 
 def test_dedupe_by_source_id_and_title():

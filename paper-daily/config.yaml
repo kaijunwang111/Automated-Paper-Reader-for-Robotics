@@ -16,6 +16,90 @@ research_profile:
     - imitation learning
     - representation learning
     - real-robot deployment
+  concept_groups:
+    manipulation:
+      - robot manipulation
+      - robotic manipulation
+      - manipulation skill
+      - manipulation policy
+      - dexterous manipulation
+      - bimanual manipulation
+      - mobile manipulation
+      - loco-manipulation
+    vla_wam:
+      - vision-language-action
+      - VLA
+      - world-action model
+      - WAM
+      - robot foundation model
+      - generalist robot policy
+    world_model:
+      - world model
+      - world modeling
+      - world modelling
+      - video world model
+      - action-conditioned video model
+      - forward dynamics model
+      - predictive video model
+    robot_learning:
+      - robot learning
+      - robot policy
+      - robot skill
+      - visuomotor policy
+      - imitation learning
+      - behavior cloning
+      - diffusion policy
+      - flow matching policy
+      - reinforcement learning
+    tactile_contact:
+      - tactile
+      - haptic
+      - force feedback
+      - force/torque
+      - contact-rich
+    human_robot_transfer:
+      - human video
+      - human demonstration
+      - egocentric video
+      - observational learning
+      - one-shot visual imitation
+      - video-to-robot
+      - human-to-robot
+      - cross-embodiment
+    whole_body_humanoid:
+      - whole-body control
+      - humanoid manipulation
+      - humanoid policy
+      - loco-manipulation
+    memory_reasoning:
+      - robot memory
+      - episodic memory
+      - spatial memory
+      - semantic memory
+      - embodied reasoning
+      - chain of thought
+      - subtask decomposition
+      - hierarchical policy
+    robot_data:
+      - robot data
+      - data curation
+      - data quality
+      - data selection
+      - data augmentation
+      - synthetic robot data
+      - online correction
+      - human correction
+      - UMI
+    transferable_method:
+      - representation learning
+      - masked modeling
+      - self-supervised learning
+      - test-time adaptation
+      - continual learning
+      - domain generalization
+      - uncertainty estimation
+      - multimodal alignment
+      - spatiotemporal modeling
   positive_keywords:
     - embodied intelligence
     - embodied AI
@@ -192,13 +276,15 @@ sources:
   arxiv:
     enabled: true
     lookback_days: 2
-    max_results: 300
-    retries: 0
+    max_results: 500
+    retries: 1
     retry_after_seconds: 20
+    historical_per_category: 200
+    historical_api_sleep_seconds: 3
     html_fallback_enabled: true
     max_api_failures_before_html: 1
-    html_fallback_per_category: 100
-    html_fallback_max_results: 300
+    html_fallback_per_category: 200
+    html_fallback_max_results: 500
     html_fallback_sleep_seconds: 0.25
   official_organization_channels:
     enabled: true
@@ -277,13 +363,50 @@ output:
   log_dir: logs
 
 retrieval:
-  candidate_limit: 300
+  daily_candidate_limit: 200
+  window_candidate_limit: null
+  keyword_count_affects_priority: false
 
 reporting:
-  selected_paper_count: 15
-  full_text_review_limit: 30
+  daily_selected_paper_limit: 5
+  daily_full_text_review_limit: 10
+  monday_window_selected_paper_limit: 15
+  friday_window_selected_paper_limit: 20
   allow_fewer_than_target: true
   minimum_quality_over_quota: true
+
+semantic_triage:
+  labels:
+    - must_fulltext_review
+    - possible
+    - reject
+  require_primary_contribution_reason: true
+  prohibit_keyword_count_scoring: true
+  review_all_daily_candidates: true
+
+personal_preference:
+  tracked_organization_prior:
+    enabled: true
+    levels:
+      - tracked-led
+      - tracked-collaboration
+      - none
+    may_protect_daily_recall: true
+    may_break_fulltext_or_selection_ties: true
+    may_change_quality_evidence_scores: false
+    may_override_negative_filter: false
+    require_verified_affiliation_or_official_source: true
+
+selection_calibration:
+  positive_fulltext_review_examples:
+    - HOST
+    - tau0-VLA
+    - RobotTTr
+    - verified papers from tracked organizations with strong method and experiment evidence
+  neutral_examples:
+    - Masked Visual Actions for Unified World Modeling
+  excluded_from_current_backfill:
+    - T-Rex: Tactile-Reactive Dexterous Manipulation
 
 quality_monitoring:
   required_artifacts:

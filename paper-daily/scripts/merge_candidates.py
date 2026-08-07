@@ -1,4 +1,4 @@
-"""Merge per-day candidate files into one bounded automation review pool."""
+"""Merge already-bounded daily candidate files without a window-wide cutoff."""
 
 from __future__ import annotations
 
@@ -13,7 +13,12 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Merge and deduplicate candidate JSON files.")
     parser.add_argument("inputs", nargs="+", help="Candidate JSON files in chronological order")
     parser.add_argument("--output", required=True, help="Output JSON file")
-    parser.add_argument("--limit", type=int, default=300, help="Maximum merged candidates")
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Optional compatibility cap; production windows should omit it",
+    )
     return parser.parse_args()
 
 
@@ -21,15 +26,18 @@ def candidate_identity(paper: dict[str, Any]) -> str:
     return stable_source_key(paper) or f"title:{normalize_title(str(paper.get('title', '')))}"
 
 
-def candidate_sort_key(paper: dict[str, Any]) -> tuple[float, float, str]:
+TIER_PRIORITY = {"P0": 3, "P1": 2, "P2": 1, "reject": 0}
+
+
+def candidate_sort_key(paper: dict[str, Any]) -> tuple[int, str, str]:
     return (
-        float(paper.get("coarse_retrieval_score") or 0.0),
-        float(paper.get("keyword_score") or 0.0),
+        TIER_PRIORITY.get(str(paper.get("recall_tier") or "P2"), 1),
         str(paper.get("published_at") or paper.get("updated_at") or ""),
+        str(paper.get("title") or ""),
     )
 
 
-def merge_candidate_files(paths: list[Path], limit: int) -> list[dict[str, Any]]:
+def merge_candidate_files(paths: list[Path], limit: int | None = None) -> list[dict[str, Any]]:
     by_identity: dict[str, dict[str, Any]] = {}
     for path in paths:
         payload = read_json(path)
@@ -44,6 +52,8 @@ def merge_candidate_files(paths: list[Path], limit: int) -> list[dict[str, Any]]
                 by_identity[identity] = dict(raw_paper)
 
     merged = sorted(by_identity.values(), key=candidate_sort_key, reverse=True)
+    if limit is None:
+        return merged
     return merged[: max(0, int(limit))]
 
 

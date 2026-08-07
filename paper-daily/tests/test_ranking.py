@@ -24,7 +24,7 @@ PROFILE = {
 }
 
 
-def test_method_scoring_prefers_transferable_sequence_method_over_domain_keyword():
+def test_method_routing_records_concepts_without_keyword_count_quality_scoring():
     method_paper = {
         "id": "1",
         "source": "arxiv",
@@ -45,9 +45,52 @@ def test_method_scoring_prefers_transferable_sequence_method_over_domain_keyword
     method_score = score_candidate_rules(method_paper, PROFILE, date(2026, 5, 14))
     domain_score = score_candidate_rules(domain_only_paper, PROFILE, date(2026, 5, 14))
 
-    assert method_score["coarse_retrieval_score"] > domain_score["coarse_retrieval_score"]
-    assert method_score["keyword_score"] > 0
+    assert method_score["recall_tier"] == "P2"
+    assert domain_score["recall_tier"] == "P2"
+    assert method_score["keyword_score"] == 1.0
     assert "state space model" in [item.lower() for item in method_score["matched_keywords"]]
+
+
+def test_host_style_paper_is_protected_by_one_decisive_concept():
+    paper = {
+        "id": "2607.20033v1",
+        "source": "arxiv",
+        "title": "Robots Acquire Manipulation Skills in Seconds from a Single Human Video",
+        "abstract": (
+            "A robot acquires a new manipulation skill at inference time from one "
+            "human video and executes it on a physical bimanual platform."
+        ),
+        "categories": ["cs.RO"],
+        "published_at": "2026-07-22T11:20:05Z",
+    }
+
+    routed = score_candidate_rules(paper, PROFILE, date(2026, 7, 22))
+
+    assert routed["recall_tier"] == "P0"
+    assert "manipulation" in routed["matched_concepts"]
+    assert "human_robot_transfer" in routed["matched_concepts"]
+
+
+def test_repeating_many_keywords_does_not_accumulate_retrieval_score():
+    once = {
+        "id": "4",
+        "source": "arxiv",
+        "title": "Language Model Calibration",
+        "abstract": "A language model calibration method.",
+        "categories": ["cs.CL"],
+        "published_at": "2026-05-14T00:00:00Z",
+    }
+    repeated = dict(
+        once,
+        id="5",
+        abstract="language model calibration reranking uncertainty estimation " * 20,
+    )
+
+    routed_once = score_candidate_rules(once, PROFILE, date(2026, 5, 14))
+    routed_repeated = score_candidate_rules(repeated, PROFILE, date(2026, 5, 14))
+
+    assert routed_once["keyword_score"] == routed_repeated["keyword_score"] == 1.0
+    assert routed_once["coarse_retrieval_score"] == routed_repeated["coarse_retrieval_score"]
 
 
 def test_freshness_score_decreases_for_older_paper():

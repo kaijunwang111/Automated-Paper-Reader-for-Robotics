@@ -175,7 +175,8 @@ retrieval:
 
     assert result["duplicate_check"]["status"] == "duplicate_of_previous"
     assert result["duplicate_check"]["duplicate_of_date"] == "2026-05-14"
-    assert result["duplicate_check"]["same_order"] is False
+    # Recall routing is deterministic and no longer preserves fetch order.
+    assert result["duplicate_check"]["same_order"] is True
     raw_payload = json.loads((tmp_path / "data" / "raw" / "2026-05-15.json").read_text(encoding="utf-8"))
     assert raw_payload["duplicate_check"]["status"] == "duplicate_of_previous"
 

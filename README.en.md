@@ -17,10 +17,10 @@ Both sites use the same content and source code under `website/`; only their bui
 
 Keyword alerts alone tend to mix relevant robotics research with off-topic, weakly evaluated, or marketing-led work. This repository turns literature tracking into an auditable pipeline:
 
-1. Retrieve up to 300 candidates from a scheduled date window.
-2. Merge arXiv records with full papers found through tracked organizations' official channels, then deduplicate and coarsely rank them.
-3. Screen the complete candidate pool and open up to 30 papers for full-text review.
-4. Select up to 15 papers based on method, data, experiments, ablations, real-robot evidence, and reproducibility. Fewer papers are published when the quality bar is not met.
+1. Retrieve and deduplicate candidates per calendar day, keeping at most 200 papers per day without a second window-level cutoff.
+2. Merge arXiv records with full papers found through tracked organizations' official channels, while preserving concept-level recall for manipulation, VLA/WAM/WM, touch, force, and human-video transfer.
+3. Semantically screen each day's full candidate pool and open at most 10 full texts per day. Keyword-hit counts are not treated as a quality score.
+4. Select at most five papers per day based on method, data, experiments, ablations, real-robot evidence, and reproducibility. Monday reports are capped at 15 and Friday reports at 20; fewer papers are published when the quality bar is not met.
 5. Produce scan-friendly cards, a more detailed technical reading, and one or two original-paper method figures per selected paper.
 6. Keep local audit information separate from the cleaned public website.
 
@@ -30,7 +30,7 @@ The Python scripts prepare candidates; they do not generate the final research c
 
 ```mermaid
 flowchart LR
-    A["Daily arXiv batches"] --> C["Merge, deduplicate, coarse rank"]
+    A["Daily arXiv batches"] --> C["Per-day merge, deduplication, concept recall"]
     B["Official robotics research channels"] --> C
     C --> D["Codex semantic screening"]
     D --> E["PDF / project-page verification"]
@@ -47,7 +47,8 @@ flowchart LR
 
 - arXiv is the primary source; OpenReview and OpenAlex fetchers remain available but are disabled by default.
 - The production workflow also checks official research pages, project pages, GitHub, and Hugging Face for 24 tracked robotics organizations, allowing formal papers or technical reports that have not yet appeared on arXiv to enter the same candidate pool.
-- Records are deduplicated by arXiv ID, normalized title, authors, and project URL before the 300-paper cap is applied.
+- Records are deduplicated by arXiv ID, normalized title, authors, and project URL before a 200-paper per-day cap is applied. Multi-day report windows are merged only after daily semantic screening.
+- Keywords and concept aliases are recall signals, not additive quality scores. A tracked-organization match only provides bounded recall, full-text-review, and tie-break priors; it never increases the paper's evidence score.
 - Negative terms and full-text rules exclude medical, surgical, mining, laboratory-automation, pure-navigation, and system-integration work that falls outside the current research scope.
 - Scores are used only for local screening and auditing; they are not shown on the public website.
 - Abstract-only candidates cannot enter a production report.

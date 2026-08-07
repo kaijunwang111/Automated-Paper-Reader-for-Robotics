@@ -43,31 +43,42 @@ def fetch_arxiv(
     historical_cutoff = date.today() - timedelta(days=historical_after_days)
     if target_date < historical_cutoff:
         logger.info(
-            "Target %s is older than the recent-list window; using one broad historical API query",
+            "Target %s is older than the recent-list window; using category-bounded historical API queries",
             target_date.isoformat(),
         )
-        historical_query = build_arxiv_query(
-            research_profile.get("arxiv_categories", []),
-            [],
-            target_date,
-            lookback_days,
-        )
-        try:
-            papers = fetch_arxiv_query(
-                historical_query,
-                max_results,
+        papers: list[dict[str, Any]] = []
+        per_category = int(source_config.get("historical_per_category", max_results))
+        sleep_seconds = float(source_config.get("historical_api_sleep_seconds", 3.0))
+        categories = research_profile.get("arxiv_categories", [])
+        for index, category in enumerate(categories):
+            historical_query = build_arxiv_query(
+                [category],
+                [],
                 target_date,
                 lookback_days,
-                retries=int(source_config.get("retries", 2)),
-                retry_after_seconds=int(source_config.get("retry_after_seconds", 60)),
             )
-            papers = _dedupe_arxiv_results(papers)[:max_results]
+            try:
+                papers.extend(
+                    fetch_arxiv_query(
+                        historical_query,
+                        per_category,
+                        target_date,
+                        lookback_days,
+                        retries=int(source_config.get("retries", 2)),
+                        retry_after_seconds=int(source_config.get("retry_after_seconds", 60)),
+                    )
+                )
+            except Exception as exc:
+                warning = f"arXiv historical API query failed for {category}: {exc}"
+                warnings.append(warning)
+                logger.warning(warning)
+            if index + 1 < len(categories):
+                time_module.sleep(sleep_seconds)
+
+        papers = _dedupe_arxiv_results(papers)
+        if papers:
             logger.info("Fetched %s historical arXiv papers after date filtering", len(papers))
             return papers, warnings
-        except Exception as exc:
-            warning = f"arXiv historical API query failed: {exc}"
-            warnings.append(warning)
-            logger.warning(warning)
 
     if source_config.get("html_recent_authoritative", True) and source_config.get("html_fallback_enabled", True):
         logger.info("Using arxiv.org HTML recent-list as the authoritative daily source")
@@ -214,7 +225,10 @@ def http_get_text(url: str, retries: int = 2, retry_after_seconds: int = 60) -> 
 
     last_response = None
     for attempt in range(max(1, retries + 1)):
-        response = requests_get(url, timeout=30)
+        # Historical category/date feeds can be several megabytes.  A longer
+        # read timeout avoids treating a slow but healthy arXiv response as an
+        # empty historical batch.
+        response = requests_get(url, timeout=120)
         last_response = response
         if response.status_code != 429 or attempt >= retries:
             response.raise_for_status()

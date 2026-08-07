@@ -51,10 +51,16 @@ logs/YYYY-MM-DD.log
 
 Runtime outputs are ignored by Git.
 
-The production configuration keeps at most 300 merged candidates. The Codex
-automation reviews up to 30 full texts and publishes up to 15 selected papers.
-For multi-day Monday/Friday windows, use `scripts/merge_candidates.py` to merge
-the per-day candidate files before semantic review.
+The production configuration keeps at most 200 candidates per calendar day.
+Codex first performs semantic screening independently for every day, then opens
+up to 10 full texts and selects at most five papers from that day. Monday
+reports are capped at 15 papers and Friday reports at 20; unused daily quota is
+not transferred across dates. For multi-day windows, use
+`scripts/merge_candidates.py` only after daily screening; it deduplicates the
+window and no longer applies a separate 300-paper cutoff.
+
+Retrieval terms and concept groups are recall mechanisms. Their hit counts do
+not produce a quality score or decide which candidates receive semantic review.
 
 The raw JSON includes a `duplicate_check` block. If `status` is
 `duplicate_of_previous`, today's final candidate pool has the same paper IDs as

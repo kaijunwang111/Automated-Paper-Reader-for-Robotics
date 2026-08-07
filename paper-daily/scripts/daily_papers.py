@@ -157,7 +157,13 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
         logger.error(message)
         raise FetchStageError(message)
 
-    candidate_limit = int(config.get("retrieval", {}).get("candidate_limit", 80))
+    retrieval_config = config.get("retrieval", {})
+    candidate_limit = int(
+        retrieval_config.get(
+            "daily_candidate_limit",
+            retrieval_config.get("candidate_limit", 200),
+        )
+    )
     candidates = build_candidate_pool(
         deduped,
         research_profile,

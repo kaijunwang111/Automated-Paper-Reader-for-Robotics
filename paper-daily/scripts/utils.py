@@ -299,6 +299,8 @@ def stable_source_key(paper: dict[str, Any]) -> str | None:
     paper_id = normalize_whitespace(str(paper.get("id", ""))).lower()
     if not source or not paper_id:
         return None
+    if source == "arxiv":
+        paper_id = re.sub(r"v\d+$", "", paper_id)
     return f"{source}:{paper_id}"
 
 
@@ -449,7 +451,16 @@ def isoformat_or_empty(value: Any) -> str:
 
 
 def paper_display_date(paper: dict[str, Any]) -> datetime | None:
-    return parse_datetime(paper.get("published_at")) or parse_datetime(paper.get("updated_at"))
+    published = parse_datetime(paper.get("published_at"))
+    updated = parse_datetime(paper.get("updated_at"))
+    # Some legacy backfill artifacts normalized a date-only ``published_at``
+    # to the following UTC midnight while preserving the real arXiv submission
+    # day in ``updated_at``.  An update cannot precede publication, so prefer
+    # the earlier timestamp in that malformed case instead of assigning the
+    # paper to the wrong natural-day pool.
+    if published and updated and updated < published:
+        return updated
+    return published or updated
 
 
 def split_csv(value: str | None) -> list[str]:

@@ -51,7 +51,7 @@ test("renders public report, database, paper, and company routes", async () => {
     render("/reports/2026-08-07"),
     render("/papers/2608.05042"),
     render("/papers/tau0-vla"),
-    render("/reports/2026-07-27"),
+    render("/reports/2026-07-23"),
     render("/papers"),
     render("/papers/2607.20683"),
     render("/papers/2607.20912"),
@@ -204,10 +204,10 @@ test("ships original-paper figures and finished social metadata", async () => {
 
   await Promise.all([
     access(new URL("public/og.png", root)),
-    access(new URL("public/report-assets/2026-07-23/2607.18236-method.png", root)),
-    access(new URL("public/report-assets/2026-07-23/2607.18840-method.png", root)),
-    access(new URL("public/report-assets/2026-07-23/2607.18231-method.png", root)),
-    access(new URL("public/report-assets/2026-07-20/2607.15275-architecture.png", root)),
+    access(new URL("public/report-assets/2026-07-24/2607.18236-method.png", root)),
+    access(new URL("public/report-assets/2026-07-24/2607.20033-method.png", root)),
+    access(new URL("public/report-assets/2026-07-24/2607.21670-method.png", root)),
+    access(new URL("public/report-assets/2026-07-20/2607.16506-overview.png", root)),
     access(new URL("public/report-assets/2026-07-24/2607.19190-overview.png", root)),
     access(new URL("public/report-assets/2026-08-01/2607.25895-overview.png", root)),
   ]);
@@ -252,8 +252,8 @@ test("enforces selected-paper figure quality manifests", async () => {
     { file: "2026-07-10.json", route: "/reports/2026-07-10", assetDate: "2026-07-10", count: 13, minWidth: 700 },
     { file: "2026-07-13.json", route: "/reports/2026-07-13", assetDate: "2026-07-13", count: 8, minWidth: 700 },
     { file: "2026-07-17.json", route: "/reports/2026-07-17", assetDate: "2026-07-17", count: 10, minWidth: 700 },
-    { file: "2026-07-20.json", route: "/reports/2026-07-20", assetDate: "2026-07-20", count: 10, minWidth: 550 },
-    { file: "2026-07-24.json", route: "/reports/2026-07-23", assetDate: "2026-07-24", count: 10, minWidth: 700 },
+    { file: "2026-07-20.json", route: "/reports/2026-07-20", assetDate: "2026-07-20", count: 8, minWidth: 550 },
+    { file: "2026-07-24.json", route: "/reports/2026-07-23", assetDate: "2026-07-24", count: 17, minWidth: 700 },
     { file: "2026-08-01.json", route: "/reports/2026-08-01", assetDate: "2026-08-01", count: 15, minWidth: 700 },
     { file: "2026-08-03.json", route: "/reports/2026-08-03", assetDate: "2026-08-03", count: 10, minWidth: 700 },
   ];

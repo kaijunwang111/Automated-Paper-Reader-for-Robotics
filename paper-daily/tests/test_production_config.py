@@ -8,13 +8,22 @@ def test_production_limits_and_sources():
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
 
     assert config["sources"]["arxiv"]["enabled"] is True
-    assert config["sources"]["arxiv"]["max_results"] == 300
+    assert config["sources"]["arxiv"]["max_results"] >= 200
     assert config["sources"]["openreview"]["enabled"] is False
     assert config["sources"]["openalex"]["enabled"] is False
-    assert config["retrieval"]["candidate_limit"] == 300
-    assert config["reporting"]["selected_paper_count"] == 15
-    assert config["reporting"]["full_text_review_limit"] == 30
+    assert config["retrieval"]["daily_candidate_limit"] == 200
+    assert config["retrieval"]["window_candidate_limit"] is None
+    assert config["retrieval"]["keyword_count_affects_priority"] is False
+    assert config["reporting"]["daily_selected_paper_limit"] == 5
+    assert config["reporting"]["daily_full_text_review_limit"] == 10
+    assert config["reporting"]["monday_window_selected_paper_limit"] == 15
+    assert config["reporting"]["friday_window_selected_paper_limit"] == 20
     assert config["reporting"]["allow_fewer_than_target"] is True
+    assert config["semantic_triage"]["prohibit_keyword_count_scoring"] is True
+    prior = config["personal_preference"]["tracked_organization_prior"]
+    assert prior["may_break_fulltext_or_selection_ties"] is True
+    assert prior["may_change_quality_evidence_scores"] is False
+    assert prior["may_override_negative_filter"] is False
 
 
 def test_quality_filters_and_taxonomy_are_production_ready():

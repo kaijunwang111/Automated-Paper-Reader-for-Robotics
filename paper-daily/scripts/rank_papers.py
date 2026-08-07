@@ -1,127 +1,186 @@
-"""Coarse candidate scoring for retrieval only.
+"""High-recall routing for paper candidates.
 
-The scores in this module are retrieval hints, not final paper judgments. Codex
-must read the candidate file and perform semantic scoring before writing a
-daily report.
+This module deliberately does not estimate paper quality.  It assigns a recall
+tier from topic context, keeps decisive matches from being crowded out, and
+leaves quality judgment to the title/abstract triage and full-text review.
 """
 
 from __future__ import annotations
 
 import re
 from datetime import date
+from functools import lru_cache
 from typing import Any
 
 from utils import paper_display_date, validate_paper_schema
 
 
-KEYWORD_WEIGHTS = {
-    "representation learning": 4.0,
-    "disentangled representation": 4.0,
-    "invariant representation": 3.5,
-    "equivariant representation": 3.5,
-    "contrastive learning": 3.5,
-    "self-supervised learning": 4.0,
-    "masked modeling": 3.5,
-    "masked autoencoder": 3.5,
-    "latent variable model": 3.0,
-    "prototype learning": 3.0,
-    "metric learning": 3.0,
-    "sequence modeling": 4.0,
-    "temporal modeling": 4.0,
-    "long-context modeling": 3.5,
-    "state space model": 4.0,
-    "recurrent model": 3.5,
-    "temporal attention": 3.5,
-    "alignment modeling": 3.5,
-    "ctc": 3.5,
-    "transducer": 3.5,
-    "sequence-to-sequence": 3.0,
-    "uncertainty estimation": 4.0,
-    "aleatoric uncertainty": 3.5,
-    "epistemic uncertainty": 3.5,
-    "calibration": 3.5,
-    "conformal prediction": 3.5,
-    "robust learning": 3.0,
-    "out-of-distribution": 3.0,
-    "noisy label learning": 3.0,
-    "confidence estimation": 3.5,
-    "online adaptation": 4.0,
-    "test-time adaptation": 4.0,
-    "continual learning": 4.0,
-    "domain adaptation": 3.5,
-    "domain generalization": 3.5,
-    "distribution shift": 3.5,
-    "representation drift": 3.5,
-    "non-stationary learning": 3.5,
-    "language model integration": 3.0,
-    "retrieval-augmented generation": 3.0,
-    "reranking": 3.5,
-    "sequence scoring": 3.5,
-    "decoding strategy": 3.5,
-    "preference optimization": 3.0,
-    "weak supervision": 3.0,
-    "posterior inference": 3.5,
-    "self-training": 3.5,
-    "pseudo-labeling": 3.0,
-    "diffusion model": 2.5,
-    "multimodal alignment": 3.5,
-    "cross-modal representation learning": 4.0,
-    "attention mechanism": 2.5,
-    "tokenization": 2.5,
-    "spatiotemporal modeling": 4.0,
-    "time series": 3.0,
-    "irregular time series": 4.0,
-    "foundation model": 3.0,
-    "scientific machine learning": 3.0,
-    "language model": 1.5,
+DEFAULT_CONCEPT_GROUPS: dict[str, list[str]] = {
+    "manipulation": [
+        "robot manipulation",
+        "robotic manipulation",
+        "manipulation skill",
+        "manipulation policy",
+        "dexterous manipulation",
+        "bimanual manipulation",
+        "mobile manipulation",
+        "loco manipulation",
+    ],
+    "vla_wam": [
+        "vision language action",
+        "vision-language-action",
+        "vla",
+        "world action model",
+        "world-action model",
+        "wam",
+        "robot foundation model",
+        "generalist robot policy",
+    ],
+    "world_model": [
+        "world model",
+        "world modeling",
+        "world modelling",
+        "action conditioned video model",
+        "forward dynamics model",
+        "predictive video model",
+        "video world model",
+    ],
+    "robot_learning": [
+        "robot learning",
+        "robot policy",
+        "robot skill",
+        "visuomotor policy",
+        "imitation learning",
+        "behavior cloning",
+        "diffusion policy",
+        "flow matching policy",
+        "reinforcement learning",
+    ],
+    "tactile_contact": [
+        "tactile",
+        "haptic",
+        "force feedback",
+        "force torque",
+        "contact rich",
+        "contact-rich",
+    ],
+    "human_robot_transfer": [
+        "human video",
+        "human demonstration",
+        "egocentric video",
+        "observational learning",
+        "one shot visual imitation",
+        "one-shot visual imitation",
+        "video to robot",
+        "human to robot",
+        "cross embodiment",
+        "cross-embodiment",
+    ],
+    "whole_body_humanoid": [
+        "whole body control",
+        "whole-body control",
+        "humanoid manipulation",
+        "humanoid policy",
+        "loco manipulation",
+        "loco-manipulation",
+    ],
+    "memory_reasoning": [
+        "robot memory",
+        "episodic memory",
+        "spatial memory",
+        "semantic memory",
+        "embodied reasoning",
+        "chain of thought",
+        "subtask decomposition",
+        "hierarchical policy",
+    ],
+    "robot_data": [
+        "robot data",
+        "data curation",
+        "data quality",
+        "data selection",
+        "data augmentation",
+        "synthetic robot data",
+        "online correction",
+        "human correction",
+        "umi",
+    ],
+    "transferable_method": [
+        "representation learning",
+        "masked modeling",
+        "self supervised learning",
+        "self-supervised learning",
+        "test time adaptation",
+        "test-time adaptation",
+        "continual learning",
+        "domain generalization",
+        "uncertainty estimation",
+        "multimodal alignment",
+        "spatiotemporal modeling",
+    ],
 }
 
-METHOD_CONTEXT_TERMS = [
-    "method",
-    "model",
-    "learning",
-    "training",
-    "adaptation",
-    "decoding",
-    "decoder",
-    "representation",
-    "alignment",
-    "uncertainty",
-    "calibration",
-    "sequence",
-    "temporal",
-    "time series",
-    "state space",
-    "diffusion",
-    "transformer",
-    "attention",
-    "loss",
-    "inference",
-    "reranking",
+CORE_CONCEPTS = {
+    "manipulation",
+    "vla_wam",
+    "world_model",
+    "robot_learning",
+    "tactile_contact",
+    "human_robot_transfer",
+    "whole_body_humanoid",
+}
+
+ROBOT_CONTEXT_TERMS = [
+    "robot",
+    "robotic",
+    "manipulation",
+    "visuomotor",
+    "embodied",
+    "humanoid",
+    "dexterous",
+    "end effector",
+    "gripper",
 ]
+
+ACTION_CONTEXT_TERMS = [
+    "action",
+    "control",
+    "policy",
+    "skill",
+    "learning",
+    "trajectory",
+    "planning",
+]
+
+TIER_PRIORITY = {"P0": 3, "P1": 2, "P2": 1, "reject": 0}
 
 
 def build_candidate_pool(
     papers: list[dict[str, Any]],
     research_profile: dict[str, Any],
     target_date: date,
-    candidate_limit: int = 80,
+    candidate_limit: int = 200,
 ) -> list[dict[str, Any]]:
-    """Return up to the configured number of candidates with retrieval metadata."""
+    """Return one day's bounded high-recall pool without keyword-count ranking."""
 
-    scored = [
+    routed = [
         score_candidate_rules(validate_paper_schema(paper), research_profile, target_date)
         for paper in papers
     ]
-    scored.sort(
-        key=lambda paper: (
-            float(paper.get("keyword_score", 0.0)),
-            float(paper.get("coarse_retrieval_score", 0.0)),
-            paper.get("published_at", ""),
-        ),
-        reverse=True,
+    retained = [paper for paper in routed if paper.get("recall_tier") != "reject"]
+    retained.sort(key=candidate_sort_key, reverse=True)
+    return [candidate_schema(paper) for paper in retained[:candidate_limit]]
+
+
+def candidate_sort_key(paper: dict[str, Any]) -> tuple[int, int, str, str]:
+    """Sort by recall protection and date; concept count is intentionally absent."""
+
+    return (
+        TIER_PRIORITY.get(str(paper.get("recall_tier")), 0),
+        1 if paper.get("tracked_org_signal") in {"tracked-led", "tracked-collaboration"} else 0,
+        str(paper.get("published_at") or paper.get("updated_at") or ""),
+        str(paper.get("title") or ""),
     )
-    return [candidate_schema(paper) for paper in scored[:candidate_limit]]
 
 
 def score_candidate_rules(
@@ -129,65 +188,107 @@ def score_candidate_rules(
     research_profile: dict[str, Any],
     target_date: date,
 ) -> dict[str, Any]:
-    """Compute coarse retrieval hints without making final relevance claims."""
+    """Annotate recall evidence; never treat keyword volume as paper quality."""
 
     text = scoring_text(paper)
-    positive_keywords = research_profile.get("positive_keywords", [])
-    negative_keywords = research_profile.get("negative_keywords", [])
-
-    matched = []
-    keyword_score = 0.0
-    method_context = has_any_term(text, METHOD_CONTEXT_TERMS)
-
-    for keyword in positive_keywords:
-        keyword_l = str(keyword).lower()
-        if not keyword_l or not contains_keyword(text, keyword_l):
-            continue
-        if keyword_l == "language model" and not method_context:
-            continue
-        matched.append(str(keyword))
-        keyword_score += KEYWORD_WEIGHTS.get(keyword_l, 2.0)
-
-    negative_matches = []
-    penalty = 0.0
-    negative_keyword_penalty = float(
-        research_profile.get("negative_keyword_penalty", -3.0)
+    concept_groups = research_profile.get("concept_groups") or DEFAULT_CONCEPT_GROUPS
+    matched_concepts = [
+        name
+        for name, expressions in concept_groups.items()
+        if has_any_term(text, [str(value) for value in expressions])
+    ]
+    matched_keywords = unique_keyword_matches(text, research_profile.get("positive_keywords", []))
+    negative_matches = unique_keyword_matches(text, research_profile.get("negative_keywords", []))
+    tracked_org_signal = normalize_tracked_org_signal(paper)
+    recall_tier, protected_reasons = classify_recall_tier(
+        paper,
+        text,
+        matched_concepts,
+        negative_matches,
+        tracked_org_signal,
     )
-    for keyword in negative_keywords:
-        keyword_l = str(keyword).lower()
-        if keyword_l and contains_keyword(text, keyword_l):
-            negative_matches.append(str(keyword))
-            penalty += negative_keyword_penalty
 
-    category_score = sum(
-        0.25
-        for category in paper.get("categories", [])
-        if category in set(research_profile.get("arxiv_categories", []))
-    )
+    # Compatibility fields remain binary/ordinal so older consumers keep
+    # working. They are not additive keyword or quality scores.
+    keyword_score = 1.0 if matched_keywords else 0.0
+    retrieval_relevance = float(TIER_PRIORITY[recall_tier])
     freshness_score = compute_freshness_score(paper, target_date)
-    combo_bonus = compute_topic_combo_bonus(text)
-    coarse_score = keyword_score + category_score + freshness_score + combo_bonus + penalty
 
     annotated = dict(paper)
     annotated.update(
         {
-            "keyword_score": round(keyword_score, 3),
-            "coarse_retrieval_score": round(coarse_score, 3),
+            "keyword_score": keyword_score,
+            "coarse_retrieval_score": retrieval_relevance,
+            "retrieval_relevance": retrieval_relevance,
             "freshness_score": round(freshness_score, 3),
-            "category_score": round(category_score, 3),
-            "topic_combo_bonus": round(combo_bonus, 3),
-            "retrieval_penalty": round(penalty, 3),
-            "matched_keywords": matched,
+            "category_score": 0.0,
+            "topic_combo_bonus": 0.0,
+            "retrieval_penalty": -1.0 if negative_matches else 0.0,
+            "matched_keywords": matched_keywords,
+            "matched_concepts": matched_concepts,
             "negative_matches": negative_matches,
-            "retrieval_reason": build_retrieval_reason(paper, matched, negative_matches),
+            "recall_tier": recall_tier,
+            "protected_recall_reasons": protected_reasons,
+            "tracked_org_signal": tracked_org_signal,
+            "retrieval_reason": build_retrieval_reason(
+                paper,
+                matched_concepts,
+                negative_matches,
+                recall_tier,
+                tracked_org_signal,
+            ),
         }
     )
     return annotated
 
 
-def candidate_schema(paper: dict[str, Any]) -> dict[str, Any]:
-    """Keep candidate files focused on metadata Codex needs for review."""
+def classify_recall_tier(
+    paper: dict[str, Any],
+    text: str,
+    matched_concepts: list[str],
+    negative_matches: list[str],
+    tracked_org_signal: str,
+) -> tuple[str, list[str]]:
+    if negative_matches:
+        return "reject", ["matched configured negative scenario"]
 
+    categories = set(paper.get("categories", []))
+    has_robot_context = has_any_term(text, ROBOT_CONTEXT_TERMS)
+    has_action_context = has_any_term(text, ACTION_CONTEXT_TERMS)
+    decisive = any(name in CORE_CONCEPTS for name in matched_concepts)
+    reasons: list[str] = []
+
+    if decisive and ("cs.RO" in categories or has_robot_context):
+        reasons.append("decisive embodied-robotics concept in robot context")
+        if tracked_org_signal != "none":
+            reasons.append(f"verified tracked-organization prior: {tracked_org_signal}")
+        return "P0", reasons
+
+    if "cs.RO" in categories and has_robot_context and has_action_context:
+        reasons.append("cs.RO paper with robot and action/skill context")
+        if tracked_org_signal != "none":
+            reasons.append(f"verified tracked-organization prior: {tracked_org_signal}")
+        return "P0", reasons
+
+    if matched_concepts and ("cs.RO" in categories or has_robot_context):
+        reasons.append("robotics paper with a transferable concept")
+        return "P1", reasons
+
+    if "cs.RO" in categories or matched_concepts:
+        reasons.append("broad robotics or adjacent-method candidate")
+        return "P2", reasons
+
+    return "P2", ["broad configured-category candidate"]
+
+
+def normalize_tracked_org_signal(paper: dict[str, Any]) -> str:
+    value = str(paper.get("tracked_org_signal") or "none")
+    if value in {"tracked-led", "tracked-collaboration"}:
+        return value
+    return "none"
+
+
+def candidate_schema(paper: dict[str, Any]) -> dict[str, Any]:
     fields = [
         "id",
         "source",
@@ -200,36 +301,53 @@ def candidate_schema(paper: dict[str, Any]) -> dict[str, Any]:
         "updated_at",
         "venue",
         "categories",
-        "keyword_score",
+        "recall_tier",
+        "retrieval_relevance",
+        "matched_concepts",
+        "protected_recall_reasons",
+        "tracked_org_signal",
         "retrieval_reason",
         "matched_keywords",
         "negative_matches",
+        "keyword_score",
         "coarse_retrieval_score",
     ]
-    return {field: paper.get(field, [] if field in {"authors", "categories"} else "") for field in fields}
+    list_fields = {
+        "authors",
+        "categories",
+        "matched_concepts",
+        "protected_recall_reasons",
+        "matched_keywords",
+        "negative_matches",
+    }
+    return {field: paper.get(field, [] if field in list_fields else "") for field in fields}
 
 
 def build_retrieval_reason(
     paper: dict[str, Any],
-    matched_keywords: list[str],
+    matched_concepts: list[str],
     negative_matches: list[str],
+    recall_tier: str,
+    tracked_org_signal: str,
 ) -> str:
-    parts = []
-    if matched_keywords:
-        parts.append("matched method-transfer terms: " + ", ".join(matched_keywords[:8]))
+    parts = [f"recall tier: {recall_tier}"]
+    if matched_concepts:
+        parts.append("matched concept groups: " + ", ".join(matched_concepts))
     else:
-        parts.append("included as a broad recent candidate from configured sources/categories")
-
+        parts.append("broad configured-category candidate")
     categories = paper.get("categories", [])
     if categories:
         parts.append("categories: " + ", ".join(categories[:5]))
-    venue = paper.get("venue")
-    if venue:
-        parts.append(f"venue/source label: {venue}")
     if negative_matches:
-        parts.append("possible off-topic signals: " + ", ".join(negative_matches[:4]))
-    parts.append("requires Codex semantic review before any recommendation")
+        parts.append("configured negative scenario: " + ", ".join(negative_matches[:4]))
+    if tracked_org_signal != "none":
+        parts.append(f"tracked organization prior: {tracked_org_signal}")
+    parts.append("requires semantic triage; keyword volume is not a quality score")
     return "; ".join(parts)
+
+
+def unique_keyword_matches(text: str, keywords: list[str]) -> list[str]:
+    return [str(keyword) for keyword in keywords if contains_keyword(text, str(keyword))]
 
 
 def scoring_text(paper: dict[str, Any]) -> str:
@@ -242,15 +360,26 @@ def scoring_text(paper: dict[str, Any]) -> str:
     return " ".join(str(piece).lower() for piece in pieces if piece)
 
 
-def contains_keyword(text: str, keyword: str) -> bool:
-    """Match keywords as terms, avoiding acronym false positives like ECoG in recognition."""
+@lru_cache(maxsize=4096)
+def normalize_for_matching(value: str) -> str:
+    text = value.lower().replace("–", "-").replace("—", "-")
+    text = re.sub(r"(?<=\w)-(?=\w)", " ", text)
+    text = re.sub(r"\brobot(?:s|ic|ics)?\b", "robot", text)
+    text = re.sub(r"\bmodels?\b|\bmodel(?:ing|ling)\b", "model", text)
+    text = re.sub(r"\bskills\b", "skill", text)
+    text = re.sub(r"\bactions\b", "action", text)
+    text = re.sub(r"\bpolicies\b", "policy", text)
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
 
-    escaped = re.escape(keyword.lower()).replace(r"\ ", r"[\s-]+")
-    if re.fullmatch(r"[a-z0-9]+", keyword.lower()):
-        pattern = rf"(?<![a-z0-9]){escaped}(?![a-z0-9])"
-    else:
-        pattern = rf"(?<![a-z0-9]){escaped}s?(?![a-z0-9])"
-    return re.search(pattern, text) is not None
+
+def contains_keyword(text: str, keyword: str) -> bool:
+    normalized_text = normalize_for_matching(text)
+    normalized_keyword = normalize_for_matching(keyword)
+    if not normalized_keyword:
+        return False
+    pattern = rf"(?<![a-z0-9]){re.escape(normalized_keyword)}(?![a-z0-9])"
+    return re.search(pattern, normalized_text) is not None
 
 
 def has_any_term(text: str, terms: list[str]) -> bool:
@@ -269,32 +398,3 @@ def compute_freshness_score(paper: dict[str, Any], target_date: date) -> float:
     if delta_days == 2:
         return 0.5
     return 0.0
-
-
-def compute_topic_combo_bonus(text: str) -> float:
-    bonus = 0.0
-    if has_any_term(text, ["sequence modeling", "temporal modeling", "state space model", "recurrent model"]) and has_any_term(
-        text, ["time series", "long-context", "spatiotemporal", "irregular"]
-    ):
-        bonus += 2.0
-    if has_any_term(text, ["test-time adaptation", "online adaptation", "continual learning"]) and has_any_term(
-        text, ["distribution shift", "domain adaptation", "domain generalization", "non-stationary", "drift"]
-    ):
-        bonus += 2.0
-    if has_any_term(text, ["uncertainty estimation", "confidence estimation", "calibration", "conformal prediction"]) and has_any_term(
-        text, ["robust", "out-of-distribution", "missing", "noisy"]
-    ):
-        bonus += 1.5
-    if has_any_term(text, ["masked modeling", "self-supervised learning", "contrastive learning"]) and has_any_term(
-        text, ["representation", "time series", "multimodal", "sequence"]
-    ):
-        bonus += 1.5
-    if has_any_term(text, ["reranking", "sequence scoring", "decoding strategy", "posterior inference"]) and has_any_term(
-        text, ["language model", "sequence", "token", "generation"]
-    ):
-        bonus += 1.5
-    if has_any_term(text, ["multimodal alignment", "cross-modal representation learning"]) and has_any_term(
-        text, ["alignment", "representation", "tokenization"]
-    ):
-        bonus += 1.0
-    return bonus

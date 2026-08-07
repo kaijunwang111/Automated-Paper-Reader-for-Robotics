@@ -1,6 +1,7 @@
 import type { Paper } from "./site-data";
+import { paperDaily20260724RerunAdditions } from "./paper-daily-2026-07-24-rerun";
 
-export const paperDaily20260724: Paper[] = [
+const priorPaperDaily20260724: Paper[] = [
   {
     rank: 1,
     title: "Patch Policy: Efficient Embodied Control via Dense Visual Representations",
@@ -251,3 +252,36 @@ export const paperDaily20260724: Paper[] = [
     figures: [{ src: "/report-assets/2026-07-24/2607.18154-overview.png", alt: "World Translation 的 backward dynamics extraction、latent domain translation 与下游部署", caption: "Figure 1 · World Translation framework。图片截取自 arXiv 原论文。" }],
   },
 ];
+
+const selectedOrder20260724 = [
+  "2607.20033",
+  "2607.18236",
+  "2607.18231",
+  "2607.18840",
+  "2607.17977",
+  "2607.18016",
+  "2607.18060",
+  "2607.21582",
+  "2607.21588",
+  "2607.21049",
+  "2607.20683",
+  "2607.20653",
+  "2607.18709",
+  "2607.19190",
+  "2607.21670",
+  "2607.20293",
+  "2607.19876",
+];
+
+const rerunPool20260724 = [
+  ...priorPaperDaily20260724,
+  ...paperDaily20260724RerunAdditions,
+];
+
+export const paperDaily20260724: Paper[] = selectedOrder20260724.map(
+  (arxivId, index) => {
+    const paper = rerunPool20260724.find((item) => item.arxivId === arxivId);
+    if (!paper) throw new Error(`Missing 2026-07-24 paper ${arxivId}`);
+    return { ...paper, rank: index + 1 };
+  },
+);
