@@ -9,6 +9,7 @@ import { paperDaily20260720 } from "./paper-daily-2026-07-20";
 import { paperDaily20260724 } from "./paper-daily-2026-07-24";
 import { paperDaily20260801 } from "./paper-daily-2026-08-01";
 import { paperDaily20260803 } from "./paper-daily-2026-08-03";
+import { paperDaily20260807 } from "./paper-daily-2026-08-07";
 
 export const paperTaxonomy = {
   research: {
@@ -1243,6 +1244,18 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-08-07",
+    date: "2026.08.07",
+    weekday: "周五",
+    range: "2026.08.03 - 2026.08.06",
+    title: "时空记忆、结构化未来与动作级世界变化",
+    summary:
+      "本期收录十一篇经全文与真机证据核验的论文，覆盖 3D 时空记忆、生成视频技能蒸馏、人类示范检索、结构化 world-action model 与自演化真机学习。",
+    overview:
+      "本期论文分别研究 3D VLA 的时空双记忆、生成视频到人形全身技能、灵巧人类数据检索、指令感知几何对齐、3D tracker 蒸馏、多视图未来监督、HIL-RL 的奖励与视觉适配、统一 visuomotor target、自适应重规划、轻量 WAM 与显式语言记忆。",
+    papers: paperDaily20260807.map(enrichPaper),
+  },
   {
     slug: "2026-08-03",
     date: "2026.08.03",
