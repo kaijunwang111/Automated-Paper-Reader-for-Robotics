@@ -1,6 +1,6 @@
 import type { Paper } from "./site-data";
 
-export const paperDaily20260803: Paper[] = [
+const paperCandidates20260730: Paper[] = [
   {
     rank: 1,
     title: "Cross-Embodiment Transfer via Behavior-Aligned Representations",
@@ -249,3 +249,21 @@ export const paperDaily20260803: Paper[] = [
     figures: [{ src: "/report-assets/2026-08-03/2607.28623-overview.png", alt: "PAC-MAN 从分割深度到 CBF-RL 全身躲避的训练与部署框架", caption: "Figure 2 · PAC-MAN 的感知输入、Link-CBF 训练与 Unitree G1 部署。图片来自 arXiv HTML 原图。" }],
   },
 ];
+
+const carryoverPaperIds20260730 = ["2607.27549", "2607.27782", "2607.28596", "2607.28391", "2607.27890"];
+
+export const paperDaily20260730Carryover: Paper[] = carryoverPaperIds20260730.map((paperId) => {
+  const paper = paperCandidates20260730.find((candidate) => candidate.arxivId === paperId);
+  if (!paper) throw new Error(`Missing July 30 paper: ${paperId}`);
+  return {
+    ...paper,
+    figures: paper.figures?.map((figure) => ({
+      ...figure,
+      src: figure.src.replace("/report-assets/2026-08-03/", "/report-assets/2026-08-01/"),
+    })),
+  };
+});
+
+// The natural-day window for the Monday report is July 31 through August 2.
+// No paper in that window passed the formal full-text and real-robot evidence gate.
+export const paperDaily20260803: Paper[] = [];

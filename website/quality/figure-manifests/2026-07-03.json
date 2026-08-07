@@ -1,21 +1,230 @@
 {
   "report": "2026-07-03",
-  "reviewedAt": "2026-08-02",
+  "reviewedAt": "2026-08-08",
   "papers": [
-    { "paperId": "2607.01067", "figures": [{ "file": "2607.01067-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.01067v1/x1.png", "sourceType": "arxiv_html_figure", "width": 793, "height": 427, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2607.02642", "figures": [{ "file": "2607.02642-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.02642v1/x1.png", "sourceType": "arxiv_html_figure", "width": 753, "height": 306, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2607.02431", "figures": [{ "file": "2607.02431-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.02431v1/x1.png", "sourceType": "arxiv_html_figure", "width": 793, "height": 271, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.31846", "figures": [{ "file": "2606.31846-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.31846v1/x1.png", "sourceType": "arxiv_html_figure", "width": 753, "height": 259, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.31723", "figures": [{ "file": "2606.31723-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.31723v1/x1.png", "sourceType": "arxiv_html_figure", "width": 997, "height": 502, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.32009", "figures": [{ "file": "2606.32009-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.32009v1/figures/intro.png", "sourceType": "arxiv_html_figure", "width": 3997, "height": 2383, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.30318", "figures": [{ "file": "2606.30318-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.30318v1/x1.png", "sourceType": "arxiv_html_figure", "width": 996, "height": 733, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.30457", "figures": [{ "file": "2606.30457-overview.jpg", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.30457v1/figures/introduction/teaser.jpg", "sourceType": "arxiv_html_figure", "width": 1650, "height": 702, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.30552", "figures": [{ "file": "2606.30552-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.30552v2/x1.png", "sourceType": "arxiv_html_figure", "width": 785, "height": 354, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2607.00272", "figures": [{ "file": "2607.00272-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.00272v1/x1.png", "sourceType": "arxiv_html_figure", "width": 793, "height": 484, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.31958", "figures": [{ "file": "2606.31958-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.31958v1/x1.png", "sourceType": "arxiv_html_figure", "width": 996, "height": 335, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.30988", "figures": [{ "file": "2606.30988-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.30988v3/x1.png", "sourceType": "arxiv_html_figure", "width": 996, "height": 404, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.30268", "figures": [{ "file": "2606.30268-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.30268v1/x1.png", "sourceType": "arxiv_html_figure", "width": 793, "height": 198, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2606.30749", "figures": [{ "file": "2606.30749-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2606.30749v1/figs/teaser_v2.png", "sourceType": "arxiv_html_figure", "width": 1784, "height": 1112, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2607.02195", "figures": [{ "file": "2607.02195-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.02195v1/x1.png", "sourceType": "arxiv_html_figure", "width": 996, "height": 465, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] }
+    {
+      "paperId": "2607.01067",
+      "figures": [
+        {
+          "file": "2607.01067-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.01067v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 427,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.02642",
+      "figures": [
+        {
+          "file": "2607.02642-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.02642v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 753,
+          "height": 306,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.02431",
+      "figures": [
+        {
+          "file": "2607.02431-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.02431v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 271,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.31846",
+      "figures": [
+        {
+          "file": "2606.31846-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.31846v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 753,
+          "height": 259,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.31723",
+      "figures": [
+        {
+          "file": "2606.31723-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.31723v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 997,
+          "height": 502,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.32009",
+      "figures": [
+        {
+          "file": "2606.32009-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.32009v1/figures/intro.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 3997,
+          "height": 2383,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.30318",
+      "figures": [
+        {
+          "file": "2606.30318-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.30318v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 733,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.30552",
+      "figures": [
+        {
+          "file": "2606.30552-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.30552v2/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 785,
+          "height": 354,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.00272",
+      "figures": [
+        {
+          "file": "2607.00272-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.00272v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 484,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.31958",
+      "figures": [
+        {
+          "file": "2606.31958-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.31958v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 335,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.30988",
+      "figures": [
+        {
+          "file": "2606.30988-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.30988v3/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 404,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.30268",
+      "figures": [
+        {
+          "file": "2606.30268-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.30268v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 198,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2606.30749",
+      "figures": [
+        {
+          "file": "2606.30749-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2606.30749v1/figs/teaser_v2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1784,
+          "height": 1112,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.02195",
+      "figures": [
+        {
+          "file": "2607.02195-overview.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.02195v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 465,
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
   ]
 }

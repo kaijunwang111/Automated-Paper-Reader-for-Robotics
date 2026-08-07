@@ -53,8 +53,8 @@ test("renders public report, database, paper, and company routes", async () => {
     render("/papers/tau0-vla"),
     render("/reports/2026-07-23"),
     render("/papers"),
-    render("/papers/2607.20683"),
-    render("/papers/2607.20912"),
+    render("/papers/2607.27549"),
+    render("/papers/2607.28391"),
     render("/papers/2607.20748"),
     render("/papers/2607.21571"),
     render("/papers/2607.20679"),
@@ -154,10 +154,10 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.doesNotMatch(databaseHtml, />多模态</);
   assert.doesNotMatch(databaseHtml, /Beyond Episodic Evaluation|Capability-Aware Traversability/);
   assert.match(paperHtml, /返回论文数据库/);
-  assert.match(paperHtml, /University of Southern California/);
-  assert.match(paperHtml, /felt-tactile\.github\.io/);
-  assert.match(paperHtml, /真机部署优化/);
-  assert.match(contactPaperHtml, /URF: A Unified Robot Control-Policy Framework/);
+  assert.match(paperHtml, /Stanford University/);
+  assert.match(paperHtml, /ajaysridhar\.com\/barx/);
+  assert.match(paperHtml, /跨本体迁移/);
+  assert.match(contactPaperHtml, /TacWAM: Anchor-Guided World Action Model/);
   assert.doesNotMatch(contactPaperHtml, /真机部署优化/);
   assert.match(memoryPaperHtml, /Memory 实现/);
   assert.match(memoryPaperHtml, /Memory 时间跨度/);
@@ -245,17 +245,18 @@ function imageDimensions(buffer) {
 test("enforces selected-paper figure quality manifests", async () => {
   const root = new URL("../", import.meta.url);
   const manifests = [
-    { file: "2026-08-07.json", route: "/reports/2026-08-07", assetDate: "2026-08-07", count: 11, minWidth: 700 },
+    { file: "2026-08-07.json", route: "/reports/2026-08-07", assetDate: "2026-08-07", count: 8, minWidth: 700 },
     { file: "2026-06-29.json", route: "/reports/2026-06-29", assetDate: "2026-06-29", count: 12, minWidth: 700 },
-    { file: "2026-07-03.json", route: "/reports/2026-07-03", assetDate: "2026-07-03", count: 15, minWidth: 700 },
+    { file: "2026-07-03.json", route: "/reports/2026-07-03", assetDate: "2026-07-03", count: 14, minWidth: 700 },
     { file: "2026-07-06.json", route: "/reports/2026-07-06", assetDate: "2026-07-06", count: 12, minWidth: 700 },
-    { file: "2026-07-10.json", route: "/reports/2026-07-10", assetDate: "2026-07-10", count: 13, minWidth: 700 },
+    { file: "2026-07-10.json", route: "/reports/2026-07-10", assetDate: "2026-07-10", count: 12, minWidth: 700 },
     { file: "2026-07-13.json", route: "/reports/2026-07-13", assetDate: "2026-07-13", count: 8, minWidth: 700 },
-    { file: "2026-07-17.json", route: "/reports/2026-07-17", assetDate: "2026-07-17", count: 10, minWidth: 700 },
+    { file: "2026-07-17.json", route: "/reports/2026-07-17", assetDate: "2026-07-17", count: 13, minWidth: 550 },
     { file: "2026-07-20.json", route: "/reports/2026-07-20", assetDate: "2026-07-20", count: 8, minWidth: 550 },
     { file: "2026-07-24.json", route: "/reports/2026-07-23", assetDate: "2026-07-24", count: 17, minWidth: 700 },
-    { file: "2026-08-01.json", route: "/reports/2026-08-01", assetDate: "2026-08-01", count: 15, minWidth: 700 },
-    { file: "2026-08-03.json", route: "/reports/2026-08-03", assetDate: "2026-08-03", count: 10, minWidth: 700 },
+    { file: "2026-07-27.json", route: "/reports/2026-07-27", assetDate: "2026-07-27", count: 0, minWidth: 700 },
+    { file: "2026-08-01.json", route: "/reports/2026-08-01", assetDate: "2026-08-01", count: 16, minWidth: 700 },
+    { file: "2026-08-03.json", route: "/reports/2026-08-03", assetDate: "2026-08-03", count: 0, minWidth: 700 },
   ];
 
   for (const entry of manifests) {

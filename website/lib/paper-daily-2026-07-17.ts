@@ -1,6 +1,7 @@
 import type { Paper } from "./site-data";
+import { paperDaily20260717Additions } from "./paper-daily-2026-07-17-additions";
 
-export const paperDaily20260717: Paper[] = [
+const paperCandidates20260717: Paper[] = [
   {
     rank: 1,
     title: "Towards Predictive, Aligned, and Scalable Robot Learning",
@@ -249,3 +250,16 @@ export const paperDaily20260717: Paper[] = [
     figures: [{ src: "/report-assets/2026-07-17/2607.11498-overview.png", alt: "不同相机视角的 depth、point cloud 与机器人中心 pointmap 对比", caption: "Figure 1 · Robot-centric pointmap 保留视角变化下的统一几何。图片截取自 arXiv 原论文。" }],
   },
 ];
+
+const selectedPaperIds20260717 = [
+  "2607.11270", "2607.15330", "2607.11643", "2607.13597", "2607.11427", "2607.13017",
+  "2607.12931", "2607.13033", "2607.11884", "2607.11498", "2607.15275", "2607.14236", "2607.14609",
+];
+
+const paperPool20260717 = [...paperCandidates20260717, ...paperDaily20260717Additions];
+
+export const paperDaily20260717: Paper[] = selectedPaperIds20260717.map((paperId, index) => {
+  const paper = paperPool20260717.find((candidate) => candidate.arxivId === paperId);
+  if (!paper) throw new Error(`Missing selected paper: ${paperId}`);
+  return { ...paper, rank: index + 1 };
+});

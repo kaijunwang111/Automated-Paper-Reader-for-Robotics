@@ -224,6 +224,12 @@ research_profile:
     - molecular generation
     - social simulation
   negative_keyword_penalty: -8.0
+  negative_keyword_matching:
+    require_phrase_match: true
+    require_title_abstract_context_confirmation: true
+    do_not_treat_as_mining_scenario:
+      - data mining
+      - skill mining
   positive_reference_organizations:
     - Physical Intelligence / OpenPI
     - NVIDIA Robotics

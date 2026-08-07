@@ -22,9 +22,7 @@ try {
   const selectedFiles = manifest.papers.flatMap((paper) =>
     paper.figures.map((figure) => figure.file),
   );
-  if (selectedFiles.length > 0) {
-    files = [...new Set(selectedFiles)].sort();
-  }
+  files = [...new Set(selectedFiles)].sort();
 } catch {
   // A new report may build its first contact sheet before its manifest exists.
 }
@@ -34,9 +32,22 @@ const imageHeight = 260;
 const labelHeight = 54;
 const tileHeight = imageHeight + labelHeight;
 const columns = 2;
-const rows = Math.ceil(files.length / columns);
+const rows = Math.max(1, Math.ceil(files.length / columns));
 
 const composites = [];
+if (files.length === 0) {
+  composites.push({
+    input: Buffer.from(
+      `<svg width="${columns * tileWidth}" height="${tileHeight}" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#e2e8f0"/>
+        <text x="50%" y="48%" text-anchor="middle" font-family="Arial, sans-serif" font-size="28" fill="#334155">No paper passed the selection gate</text>
+        <text x="50%" y="60%" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#64748b">${reportDate}</text>
+      </svg>`,
+    ),
+    left: 0,
+    top: 0,
+  });
+}
 for (const [index, file] of files.entries()) {
   const input = join(assetDir, file);
   const image = await sharp(input)

@@ -75,6 +75,7 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - 重点关注以下会议或期刊：Science Robotics、RSS、CoRL、ICRA、IROS、TRO、IJRR、ICML、ICCV、ECCV、CVPR、NeurIPS、AAAI。
 
 负向过滤：
+- 负向词必须按语义短语与论文主场景判断，不能用单个词做硬过滤。例如 `mining robotics`、`autonomous mining` 可触发矿山场景过滤，但 `data mining`、`skill mining` 不得因此被拒；命中负向词后必须阅读标题和摘要确认语境。
 - 没有进行真机实验的原则上降级或排除。预训练、世界模型评测或相邻领域通用方法只有在迁移价值显著、闭环或多基准证据充分、对照与消融可信时才可例外；必须在本地记录无真机及降权原因。
 - 仿真只在LIBERO上做的。
 - 消融实验不完善的，属于明显排列组合的论文。

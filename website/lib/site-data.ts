@@ -8,7 +8,7 @@ import { paperDaily20260717 } from "./paper-daily-2026-07-17";
 import { paperDaily20260720 } from "./paper-daily-2026-07-20";
 import { paperDaily20260724 } from "./paper-daily-2026-07-24";
 import { paperDaily20260801 } from "./paper-daily-2026-08-01";
-import { paperDaily20260803 } from "./paper-daily-2026-08-03";
+import { paperDaily20260730Carryover, paperDaily20260803 } from "./paper-daily-2026-08-03";
 import { paperDaily20260807 } from "./paper-daily-2026-08-07";
 
 export const paperTaxonomy = {
@@ -833,39 +833,15 @@ const paperDaily20260727Archive: Paper[] = [
   },
 ];
 
-const paperDaily20260727ExcludedFromPublic = new Set([
-  "2607.20683",
-  "2607.20653",
-  "2607.21049",
-  "2607.21582",
-  "2607.21113",
-  "2607.21071",
-  "2607.21058",
-  "2607.20748",
-  "2607.20662",
-  "2607.21025",
-  "2607.21571",
-  "2607.20679",
-]);
+// The July 24–26 natural-day window contains no paper that passes the formal
+// full-text, domain-fit, and evidence gate. Keep the old test objects locally
+// for audit, but do not publish them as selected work.
+void paperDaily20260727Archive;
+const paperDaily20260727: Paper[] = [];
 
-const paperDaily20260727Priority = [
-  "2607.20683",
-  "2607.21582",
-  "2607.21049",
-  "2607.20912",
-  "2607.20653",
-  "2607.21341",
-  "2607.20665",
-];
-
-const paperDaily20260727: Paper[] = paperDaily20260727Archive
-  .filter((paper) => !paperDaily20260727ExcludedFromPublic.has(paper.arxivId))
-  .sort(
-    (paperA, paperB) =>
-      paperDaily20260727Priority.indexOf(paperA.arxivId) -
-      paperDaily20260727Priority.indexOf(paperB.arxivId),
-  )
-  .map((paper, index) => ({ ...paper, rank: index + 1 }));
+const paperDaily20260731: Paper[] = [...paperDaily20260801, ...paperDaily20260730Carryover].map(
+  (paper, index) => ({ ...paper, rank: index + 1 }),
+);
 
 const latestPapers: Paper[] = [
   {
@@ -1255,9 +1231,9 @@ export const reports: Report[] = [
     range: "2026.08.03 - 2026.08.06",
     title: "时空记忆、结构化未来与动作级世界变化",
     summary:
-      "本期收录十一篇经全文与真机证据核验的论文，覆盖 3D 时空记忆、生成视频技能蒸馏、人类示范检索、结构化 world-action model 与自演化真机学习。",
+      "本期独立复筛后收录八篇论文，覆盖 3D 时空记忆、生成视频技能蒸馏、人类示范检索、结构化 world-action model 与自演化真机学习。",
     overview:
-      "本期论文分别研究 3D VLA 的时空双记忆、生成视频到人形全身技能、灵巧人类数据检索、指令感知几何对齐、3D tracker 蒸馏、多视图未来监督、HIL-RL 的奖励与视觉适配、统一 visuomotor target、自适应重规划、轻量 WAM 与显式语言记忆。",
+      "本期论文分别研究 3D VLA 的时空双记忆、生成视频到人形全身技能、灵巧人类数据检索、指令感知几何对齐、3D tracker 蒸馏、多视图未来监督、HIL-RL 的奖励与视觉适配，以及统一 visuomotor target。",
     papers: paperDaily20260807.map(enrichPaper),
   },
   {
@@ -1265,11 +1241,11 @@ export const reports: Report[] = [
     date: "2026.08.03",
     weekday: "周一",
     range: "2026.07.31 - 2026.08.02",
-    title: "跨本体表征、失败纠偏与接触感知",
+    title: "本期未发现达到收录门槛的新论文",
     summary:
-      "本期收录十篇经全文与实验核验的论文，覆盖跨本体行为表征、VLA 失败纠偏、多频接触策略、触觉 WAM、动态物体操作与人形全身安全。",
+      "按自然日窗口独立复筛后，本期没有论文同时满足领域相关性、方法增量与实验完整性要求，因此不为凑数收录。",
     overview:
-      "本期论文分别研究跨本体行为对齐、flow policy 的动作级失败重定向、接触前后自适应频率、criticality 驱动的难例采集、力学触觉预测、零样本对象对应、移动目标增强、灵巧示范采集、弧形触觉硬件与人形躲避。",
+      "候选仍经过标题摘要召回与全文门槛检查；未通过的工作不会进入公开论文数据库。下一期继续从后续自然日窗口检索。",
     papers: paperDaily20260803.map(enrichPaper),
   },
   {
@@ -1279,21 +1255,21 @@ export const reports: Report[] = [
     range: "2026.07.27 - 2026.07.30",
     title: "τ0-VLA、世界模型推理与高保真机器人数据",
     summary:
-      "本期收录十五篇经原文与实验核验的论文，覆盖 τ0-VLA 的长时子任务推理、高保真跨本体数据、动态中心 world-action model、实时流策略、轻量 VLA 和长时技能重组。",
+      "本期独立复筛后收录十六篇论文，覆盖 τ0-VLA 的长时子任务推理、高保真跨本体数据、动态中心 world-action model、实时流策略、接触策略与跨本体迁移。",
     overview:
-      "本期包含一篇来自受关注公司官方渠道、尚未进入 arXiv 的 τ0-VLA，并与窗口内 arXiv 论文统一排序。内容覆盖高层 subtask test-time computation、高保真跨本体数据、动态中心 world-action model、实时与轻量 VLA、预测表征、按需 RL steering 和长时技能重组。",
-    papers: paperDaily20260801.map(enrichPaper),
+      "本期包含一篇来自受关注公司官方渠道、尚未进入 arXiv 的 τ0-VLA，并与窗口内 arXiv 论文统一排序。内容覆盖高层 subtask test-time computation、高保真数据、动态中心 world-action model、实时与轻量 VLA、预测表征、按需 RL steering、触觉 WAM 和移动目标操作。",
+    papers: paperDaily20260731.map(enrichPaper),
   },
   {
     slug: "2026-07-27",
     date: "2026.07.27",
     weekday: "周一",
     range: "2026.07.24 - 2026.07.26",
-    title: "接触控制、双臂组合与多机安全迁移",
+    title: "本期未发现达到收录门槛的新论文",
     summary:
-      "本期保留三篇经原文核验的论文，覆盖统一接触控制、双臂组合优化与多机安全强化学习。",
+      "按自然日窗口独立复筛后，本期没有论文同时满足领域相关性、方法增量与实验完整性要求，因此不为凑数收录。",
     overview:
-      "本期三篇分别研究策略与柔顺控制器联合输出、扩散采样中的双臂约束优化，以及多机协同运输的安全 Sim2Real。",
+      "候选仍经过标题摘要召回与全文门槛检查；场景型系统、弱实验工作和日期不属于本窗口的论文均未进入公开收录。",
     papers: paperDaily20260727.map(enrichPaper),
   },
   {
@@ -1440,9 +1416,9 @@ export const reports: Report[] = [
     range: "2026.07.13 - 2026.07.16",
     title: "规模化 VLA、动作表征与结构化探索",
     summary:
-      "本期收录十篇经原文与实验核验的论文，覆盖 Lumo-2、Xiaomi-Robotics-1/U0、环境依赖动作表征、光流 WAM、结构化 RL 探索与机器人中心几何。",
+      "本期独立复筛后收录十三篇论文，覆盖 Lumo-2、Xiaomi-Robotics-1/U0、长上下文记忆、力觉后训练、触觉表征、光流 WAM 与结构化 RL 探索。",
     overview:
-      "本期论文关注三条具体进展：用大规模人类/跨本体数据训练 VLA 与 world-action model，用未来视觉或人类语义改造动作表征，以及用 experience token、稠密奖励和多坐标系扩散提高操作学习效率。",
+      "本期论文关注大规模人类/跨本体数据、未来视觉与动作表征、experience token 与结构化探索；同时补回独立召回发现的 RoboTTT、LIFT 和触觉表征对齐三项工作。",
     papers: paperDaily20260717.map(enrichPaper),
   },
   {
@@ -1464,7 +1440,7 @@ export const reports: Report[] = [
     range: "2026.07.06 - 2026.07.09",
     title: "世界动作模型、触觉闭环与生成式策略适配",
     summary:
-      "本期收录十三篇经原文与实验核验的论文，覆盖双系统 WAM、预测—反应触觉、少样本人机纠正、人类视频迁移、数字遥操作、三维 VLA、原生记忆与推理加速。",
+      "本期独立复筛后收录十二篇论文，覆盖双系统 WAM、预测—反应触觉、少样本人机纠正、人类视频迁移、技能库迁移、三维 VLA、原生记忆与推理加速。",
     overview:
       "这些工作分别从大规模世界动作预训练、真实接触反馈、潜空间纠正、数据筛选和部署系统优化切入；每篇均保留任务协议、关键对照、复现边界和原论文方法图。",
     papers: paperDaily20260710.map(enrichPaper),
@@ -1488,7 +1464,7 @@ export const reports: Report[] = [
     range: "2026.06.29 - 2026.07.02",
     title: "触觉预训练、真实机器人 RL 与可迁移具身数据",
     summary:
-      "本期收录十五篇经原文与实验核验的论文，覆盖大规模触觉预训练、世界模型评测与真机 RL、VLA 强化学习后训练、humanoid 人类数据、长期记忆、具身 CoT 和轻量世界变化先验。",
+      "本期独立复筛后收录十四篇论文，覆盖大规模触觉预训练、世界模型评测与真机 RL、VLA 强化学习后训练、humanoid 人类数据、长期记忆、具身 CoT 和轻量世界变化先验。",
     overview:
       "这些工作分别研究如何用人类触觉与 ego-exo 视频扩展训练数据，如何让 world model 服务策略评估和真实在线学习，以及如何通过语义技能、长期历史、力觉持续适配和接触仿真改善闭环执行。",
     papers: paperDaily20260703.map(enrichPaper),

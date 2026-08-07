@@ -1,6 +1,6 @@
 import type { Paper } from "./site-data";
 
-export const paperDaily20260703: Paper[] = [
+const paperCandidates20260703: Paper[] = [
   {
     rank: 1, title: "Human-Centric Transferable Tactile Pre-Training for Dexterous Robotic Manipulation", arxivId: "2607.01067", url: "https://arxiv.org/abs/2607.01067",
     institutions: ["Peking University", "BeingBeyond", "Tsinghua University"], signal: "用 160 小时人类触觉动作数据预训练统一触觉/动作空间，再迁移到多种机械臂、夹爪和灵巧手",
@@ -298,3 +298,15 @@ export const paperDaily20260703: Paper[] = [
     figures: [{ src: "/report-assets/2026-07-03/2607.02195-overview.png", alt: "BRIDGE-WA 将未来变化 teacher 蒸馏为 future token、change map 和 motion flow", caption: "Figure 1 · BRIDGE-WA 的紧凑世界变化先验。图片来自 arXiv 原论文。" }],
   },
 ];
+
+const selectedPaperIds20260703 = [
+  "2607.01067", "2607.02642", "2607.02431", "2606.31846", "2606.31723",
+  "2606.32009", "2606.30318", "2606.30552", "2607.00272", "2606.31958",
+  "2606.30988", "2606.30268", "2606.30749", "2607.02195",
+];
+
+export const paperDaily20260703: Paper[] = selectedPaperIds20260703.map((paperId, index) => {
+  const paper = paperCandidates20260703.find((candidate) => candidate.arxivId === paperId);
+  if (!paper) throw new Error(`Missing selected paper: ${paperId}`);
+  return { ...paper, rank: index + 1 };
+});
