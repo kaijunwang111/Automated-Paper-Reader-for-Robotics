@@ -1,4 +1,4 @@
-import { mkdir, readdir } from "node:fs/promises";
+import { mkdir, readFile, readdir } from "node:fs/promises";
 import { basename, join, resolve } from "node:path";
 import sharp from "sharp";
 
@@ -10,9 +10,24 @@ if (!reportDate) {
 const root = resolve(import.meta.dirname, "..");
 const assetDir = join(root, "public", "report-assets", reportDate);
 const outputDir = join(root, "quality", "contact-sheets");
-const files = (await readdir(assetDir))
+const allFiles = (await readdir(assetDir))
   .filter((file) => /\.(png|jpe?g)$/i.test(file))
   .sort();
+let files = allFiles;
+
+try {
+  const manifest = JSON.parse(
+    await readFile(join(root, "quality", "figure-manifests", `${reportDate}.json`), "utf8"),
+  );
+  const selectedFiles = manifest.papers.flatMap((paper) =>
+    paper.figures.map((figure) => figure.file),
+  );
+  if (selectedFiles.length > 0) {
+    files = [...new Set(selectedFiles)].sort();
+  }
+} catch {
+  // A new report may build its first contact sheet before its manifest exists.
+}
 
 const tileWidth = 520;
 const imageHeight = 260;

@@ -834,6 +834,10 @@ const paperDaily20260727Archive: Paper[] = [
 ];
 
 const paperDaily20260727ExcludedFromPublic = new Set([
+  "2607.20683",
+  "2607.20653",
+  "2607.21049",
+  "2607.21582",
   "2607.21113",
   "2607.21071",
   "2607.21058",
@@ -1285,11 +1289,11 @@ export const reports: Report[] = [
     date: "2026.07.27",
     weekday: "周一",
     range: "2026.07.24 - 2026.07.26",
-    title: "触觉生成、偏置感知采集与可纠正视觉注意",
+    title: "接触控制、双臂组合与多机安全迁移",
     summary:
-      "本期保留七篇经原文核验的论文，按研究相关性与实验证据排序，覆盖触觉生成、数据筛选、可纠正注意、接触控制、物理 world model、双臂组合优化与安全 RL。",
+      "本期保留三篇经原文核验的论文，覆盖统一接触控制、双臂组合优化与多机安全强化学习。",
     overview:
-      "本期七篇分别研究无触觉传感器部署、偏置诊断与定向采集、OOD 视觉纠正、柔顺接触控制、混合物理动力学、双臂组合优化与多机安全 RL。具身问答导航和纯地形导航工作不再纳入正式日报。",
+      "本期三篇分别研究策略与柔顺控制器联合输出、扩散采样中的双臂约束优化，以及多机协同运输的安全 Sim2Real。",
     papers: paperDaily20260727.map(enrichPaper),
   },
   {
@@ -1297,11 +1301,11 @@ export const reports: Report[] = [
     date: "2026.07.24",
     weekday: "周五",
     range: "2026.07.20 - 2026.07.23",
-    title: "稠密视觉、双层记忆与可验证具身执行",
+    title: "单视频技能获取、具身数据引擎与多模态控制",
     summary:
-      "本期正式收录十篇经原文与实验核验的论文，覆盖 dense patch policy、事件与力觉记忆、跨本体 VLA、异构策略编排、WAM 测试时验证、Real2Sim 与 Sim2Real。",
+      "本期独立复筛后收录十七篇论文，覆盖单视频技能获取、VLA/WAM、多模态接触、数据质量、推理加速与真实机器人闭环。",
     overview:
-      "本期论文分别研究视觉表征保真、长短期事件记忆、接触历史、统一具身预训练、humanoid 对象状态闭环、policy handoff、世界模型候选验证、中间表征数据、交互式数字孪生与隐藏动力学翻译。",
+      "内容包括 HOST 的单视频推理时技能获取、dense patch 与力觉记忆策略、事件级 WAM、跨本体预训练、humanoid 对象状态闭环、策略编排、触觉生成、数据偏置与质量引擎、动作 token、diffusion 缓存加速、world-model 运动学评测和 Real2Sim。",
     papers: paperDaily20260724.map(enrichPaper),
     archivedTestPapers: latestPapers.map(enrichPaper),
   },
@@ -1310,11 +1314,11 @@ export const reports: Report[] = [
     date: "2026.07.20",
     weekday: "周一",
     range: "2026.07.17 - 2026.07.19",
-    title: "长上下文、接触数据与实时 VLA 推理",
+    title: "组合泛化、子任务交接与异步多模态控制",
     summary:
-      "本期正式收录十篇经原文与实验核验的论文，覆盖长上下文 VLA、力觉后训练、humanoid 行为基础模型、接触数据、Ego 数据、主动真机评测、触觉表征、实时推理与 WAM 安全。",
+      "本期独立复筛后收录八篇论文，覆盖组合 OOD、长时子任务交接、视觉—力觉异步融合、接触 belief、机器人 runtime 与 action-conditioned world model。",
     overview:
-      "本期论文分别研究 fast-weight 历史压缩、接触阶段的力觉旁路与定向采样、大规模 humanoid 运动预训练、动作导向人类视频、样本高效真机评测、触觉监督位置、隐式力线索、流式 VLA 与 action-only 后门。",
+      "内容包括基于真实 rollout 的数据价值建模、无需改 backbone 的组合泛化后训练、foresight residual RL、异步视觉—力觉 diffusion composition、多峰接触位姿推断、长时 agent runtime、可重构灵巧手/humanoid，以及带 OOD action exploration 的 world-model RL。",
     papers: paperDaily20260720.map(enrichPaper),
     archivedTestPapers: ([
       {
