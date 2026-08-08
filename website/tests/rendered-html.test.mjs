@@ -108,6 +108,10 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(officialPaperHtml, /40,115 小时/);
   assert.match(officialPaperHtml, /github\.com\/sii-research\/tau-0-vla/);
   assert.match(detailHtml, /FELT/);
+  assert.match(detailHtml, /Masked Visual Actions for Unified World Modeling/);
+  assert.match(detailHtml, /masked-visual-actions\.github\.io/);
+  assert.match(detailHtml, /BEHAVIOR-1K 未见双臂本体/);
+  assert.doesNotMatch(detailHtml, /复查后加入|补录|保持中性|neutral calibration/);
   assert.match(detailHtml, /felt-tactile\.github\.io/);
   assert.match(detailHtml, /项目页/);
   assert.match(detailHtml, /01 \/ 出发点/);
@@ -206,6 +210,7 @@ test("ships original-paper figures and finished social metadata", async () => {
     access(new URL("public/og.png", root)),
     access(new URL("public/report-assets/2026-07-24/2607.18236-method.png", root)),
     access(new URL("public/report-assets/2026-07-24/2607.20033-method.png", root)),
+    access(new URL("public/report-assets/2026-07-24/2607.19343-overview.png", root)),
     access(new URL("public/report-assets/2026-07-24/2607.21670-method.png", root)),
     access(new URL("public/report-assets/2026-07-20/2607.16506-overview.png", root)),
     access(new URL("public/report-assets/2026-07-24/2607.19190-overview.png", root)),
@@ -253,7 +258,7 @@ test("enforces selected-paper figure quality manifests", async () => {
     { file: "2026-07-13.json", route: "/reports/2026-07-13", assetDate: "2026-07-13", count: 8, minWidth: 700 },
     { file: "2026-07-17.json", route: "/reports/2026-07-17", assetDate: "2026-07-17", count: 13, minWidth: 550 },
     { file: "2026-07-20.json", route: "/reports/2026-07-20", assetDate: "2026-07-20", count: 8, minWidth: 550 },
-    { file: "2026-07-24.json", route: "/reports/2026-07-23", assetDate: "2026-07-24", count: 17, minWidth: 700 },
+    { file: "2026-07-24.json", route: "/reports/2026-07-23", assetDate: "2026-07-24", count: 18, minWidth: 700 },
     { file: "2026-07-27.json", route: "/reports/2026-07-27", assetDate: "2026-07-27", count: 5, minWidth: 700 },
     { file: "2026-08-01.json", route: "/reports/2026-07-31", assetDate: "2026-08-01", count: 16, minWidth: 700 },
     { file: "2026-08-03.json", route: "/reports/2026-08-03", assetDate: "2026-08-03", count: 9, minWidth: 700 },

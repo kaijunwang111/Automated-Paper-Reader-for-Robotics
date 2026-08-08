@@ -50,7 +50,7 @@
 5. 真机泛化、复杂任务、充分消融和公平对照提高 Experimental Evidence；宣传视频、少量挑选案例和不公平对比必须降权。
 6. 保存内部评分到 `paper-daily/data/processed/RUN_DATE_scored.json`，保存本地完整日报到
    `paper-daily/reports/RUN_DATE.md`。
-7. `Code/ref` 中的内容样例、HOST、tau0-VLA、RobotTTr 和经确认的跟踪公司高质量论文可作为正向校准；Masked Visual Actions 保持中性，T-Rex 不属于本轮日期范围。公司先验只在方法相关和证据接近时作为有限偏好，不得因机构知名自动收录。
+7. `Code/ref` 中的内容样例、HOST、tau0-VLA、RobotTTr、Masked Visual Actions 和经确认的跟踪公司高质量论文可作为正向校准；T-Rex 不属于本轮日期范围。公司先验只在方法相关和证据接近时作为有限偏好，不得因机构知名自动收录。
 8. 医疗/手术、矿山、实验室自动化、液体处理等场景型系统论文，以及纯导航、具身问答导航、object navigation、traversability mapping 或纯系统集成论文，原则上排除；不能仅以 Memory 或表征可能可迁移为由放宽收录。
 9. 负向过滤必须匹配语义短语和论文主场景，不能因单个词机械拒绝。`mining robotics`、`autonomous mining` 属于负向场景，`data mining`、`skill mining` 不属于；命中后先读标题与摘要再决定。
 10. 本地评分与日报必须记录主要入选和未入选原因；“综合质量一般”不能代替领域偏离、全文不可得、实验不足、对比不公平等可核验依据。

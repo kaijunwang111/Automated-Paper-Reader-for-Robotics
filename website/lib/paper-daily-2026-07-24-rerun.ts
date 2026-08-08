@@ -265,4 +265,106 @@ export const paperDaily20260724RerunAdditions: Paper[] = [
     deepDive: { lead: "OAT 让动作 token 的位置带有计算含义：越靠前越负责可执行的粗轨迹，越靠后越负责残差细节。", sections: [{ title: "前缀可解码的动作码本", paragraphs: ["encoder 用 registers 汇聚整段连续动作，再逐个量化为离散 token。训练时不只用完整序列重建，而是对每个前缀都调用 decoder，使第一个 token 必须覆盖最大尺度信息。", "下游自回归策略可以在预算紧时提前停止；token co-training 则把有序动作预测当作 VLM context 的辅助目标，最终动作仍由 flow expert 生成。"] }], equations: [{ name: "前缀重建目标", expression: "ℒprefix = Σₖ λₖ ‖a₁:H − D(z₁:k)‖₁", explanation: "所有 token 前缀都要重建完整 action chunk，迫使早期 token 表达粗动作、后期 token 补充细节。" }], experimentReading: [], reflections: [] },
     figures: [{ src: "/report-assets/2026-07-24/2607.21670-method.png", alt: "OAT 的 action encoder、ordered registers、FSQ 和 prefix decoder", caption: "Ordered Action Tokenization 的粗到细动作编码与下游策略接口。图片取自官方项目页对应论文图。" }],
   },
+  {
+    rank: 10,
+    title: "Masked Visual Actions for Unified World Modeling",
+    arxivId: "2607.19343",
+    url: "https://arxiv.org/abs/2607.19343",
+    institutions: ["Stanford University", "University of Maryland, College Park", "Harvard University"],
+    signal: "把机器人或目标物体的时空像素区域作为动作条件，让同一个视频模型同时承担前向预测、逆向动作生成与跨本体 world modeling",
+    tags: ["Masked Visual Actions", "Video World Model", "Forward / Inverse Modeling"],
+    classification: {
+      research: "WM",
+      training: "Post-training",
+      modalities: ["Mask / Segmentation"],
+      data: "合成 / 仿真数据",
+      platforms: ["机械臂", "夹爪"],
+      deployment: "跨本体迁移",
+    },
+    resources: [
+      { label: "项目页", url: "https://masked-visual-actions.github.io/" },
+      { label: "GitHub", url: "https://github.com/HadiZayer/masked-visual-actions" },
+      { label: "模型", url: "https://huggingface.co/HadiZayer/masked-visual-actions" },
+    ],
+    motivation: "机器人 world model 常用关节量或末端位姿表示动作，这些信号绑定具体本体；轨迹点、骨架等视觉条件又过于稀疏，模型仍需自行推断几何、接触与遮挡。论文希望把动作直接放回视频模型熟悉的像素空间。",
+    methodSummary: "给定初始帧和一段只显露特定实体轨迹的 masked video，模型补全其余场景。显露机器人运动时，它预测物体和环境响应；显露目标物体运动时，同一模型反向生成满足该结果的机器人运动，再由 inverse dynamics model 解码低层动作。",
+    architecture: "以 Wan-Fun-Control 2.2 14B 为底座，用同一 VAE 编码 masked conditioning video，并把空间对齐的条件 latent 与视频生成输入拼接。模型本身不增加专用 forward/inverse head，两种功能由推理时选择显露机器人还是物体区域来切换。",
+    optimization: "对预训练视频模型做 LoRA post-training：rank 256、batch size 4、8 张 H200，约 10,000 steps、训练 4 天。训练样本只提供 forward masking，inverse modeling 是推理时零样本出现的能力，没有额外 inverse finetuning。",
+    data: "约 1,000 条 DROID demonstrations，经机器人分割和 URDF rendering 两条管线生成 masked condition；另加入约 4,000 个 RoboCasa 样本，并保留成功与失败轨迹。作者将有效 masked video 训练量概括为约 15 小时。",
+    experiments: "在 DROID、真实 Franka 自定义夹爪与未见双臂本体 BEHAVIOR-1K 上评测视频重建和条件泛化；另在 RoboCasa 测试 Best-of-N planning、policy evaluation 与 inverse action extraction，并以四项真实任务各 20 条演示检查 imagined rollout 和真实执行的一致性。",
+    novelty: "相比 Ctrl-World 的本体专用动作状态、Wan-Move 的轨迹条件以及 EEF/Skeleton 可视化，Masked Visual Actions 提供更密集且与图像对齐的控制信号；更关键的是，同一 checkpoint 可通过改变被显露的实体，在 forward 与 inverse world modeling 之间切换。",
+    strengths: "动作接口简单但有明确方法价值；跨本体对照、条件形式消融、下游 planning/policy evaluation/action extraction 和真实数据验证形成较完整证据链，代码与 LoRA 权重也已公开。",
+    limitations: "真实机器人部分主要验证预测与真实执行的一致性，并非在线闭环规划；planning 和 action extraction 的成功率来自 RoboCasa。模型仍可能产生接触幻觉和任务进展正向偏置，14B 视频模型的推理成本也限制实时控制。",
+    transfer: "可以把现有策略采样出的关节轨迹先渲染成机器人 mask，用视频模型做执行前筛选；也可研究以对象 mask、手部 mask 或接触区域作为跨本体中间接口，而不必直接统一不同机器人的动作维度。",
+    experimentDetails: [
+      {
+        title: "跨本体视频生成与动作条件消融",
+        setup: "使用 DROID held-out 场景、13 段真实自定义夹爪视频和 50 段 BEHAVIOR-1K 双臂视频；报告 PSNR、SSIM、LPIPS 及标准误。",
+        comparisons: "Wan2.2 image-to-video、Wan-Move、Ctrl-World，以及在相同 DROID 数据和相同底座上训练的 EEF visualization 与 Skeleton visualization。",
+        results: [
+          "在 BEHAVIOR-1K 未见双臂本体上，Masked Visual Actions 达到 PSNR 22.90、SSIM 0.842、LPIPS 0.123；Ctrl-World 分别为 18.39、0.836、0.196。",
+          "在 DROID 上三种视觉动作条件差距较小；换成真实自定义夹爪或未见双臂本体后，EEF/Skeleton 容易生成训练本体或扭曲机器人，masked condition 的优势明显扩大。",
+          "真实自定义夹爪数据上，本方法 PSNR 22.79、LPIPS 0.148，优于 Skeleton 的 21.02 和 0.169；SSIM 0.864 与 Skeleton 的 0.866 基本相当。",
+        ],
+      },
+      {
+        title: "规划、策略评估与逆向动作提取",
+        setup: "规划实验在 RoboCasa 每任务 10 个场景、每场景最多比较 10 条 Diffusion Policy 候选；inverse modeling 在 CoffeeServeMug 上以 100 条 demonstrations 训练 IDM 与各基线，每方法执行 20 次。真实策略评估覆盖四项任务，每项 20 条演示。",
+        comparisons: "随机或单样本策略、Diffusion Policy、ACT、SmolVLA，以及真实环境/真实机器人执行结果。候选未来由 Gemini 3.1 Pro 按任务成功、可见接触和物理合理性排序。",
+        results: [
+          "RoboCasa imagined rollout 的策略成功率与真实仿真执行成功率相关系数为 r=0.982，但模型整体存在高估任务进展的偏置。",
+          "Best-of-N 规划随候选数增加获得持续成功率提升，说明生成的 counterfactual future 能用于动作序列筛选。",
+          "零样本 inverse video modeling 加 IDM 在 CoffeeServeMug 的 20 次测试中达到 90% 成功率，高于论文列出的 imitation-learning baselines；该结果属于仿真而非真机。",
+        ],
+      },
+    ],
+    reproducibilityDetails: {
+      status: "资源较完整",
+      verifiedResources: [
+        "GitHub 已公开训练 recipe 与推理脚本；Hugging Face 已发布两组 LoRA 权重；项目页提供完整视频结果和 80 段真实演示对照。",
+      ],
+      implementation: [
+        "Wan-Fun-Control 2.2 14B；双 expert LoRA；rank 256；batch size 4；8×H200；约 10,000 steps / 4 days；灰色填充未显露区域。",
+        "DROID 机器人分割使用 Segment Anything；rendering 管线依赖机器人状态、URDF、相机标定和 PointWorld 对齐流程。",
+      ],
+      missing: [
+        "仓库注明从 DROID episode 生成 URDF control video 的工具仍待发布；完整训练数据处理产物和真实机器人闭环接口尚未随代码提供。",
+      ],
+    },
+    deepDive: {
+      lead: "Masked Visual Actions 的核心不是再训练一个更大的 world model，而是重新定义视频模型接收动作的接口：动作直接表现为某个实体在时间和像素空间中的可见轨迹。",
+      sections: [
+        {
+          title: "用条件补全统一 forward 与 inverse model",
+          paragraphs: [
+            "作者把场景写成若干 active 与 passive entities。二值时空 mask 决定哪些实体轨迹作为已知条件输入，视频模型负责补全未显露区域。显露机器人轨迹时，未知部分是物体和环境响应；显露目标物体轨迹时，未知部分变成应该完成该结果的机器人运动。",
+            "训练时模型只看以机器人为 active entity 的 forward examples，但 mask 接口并没有把 active/passive 写死在网络结构中。因此测试时换成物体轨迹，模型仍可利用视频先验补出机器人行为；这也是论文所称统一 forward/inverse modeling 的来源。",
+          ],
+        },
+        {
+          title: "分割条件与渲染条件各自解决什么问题",
+          paragraphs: [
+            "分割管线直接从真实视频抽出机器人像素，不要求关节状态或标定，适合扩展数据来源；但遮挡处可能泄漏原视频的环境变化，而且用户在推理时难以精确指定未来分割。",
+            "渲染管线根据关节状态、URDF 与相机外参画出半透明机器人，因此能够把任意候选动作转成控制视频。它更适合 planning，却依赖准确标定和已知机器人模型。论文同时训练两类条件，避免把通用数据构造和可控推理押在同一种表示上。",
+          ],
+        },
+      ],
+      equations: [
+        {
+          name: "Masked conditional video model",
+          expression: "pθ(V | M ⊙ V, I₀)",
+          explanation: "V 是完整交互视频，M 只显露指定实体的时空像素，I₀ 固定初始场景；改变 M 所覆盖的实体，就能在前向环境响应预测和逆向机器人行为生成之间切换。",
+        },
+      ],
+      experimentReading: [],
+      reflections: [],
+    },
+    figures: [
+      {
+        src: "/report-assets/2026-07-24/2607.19343-overview.png",
+        alt: "Masked Visual Actions 从掩码机器人轨迹微调视频模型，并统一支持前向建模、逆向建模、策略评估、规划和动作提取",
+        caption: "Figure 1 · Masked Visual Actions 方法与三类机器人应用总览。图片取自 arXiv 原论文。",
+      },
+    ],
+  },
 ];

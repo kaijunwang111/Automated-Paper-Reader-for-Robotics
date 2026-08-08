@@ -1280,9 +1280,9 @@ export const reports: Report[] = [
     range: "2026.07.20 - 2026.07.23",
     title: "单视频技能获取、具身数据引擎与多模态控制",
     summary:
-      "本期独立复筛后收录十七篇论文，覆盖单视频技能获取、VLA/WAM、多模态接触、数据质量、推理加速与真实机器人闭环。",
+      "本期收录十八篇论文，覆盖单视频技能获取、VLA/WAM、像素空间动作 world model、多模态接触、数据质量、推理加速与真实机器人闭环。",
     overview:
-      "内容包括 HOST 的单视频推理时技能获取、dense patch 与力觉记忆策略、事件级 WAM、跨本体预训练、humanoid 对象状态闭环、策略编排、触觉生成、数据偏置与质量引擎、动作 token、diffusion 缓存加速、world-model 运动学评测和 Real2Sim。",
+      "内容包括 HOST 的单视频推理时技能获取、dense patch 与力觉记忆策略、事件级 WAM、Masked Visual Actions 的统一前向/逆向 world modeling、跨本体预训练、humanoid 对象状态闭环、策略编排、触觉生成、数据偏置与质量引擎、动作 token、diffusion 缓存加速、world-model 运动学评测和 Real2Sim。",
     papers: paperDaily20260724.map(enrichPaper),
     archivedTestPapers: latestPapers.map(enrichPaper),
   },

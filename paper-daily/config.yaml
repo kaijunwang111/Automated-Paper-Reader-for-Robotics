@@ -409,9 +409,9 @@ selection_calibration:
     - HOST
     - tau0-VLA
     - RobotTTr
-    - verified papers from tracked organizations with strong method and experiment evidence
-  neutral_examples:
     - Masked Visual Actions for Unified World Modeling
+    - verified papers from tracked organizations with strong method and experiment evidence
+  neutral_examples: []
   excluded_from_current_backfill:
     - T-Rex: Tactile-Reactive Dexterous Manipulation
 

@@ -1,6 +1,6 @@
 {
   "report": "2026-07-24",
-  "reviewedAt": "2026-08-07",
+  "reviewedAt": "2026-08-08",
   "papers": [
     { "paperId": "2607.20033", "figures": [{ "file": "2607.20033-method.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.20033v1", "sourceType": "arxiv_html_figure", "width": 793, "height": 770, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
     { "paperId": "2607.18236", "figures": [{ "file": "2607.18236-method.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.18236v1/x2.png", "sourceType": "arxiv_html_figure", "width": 793, "height": 379, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
@@ -18,6 +18,7 @@
     { "paperId": "2607.19190", "figures": [{ "file": "2607.19190-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.19190v1/figures/figs/compressed/Fig_teaser.png", "sourceType": "arxiv_html_figure", "width": 1920, "height": 1080, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
     { "paperId": "2607.21670", "figures": [{ "file": "2607.21670-method.png", "figureNumber": "2", "sourceUrl": "https://ordered-action-tokenization.github.io/", "sourceType": "official_project_figure", "width": 2400, "height": 677, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
     { "paperId": "2607.20293", "figures": [{ "file": "2607.20293-method.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2607.20293v1", "sourceType": "arxiv_html_figure", "width": 996, "height": 690, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
-    { "paperId": "2607.19876", "figures": [{ "file": "2607.19876-pipeline.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.19876v1", "sourceType": "arxiv_html_figure", "width": 793, "height": 324, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] }
+    { "paperId": "2607.19876", "figures": [{ "file": "2607.19876-pipeline.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.19876v1", "sourceType": "arxiv_html_figure", "width": 793, "height": 324, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] },
+    { "paperId": "2607.19343", "figures": [{ "file": "2607.19343-overview.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2607.19343v1/x1.png", "sourceType": "arxiv_html_figure", "width": 996, "height": 439, "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }] }
   ]
 }
