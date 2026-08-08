@@ -53,9 +53,9 @@ Runtime outputs are ignored by Git.
 
 The production configuration keeps at most 200 candidates per calendar day.
 Codex first performs semantic screening independently for every day, then opens
-up to 10 full texts and selects at most five papers from that day. Monday
-reports are capped at 15 papers and Friday reports at 20; unused daily quota is
-not transferred across dates. For multi-day windows, use
+up to 20 full texts. A single day may contribute more than five selected papers,
+but the report total is capped at five times the number of covered calendar days:
+15 papers on Monday and 20 on Friday. For multi-day windows, use
 `scripts/merge_candidates.py` only after daily screening; it deduplicates the
 window and no longer applies a separate 300-paper cutoff.
 

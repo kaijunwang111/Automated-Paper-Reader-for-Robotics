@@ -109,7 +109,7 @@ Suggested schema:
 Reading workflow:
 1. Read candidates.json and score each paper using title, abstract, venue/categories, and retrieval_reason.
 2. Select up to 30 high-scoring papers for paper-page or PDF review.
-3. For the final Top 15, open the paper page or PDF and inspect the affiliation page, abstract, introduction, method, data/training, experiments, ablations, limitations, and conclusion.
+3. For every final selection, open the paper page or PDF and inspect the affiliation page, abstract, introduction, method, data/training, experiments, ablations, limitations, and conclusion. A single day may contribute more than five papers, while the report total is capped at five times the number of covered calendar days (15 on Monday, 20 on Friday).
 4. If only abstract-level evidence is available, state this explicitly in `reading_evidence` and in the report.
 5. Do not invent information that is not supported by the candidate metadata, web page, or PDF.
 

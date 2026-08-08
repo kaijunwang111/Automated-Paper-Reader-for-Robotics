@@ -7,8 +7,10 @@ import { paperDaily20260713 } from "./paper-daily-2026-07-13";
 import { paperDaily20260717 } from "./paper-daily-2026-07-17";
 import { paperDaily20260720 } from "./paper-daily-2026-07-20";
 import { paperDaily20260724 } from "./paper-daily-2026-07-24";
+import { paperDaily20260727Fresh } from "./paper-daily-2026-07-27";
 import { paperDaily20260801 } from "./paper-daily-2026-08-01";
-import { paperDaily20260730Carryover, paperDaily20260803 } from "./paper-daily-2026-08-03";
+import { paperDaily20260730Carryover } from "./paper-daily-2026-08-03";
+import { paperDaily20260803Fresh as paperDaily20260803 } from "./paper-daily-2026-08-03-fresh";
 import { paperDaily20260807 } from "./paper-daily-2026-08-07";
 
 export const paperTaxonomy = {
@@ -833,11 +835,10 @@ const paperDaily20260727Archive: Paper[] = [
   },
 ];
 
-// The July 24–26 natural-day window contains no paper that passes the formal
-// full-text, domain-fit, and evidence gate. Keep the old test objects locally
-// for audit, but do not publish them as selected work.
+// Keep the old test objects locally for audit, but publish only the papers
+// independently recalled and reviewed from the July 24–26 v1 window.
 void paperDaily20260727Archive;
-const paperDaily20260727: Paper[] = [];
+const paperDaily20260727: Paper[] = paperDaily20260727Fresh;
 
 const paperDaily20260731: Paper[] = [...paperDaily20260801, ...paperDaily20260730Carryover].map(
   (paper, index) => ({ ...paper, rank: index + 1 }),
@@ -1241,15 +1242,15 @@ export const reports: Report[] = [
     date: "2026.08.03",
     weekday: "周一",
     range: "2026.07.31 - 2026.08.02",
-    title: "本期未发现达到收录门槛的新论文",
+    title: "世界 critic、动作条件未来与动态接触控制",
     summary:
-      "按自然日窗口独立复筛后，本期没有论文同时满足领域相关性、方法增量与实验完整性要求，因此不为凑数收录。",
+      "本期从 7 月 31 日至 8 月 2 日的独立候选池中收录九篇，覆盖 VLA-RL critic、WAM、人形闭环后训练、运行时防护、快速生成策略、视角鲁棒与触觉控制。",
     overview:
-      "候选仍经过标题摘要召回与全文门槛检查；未通过的工作不会进入公开论文数据库。下一期继续从后续自然日窗口检索。",
+      "内容包括用未来 latent 训练 critic、action-conditioned self-mask WAM、managed SFT API 的闭环 flywheel、VLA 一致性防护、历史初始化 action generation、ray-conditioned 视觉、CBF flow safety、单静态示范动态增强与接触感知触觉 attention。",
     papers: paperDaily20260803.map(enrichPaper),
   },
   {
-    slug: "2026-08-01",
+    slug: "2026-07-31",
     date: "2026.07.31",
     weekday: "周五",
     range: "2026.07.27 - 2026.07.30",
@@ -1265,11 +1266,11 @@ export const reports: Report[] = [
     date: "2026.07.27",
     weekday: "周一",
     range: "2026.07.24 - 2026.07.26",
-    title: "本期未发现达到收录门槛的新论文",
+    title: "视觉触觉世界模型、精度 scaling 与动态双臂协作",
     summary:
-      "按自然日窗口独立复筛后，本期没有论文同时满足领域相关性、方法增量与实验完整性要求，因此不为凑数收录。",
+      "本期从 7 月 24 日至 26 日的独立候选池中收录五篇，覆盖视觉触觉 world model、高精度 imitation scaling law、动态双臂、多本体视频世界模型与 code-as-policy evolution。",
     overview:
-      "候选仍经过标题摘要召回与全文门槛检查；场景型系统、弱实验工作和日期不属于本窗口的论文均未进入公开收录。",
+      "内容分别研究触觉 rollout 数据扩增、精度极限的数据成本、把另一只手作为动态任务参数、用 URDF rendering 统一 world-model action interface，以及带记忆的长时策略程序搜索。",
     papers: paperDaily20260727.map(enrichPaper),
   },
   {

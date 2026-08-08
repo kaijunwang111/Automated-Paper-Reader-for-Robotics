@@ -254,9 +254,9 @@ test("enforces selected-paper figure quality manifests", async () => {
     { file: "2026-07-17.json", route: "/reports/2026-07-17", assetDate: "2026-07-17", count: 13, minWidth: 550 },
     { file: "2026-07-20.json", route: "/reports/2026-07-20", assetDate: "2026-07-20", count: 8, minWidth: 550 },
     { file: "2026-07-24.json", route: "/reports/2026-07-23", assetDate: "2026-07-24", count: 17, minWidth: 700 },
-    { file: "2026-07-27.json", route: "/reports/2026-07-27", assetDate: "2026-07-27", count: 0, minWidth: 700 },
-    { file: "2026-08-01.json", route: "/reports/2026-08-01", assetDate: "2026-08-01", count: 16, minWidth: 700 },
-    { file: "2026-08-03.json", route: "/reports/2026-08-03", assetDate: "2026-08-03", count: 0, minWidth: 700 },
+    { file: "2026-07-27.json", route: "/reports/2026-07-27", assetDate: "2026-07-27", count: 5, minWidth: 700 },
+    { file: "2026-08-01.json", route: "/reports/2026-07-31", assetDate: "2026-08-01", count: 16, minWidth: 700 },
+    { file: "2026-08-03.json", route: "/reports/2026-08-03", assetDate: "2026-08-03", count: 9, minWidth: 700 },
   ];
 
   for (const entry of manifests) {

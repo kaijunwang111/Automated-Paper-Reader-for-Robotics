@@ -1,5 +1,159 @@
 {
-  "report": "2026-08-03",
-  "reviewedAt": "2026-08-08",
-  "papers": []
+  "reportDate": "2026-08-03",
+  "reviewedAt": "2026-08-08T11:20:00+08:00",
+  "papers": [
+    {
+      "paperId": "2607.29613",
+      "figures": [
+        {
+          "file": "2607.29613-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2607.29613v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 792,
+          "height": 398,
+          "caption": "Figure 2 : Overview of the World Critic Model (WCM) method. (a) Architecture. An observation encoder first maps individual images from the past K K frames into sequential latent states. Concurrently, a predictor equipped with two decoder heads forecasts the next state and estimates the value respectively. (b) On-policy Pipeline : WCM estimates values from on-policy rollouts to compute GAE advantages for PPO/Flow-SDE updates. (c) Off-policy Pipeline : Unified data buffers (SFT + rollouts) are utilized to stably update both WCM and the policy via AWR/RECAP.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.00725",
+      "figures": [
+        {
+          "file": "2608.00725-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.00725v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1115,
+          "height": 452,
+          "caption": "Figure 2: SelfWAM architecture and attention design. Left: the modality-specialized MoT contains a video backbone and a lightweight action expert coupled through mixed attention. Middle: during training, clean executed-action tokens condition only future-video queries, aligning the predicted dynamics with the executed control while preventing ground-truth action leakage into future-action prediction. This keeps the policy path consistent with action-only deployment. Right: SelfWAM supports two inference modes. For fast control, the action expert predicts actions directly from the current observation without generating future video. For optional world-model rollout, a supplied action and output prompt condition the video backbone to generate either future RGB or future self-mask video.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.29172",
+      "figures": [
+        {
+          "file": "2607.29172-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.29172v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 417,
+          "caption": "Figure 1: CLIFT turns closed-weight Gemini Robotics into a humanoid specialist. CLIFT is an API-only, non-invasive flywheel that bridges managed SFT interfaces and closed-loop policy improvement for humanoid manipulation, without ever touching the model’s weights, gradients, or losses. Starting from an initial imitation policy, each flywheel cycle deploys the current policy to collect on-device closed-loop rollouts , scores them with a preference-calibrated dense reward, and converts each rollout chunk into an SFT tuple carrying a special advantage token derived from that reward. Fine-tuning on these tuples through GROD’s managed SFT API and conditioning on the positive advantage token at deployment yields the next policy, closing the flywheel.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.29169",
+      "figures": [
+        {
+          "file": "2607.29169-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2607.29169v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1163,
+          "height": 372,
+          "caption": "Figure 2: Overview of ActFovea. Action-conditioned foveation constructs interaction-centered preserve regions and consistency evidence from runtime observations, robot state, and action history. Recoverable spatial, temporal, and action-side inconsistencies enter a shared candidate, verification, and bounded-execution path. Confirmed frozen-observation replay instead bypasses recovery and triggers safe failure.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.29482",
+      "figures": [
+        {
+          "file": "2607.29482-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2607.29482v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 305,
+          "caption": "Figure 2 : Overview of our architecture. Unlike standard generative models that initialize from independent Gaussian noise ( 𝐱 0 ∼ 𝒩 ​ ( 𝟎 , 𝐈 ) \\mathbf{x}_{0}\\sim\\mathcal{N}(\\mathbf{0},\\mathbf{I}) , our method explicitly initializes the generative process with the robots recent state history 𝐱 0 \\mathbf{x}_{0} . The architecture consists of: (1) An Observation Encoder that processes sensory observations into a conditioning vector c c ; (2) A U-Net Backbone that predicts the drift b θ ​ ( 𝐱 λ , 𝐱 0 , λ , c ) b_{\\theta}(\\mathbf{x}_{\\lambda},\\mathbf{x}_{0},\\lambda,c) ; and (3) an ODE/SDE Solver that integrates this vector field from λ = 0 \\lambda=0 to λ = 1 \\lambda=1 to generate the target action sequence.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.29622",
+      "figures": [
+        {
+          "file": "2607.29622-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.29622v1/figure_and_table/ray_vit_no_blank.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 8889,
+          "height": 4222,
+          "caption": "Figure 1: Overview of RayViT . Camera geometry is injected through a ray-map–conditioned class token and patch-aligned ray embeddings. An intermediate cross-view consistency loss regularizes the visual representation. Visual tokens, frozen CLIP [ 25 ] language tokens, and noisy action tokens are processed by a decoder-only xLSTM policy [ 3 , 11 ] .",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.29569",
+      "figures": [
+        {
+          "file": "2607.29569-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.29569v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 987,
+          "height": 649,
+          "caption": "Figure 1: High-level block diagram of a safe VLA with an additional CBF block that adjusts generated action chunks for safety considerations.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.01452",
+      "figures": [
+        {
+          "file": "2608.01452-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.01452v1/x3.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 483,
+          "caption": "Figure 3: Overview of the dynamic-aware adaptive policy. During training, stage labels automatically extracted from augmented trajectories provide auxiliary supervision for stage prediction. During deployment, the predicted stage is used to adaptively regulate the policy inference frequency according to the current task dynamics.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.01102",
+      "figures": [
+        {
+          "file": "2608.01102-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.01102v1/fig/pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 4635,
+          "height": 1626,
+          "caption": "Figure 1: Overview of CAAT. CAAT introduces contact-aware priors into Transformer-based visuo-tactile action prediction. Visual observations and robot states are encoded as modality-specific tokens, while tactile images are converted into patch tokens using a pretrained tactile encoder. CAAT first applies Dynamic Tactile Masking , which compares the current tactile tokens with a non-contact reference and suppresses unchanged background regions while retaining tokens that capture contact-induced deformations. The visual, masked tactile, and state tokens are then concatenated and processed by Transformer layers. For action decoding, CAAT computes modality-specific attention readouts and scales the visual and tactile contributions according to the estimated contact state: visual features are emphasized before contact, whereas tactile features are emphasized during contact. The resulting multimodal representation is passed to the action decoder to predict a sequence of future actions.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
 }

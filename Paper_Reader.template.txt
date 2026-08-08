@@ -26,7 +26,7 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - 每次运行还必须检查受关注公司的官方研究页、项目页、GitHub 与 Hugging Face，补充日期窗口内尚未出现在 arXiv 的正式论文或技术报告。当前公司名单以 `paper-daily/config.yaml` 的 `sources.official_organization_channels.organizations` 为准。
 - 非 arXiv 候选必须来自官方渠道，包含完整论文、作者/机构、发布日期、方法和实验。产品宣传、媒体报道、社交转发和仅有演示视频的页面不能进入候选池；搜索引擎只能用于发现官方页面。
 - 官方候选与 arXiv 候选按首次公开的自然日合并，按标题、作者和项目页去重。若已有 arXiv 版本，以 arXiv 为主记录并补充官方项目、代码和模型链接。
-- 每个自然日最多保留 200 篇候选，逐日语义初筛后再合并窗口，不得执行窗口级 300 篇截断。每天最多收录 5 篇，因此周一日报最多 15 篇、周五日报最多 20 篇；质量不足时必须少选。
+- 每个自然日最多保留 200 篇候选，逐日语义初筛后再合并窗口，不得执行窗口级 300 篇截断。单日最终入选可以超过 5 篇，但整期总数不得超过覆盖自然日数 × 5，因此周一日报最多 15 篇、周五日报最多 20 篇；质量不足时必须少选。
 - 多日窗口需要按日期逐日执行 arXiv fetch，再合并 candidates、按 paper id 去重；不要只抓运行日一个批次就声称覆盖整个窗口。
 - 周一正式任务覆盖上周五至周日；周五正式任务覆盖本周一至周四。没有 arXiv 公告批次的日期可以跳过，但必须记录。
 - 示例或手动补跑以用户指定窗口为准，并在日报开头写明实际覆盖日期和 arXiv 公告批次。
@@ -60,7 +60,7 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - 不要只因为论文包含领域关键词就给高分。
 - 相邻领域论文只要方法可迁移，也可以高分。
 - 对直接领域论文也要看方法贡献、实验质量和可复用价值。
-- 每个自然日最终数量上限为 5 篇，不设最低数量。不同日期不能借用配额；不得为了凑满周一 15 篇或周五 20 篇降低标准。
+- 单个自然日不设 5 篇硬上限，不设最低数量；整期总数按覆盖自然日数 × 5 封顶（周一 15 篇、周五 20 篇）。不得为了凑满整期上限降低标准。
 - `C:\Users\kaijun\Desktop\Code\ref` 中的内容样例用于学习选题粒度、方法信息密度与表达方式，不得照抄其中表述。
 - `paper-daily/config.yaml` 中 `positive_reference_organizations` 所列跟踪机构的论文可作为高质量正向参考，但公司或机构身份不能替代方法和实验核验；名单更新以后以配置文件为准，不沿用旧的硬编码数量或名称。
 
@@ -179,7 +179,7 @@ data/processed/YYYY-MM-DD_scored.json
 
 阅读流程：
 1. 读取每天最多 200 篇的 candidates.json，基于 title、abstract、venue/categories、retrieval_reason 分批标记 `must_fulltext_review`、`possible` 或 `reject`。关键词和概念命中只负责召回，初筛不生成数值质量分。
-2. 每天通常选择最多 10 篇进一步打开论文页或 PDF，不能只取关键词命中最多的条目。
+2. 每个自然日通常选择最多 20 篇进一步打开论文页或 PDF，不能只取关键词命中最多的条目；候选稠密的单日可以贡献超过 5 篇最终论文。
 3. 对最终入选论文打开 PDF，阅读首页机构、abstract、introduction、related work、method、data/training、experiments、ablation、limitations/conclusion；不能只依赖摘要。
 4. 对每篇入选论文核对实验是否真正支持作者结论，并指出可能的宣传性表述、混杂因素或证据缺口。
 5. 如果只能基于 abstract 判断，必须在 `reading_evidence` 和日报中明确写明，且不能进入正式日报；示例模式需明确标注例外。
@@ -205,7 +205,7 @@ reports/YYYY-MM-DD.md
 
 日报建议包含：
 - 今日概览
-- 入选论文（每天最多 5 篇；周一整期最多 15 篇，周五整期最多 20 篇）
+- 入选论文（单日可超过 5 篇；整期按覆盖自然日数 × 5 封顶，周一最多 15 篇、周五最多 20 篇）
 - 每篇论文使用统一结构：
   1. 机构 / 公司 / 实验室（注明证据来源）
   2. 一句话概览：克制地概括论文实际完成的工作，不使用“最强趋势”“彻底解决”“human-level”等未经独立验证的结论

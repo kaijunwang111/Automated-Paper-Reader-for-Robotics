@@ -1,5 +1,91 @@
 {
-  "report": "2026-07-27",
-  "reviewedAt": "2026-08-08",
-  "papers": []
+  "reportDate": "2026-07-27",
+  "reviewedAt": "2026-08-08T11:20:00+08:00",
+  "papers": [
+    {
+      "paperId": "2607.22530",
+      "figures": [
+        {
+          "file": "2607.22530-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.22530v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 446,
+          "caption": "Figure 1: Overview of ViTacWorld. Right side shows scaling training pipeline, where real visuo-tactile data and task-aligned simulation data are used for pretraining, followed by real robot task data and policy rollout data for target-domain tuning. Left side illustrates the action-conditioned visuo-tactile world model and its rollout generation process. Visual and tactile streams are encoded into latent tokens and modeled with a view-aware DiT to produce policy-conditioned rollouts, which support both dataset augmentation and policy evaluation.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.23108",
+      "figures": [
+        {
+          "file": "2607.23108-fig4.png",
+          "figureNumber": "4",
+          "sourceUrl": "https://arxiv.org/html/2607.23108v1/figures/PegInsertion_fig1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1000,
+          "height": 600,
+          "caption": "(a) Peg Insertion",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.22119",
+      "figures": [
+        {
+          "file": "2607.22119-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.22119v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1148,
+          "height": 531,
+          "caption": "Figure 1 : DynaMAC brings multi-stream learning to dynamic environments and bimanual manipulation. By estimating kinematic links from demonstrations, it distinguishes independently moving objects ( blue ) from those manipulated by the robot ( orange ). Disentangling these causal relationships enables multi-stream learning using the dynamic object frames as task parameters. These dynamic task parameters further enable effective multi-agent coordination without an explicit leader-follower relationship or coordination module. When the cube is lifted ( green ), the right arm’s pose informs the handover ( pink ).",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.22535",
+      "figures": [
+        {
+          "file": "2607.22535-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.22535v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 997,
+          "height": 423,
+          "caption": "Figure 1: Visual world-model interface. Static context carries scene and viewpoint; rendered nominal robot geometry carries action; the diffusion model predicts scene response.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2607.22832",
+      "figures": [
+        {
+          "file": "2607.22832-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2607.22832v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 876,
+          "height": 473,
+          "caption": "Figure 1: Conceptual overview of MEMENTO. The top row shows the task environments used in the study, including a Robosuite Franka Tower-of-Hanoi task and AI2-THOR household interaction scenes. The left panel illustrates evaluator evolution: candidate evaluators are generated, judged by an LLM majority vote, and iteratively refined to obtain the evolved evaluator E ⋆ E^{\\star} . The right panel illustrates policy evolution under the fixed evaluator E ⋆ E^{\\star} . An initial policy p 0 p_{0} is evaluated to form the current elite candidate state 𝒞 g \\mathcal{C}_{g} , after which each generation applies three proposal mechanisms: sequential hill-climbing from the current accepted candidate with rejected-proposal memory ℋ \\mathcal{H} , macro-mutation from the elite, and crossover between the best hill-climb and macro-mutation candidates. The best resulting candidate is selected as the next elite 𝒞 g + 1 \\mathcal{C}_{g+1} , and the process repeats for G G generations.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
 }

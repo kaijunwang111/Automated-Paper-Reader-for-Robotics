@@ -374,8 +374,9 @@ retrieval:
   keyword_count_affects_priority: false
 
 reporting:
-  daily_selected_paper_limit: 5
-  daily_full_text_review_limit: 10
+  per_day_selected_paper_limit: null
+  window_selected_paper_limit_per_covered_day: 5
+  daily_full_text_review_limit: 20
   monday_window_selected_paper_limit: 15
   friday_window_selected_paper_limit: 20
   allow_fewer_than_target: true

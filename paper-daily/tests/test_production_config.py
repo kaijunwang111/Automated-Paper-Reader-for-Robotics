@@ -14,8 +14,9 @@ def test_production_limits_and_sources():
     assert config["retrieval"]["daily_candidate_limit"] == 200
     assert config["retrieval"]["window_candidate_limit"] is None
     assert config["retrieval"]["keyword_count_affects_priority"] is False
-    assert config["reporting"]["daily_selected_paper_limit"] == 5
-    assert config["reporting"]["daily_full_text_review_limit"] == 10
+    assert config["reporting"]["per_day_selected_paper_limit"] is None
+    assert config["reporting"]["window_selected_paper_limit_per_covered_day"] == 5
+    assert config["reporting"]["daily_full_text_review_limit"] == 20
     assert config["reporting"]["monday_window_selected_paper_limit"] == 15
     assert config["reporting"]["friday_window_selected_paper_limit"] == 20
     assert config["reporting"]["allow_fewer_than_target"] is True

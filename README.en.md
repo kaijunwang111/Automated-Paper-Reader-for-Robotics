@@ -19,8 +19,8 @@ Keyword alerts alone tend to mix relevant robotics research with off-topic, weak
 
 1. Retrieve and deduplicate candidates per calendar day, keeping at most 200 papers per day without a second window-level cutoff.
 2. Merge arXiv records with full papers found through tracked organizations' official channels, while preserving concept-level recall for manipulation, VLA/WAM/WM, touch, force, and human-video transfer.
-3. Semantically screen each day's full candidate pool and open at most 10 full texts per day. Keyword-hit counts are not treated as a quality score.
-4. Select at most five papers per day based on method, data, experiments, ablations, real-robot evidence, and reproducibility. Monday reports are capped at 15 and Friday reports at 20; fewer papers are published when the quality bar is not met.
+3. Semantically screen each day's full candidate pool and open at most 20 full texts per day. Keyword-hit counts are not treated as a quality score.
+4. Select papers based on method, data, experiments, ablations, real-robot evidence, and reproducibility. A single day may contribute more than five papers, while each report is capped at five times its number of covered calendar days (15 on Monday and 20 on Friday); fewer papers are published when the quality bar is not met.
 5. Produce scan-friendly cards, a more detailed technical reading, and one or two original-paper method figures per selected paper.
 6. Keep local audit information separate from the cleaned public website.
 
