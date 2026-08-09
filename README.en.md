@@ -93,8 +93,8 @@ The default timezone is `Asia/Shanghai`:
 
 | Branch | Schedule | Work performed |
 | --- | --- | --- |
-| Monday maintenance | Monday 09:30 | Previous Friday–Sunday papers plus the latest official company signals |
-| Friday maintenance | Friday 09:30 | Monday–Thursday papers; company tracking is skipped |
+| Monday maintenance | Monday 00:00 | Previous Friday–Sunday papers plus the latest official company signals |
+| Friday maintenance | Friday 00:00 | Monday–Thursday papers; company tracking is skipped |
 
 Operational instructions live in [`automation/`](automation/README.md), and the production quality gates are documented in [`automation/PAPER_DAILY_QUALITY_GATES.md`](automation/PAPER_DAILY_QUALITY_GATES.md).
 

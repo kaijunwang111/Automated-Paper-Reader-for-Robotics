@@ -93,8 +93,8 @@ flowchart LR
 
 | 任务分支 | 时间 | 执行内容 |
 | --- | --- | --- |
-| 周一维护 | 每周一 09:30 | 上周五至周日论文 + 公司最新官方信号 |
-| 周五维护 | 每周五 09:30 | 本周一至周四论文；不执行公司追踪 |
+| 周一维护 | 每周一 00:00 | 上周五至周日论文 + 公司最新官方信号 |
+| 周五维护 | 每周五 00:00 | 本周一至周四论文；不执行公司追踪 |
 
 完整运行手册位于 [`automation/`](automation/README.md)，论文质量门禁见 [`automation/PAPER_DAILY_QUALITY_GATES.md`](automation/PAPER_DAILY_QUALITY_GATES.md)。
 

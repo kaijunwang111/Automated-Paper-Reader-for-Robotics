@@ -5,7 +5,7 @@
 
 ## 定时任务
 
-同一个任务每周一、周五 09:30（Asia/Shanghai）运行，并按计划日期分支：
+同一个任务每周一、周五 00:00（Asia/Shanghai）运行，也就是周日刚进入周一、周四刚进入周五的时刻，并按计划日期分支：
 
 - 周一：先执行 [PAPER_DAILY_AUTOMATION.md](PAPER_DAILY_AUTOMATION.md)，再执行
   [COMPANY_TRACKER_AUTOMATION.md](COMPANY_TRACKER_AUTOMATION.md)，最后统一测试、提交和发布一次。
