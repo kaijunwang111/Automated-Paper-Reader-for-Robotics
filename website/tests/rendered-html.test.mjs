@@ -37,8 +37,8 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /检索论文数据库/);
   assert.match(html, /查看更多公司动态/);
   assert.equal((html.match(/<article class="company-card company-card-compact">/g) ?? []).length, 5);
-  assert.match(html, /2026\.08\.07/);
-  assert.match(html, /周五/);
+  assert.match(html, /2026\.08\.10/);
+  assert.match(html, /周一/);
   assert.doesNotMatch(html, /周六补跑|补跑|href="\/about"/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
@@ -48,8 +48,8 @@ test("renders public report, database, paper, and company routes", async () => {
   const [archive, latestDetail, latestPaper, officialPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, removedAbout] =
     await Promise.all([
     render("/reports"),
-    render("/reports/2026-08-07"),
-    render("/papers/2608.05042"),
+    render("/reports/2026-08-10"),
+    render("/papers/2608.06375"),
     render("/papers/tau0-vla"),
     render("/reports/2026-07-23"),
     render("/papers"),
@@ -96,14 +96,14 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(archiveHtml, /2026\.08\.07/);
   assert.match(archiveHtml, /2026\.07\.24/);
   assert.doesNotMatch(archiveHtml, /周六补跑|补跑/);
-  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/08\/07/);
-  assert.match(latestDetailHtml, /BridgeVLA\+\+/);
-  assert.match(latestDetailHtml, /RoboReact/);
-  assert.match(latestDetailHtml, /RMBench 18\.9% 提到 96\.0%/);
+  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/08\/10/);
+  assert.match(latestDetailHtml, /ω-0/);
+  assert.match(latestDetailHtml, /World-to-Wrist/);
+  assert.match(latestDetailHtml, /79\.1%\/81\.8%/);
   assert.doesNotMatch(latestDetailHtml, /MoMo: Dial Motion Mode/);
   assert.doesNotMatch(latestDetailHtml, /综合分|候选论文|内部评分/);
-  assert.match(latestPaperHtml, /Institute of Automation, Chinese Academy of Sciences/);
-  assert.match(latestPaperHtml, /Spatio-Temporal Memory/);
+  assert.match(latestPaperHtml, /MARS Lab, Nanyang Technological University/);
+  assert.match(latestPaperHtml, /Whole-body Control/);
   assert.match(officialPaperHtml, /OFFICIAL PAPER/);
   assert.match(officialPaperHtml, /40,115 小时/);
   assert.match(officialPaperHtml, /github\.com\/sii-research\/tau-0-vla/);
@@ -168,7 +168,7 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(memoryPaperHtml, /单个 episode 内完整力历史/);
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周一/);
-  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.08\.03/);
+  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.08\.10/);
   assert.match(companiesHtml, /开源 GPU 加速医疗机器人物理仿真框架/);
   assert.match(companiesHtml, /Fremont 开始 Optimus 工厂施工与产线安装/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
@@ -250,6 +250,7 @@ function imageDimensions(buffer) {
 test("enforces selected-paper figure quality manifests", async () => {
   const root = new URL("../", import.meta.url);
   const manifests = [
+    { file: "2026-08-10.json", route: "/reports/2026-08-10", assetDate: "2026-08-10", count: 15, minWidth: 700 },
     { file: "2026-08-07.json", route: "/reports/2026-08-07", assetDate: "2026-08-07", count: 8, minWidth: 700 },
     { file: "2026-06-29.json", route: "/reports/2026-06-29", assetDate: "2026-06-29", count: 12, minWidth: 700 },
     { file: "2026-07-03.json", route: "/reports/2026-07-03", assetDate: "2026-07-03", count: 14, minWidth: 700 },

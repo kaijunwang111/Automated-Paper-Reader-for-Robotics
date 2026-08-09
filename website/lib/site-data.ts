@@ -12,6 +12,7 @@ import { paperDaily20260801 } from "./paper-daily-2026-08-01";
 import { paperDaily20260730Carryover } from "./paper-daily-2026-08-03";
 import { paperDaily20260803Fresh as paperDaily20260803 } from "./paper-daily-2026-08-03-fresh";
 import { paperDaily20260807 } from "./paper-daily-2026-08-07";
+import { paperDaily20260810 } from "./paper-daily-2026-08-10";
 
 export const paperTaxonomy = {
   research: {
@@ -1226,6 +1227,18 @@ function enrichPaper(paper: Paper): Paper {
 
 export const reports: Report[] = [
   {
+    slug: "2026-08-10",
+    date: "2026.08.10",
+    weekday: "周一",
+    range: "2026.08.07 - 2026.08.09",
+    title: "未来视觉、跨本体控制与接触闭环",
+    summary:
+      "本期收录十五篇论文，覆盖人形全身 WAM、未来腕部建模、跨本体 VLA、技能记忆、视觉动作 world model、接触变阻抗与低延迟触觉。",
+    overview:
+      "本期方法分别研究未来视觉 latent 如何约束动作、共享动力学如何适配不同本体、非机器人视频如何转成可执行监督，以及真机系统如何在光照、视角、接触和低延迟条件下保持闭环性能。",
+    papers: paperDaily20260810.map(enrichPaper),
+  },
+  {
     slug: "2026-08-07",
     date: "2026.08.07",
     weekday: "周五",
@@ -1484,7 +1497,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.08.03";
+export const companyTrackerLastChecked = "2026.08.10";
 
 export const companyUpdates: CompanyUpdate[] = [
   {

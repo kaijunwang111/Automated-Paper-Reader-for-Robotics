@@ -1,0 +1,261 @@
+{
+  "reportDate": "2026-08-10",
+  "reviewedAt": "2026-08-10T18:40:00+08:00",
+  "papers": [
+    {
+      "paperId": "2608.06375",
+      "figures": [
+        {
+          "file": "2608.06375-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.06375v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 292,
+          "caption": "Figure 2 : Overview of ω \\omega -0. We first train a whole-body VLM for action-aware visual-language representation learning, and then use a joint video-action latent predictor to couple future visual latents with whole-body action generation. The predictor uses prefix-guided dual-query attention with token-specific positional encoding: 2D RoPE for visual prefix tokens, 3D RoPE for future video queries, and 1D RoPE for temporal action queries. The action DiT denoises SONIC-compatible whole-body action latents for real-world humanoid control, while the future visual branch provides lightweight latent supervision and optional visualization.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05369",
+      "figures": [
+        {
+          "file": "2608.05369-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.05369v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 541,
+          "caption": "Figure 1: W2-VLA predicts task-conditioned future wrist latents from wrist history and current task context, then uses them to regularize action learning.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05903",
+      "figures": [
+        {
+          "file": "2608.05903-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.05903v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 376,
+          "caption": "Figure 2 : Overview of Robust-WAM. (a) We inherit the video branch of the original WAM as it is. The Video DiT keeps denoising the VAE latents of the future frames under its own flow-matching loss, so the large-scale VAE-space pretraining is retained. (b) The upper part is the semantic alignment . For each future step and camera view we prepend a learnable query token to the noised action tokens, and after the Action DiT processes the whole sequence we align the output of each query with the frozen DINOv3 CLS embedding of the corresponding ground-truth future frame, which is an appearance-invariant summary of the scene content. The lower part is the shared positional encoding (PE) . Each query reuses the positional encoding of the action tokens at the step it describes, which tells the model how far into the future that query is looking. The teacher and the alignment head are only needed during training, so at inference they are dropped and only the queries stay in the sequence.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.06332",
+      "figures": [
+        {
+          "file": "2608.06332-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.06332v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 263,
+          "caption": "Figure 1: Overview of the GeniWorld method. We convert robot actions into visual motions via URDF rendering. These motions are subsequently encoded into latent representations and concatenated with noisy video latents. The combined representation serves as input to a causal DiT that predicts future videos via flow matching. During inference, the initial scene image is provided as the first frame. Actions are passed through the URDF-based renderer to produce motion conditions, and the model predicts future observations while leveraging KV caching to maintain historical context.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.06374",
+      "figures": [
+        {
+          "file": "2608.06374-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.06374v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 997,
+          "height": 406,
+          "caption": "Figure 2 : Overview of our DyPES-VLA. (a) A pretrained Vision Language Model maps observations, instructions, embodiment metadata, and learnable query tokens into query states that carry the shared dynamics priors. A future generation head predicts the future frame from these states, and an embodiment-specific Mixture-of-Experts (MoE) action head decodes them into actions in each embodiment’s native action space. The action head shares attention layers across embodiments, while a static router selects the embodiment-specific encoder, feed-forward expert, and decoder. (b) Two-stage training: Dynamics Priors Pretraining on action-free videos, followed by Cross-Embodiment Co-Training on action-labeled robot demonstrations.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05970",
+      "figures": [
+        {
+          "file": "2608.05970-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.05970v1/figures/Pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 3267,
+          "height": 901,
+          "caption": "Figure 2: Overview of the SkillMemo framework. The Expert-Guided Trajectory Segmentation module implicitly ∗ extracts latent atomic skills from demonstrations via MoE routing. The Skill-Level Memory Architecture structurally stores and dynamically prunes these learned gating profiles, enabling context-aware retrieval for robust compositional generalization on unseen task.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05738",
+      "figures": [
+        {
+          "file": "2608.05738-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.05738v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1140,
+          "height": 436,
+          "caption": "Figure 2: Overview of the VLA-Talker framework. An agentic tool-use module (depth estimation, open-vocabulary object detection, gripper projection, and VLM fallback) acquires grounded spatial evidence at each keyframe, which is rendered into a diverse, paraphrased in-context prompt. This evidence is injected into the VLM alongside the task instruction and image.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05674",
+      "figures": [
+        {
+          "file": "2608.05674-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.05674v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 997,
+          "height": 413,
+          "caption": "Figure 1 : JoyAI-RA 0.5 is a Vision-Language-World-Action framework for scaling learning robot manipulation from heterogeneous data through dual action alignment.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05215",
+      "figures": [
+        {
+          "file": "2608.05215-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.05215v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 753,
+          "height": 351,
+          "caption": "Figure 2: VLAff combines a vision encoder and VLM with visual-affordance, grasp-affordance and trajectory-affordance decoders.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05706",
+      "figures": [
+        {
+          "file": "2608.05706-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.05706v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 930,
+          "height": 495,
+          "caption": "Figure 1: Overview of LAWM-3D framework. The model learns 3D-aware latent actions through joint training on multi-view and single-view datasets. The learned latent action space enables world model pretraining and supports downstream tasks, achieving superior overall performance compared to the baseline method DreamDojo (Gao et al. 2026a ) .",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05799",
+      "figures": [
+        {
+          "file": "2608.05799-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.05799v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 814,
+          "height": 413,
+          "caption": "Figure 1: The XEWorld cross-embodiment testbed. The benchmark isolates embodiment changes while holding scenes and tasks fixed.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.06210",
+      "figures": [
+        {
+          "file": "2608.06210-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/pdf/2608.06210v1",
+          "sourceType": "pdf_exact_figure_crop",
+          "width": 1290,
+          "height": 516,
+          "caption": "Figure 1: VIDP extracts task-frame and direction-aware motion distributions from diverse kinematic demonstrations, maps their variance to stiffness, and jointly predicts end-effector pose and compliance.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05579",
+      "figures": [
+        {
+          "file": "2608.05579-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.05579v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 321,
+          "caption": "Figure 1: Overview of ARGUS. Given two RGB images from any two camera viewpoints, we first construct a 3D point cloud of the scene using a Large Vision Model (ex. VGGT [ 26 ] ). The point cloud is then aligned and scaled to fit the approximate geometry of the real world before it is used to render a 2D RGB image from a canonical viewpoint. This rendered image is then fed into the downstream visuomotor (ex. Diffusion) policy which is then used to predict actions.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05725",
+      "figures": [
+        {
+          "file": "2608.05725-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.05725v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 595,
+          "caption": "Figure 1 : Deterministic near-sensor visuotactile perception. a, Biological protective reflex. A cutaneous stimulus is relayed to the spinal cord, where a protective response is initiated within 65–137 ms [ 29 ] ; the slower cortical pathway supports deliberate responses on a 200–450 ms timescale. b, Engineered counterpart. Frames from the ultrafast vision-based tactile sensor (VBTS) are converted into dense depth maps by the near-sensor processor and acted upon locally. The first depth value is produced at a fixed latency of 0.211 ms after the first input pixel arrives, followed by one depth value per clock cycle, consuming 347 mW (FPGA programmable logic estimate), and 324 mW (45 nm ASIC estimate). This local pathway avoids the additional power consumption, data-transfer delay, and timing variability of host-based CPU or GPU processing.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.05948",
+      "figures": [
+        {
+          "file": "2608.05948-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.05948v1/x1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 793,
+          "height": 422,
+          "caption": "Figure 1 : Overview of GAUGE . Controlled real-world experiments provide calibrated physical metadata and motion-capture ground truth for rigid bodies, textiles, and volumetric deformable bodies. The physics-engine track (left) compares trajectories from matched simulated scenes with real measurements. The video world-model track (right) generates future motion from an initial frame and prompt, then evaluates the tracked motion in terms of physical laws and parameters.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}
