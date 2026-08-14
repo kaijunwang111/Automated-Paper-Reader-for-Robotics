@@ -13,6 +13,7 @@ import { paperDaily20260730Carryover } from "./paper-daily-2026-08-03";
 import { paperDaily20260803Fresh as paperDaily20260803 } from "./paper-daily-2026-08-03-fresh";
 import { paperDaily20260807 } from "./paper-daily-2026-08-07";
 import { paperDaily20260810 } from "./paper-daily-2026-08-10";
+import { paperDaily20260814 } from "./paper-daily-2026-08-14";
 
 export const paperTaxonomy = {
   research: {
@@ -1226,6 +1227,18 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-08-14",
+    date: "2026.08.14",
+    weekday: "周五",
+    range: "2026.08.10 - 2026.08.13",
+    title: "失败监督、训练期世界建模与动作前验证",
+    summary:
+      "本期收录十四篇论文，覆盖失败感知 WAM、时序价值模型、紧凑预测表征、真机在线 RL、结构化示范与接触前监控。",
+    overview:
+      "本期工作集中回答三个可验证问题：怎样把失败和未来转成不污染动作学习的监督，怎样让大模型在部署时减少世界建模成本，以及怎样用进度、价值或预测后果守住真实机器人执行边界。",
+    papers: paperDaily20260814.map(enrichPaper),
+  },
   {
     slug: "2026-08-10",
     date: "2026.08.10",

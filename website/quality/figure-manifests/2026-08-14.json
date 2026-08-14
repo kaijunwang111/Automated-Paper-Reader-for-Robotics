@@ -1,0 +1,244 @@
+{
+  "reportDate": "2026-08-14",
+  "reviewedAt": "2026-08-14T18:45:00+08:00",
+  "papers": [
+    {
+      "paperId": "2608.10232",
+      "figures": [
+        {
+          "file": "2608.10232-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.10232v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 997,
+          "height": 519,
+          "caption": "Figure 2: FACT architecture. (a) A shared causal diffusion transformer denoises action, value, and future-video tokens; value and future video condition on the clean action slot G G , not the noisy A A . At inference, Stage 1 denoises an action chunk, which fills G G for Stage 2 value and future-video prediction. (b) Success demonstrations supervise all three losses; failure rollouts mask ℒ act \\mathcal{L}_{\\mathrm{act}} but keep value and future-video supervision with a lowered progress target—failures teach consequences, not behavior.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.09853",
+      "figures": [
+        {
+          "file": "2608.09853-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.09853v1/RynnValue_arch.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1282,
+          "height": 387,
+          "caption": "Figure 1 : Overview of RynnValue. RynnValue is a language-conditioned value model trained on over 7,000 hours of heterogeneous embodied data, comprising roughly 3M instruction-conditioned trajectory clips across diverse embodiments, viewpoints, and task domains. Given a language instruction and a sequence of sampled observations, the model builds an interleaved multimodal sequence of repeated absolute-value and relative-value queries, which RynnBrain encodes in a single forward pass. Two distributional heads then predict the absolute temporal distance to task completion and the signed relative temporal displacement between observations, while the language branch produces video analysis and language-conditioned verification. The resulting temporal values serve as a unified interface for progress estimation, failure detection, and reward specification in robotic reinforcement learning.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.09771",
+      "figures": [
+        {
+          "file": "2608.09771-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.09771v1/teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1867,
+          "height": 945,
+          "caption": "Figure 1: Overview of SLIM. A compact MoT backbone models interactions among observation latents, continuous action tokens, and predictive future slots.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.09762",
+      "figures": [
+        {
+          "file": "2608.09762-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.09762v1/training_framework.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 792,
+          "height": 316,
+          "caption": "Figure 2: Overview of training framework with CTDE, reward-decomposed critic, human intervention, replay buffers, actors and learner.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.09730",
+      "figures": [
+        {
+          "file": "2608.09730-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.09730v1/work-version.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1710,
+          "height": 899,
+          "caption": "Figure 2: Training architecture. Given multi-view observations and language, the VLM produces multimodal features that the World Adapter maps into a fixed set of world tokens q t q_{t} . These tokens condition a jointly fine-tuned video denoiser (top) and a flow-matching action expert (bottom right). A Canny edge map of the primary view, encoded as a first-frame latent, supplies appearance-suppressed spatial structure to the video branch. At deployment, the video tokenizer, denoiser, structural anchor, and future targets are removed; the VLM, World Adapter, and action expert remain.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.09492",
+      "figures": [
+        {
+          "file": "2608.09492-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.09492v1/Figures/fig8.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 3976,
+          "height": 1558,
+          "caption": "Figure 2: Overview of TempoWAM. The base WAM generates an action chunk c c from the current observation, whose first n p n_{p} actions are executed unconditionally. Each subsequent decision step evaluates the remaining n t = min ⁡ ( n p , | c r ​ e ​ m | ) n_{t}=\\min(n_{p},|c^{rem}|) candidate actions: the RPM estimates the task progress that would be reached if they were executed, from the current observation, task instruction, candidate prefix, and execution history; the AEP then decides whether they will advance the task at the required rate. If yes, execution continues; otherwise the remaining actions are discarded and the WAM is triggered for a fresh chunk. TempoWAM adapts the execution horizon online: easy stages run through with few replanning, while hard stages trigger early discard and frequent replanning (bottom right).",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.09381",
+      "figures": [
+        {
+          "file": "2608.09381-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.09381v1/framework.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2020,
+          "height": 794,
+          "caption": "Figure 3: Overview of JEPA-WAM. A frozen V-JEPA encoder constructs a spatially structured joint current-future target for latent transition prediction.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.11363",
+      "figures": [
+        {
+          "file": "2608.11363-fig1.jpg",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.11363v1/figs/final_plots/main_fig.jpg",
+          "sourceType": "arxiv_html_figure",
+          "width": 2500,
+          "height": 1000,
+          "caption": "Figure 1 : Overview of minimal-data adaptation. A single demonstration is sparse and underdetermined on its own, but pre-trained VLA representations turn it into a useful anchor for adaptation. Few-demo behavior cloning narrows the search space to a task-relevant region around the demonstration, and online residual RL then expands local success by learning value-guided corrections on top of the warm-started base policy.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.10860",
+      "figures": [
+        {
+          "file": "2608.10860-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.10860v1/x2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 996,
+          "height": 356,
+          "caption": "Figure 2: Flex- π \\pi architecture. At time t t , RGB o t o_{t} and 3D pointmaps p t p_{t} are encoded by a pre-trained Wan-2.2 VAE into latent token streams z t o , z t p z^{o}_{t},z^{p}_{t} ; DINOv3 produces semantic tokens d t d_{t} . A stream presence mask 𝐦 in \\mathbf{m}^{\\text{in}} selects which visual streams are attended to in a shared Visual Transformer Backbone. A smaller Action Expert cross-attends to visual streams to produce an action chunk a t : t + H a_{t:t+H} . Conditioning ( s t s_{t} , l l ) is shared across streams, and an output mask 𝐦 out \\mathbf{m}^{\\text{out}} sets which future visual streams { z o , z p , d } t + 1 t + 1 + H \\{z^{o},z^{p},d\\}_{t+1}^{t+1+H} are mutually visible when jointly generated with the actions.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.11739",
+      "figures": [
+        {
+          "file": "2608.11739-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.11739v1/tokenizer_v2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2045,
+          "height": 640,
+          "caption": "Figure 3: Structured action tokenization. Heterogeneous robot actions are decomposed into semantically aligned motion parts, encoded with a residual vector quantizer, and serialized as part-specific action tokens. This representation shares one action vocabulary across embodiments while allowing sparse prediction over only the activated parts.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.11671",
+      "figures": [
+        {
+          "file": "2608.11671-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.11671v1/teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1114,
+          "height": 505,
+          "caption": "Figure 1 : Overview of StellaVLA , which conditions a VLA policy on in-context structured demonstrations. We convert diverse human and robot demonstrations into structured examples. Each example comprises high-level semantic rationales (sub-goals) and fine-grained kinematic rationales (movements), which are retrieved to prompt a vision-language-action model for manipulation tasks. During training, an auxiliary spatial-language expert supervises these rationales so the policy grounds its actions in the underlying reasoning rather than only imitating the observed motions. At inference this expert is removed and only the action expert is used, preserving real-time control. The resulting model generalizes more robustly to unseen tasks and environments in both simulation and real-world experiments.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.12063",
+      "figures": [
+        {
+          "file": "2608.12063-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.12063v1/main_figure.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2028,
+          "height": 1014,
+          "caption": "Figure 1: The three main stages of our proposed pipeline. We first collect a dataset from an expert SMPC , which is easy to tune in near real-time. We then train complex loco-manipulation policies with sparse rewards solely by mixing in the offline expert data, skipping tedious reward tuning. Finally, the sparse-reward policies are deployed on hardware. Website: https://pages.rai-inst.com/smpc2rl/",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.13422",
+      "figures": [
+        {
+          "file": "2608.13422-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.13422v1/seeker_overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 905,
+          "height": 387,
+          "caption": "Figure 1: Seeker Overview. (a) A state-conditioned query is iteratively refined over frozen DINOv3 patch tokens, producing a compact visual context together with attention maps and head scores. (b) Head-score-weighted attention is converted into a mask and bounding box using a top_p mass criterion. (c) The visual context is trained through a diffusion action-prediction loss, allowing the ROI to emerge without spatial supervision.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.13438",
+      "figures": [
+        {
+          "file": "2608.13438-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.13438v1/overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2047,
+          "height": 545,
+          "caption": "Figure 2: ContactGuard overview. A shared multi-view encoder maps camera observations to a latent context. An action-conditioned predictor rolls this context forward under the policy’s planned action chunk to produce future latents z ^ t + 1 : t + K \\hat{z}_{t+1:t+K} . A lightweight probe is trained offline on labelled pre-contact clips and used online to score the predicted post-contact latent z ^ t + K \\hat{z}_{t+K} . If the predicted failure probability exceeds threshold τ \\tau , execution is aborted before contact. Training uses teacher-forced next-latent prediction; inference uses autoregressive rollout.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}
