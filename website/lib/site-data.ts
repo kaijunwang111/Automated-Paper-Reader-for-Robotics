@@ -1510,7 +1510,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.08.10";
+export const companyTrackerLastChecked = "2026.08.17";
 
 export const companyUpdates: CompanyUpdate[] = [
   {
