@@ -1,0 +1,57 @@
+{
+  "reportDate": "2026-08-17",
+  "reviewedAt": "2026-08-17T18:30:00+08:00",
+  "papers": [
+    {
+      "paperId": "2608.14028",
+      "figures": [
+        {
+          "file": "2608.14028-fig4.png",
+          "figureNumber": "4",
+          "sourceUrl": "https://arxiv.org/html/2608.14028v1/pipe.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1748,
+          "height": 582,
+          "caption": "Figure 4: Domain-adversarial VLA with a Gradient Reversal Layer, Diffusion Transformer action expert, and Joint-Aligned Action Space.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.14379",
+      "figures": [
+        {
+          "file": "2608.14379-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.14379v1/figures/reflexvla.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2964,
+          "height": 1794,
+          "caption": "Figure 3: ReflexVLA combines latent future prediction, intermediate-feature temporal fusion, batched visual encoding, and CUDA Graph replay.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.14284",
+      "figures": [
+        {
+          "file": "2608.14284-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.14284v1/teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1566,
+          "height": 422,
+          "caption": "Figure 1: PRM-as-a-Judge evolves outcome-only evaluation into progress curves, 1.5 diagnosis metrics, and an assessment suite.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}

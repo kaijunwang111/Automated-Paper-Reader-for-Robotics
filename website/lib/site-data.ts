@@ -14,6 +14,7 @@ import { paperDaily20260803Fresh as paperDaily20260803 } from "./paper-daily-202
 import { paperDaily20260807 } from "./paper-daily-2026-08-07";
 import { paperDaily20260810 } from "./paper-daily-2026-08-10";
 import { paperDaily20260814 } from "./paper-daily-2026-08-14";
+import { paperDaily20260817 } from "./paper-daily-2026-08-17";
 
 export const paperTaxonomy = {
   research: {
@@ -1227,6 +1228,18 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-08-17",
+    date: "2026.08.17",
+    weekday: "周一",
+    range: "2026.08.14 - 2026.08.16",
+    title: "动态操作、跨本体灵巧控制与过程评测",
+    summary:
+      "本期收录三篇论文，覆盖低时延反应式 VLA、人类示范到灵巧手的跨本体迁移，以及基于进度曲线的机器人过程评测。",
+    overview:
+      "本期方法分别回答三个可核验问题：动态目标持续运动时怎样减少感知—动作延迟，异构人手与机器人动作怎样共享监督，以及怎样从大量真实 rollout 中区分早期失败、临门失败、回退与恢复。",
+    papers: paperDaily20260817.map(enrichPaper),
+  },
   {
     slug: "2026-08-14",
     date: "2026.08.14",
