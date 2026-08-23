@@ -1523,7 +1523,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.08.17";
+export const companyTrackerLastChecked = "2026.08.24";
 
 export const companyUpdates: CompanyUpdate[] = [
   {
@@ -1578,12 +1578,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "智元机器人",
     shortName: "AG",
     color: "#2765d8",
-    date: "2026.06.28",
-    category: "Deployment",
-    title: "第 15,000 台机器人下线",
+    date: "2026.08.20",
+    category: "Manufacturing",
+    title: "披露上半年人形机器人出货与产线部署",
     summary:
-      "里程碑机型为面向工业与真实作业场景的 G2，信号重点不在单次展示，而在量产、交付与场景规模化能力。",
-    url: "https://www.agibot.com/article/231/detail/82.html",
+      "智元援引 Counterpoint Research 称其 2026 年上半年出货约 9,700 台、占全球 43% 以上；官方同时披露 G2 已进入龙旗科技消费电子产线执行生产任务，这些数字按公司引用的第三方口径记录。",
+    url: "https://www.agibot.com/article/231/detail/89.html",
     source: "AGIBOT News",
   },
   {
@@ -1710,12 +1710,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "Generalist AI",
     shortName: "GN",
     color: "#d4532b",
-    date: "2026.07.23",
-    category: "Cross-Embodiment",
-    title: "GEN-1 扩展到多种灵巧手与专用末端",
+    date: "2026.08.19",
+    category: "Foundation Model",
+    title: "发布可一次示范适配的 GEN-1.5",
     summary:
-      "Generalist 报告 GEN-1 已在超过 50 万小时真实交互数据和约 9,000 种末端变体上训练，并展示中途更换末端后的策略适配；公开内容给出了权重变化分析，但未提供统一成功率表或独立复核。",
-    url: "https://generalistai.com/blog/towards-machines-with-a-thousand-hands",
+      "GEN-1.5 把 3–12 秒传感运动示范放入 30 秒上下文，在 10 项短程真机任务上报告一次示范平均成功率 59%±10%；公司也明确说明任务仍较简单、成功率有限。",
+    url: "https://generalistai.com/blog/gen-1.5",
     source: "Generalist AI Blog",
   },
   {
@@ -1758,12 +1758,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "星尘智能 Astribot",
     shortName: "AS",
     color: "#7c3aed",
-    date: "2025.12.09",
-    category: "Embodied Reasoning",
-    title: "发布具身推理 VLA 模型 Lumo-1",
+    date: "2026.07.13",
+    category: "World Action Model",
+    title: "发布隐空间世界动作模型 Lumo-2",
     summary:
-      "Lumo-1 通过视觉语言继续预训练、跨本体联合训练、S1 真机动作训练与强化学习，将文本/视觉推理和连续控制对齐；官方技术报告给出空间动作 token、泛化抓放与长时操作结果，代码和权重开放程度仍需持续跟踪。",
-    url: "https://www.astribot.com/research/Lumo1/",
+      "Lumo-2 用隐空间动力学替代显式文本规划，并以三阶段模态预对齐连接世界动态、视觉语言与动作；官方报告给出 2.71× 端到端解码加速和多类真机任务，但未公开完整训练数据规模。",
+    url: "https://www.astribot.com/en/research/Lumo2/",
     source: "Astribot Research",
   },
   {
@@ -1782,24 +1782,24 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "灵初智能 PsiBot",
     shortName: "PS",
     color: "#0f766e",
-    date: "2026.04.22",
-    category: "World Action Model",
-    title: "发布 Psi-R2、Psi-W0 与千小时人类操作数据",
+    date: "2026.07.14",
+    category: "Open Source",
+    title: "开源双灵巧手全栈系统 EgoSteer",
     summary:
-      "灵初智能以 10 万小时级人类手部数据预训练 Psi-R2，并用动作条件世界模型 Psi-W0 评估、生成和筛选策略数据；首批开源 1,000 小时视觉、语言、关节与触觉数据，官方称少于 100 条真机轨迹即可适配长程精细任务。",
-    url: "https://www.psibot.ai/%E7%81%B5%E5%88%9D%E6%99%BA%E8%83%BD%E6%96%B0%E4%B8%80%E4%BB%A3%E5%85%B7%E8%BA%AB%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B8%83%EF%BC%8C%E5%85%A8%E7%90%83%E6%9C%80%E5%A4%A7%E4%BA%BA%E7%B1%BB%E6%89%8B%E9%83%A8/",
+      "EgoSteer 将 9,600 小时第一人称人手数据、187 小时真机数据与人在闭环 DAgger 串成双灵巧手训练栈；官方已开放模型、训练推理、遥操与数据处理代码，数据仍标注为后续开放。",
+    url: "https://www.psibot.ai/%E7%81%B5%E5%88%9D%E6%99%BA%E8%83%BD%E4%B8%8E%E5%8C%97%E5%A4%A7-%E7%81%B5%E5%88%9D%E8%81%94%E5%90%88%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%85%B1%E5%90%8C%E5%8F%91%E5%B8%83%E5%B9%B6%E5%BC%80%E6%BA%90%E5%8F%8C/",
     source: "PsiBot News",
   },
   {
     company: "舞肌科技 WUJI",
     shortName: "WJ",
     color: "#d33b32",
-    date: "2026.07.23",
-    category: "Dexterous Hand",
-    title: "Wuji Hand 2 Beta 1 补齐仿真与机械集成资源",
+    date: "2026.08.03",
+    category: "Open Source",
+    title: "Wuji Hand 2 开放首版指尖触觉接口",
     summary:
-      "舞肌更新第二代 20 主动自由度灵巧手资源，提供重新标定的 URDF、MuJoCo MJCF、Isaac Sim USD、STL 与整机 STEP，并固定解剖学关节命名；当前仍是 Beta 1，驱动增益与物理参数后续还会更新。",
-    url: "https://docs.wuji.tech/docs/zh/wuji-hand/latest/release-notes/",
+      "Wuji SDK v2026.8.3 首次提供五指自描述触觉流、重标定和状态查询接口，并同步修复 Hand 2 连接与固件升级问题；官方仍将 Hand 2 标为 Beta 1，物理参数会继续迭代。",
+    url: "https://docs.wuji.tech/docs/en/wuji-sdk/latest/release-notes/",
     source: "WUJI Docs",
   },
   {

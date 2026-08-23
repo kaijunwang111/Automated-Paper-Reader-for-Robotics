@@ -171,7 +171,7 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(memoryPaperHtml, /单个 episode 内完整力历史/);
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周一/);
-  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.08\.17/);
+  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.08\.24/);
   assert.match(companiesHtml, /开源 GPU 加速医疗机器人物理仿真框架/);
   assert.match(companiesHtml, /Fremont 开始 Optimus 工厂施工与产线安装/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
