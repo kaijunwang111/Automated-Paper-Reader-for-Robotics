@@ -8,10 +8,13 @@ older report or candidate decision.
 from __future__ import annotations
 
 import argparse
+import base64
 import html as html_module
 import json
 import re
 import struct
+import subprocess
+import tempfile
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any
@@ -59,17 +62,70 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--report-date", required=True)
     parser.add_argument("--paper", action="append", required=True, help="arXiv id; repeatable")
     parser.add_argument("--repo-root", default="..")
+    parser.add_argument(
+        "--fulltext-only",
+        action="store_true",
+        help="Download HTML/text for review without selecting figures or writing a manifest.",
+    )
     return parser.parse_args()
 
 
 def get(url: str) -> requests.Response:
-    response = requests.get(
-        url,
-        headers={"User-Agent": USER_AGENT},
-        timeout=180,
-        proxies={"http": None, "https": None},
+    try:
+        response = requests.get(
+            url,
+            headers={"User-Agent": USER_AGENT},
+            timeout=180,
+            proxies={"http": None, "https": None},
+        )
+        response.raise_for_status()
+        return response
+    except requests.RequestException as primary_error:
+        try:
+            return get_with_powershell(url)
+        except (OSError, RuntimeError, subprocess.SubprocessError) as fallback_error:
+            raise RuntimeError(
+                "Download failed through both requests and the Windows web-stack fallback: "
+                f"requests={primary_error}; fallback={fallback_error}"
+            ) from fallback_error
+
+
+def get_with_powershell(url: str) -> requests.Response:
+    safe_url = url.replace("'", "''")
+    user_agent = USER_AGENT.replace("'", "''")
+    with tempfile.TemporaryDirectory(prefix="paper-reader-fetch-") as temp_dir:
+        output_path = Path(temp_dir) / "response.bin"
+        safe_output = str(output_path).replace("'", "''")
+        script = (
+            "$ErrorActionPreference='Stop';"
+            "$ProgressPreference='SilentlyContinue';"
+            f"Invoke-WebRequest -UseBasicParsing -Uri '{safe_url}' "
+            f"-Headers @{{'User-Agent'='{user_agent}'}} -TimeoutSec 180 "
+            f"-OutFile '{safe_output}'"
+        )
+        encoded = base64.b64encode(script.encode("utf-16le")).decode("ascii")
+        completed = subprocess.run(
+            ["powershell.exe", "-NoProfile", "-NonInteractive", "-EncodedCommand", encoded],
+            check=False,
+            capture_output=True,
+            timeout=210,
+        )
+        if completed.returncode != 0:
+            stderr = completed.stderr.decode("utf-8", errors="replace").strip()
+            raise RuntimeError(stderr or f"PowerShell exited with {completed.returncode}")
+        payload = output_path.read_bytes()
+
+    response = requests.Response()
+    response.status_code = 200
+    response.url = url
+    response._content = payload
+    suffix = Path(urlparse(url).path).suffix.lower()
+    response.headers["Content-Type"] = (
+        "image/png" if suffix == ".png" else
+        "image/jpeg" if suffix in {".jpg", ".jpeg"} else
+        "text/html; charset=utf-8"
     )
-    response.raise_for_status()
+    response.encoding = "utf-8"
     return response
 
 
@@ -160,12 +216,21 @@ def main() -> None:
 
     for paper_id in args.paper:
         html_url = f"https://arxiv.org/html/{paper_id}v1"
-        response = get(html_url)
+        try:
+            response = get(html_url)
+        except RuntimeError as exc:
+            if args.fulltext_only:
+                print(f"{paper_id}: HTML unavailable; PDF review required ({exc})")
+                continue
+            raise
         page_html = response.text
         (fulltext_dir / f"{paper_id}.html").write_text(page_html, encoding="utf-8")
         extractor = TextExtractor()
         extractor.feed(page_html)
         (fulltext_dir / f"{paper_id}.txt").write_text(extractor.result(), encoding="utf-8")
+        if args.fulltext_only:
+            print(f"{paper_id}: full text saved")
+            continue
 
         selected: dict[str, Any] | None = None
         for candidate in figure_candidates(page_html, html_url):
@@ -198,6 +263,9 @@ def main() -> None:
         if selected is None:
             raise RuntimeError(f"No figure passed the automatic dimension gate for {paper_id}")
         manifest_papers.append({"paperId": paper_id, "figures": [selected]})
+
+    if args.fulltext_only:
+        return
 
     manifest = {
         "reportDate": args.report_date,

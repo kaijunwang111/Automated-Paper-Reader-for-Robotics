@@ -1,0 +1,142 @@
+{
+  "reportDate": "2026-08-24",
+  "reviewedAt": "2026-08-27T16:30:00+08:00",
+  "papers": [
+    {
+      "paperId": "2608.21355",
+      "figures": [
+        {
+          "file": "2608.21355-fig5.png",
+          "figureNumber": "5",
+          "sourceUrl": "https://arxiv.org/html/2608.21355v1/model_final.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2047,
+          "height": 879,
+          "caption": "Fig. 4: Overview of ViTacPhys. (A) The predictor combines temporal visual–tactile observations, flow features, and a VLM-derived semantic prior computed from pre-contact RGB frames. (B) Human-to-robot transfer uses robot teleoperation, matched-action human demonstrations, and visually augmented human demonstrations. (C) During deployment, the VLM prior is computed before contact. After contact, the system immediately begins rolling prediction from a 30-frame visual–tactile queue; unavailable initial entries repeat the earliest post-contact observation before 15 frames and 14 adjacent flow fields are sampled. Cumulative temporal voting stabilizes the predicted classes and stiffness bin before they are passed to the downstream policy.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.21290",
+      "figures": [
+        {
+          "file": "2608.21290-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.21290v1/pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1547,
+          "height": 787,
+          "caption": "Fig. 2 : Overview of VT-MUSE. (a) Stage I adapts pretrained visual and tactile ViT encoders using cross-modal alignment, temporal coherence and mask-consistency objectives. (b) Stage II freezes both modality encoders and masks the visual tokens at the most recent time slot. Interleaved visuotactile tokens are then fed into temporal memory transformer, from which recent tactile tokens retrieve relevant information. A conditional variational model is trained to reconstruct the masked visual observations and predict tactile depth flow. Simultaneously, we use seen visual tail for posterior training reference. (c) The frozen sequential representation is projected into memory tokens and incorporated into intermediate layers of the VT-MUSE Policy through gated cross-attention. (d) We test our framework on both real world task and UniVTAC simulation task suite.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.21204",
+      "figures": [
+        {
+          "file": "2608.21204-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.21204v1/img/qplanning_teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2043,
+          "height": 551,
+          "caption": "Figure 1: Q-Planning overview. Left: at inference, the frozen BC policy samples N N candidate action chunks; the Q-function scores them and the executed chunk is a single-step Q-weighted average. Right: rollouts (successful and failed) are appended to a replay buffer and used to fine-tune only the Q-function. The updated Q ϕ Q_{\\phi} returns to the next inference iteration; the BC policy is never updated.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.20735",
+      "figures": [
+        {
+          "file": "2608.20735-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.20735v1/figures/method_overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 12135,
+          "height": 4223,
+          "caption": "Fig. 1: ForeTime-VLA overview. Left: the offline teacher encodes the current observation and sampled future frames with a frozen video VAE, then maps them to a compact action-equivalent target. Center: the deployable student uses eight causal observations to predict future, phase, and transition horizon variables. These predictions condition both the slow π 0.5 \\pi_{0.5} VLM prefix and the fast action-expert suffix, while the original noisy-action and target-flow construction is retained. Right: training combines action flow, future alignment, relational geometry, transition, phase, and auxiliary action-reconstruction losses. Future frames and the WAM are absent at test time.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.21740",
+      "figures": [
+        {
+          "file": "2608.21740-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.21740v1/teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1009,
+          "height": 565,
+          "caption": "Figure 1: Overview of CounterAlign . Through adversarial and relabeling-based discriminator training, CounterAlign converts expert demonstrations into an instruction-grounded reward. Relabeling creates counterfactual negative or unlabeled tuples that teach the reward model which instruction–action pairings are semantically inconsistent. The learned reward is then used to train a VLA policy with offline RL, improving robustness to object position and task perturbations without additional data collection or annotation.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.22419",
+      "figures": [
+        {
+          "file": "2608.22419-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.22419v1/fig/overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1853,
+          "height": 780,
+          "caption": "Figure 3: Overview of the Modality Masking Mechanism (M3). M3 is a training-time strategy that injects partial observability by stochastically masking modalities and action queries. As illustrated along the batch and token axes, different token subsets (comprising Egocentric (E), Left-wrist (L), Right-wrist (R) observations, Text Instructions (T), and Action Queries (Q)) are made visible (grey) at each training step. These partially observable inputs are processed by the VLM to produce M3-conditioned latents, which are then used by the action expert to decode actions. This process is intended to encourage more robust evidence selection and complementary representations without over-relying on any single input channel.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.22403",
+      "figures": [
+        {
+          "file": "2608.22403-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.22403v1/LD4WAM_Method.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2038,
+          "height": 1406,
+          "caption": "Figure 3: Pipeline of LD4WAM. Latent Dynamics Model (left): Frames sampled with random temporal skips are encoded by a frozen DINOv3; their features are aggregated by a spatio-temporal transformer and mapped via soft-VQ to latent dynamics { z i } \\{z_{i}\\} , supervised by semantic reconstruction and camera-frame end-effector deltas (Delta EE). World Dynamics Action Model (right): A Mixture-of-Transformers in which the video, latent dynamics, and action experts share a self-attention module. Learnable queries transfer the LDM-supervised latent dynamics from the video expert to the action expert; text conditions all three experts through cross-attention and is additionally concatenated with the state as input to the action expert. Training Procedure (bottom): Stage I pretrains the video and latent dynamics experts on all data while freezing the action expert; Stage II aligns all experts on robot data; Stage III post-trains the model on task-specific data.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.22301",
+      "figures": [
+        {
+          "file": "2608.22301-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.22301v1/fig1_teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1166,
+          "height": 377,
+          "caption": "Figure 1: The Imitator Game setup and Imitator Arena. A human demonstrates in one scene, a robot reproduces the intent in another, and anonymous rollouts are compared in structured A/B evaluation.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}

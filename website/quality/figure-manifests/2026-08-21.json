@@ -1,0 +1,244 @@
+{
+  "reportDate": "2026-08-21",
+  "reviewedAt": "2026-08-27T16:30:00+08:00",
+  "papers": [
+    {
+      "paperId": "2608.16837",
+      "figures": [
+        {
+          "file": "2608.16837-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.16837v1/fig_haf_overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2020,
+          "height": 1975,
+          "caption": "Figure 1: Overview of HAF. We demonstrate seven humanoid loco-manipulation tasks in real-world settings. HAF consists of two complementary components: HAF-VLA is a hierarchical action-flow vision-language-action model that generates whole-body motions stage by stage according to the kinematic dependencies among locomotion, torso adjustment, and dual-arm manipulation; HAF-Steer performs latent-space reinforcement learning on discrete cosine transform compressed temporal noise from frozen flow-based VLA policies. Together, they improve task performance in real-world settings.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.16715",
+      "figures": [
+        {
+          "file": "2608.16715-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.16715v1/pipeline_v4.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1163,
+          "height": 492,
+          "caption": "Figure 1 : The overview of MatchingPolicy. Correspondence points are extracted using a two-stage feature matching algorithm with VFMs and subsequently passed into a graph-based diffusion policy model to predict 6D gripper poses. These predicted motions are then translated into robot joint commands, with the model trained end-to-end on our synthetic dataset.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.16172",
+      "figures": [
+        {
+          "file": "2608.16172-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.16172v1/overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1484,
+          "height": 733,
+          "caption": "Figure 2: Overview of SparkVLA. At each subtask onset, the high-level planner autoregressively generates a subtask command, extracts a raw anchor from the penultimate layer, and fuses it with the anchor history pool via self-attention to form a history-aware anchor. At every decision boundary, anchor-conditioned context encoding extracts task-relevant visual features, while the stop-aware selector ranks Stop against all action-prefix candidates.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.18077",
+      "figures": [
+        {
+          "file": "2608.18077-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.18077v1/method_overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2043,
+          "height": 631,
+          "caption": "Figure 1 : Overview of Hydra-0. During offline training (top) , we recover action flow from interaction videos by tracking both the embodiment and the manipulated object , as detailed in Section 2.1 . The future video is encoded to construct the flow-matching training target. During online deployment (bottom) , Isaac Lab executes a candidate command sequence 𝐚 0 : H − 1 \\mathbf{a}_{0:H-1} through the robot controller and physics simulation, producing robot link transforms over the prediction horizon. Using these transforms, we propagate visible robot-surface points and project them through the calibrated camera following Equation 1 , producing embodiment action flow that conditions the causal autoregressive model to predict the command sequence’s real-world consequence.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.18234",
+      "figures": [
+        {
+          "file": "2608.18234-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.18234v1/overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2018,
+          "height": 897,
+          "caption": "Figure 2 : GigaBrain-WBC-0.5 overview. (a) The reference window c t c_{t} is perturbed with noise and, for the robot-relative root translation, intermittently masked, then mapped by an MLP encoder to the latent behavior command z t r ​ a ​ w z_{t}^{raw} ; a finite scalar quantizer and a decoder reconstruct the clean reference for a training-only cycle-consistency loss (dashed). (b) [ s t , a t − 1 , z t ] [s_{t},a_{t-1},z_{t}] is processed by a 6-layer causal Transformer with a KV cache; three heads emit the action a t a_{t} , the next proprioceptive state s t + 1 s_{t+1} (aligned against parallel-simulator rollouts), and the Gaussian Mixture Model (GMM) G t + 1 G_{t+1} over the next latent command. (c) At deployment, a stateless Mahalanobis test checks z t r ​ a ​ w z_{t}^{raw} against G t G_{t} —the mixture emitted one step earlier—and radially retracts out-of-distribution commands onto the safety ellipsoid of the selected component before committing z t z_{t} . The real-robot frames at bottom right illustrate commands produced by this deployment path on hardware.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.17962",
+      "figures": [
+        {
+          "file": "2608.17962-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.17962v1/overview_v2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2033,
+          "height": 903,
+          "caption": "Fig. 1 : Overview of PRISM dataset. We collect data using multiple robot platforms in diverse environments. Each manipulation episode includes synchronized multimodal observations, including visual, force, and proprioceptive signals, with tactile signals available for a subset of episodes.. For each episode, the full manipulation process is captured with well-calibrated multi-view cameras. The dataset spans a wide range of manipulation skills, and each episode is paired with a corresponding language description. In total, we provide more than 5,000 robot trajectories and 5,000 paired human demonstrations, covering over 45 hours of interaction across more than 25 tasks.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.17432",
+      "figures": [
+        {
+          "file": "2608.17432-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.17432v1/Figs/System.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 5151,
+          "height": 3212,
+          "caption": "Figure 1: System architecture of UniReflex . UniReflex hierarchically couples slow vision-driven planning, a fast proprioceptive reflex, and a real-time execution layer that tracks predicted reference forces together with reference-impedance targets.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.17423",
+      "figures": [
+        {
+          "file": "2608.17423-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.17423v1/objective_space.svg",
+          "sourceType": "arxiv_html_figure",
+          "width": 5220,
+          "height": 3951,
+          "caption": "Figure 1: Illustrative overview. Binary GRPO discards all-success and all-failure groups because identical rewards yield zero advantage. Prism-GRPO splits them by execution quality to recover informative, success-aligned updates.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.18948",
+      "figures": [
+        {
+          "file": "2608.18948-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.18948v1/RoboEdit_Trans.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2025,
+          "height": 475,
+          "caption": "Figure 1: RoboEdit-Trans uses LoRA and residual adapter for editing and 3D Robot-State Decoder for state recovery.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.19182",
+      "figures": [
+        {
+          "file": "2608.19182-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.19182v1/adept_overview_aug_12.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2038,
+          "height": 504,
+          "caption": "Figure 2: ADEPT Overview. (1) Pre-train ( π pre , V pre ) (\\pi_{\\mathrm{pre}},V_{\\mathrm{pre}}) via PPO on a generic reposing task. (2) Post-train into ( π post , V post ) (\\pi_{\\mathrm{post}},V_{\\mathrm{post}}) for the downstream contact-rich task via BC distillation, frozen actor critic warm-up, and conservative PPO. (3) Distill π post \\pi_{\\mathrm{post}} into a stereo RGB student π student \\pi_{\\text{student}} . (4) Deploy π student \\pi_{\\text{student}} zero-shot on the real robot.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.18787",
+      "figures": [
+        {
+          "file": "2608.18787-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.18787v1/frame1_v3_compressed.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1489,
+          "height": 556,
+          "caption": "Fig. 1: Illustration of the Dream2Reward framework. From a language-conditioned visual history, a latent transition model trained only on positive demonstration data predicts the successful latent displacement Δ ​ z ^ t + \\widehat{\\Delta z}^{+}_{t} . At inference, a candidate transition is encoded into its own displacement Δ ​ z t cand \\Delta z_{t}^{\\mathrm{cand}} , and the reward is the angular alignment and magnitude agreement between the two: transitions along the success direction with an appropriate step size score high, whereas wrong-direction, overshooting, or stagnant transitions score low.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.19574",
+      "figures": [
+        {
+          "file": "2608.19574-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.19574v1/fig2_submission.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 900,
+          "height": 1300,
+          "caption": "Fig. 2: Architecture of HiTac-WAM. (a) A directed attention mask allows tactile queries to access the video–action context while isolating video and action queries from tactile history. (b) The hierarchy predicts bilateral contact, contact-conditioned 3D deformation, and contact-gated slip risk. (c) Candidate action–forecast pairs are ranked by J ( k ) J^{(k)} ; the selected tactile forecast is retained as the execution-time reference, and persistent forecast deviations trigger corrective replanning.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.20114",
+      "figures": [
+        {
+          "file": "2608.20114-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.20114v1/figures/intro_overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2282,
+          "height": 826,
+          "caption": "Fig. 1: DECOWAM architecture, training, and deployment. (A) A frozen WAN backbone is augmented with trainable residual adapters, a teacher–student future bottleneck, separated base/arm latents, and base-velocity ego-motion conditioning; ActionDiT produces future RGB clips and a 48-step, 14-D action chunk. (B) Deployment removes future-frame inputs and the privileged teacher path, yielding strictly causal 14-D action inference. (C) Staged training first aligns pretrained FastWAM to ARMDOG and then adapts the decoupled modules to obtain the deployable policy.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.19613",
+      "figures": [
+        {
+          "file": "2608.19613-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.19613v1/main.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1569,
+          "height": 666,
+          "caption": "Fig. 1: Overview of design choices across three dimensions for latent action learning. Design I examines the impact of latent action modeling paradigms by comparing the implicit IDM-FDM framework with the explicit CFD-AE framework. Design II investigates how different regularization methods and their regularization strengths shape latent action representations and affect downstream policy learning. Design III evaluates the necessity of latent action normalization and investigates different strategies for integrating latent actions into physical action prediction. Stage I is trained on unlabeled video data consisting only of image frames, Stage II uses labeled video data paired with latent actions, and Stage III uses robot action data paired with physical actions. Further details of the three design studies and the three-stage training pipeline are provided in Section IV and Section III-B , respectively.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}

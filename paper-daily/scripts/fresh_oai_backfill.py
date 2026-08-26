@@ -10,7 +10,9 @@ avoids the ordinary OAI ``created`` field, which may reflect a later revision.
 from __future__ import annotations
 
 import argparse
+import base64
 import html
+import subprocess
 import time
 import xml.etree.ElementTree as ET
 from collections import defaultdict
@@ -36,8 +38,17 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Fresh historical arXiv OAI backfill")
     parser.add_argument("--config", default="config.yaml")
     parser.add_argument("--date", action="append", required=True, help="Natural day; repeatable")
-    parser.add_argument("--until", default=date.today().isoformat(), help="Last OAI datestamp to inspect")
+    parser.add_argument(
+        "--until",
+        default=datetime.now(timezone.utc).date().isoformat(),
+        help="Last OAI datestamp to inspect (defaults to the current UTC date)",
+    )
     parser.add_argument("--sleep-seconds", type=float, default=3.0)
+    parser.add_argument(
+        "--allow-empty-window",
+        action="store_true",
+        help="Permit an all-zero target window. Intended only for a manually verified arXiv outage/holiday.",
+    )
     return parser.parse_args()
 
 
@@ -60,10 +71,52 @@ def request_xml(params: dict[str, str], retries: int = 3) -> ET.Element:
             return ET.fromstring(response.content)
         except (requests.RequestException, ET.ParseError) as exc:
             last_error = exc
+            if "10054" in str(exc) or "connection was reset" in str(exc).lower():
+                break
             if attempt + 1 < retries:
                 time.sleep(10 * (attempt + 1))
     assert last_error is not None
-    raise last_error
+    try:
+        return request_xml_with_powershell(params)
+    except (OSError, RuntimeError, subprocess.SubprocessError, ET.ParseError) as fallback_error:
+        raise RuntimeError(
+            "arXiv OAI failed through both requests and the Windows web-stack fallback: "
+            f"requests={last_error}; fallback={fallback_error}"
+        ) from fallback_error
+
+
+def request_xml_with_powershell(params: dict[str, str]) -> ET.Element:
+    """Use the Windows web stack when Python sockets are reset by the local network.
+
+    Some Windows environments can reach export.arxiv.org through
+    ``Invoke-WebRequest`` while Python/OpenSSL connections are reset.  The
+    fallback is per-request, keeps the official HTTPS endpoint, and passes the
+    command via ``-EncodedCommand`` so OAI resumption tokens are not interpreted
+    by a shell.
+    """
+
+    prepared = requests.Request("GET", OAI_URL, params=params).prepare()
+    url = (prepared.url or OAI_URL).replace("'", "''")
+    user_agent = USER_AGENT.replace("'", "''")
+    script = (
+        "$ErrorActionPreference='Stop';"
+        "$ProgressPreference='SilentlyContinue';"
+        "[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new($false);"
+        f"$response=Invoke-WebRequest -UseBasicParsing -Uri '{url}' "
+        f"-Headers @{{'User-Agent'='{user_agent}'}} -TimeoutSec 180;"
+        "[Console]::Out.Write($response.Content)"
+    )
+    encoded = base64.b64encode(script.encode("utf-16le")).decode("ascii")
+    completed = subprocess.run(
+        ["powershell.exe", "-NoProfile", "-NonInteractive", "-EncodedCommand", encoded],
+        check=False,
+        capture_output=True,
+        timeout=210,
+    )
+    if completed.returncode != 0:
+        stderr = completed.stderr.decode("utf-8", errors="replace").strip()
+        raise RuntimeError(stderr or f"PowerShell exited with {completed.returncode}")
+    return ET.fromstring(completed.stdout)
 
 
 def iter_category_records(
@@ -162,6 +215,26 @@ def merge_papers(existing: dict[str, Any] | None, incoming: dict[str, Any]) -> d
     return merged
 
 
+def ensure_window_ready(
+    by_day: dict[date, list[dict[str, Any]]],
+    targets: list[date],
+    *,
+    allow_empty_window: bool,
+) -> None:
+    """Reject a false-empty OAI response before it can overwrite report inputs."""
+
+    target_paper_count = sum(len(by_day.get(target, [])) for target in targets)
+    if target_paper_count > 0 or allow_empty_window:
+        return
+    target_range = f"{targets[0].isoformat()}..{targets[-1].isoformat()}"
+    raise RuntimeError(
+        "Fresh arXiv OAI retrieval returned zero v1 papers across the entire "
+        f"target window {target_range}. Treat this as an incomplete/unavailable "
+        "announcement batch, not a valid empty report. Retry after the scheduled "
+        "arXiv announcement or pass --allow-empty-window only after manual verification."
+    )
+
+
 def main() -> None:
     args = parse_args()
     config_path = Path(args.config).resolve()
@@ -186,6 +259,8 @@ def main() -> None:
         created_day = date.fromisoformat(str(paper["published_at"])[:10])
         if created_day in target_set:
             by_day[created_day].append(paper)
+
+    ensure_window_ready(by_day, targets, allow_empty_window=args.allow_empty_window)
 
     raw_dir = config_path.parent / config.get("output", {}).get("data_dir", "data") / "raw"
     processed_dir = config_path.parent / config.get("output", {}).get("data_dir", "data") / "processed"

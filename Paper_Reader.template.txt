@@ -40,15 +40,19 @@ python scripts/daily_papers.py --config config.yaml --date today --stage fetch -
 - fetch 完成后读取命令输出中的候选文件路径，通常是：
   data/processed/YYYY-MM-DD_candidates.json
 - 同时读取 `data/raw/YYYY-MM-DD.json` 中的 `recommended_action` 和 `duplicate_check`。
-- 如果 `recommended_action` 是 `write_no_new_batch_note`、`duplicate_check.recommended_action` 是 `write_no_new_batch_note`、`duplicate_check.status` 是 `duplicate_of_previous`，或当天 candidates 为空 / paper id 集合与最近一天 candidates 完全一致：
+- 如果 `recommended_action` 是 `write_no_new_batch_note`、`duplicate_check.recommended_action` 是 `write_no_new_batch_note`、`duplicate_check.status` 是 `duplicate_of_previous`，或当天 candidates 为空 / paper id 集合与最近一天 candidates 完全一致，先检查预期 arXiv 公告批次是否已经发布并能从官方 OAI/API 读取：
+  - 目标日期仍被判为未来、最近批次落后、网络/解析报错或整个窗口为零时，不能进入“无新候选”分支；保持原窗口每 15 分钟重试、最多三次，不得回退 `until` 或使用前一天候选。
+  - 三次仍未就绪则停止论文阶段并报告失败；自动化不得使用 `--allow-empty-window`。
+  - 只有预期公告已确认可见、网络与解析正常、按原窗口重拉仍为空时，才执行下面的真正零候选处理：
   - 不要重复生成正常 Top 15 日报。
   - 不要沿用旧 Top 15 冒充当天新推荐。
   - 写一个很短的“今日无新候选批次”说明到 `reports/YYYY-MM-DD.md`，注明候选数量、最近可见 arXiv 批次、主要原因（例如 arXiv 今日 recent-list 尚未更新、当天无公告批次、或候选池与上一批重复）。
   - 除非用户明确要求补跑/重评，不要重写 `data/processed/YYYY-MM-DD_scored.json`。
 
-如果 fetch 失败或候选池为空：
+如果 fetch 失败、公告未就绪或候选池为空：
 - 检查 `logs/YYYY-MM-DD.log`、`data/raw/YYYY-MM-DD.json` 和 `data/processed/YYYY-MM-DD_candidates.json`。
 - 如果原因是网络、代理或 arXiv 访问失败，不要写泛化空日报。
+- 如果原因是运行早于公告、目标日期被判为未来或 OAI 整窗为零，同样按失败处理，不得发布 0 篇网站日报。
 - 报告失败命令、错误原因、已生成文件、候选数量和建议修复方案。
 - 只有在用户明确要求 fallback 时，才可使用最近一个非空 candidates 文件生成补跑日报，并在报告开头标明来源日期。
 

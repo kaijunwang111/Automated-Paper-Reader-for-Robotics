@@ -15,6 +15,8 @@ import { paperDaily20260807 } from "./paper-daily-2026-08-07";
 import { paperDaily20260810 } from "./paper-daily-2026-08-10";
 import { paperDaily20260814 } from "./paper-daily-2026-08-14";
 import { paperDaily20260817 } from "./paper-daily-2026-08-17";
+import { paperDaily20260821 } from "./paper-daily-2026-08-21";
+import { paperDaily20260824 } from "./paper-daily-2026-08-24";
 
 export const paperTaxonomy = {
   research: {
@@ -1228,6 +1230,30 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-08-24",
+    date: "2026.08.24",
+    weekday: "周一",
+    range: "2026.08.21 - 2026.08.23",
+    title: "自改进规划、视触觉物性与人类视频动力学",
+    summary:
+      "本期收录八篇论文，覆盖冻结 VLA 的 Q-Planning、视觉触觉物性与表征、未来 token 蒸馏、反事实监督、双臂鲁棒训练、human-video WAM 和意图模仿评测。",
+    overview:
+      "这些工作分别研究怎样从部署成败改进冻结策略、怎样把接触和物性转成控制变量、怎样以紧凑未来表征替代在线视频生成，以及怎样检验机器人是否真正理解人类演示意图。",
+    papers: paperDaily20260824.map(enrichPaper),
+  },
+  {
+    slug: "2026-08-21",
+    date: "2026.08.21",
+    weekday: "周五",
+    range: "2026.08.17 - 2026.08.20",
+    title: "人形全身 VLA、动作流世界模型与接触闭环",
+    summary:
+      "本期收录十四篇论文，覆盖人形全身 action flow、跨物体对应、层级子任务、触觉/力控 WAM、灵巧 RL、移动操作与人类视频预训练。",
+    overview:
+      "本期方法集中在三个具体问题：高维全身动作如何结构化生成，跨本体视频如何形成可执行监督，以及接触、未来和失败信号如何进入真实机器人闭环。",
+    papers: paperDaily20260821.map(enrichPaper),
+  },
   {
     slug: "2026-08-17",
     date: "2026.08.17",

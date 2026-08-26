@@ -9,6 +9,11 @@ def test_production_limits_and_sources():
 
     assert config["sources"]["arxiv"]["enabled"] is True
     assert config["sources"]["arxiv"]["max_results"] >= 200
+    readiness = config["sources"]["arxiv"]["announcement_readiness"]
+    assert readiness["scheduled_hour"] == 10
+    assert readiness["require_expected_batch_before_accepting_empty"] is True
+    assert readiness["prohibit_fallback_to_earlier_until_date"] is True
+    assert readiness["prohibit_empty_public_report"] is True
     assert config["sources"]["openreview"]["enabled"] is False
     assert config["sources"]["openalex"]["enabled"] is False
     assert config["retrieval"]["daily_candidate_limit"] == 200

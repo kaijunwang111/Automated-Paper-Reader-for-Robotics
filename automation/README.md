@@ -5,14 +5,14 @@
 
 ## 定时任务
 
-同一个任务每周一、周五 00:00（Asia/Shanghai）运行，也就是周日刚进入周一、周四刚进入周五的时刻，并按计划日期分支：
+同一个任务每周一、周五 10:00（Asia/Shanghai）运行，并按计划日期分支。arXiv 的新论文公告在美国东部时间周日至周四 20:00 发布，换算到中国时间通常是次日 08:00 或 09:00；10:00 为公告和索引同步预留缓冲，避免凌晨运行把“批次尚未发布”误判为“0 篇”：
 
 - 周一：先执行 [PAPER_DAILY_AUTOMATION.md](PAPER_DAILY_AUTOMATION.md)，再执行
   [COMPANY_TRACKER_AUTOMATION.md](COMPANY_TRACKER_AUTOMATION.md)，最后统一测试、提交和发布一次。
 - 周五：只执行 [PAPER_DAILY_AUTOMATION.md](PAPER_DAILY_AUTOMATION.md)，不得检索、改写或刷新公司动态及 `companyTrackerLastChecked`。
 - 所有论文更新都必须通过 [PAPER_DAILY_QUALITY_GATES.md](PAPER_DAILY_QUALITY_GATES.md) 的全部质量门禁。
 
-周一论文阶段没有新候选批次时，仍继续执行公司阶段；周五没有新论文且没有公开文件变更时，不创建空提交，也不重复发布网站。
+只有在预期公告批次已确认可见后，才允许把候选数为零解释为真正无新候选。若 OAI/API 返回整个窗口为零、目标日期仍被服务端视为未来、或最近批次落后于预期，论文阶段必须重试并最终失败退出，不得发布空日报或把查询上限退回更早日期。周一论文阶段失败时仍可继续公司阶段，但最终回报必须明确论文未更新；周五没有经过就绪确认的新论文且没有公开文件变更时，不创建空提交，也不重复发布网站。
 
 ## 单任务执行顺序
 

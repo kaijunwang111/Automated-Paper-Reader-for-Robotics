@@ -292,6 +292,15 @@ sources:
     html_fallback_per_category: 200
     html_fallback_max_results: 500
     html_fallback_sleep_seconds: 0.25
+    announcement_readiness:
+      timezone: Asia/Shanghai
+      scheduled_hour: 10
+      scheduled_minute: 0
+      retries: 3
+      retry_delay_minutes: 15
+      require_expected_batch_before_accepting_empty: true
+      prohibit_fallback_to_earlier_until_date: true
+      prohibit_empty_public_report: true
   official_organization_channels:
     enabled: true
     check_each_run: true
