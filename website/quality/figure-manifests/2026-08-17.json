@@ -1,18 +1,52 @@
 {
   "reportDate": "2026-08-17",
-  "reviewedAt": "2026-08-17T18:30:00+08:00",
+  "reviewedAt": "2026-08-27",
   "papers": [
+    {
+      "paperId": "2608.15875",
+      "figures": [
+        {
+          "file": "2608.15875-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.15875v1/gigabrain07_teaser_compressed.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2035,
+          "height": 1384,
+          "caption": "Figure 1 : Overview of GigaBrain-0.7 . GigaBrain-0.7 is an embodied foundation-model system that coordinates understanding and planning, prediction and evaluation, and action and control through a three-system architecture. It learns from heterogeneous pretraining data and on-robot experience to support generalization and continual improvement across diverse robot embodiments and real-world scenarios.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
     {
       "paperId": "2608.14028",
       "figures": [
         {
-          "file": "2608.14028-fig4.png",
-          "figureNumber": "4",
-          "sourceUrl": "https://arxiv.org/html/2608.14028v1/pipe.png",
+          "file": "2608.14028-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.14028v1/teaser.png",
           "sourceType": "arxiv_html_figure",
-          "width": 1748,
-          "height": 582,
-          "caption": "Figure 4: Domain-adversarial VLA with a Gradient Reversal Layer, Diffusion Transformer action expert, and Joint-Aligned Action Space.",
+          "width": 1536,
+          "height": 789,
+          "caption": "Figure 1: AdvDex. A unified Vision-Language-Action framework for scalable cross-embodiment dexterous manipulation. By aligning hardware kinematics through a shared action space and reducing embodiment-specific visual information through domain-adversarial learning, AdvDex supports zero-shot generalization to novel objects and unseen environments.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15897",
+      "figures": [
+        {
+          "file": "2608.15897-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.15897v1/method.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2028,
+          "height": 1080,
+          "caption": "Fig. 2: Overview of Sim2Real via Bottlenecked Latent Reconstruction. Unpaired PFC (sim) and tactile (real) data is used to train bidirectional rectified-flow converters f p → c f_{p\\rightarrow c} and f c → p f_{c\\rightarrow p} . Stage 1 learns a base policy on PFC without sensor-specific simulation; stage 2 adapts it via bottlenecked latent reconstruction. At deployment, f c → p f_{c\\rightarrow p} maps real tactile readings to PFC for the adapted RL policy.",
           "visualReview": "passed",
           "containsPageHeader": false,
           "completeFrame": true
@@ -23,13 +57,13 @@
       "paperId": "2608.14379",
       "figures": [
         {
-          "file": "2608.14379-fig3.png",
-          "figureNumber": "3",
-          "sourceUrl": "https://arxiv.org/html/2608.14379v1/figures/reflexvla.png",
+          "file": "2608.14379-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.14379v1/figures/reflex_f1.png",
           "sourceType": "arxiv_html_figure",
-          "width": 2964,
-          "height": 1794,
-          "caption": "Figure 3: ReflexVLA combines latent future prediction, intermediate-feature temporal fusion, batched visual encoding, and CUDA Graph replay.",
+          "width": 1419,
+          "height": 1329,
+          "caption": "Fig. 1 : Overview of our work. We introduce ReflexBench , a benchmark of six reaction-critical manipulation tasks. Building upon it, we propose ReflexVLA , a fast and predictive VLA that achieves strong performance with low latency.",
           "visualReview": "passed",
           "containsPageHeader": false,
           "completeFrame": true
@@ -37,16 +71,169 @@
       ]
     },
     {
-      "paperId": "2608.14284",
+      "paperId": "2608.15139",
       "figures": [
         {
-          "file": "2608.14284-fig1.png",
+          "file": "2608.15139-fig1.png",
           "figureNumber": "1",
-          "sourceUrl": "https://arxiv.org/html/2608.14284v1/teaser.png",
+          "sourceUrl": "https://arxiv.org/html/2608.15139v1/motivation.png",
           "sourceType": "arxiv_html_figure",
-          "width": 1566,
-          "height": 422,
-          "caption": "Figure 1: PRM-as-a-Judge evolves outcome-only evaluation into progress curves, 1.5 diagnosis metrics, and an assessment suite.",
+          "width": 1007,
+          "height": 784,
+          "caption": "Figure 1: Structured exploration for flow-based VLA-RL. (a) Robot exploration benefits from smooth action chunks and group-aware noise scales. (b) In-chain noise can lose its intended structure during the remaining denoising steps. (c) StructRL keeps denoising deterministic and applies structured noise directly in the action space.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15917",
+      "figures": [
+        {
+          "file": "2608.15917-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.15917v1/arch_v2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1707,
+          "height": 1100,
+          "caption": "Figure 3: Policy Architecture. Our policy is a diffusion transformer that consumes a sequence of proprioception ( o o ), action ( a a ), multi-view images, and noised action chunks as interleaved tokens. In training, the model denoises all action chunks simultaneously with a causal mask, amortizing its sequence length. We additionally use sliding window attention in training, with a matched rolling KV cache for efficient inference.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.14822",
+      "figures": [
+        {
+          "file": "2608.14822-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.14822v1/framework_core.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2037,
+          "height": 780,
+          "caption": "Figure 2: Overview of CoRe. An online perturbation trips the suffix OOD detector and interrupts the frozen VLA (top). Recovery runs through the virtual planning stages (bottom), passing the recovery anchor, the rejoin state c ∗ c^{*} , and the restoration subset S ∗ S^{*} left to right. Only the final rearrangement and handoff produces physical motion before control returns to the frozen VLA.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15269",
+      "figures": [
+        {
+          "file": "2608.15269-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.15269v1/mamba_compressed.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2016,
+          "height": 1003,
+          "caption": "Figure 2: Mamba-compressed visual-history pipeline. Historical multi-view patch features are extracted by the shared visual encoder and mapped into a unified feature space by a lightweight adapter. Each frame is encoded through bidirectional spatial scans and learned-query pooling, after which causal temporal Mamba layers recurrently aggregate the per-view history. The resulting visual-history representations provide the keys and values for residual cross-attention, while the final hidden representations used for action prediction provide the queries. The enhanced hidden representations are then passed to the action head.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15680",
+      "figures": [
+        {
+          "file": "2608.15680-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.15680v1/0729main_vector_text_aaai.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1601,
+          "height": 900,
+          "caption": "Figure 1: Overview of Robo-Dopamine 2.0. Standard queries use same-episode expert history, online queries use the observed rollout history, and synthetic OOD queries use source-aligned successful-reference panels while preserving their edited endpoints. All context modes share the same pairwise GRM interface.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15816",
+      "figures": [
+        {
+          "file": "2608.15816-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.15816v1/overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1597,
+          "height": 582,
+          "caption": "Figure 2: Overview of ViTaR. A frozen VLA maps language, RGB observations, and proprioception to a base action. Marker and tactile-image chunks provide local contact evidence. EGM estimates state adaptability and relative effects for the base action and residual options; RAM then selects an action choice and predicts a continuous scale for the selected residual before execution.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15863",
+      "figures": [
+        {
+          "file": "2608.15863-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.15863v1/applianceplan.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1012,
+          "height": 846,
+          "caption": "Figure 2. Overview of MAGE. The first two stages (Secs. 3.2 – 3.3 ) construct the Hierarchical Appliance Graph (HAG) via automated collection and human-verified annotation; the latter two (Secs. 3.4 – 3.5 ) consume the completed HAG to synthesize three types of data—part grounding annotations, open-loop manipulation plans, and observation images with closed-loop recovery data.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15766",
+      "figures": [
+        {
+          "file": "2608.15766-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.15766v1/pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2041,
+          "height": 637,
+          "caption": "Fig. 2 : Overview of the Tac4Loco pipeline. During training, proprioception and raw plantar pressure measurements are collected in simulation. The pressure signals are preprocessed through matrixization, history extraction, terrain-orientation estimation, and observation augmentation, and then encoded by a dual-branch plantar pressure encoder consisting of a spatial branch and a temporal branch. The resulting tactile representation is fused with proprioception in an asymmetric actor–critic framework for policy learning. After training, the learned actor is transferred to the real robot and driven by physical plantar pressure measurements processed under the same representation.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15707",
+      "figures": [
+        {
+          "file": "2608.15707-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.15707v1/method.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1150,
+          "height": 461,
+          "caption": "Figure 2: An Overview of GAINS.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.15560",
+      "figures": [
+        {
+          "file": "2608.15560-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.15560v1/teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1200,
+          "height": 900,
+          "caption": "Figure 1: Force-aware retargeting overview. Human-guided motion and contact references specify the intended interaction, while ReForce uses robot-side fingertip force feedback to adapt the reference into dexterous-hand commands during contact-rich execution.",
           "visualReview": "passed",
           "containsPageHeader": false,
           "completeFrame": true
