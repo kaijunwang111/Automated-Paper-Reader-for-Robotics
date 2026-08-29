@@ -1,0 +1,346 @@
+{
+  "reportDate": "2026-08-28",
+  "reviewedAt": "2026-08-30",
+  "papers": [
+    {
+      "paperId": "2608.27033",
+      "figures": [
+        {
+          "file": "2608.27033-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.27033v1/teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1497,
+          "height": 644,
+          "caption": "Figure 1 : Overview of Riemann-1.0 . Riemann-1.0 integrates a unified embodied data infrastructure, Progressive Embodied Pretraining, and a fully causal World Action Model into a unified framework for embodied intelligence. The resulting model simultaneously serves as an executable robot policy and an action-conditioned visual world simulator, achieving state-of-the-art performance across both simulation benchmarks and long-horizon real-world manipulation tasks.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.25757",
+      "figures": [
+        {
+          "file": "2608.25757-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.25757v1/polished_algorithm_overview_v18.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1563,
+          "height": 975,
+          "caption": "Figure 1: LM-X 以 RTG、ETG 与异方差动作流分别显式建模任务进度、事件级意图和局部动作可靠性，并将三者接入同一动作生成计算图。",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.26058",
+      "figures": [
+        {
+          "file": "2608.26058-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.26058v1/figs/UCAG.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 5876,
+          "height": 2825,
+          "caption": "Figure 3 : Overview of UCAG-P for unified learning from heterogeneous manipulation data, spanning single-arm robots, bimanual robots, dexterous robotic hands, and human hands. UCAG-P maps their incompatible native action spaces into a shared camera-centric motion space defined by 3D camera-frame trajectories of the wrist or end-effector and grasp center. A geometry-conditioned translator then combines the unified motion prediction with camera-to-base transforms, Jacobians, and robot state to produce embodiment-specific executable actions. This unified interface enables joint robot–human training and improves performance across LIBERO, LIBERO-Plus, RoboTwin, and RoboCasa GR-1.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.24885",
+      "figures": [
+        {
+          "file": "2608.24885-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.24885v1/figure1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1540,
+          "height": 805,
+          "caption": "Figure 1: Overview of our diagnose–improve–validate pipeline. WorldEcho probes action-conditioned world models with demonstrated and diverse off-expert queries, jointly evaluating visual integrity and SE ⁡ ( 3 ) \\mathrm{SE}(3) end-effector alignment to expose visual collapse and action mismatch. Guided by this diagnosis, WorldSync broadens the training distribution over action consequences, grounds intermediate video representations in action-induced robot dynamics through an Action-Forcing Expert, and aligns predicted changes under action interventions with the corresponding changes in ground-truth futures. In simulation and real-robot policy-improvement experiments, these gains translate into higher policy success rates.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.23831",
+      "figures": [
+        {
+          "file": "2608.23831-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.23831v1/body/figures/approach_diagram.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2452,
+          "height": 940,
+          "caption": "Figure 2: An overview of our approach, Arli . Inference begins t delay t_{\\mathrm{delay}} steps before the next action chunk is required, in which the VLM backbone π pt vlm \\pi_{\\mathrm{pt}}^{\\mathrm{vlm}} takes state s t − t delay s_{t-t_{\\mathrm{delay}}} as input. At step t − t delay rl t-t_{\\mathrm{delay}}^{\\mathrm{rl}} , RL policy π rl \\pi_{\\mathrm{rl}} must be run to ensure that the action expert π pt ae \\pi_{\\mathrm{pt}}^{\\mathrm{ae}} is provided a noise input w w once VLM inference finishes. π rl \\pi_{\\mathrm{rl}} is conditioned on (a) the initial state s t − t delay s_{t-t_{\\mathrm{delay}}} , (b) intermediate actions a − 9 : 0 a_{-9:0} , and (c) intermediate state s t − t delay rl s_{t-t_{\\mathrm{delay}}^{\\mathrm{rl}}} . Once the action expert’s inference is complete, the next action played, a 0 a_{0} , starts at step n delay n_{\\text{delay}} within the newly-generated chunk A t A_{t} .",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.22869",
+      "figures": [
+        {
+          "file": "2608.22869-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://export.arxiv.org/e-print/2608.22869v1#figures/model_final.pdf",
+          "sourceType": "arxiv_source_figure",
+          "width": 882,
+          "height": 1189,
+          "caption": "Figure 1: UniMem 通过事件分类器触发文本事件与视觉关键帧记忆更新，并将缓存后的多模态历史直接送回共享 VLA 主干和动作专家。",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.27384",
+      "figures": [
+        {
+          "file": "2608.27384-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.27384v1/teaser_a.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2037,
+          "height": 847,
+          "caption": "(a) Conceptual illustration of prior VLA inference: it either stalls the robot at every chunk boundary (synchronous) or predicts from a stale observation whose mismatch grows with the lookahead (asynchronous with future-state conditioning). FlashVLA removes both costs at once by decoding chunks jointly under chunk-wise causal attention.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.25798",
+      "figures": [
+        {
+          "file": "2608.25798-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.25798v1/Framwork.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1460,
+          "height": 586,
+          "caption": "Figure 1 : Overview of TacForcing . The VLM encodes the visual observation and language instruction once, and the resulting task context is reused throughout streaming generation. The Streaming Action Expert progressively refines action blocks according to block-specific flow times, allowing successive blocks to become ready for sequential execution. After each ready block is executed, the resulting tactile feedback is encoded before generation resumes from the retained intermediate states of unfinished blocks. Execution-Aware Tactile Attention allows the latest tactile feedback to condition only the block scheduled for execution next, thereby reducing the temporal mismatch between tactile acquisition and action execution.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.26103",
+      "figures": [
+        {
+          "file": "2608.26103-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.26103v1/data_combine_v1.1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1033,
+          "height": 887,
+          "caption": "Figure 2 : Data construction and in-context human video generation. Top: Task-diverse VA data provide task-balanced robotic video-action pre-training data, while HumanGen contains Pre-train ICL (External), Pre-train ICL (In-house), Simulation ICL, and Real-world ICL pairs. Bottom: the in-context human video generation pipeline converts task-sampled robot videos into human video instructions.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.25308",
+      "figures": [
+        {
+          "file": "2608.25308-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2608.25308v1/method_overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2032,
+          "height": 764,
+          "caption": "Fig. 3 : The overall pipeline of V-Link. V-Link introduces learnable Spatial and Semantic Queries into the pretrained VLM. A causal attention mask enables them to independently extract geometric and semantic cues from deep VLM features without disrupting the native multimodal token stream. Lightweight depth and semantic heads provide explicit supervision to disentangle these cues within the VLM latent space and are removed at inference. The resulting representations are injected into Action DiT through asymmetric pathways: Semantic Queries complement the VLM image tokens, whereas Spatial Queries form a mandatory geometry-conditioning branch that compels Action DiT to explicitly encode depth-aware representations rather than rely on semantic shortcuts.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.23138",
+      "figures": [
+        {
+          "file": "2608.23138-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.23138v1/pointing_vla_architecture_v9_20260724.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 840,
+          "height": 567,
+          "caption": "Figure 2: Pointing-VLA architecture and typed interfaces. Embodied-R1 hidden states feed point, OFG/contact-heatmap, and VTG-waypoint heads; fixed PICK/PLACE slots use source-conditioned OFG/Pointing, and a wrapper maps image geometry to robot coordinates.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.26545",
+      "figures": [
+        {
+          "file": "2608.26545-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.26545v1/pullfig.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1640,
+          "height": 502,
+          "caption": "Figure 1: Memory Anchors . New tasks may be visually similar to old tasks while requiring different, sometimes even opposite actions, causing catastrophic forgetting (Right). We claim that a small proportion of old data plays a large role in anchoring past task performance. While these Memory Anchors may appear naturally in randomly selected memories, their concentration is especially important with conflicting tasks. We propose a method for finding Memory Anchors and supplementing the ER buffer with them to reduce catastrophic forgetting for these worst-case scenarios (Left).",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.23478",
+      "figures": [
+        {
+          "file": "2608.23478-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.23478v1/Figure2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2043,
+          "height": 646,
+          "caption": "Figure 2: Overview of Indi . A training-only teacher VLM derives multimodal intent and textual-purpose targets from executed behavior, while a frozen visual encoder supplies the endpoint-visual target. The VLA decoder recovers intent at an intermediate layer and jointly predicts actions and latent visual and textual groundings, denoted by V ^ t \\widehat{V}_{t} and R ^ t \\widehat{R}_{t} . Dashed lines indicate training-only supervision, and all target-generation modules are removed at deployment.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.23224",
+      "figures": [
+        {
+          "file": "2608.23224-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.23224v1/figure2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1520,
+          "height": 639,
+          "caption": "Figure 2: TOWN-VLA separates invocation, candidate ranking, prompt authorization, and frozen control. Ranked contexts are checked and either rendered as a canonical capsule or rejected for exact Base restoration. Logged scores, flags, and prompt hashes make routes auditable. Task-Prior is used only for the oracle control in Equation ( 9 ).",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.24101",
+      "figures": [
+        {
+          "file": "2608.24101-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.24101v1/img/splash.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2740,
+          "height": 650,
+          "caption": "Figure 1: Overview of TrAct. TrAct uses VLAT (left, purple), pretrained on large-scale cross-embodiment data, to propose candidate action–track pairs. TWM (middle, gray) rolls out the visual outcome for each candidate conditioned on the tracks, and VLAC (middle, green) selects the highest-reward rollout; the robot executes the paired action. Visual tracks thus serve as an intermediate interface between future prediction and robot control. We evaluate TrAct on diverse simulation and physical robot tasks (right).",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.24603",
+      "figures": [
+        {
+          "file": "2608.24603-fig5.png",
+          "figureNumber": "5",
+          "sourceUrl": "https://arxiv.org/html/2608.24603v1/method_f.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 864,
+          "height": 370,
+          "caption": "Figure 5 : An overview of GVLA architecture. Our method extends the pretrained VLA backbone with two gripper-aware components. (Left) Multi-gripper tokenizer encodes gripper knowledge through three-level soft prompts: platform-specific, gripper type-specific, and instance-specific learnable tokens. (Right) A dual MoA routes action tokens through type-stratified expert pools using a cascaded domain and a gripper router, applying top-k selected adapters as residual connections to adapt to gripper-specific manipulation strategies.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.26800",
+      "figures": [
+        {
+          "file": "2608.26800-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.26800v1/system_overview_v5.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1623,
+          "height": 606,
+          "caption": "Figure 1: Hierarchical, skill-based system architecture and real-time information flow for on-robot learning. The Orchestrator dispatches skill descriptions to the Skill Executor , where the target outcome ( y d y_{d} ) is decoded. The Regularized Memory-Based Learner uses the experience Memory to adapt the command ( u u ), while the model-based Control System generates joint trajectories for the physical robot. A precomputed Mutually Reachable Set constrains the task-level plan so that successive skills can be safely composed without violating the robot’s physical limits. An asynchronous Perception module tracks object states ( x x ) to provide feedback for closed-loop execution. The resulting outcome ( y y ) is stored in memory and immediately becomes available for refining commands.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.25864",
+      "figures": [
+        {
+          "file": "2608.25864-fig2.jpg",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.25864v1/fig/cg.jpg",
+          "sourceType": "arxiv_html_figure",
+          "width": 3936,
+          "height": 1184,
+          "caption": "Figure 2 : Multi-arm compositional generalization: unseen collaboration patterns induced by new combinations of arm roles, spatial states, and atomic actions, beyond the patterns observed in training.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.27406",
+      "figures": [
+        {
+          "file": "2608.27406-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.27406v1/teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2035,
+          "height": 645,
+          "caption": "Figure 1: We introduce CLAP , a cross-embodiment learning framework that trains action-conditioned video models on diverse human and robot video data to learn fundamental physical priors that are critical for fine-grained dynamics prediction.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.24882",
+      "figures": [
+        {
+          "file": "2608.24882-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.24882v1/main.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1635,
+          "height": 837,
+          "caption": "Figure 2: Overview of our LAWA. A structured mask controls information flow among the three branches. At inference, LAWA discards the future-video branch and jointly denoises compact latent intentions and action chunks, retaining future-aware action generation without explicitly predicting future observations. The language instruction is omitted for better illustration.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}

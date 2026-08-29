@@ -17,6 +17,7 @@ import { paperDaily20260814 } from "./paper-daily-2026-08-14";
 import { paperDaily20260817 } from "./paper-daily-2026-08-17";
 import { paperDaily20260821 } from "./paper-daily-2026-08-21";
 import { paperDaily20260824 } from "./paper-daily-2026-08-24";
+import { paperDaily20260828 } from "./paper-daily-2026-08-28";
 
 export const paperTaxonomy = {
   research: {
@@ -1230,6 +1231,18 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-08-28",
+    date: "2026.08.28",
+    weekday: "周五",
+    range: "2026.08.24 - 2026.08.27",
+    title: "跨本体世界模型、流式控制与可验证记忆",
+    summary:
+      "本期收录二十篇论文，覆盖跨本体 VLA/WAM、低延迟流式动作、执行期触觉、机器人记忆、持续学习与真机在线适应。",
+    overview:
+      "8 月 24–27 日的新工作主要研究异构人类与机器人数据如何进入统一动作空间，世界模型如何直接服务策略学习，以及记忆、触觉和推理延迟如何在真实部署中形成可验证的闭环。",
+    papers: paperDaily20260828.map(enrichPaper),
+  },
   {
     slug: "2026-08-24",
     date: "2026.08.24",

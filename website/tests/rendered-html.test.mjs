@@ -37,8 +37,8 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /检索论文数据库/);
   assert.match(html, /查看更多公司动态/);
   assert.equal((html.match(/<article class="company-card company-card-compact">/g) ?? []).length, 5);
-  assert.match(html, /2026\.08\.24/);
-  assert.match(html, /周一/);
+  assert.match(html, /2026\.08\.28/);
+  assert.match(html, /周五/);
   assert.doesNotMatch(html, /周六补跑|补跑|href="\/about"/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
@@ -48,8 +48,8 @@ test("renders public report, database, paper, and company routes", async () => {
   const [archive, latestDetail, latestPaper, officialPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, removedAbout] =
     await Promise.all([
     render("/reports"),
-    render("/reports/2026-08-24"),
-    render("/papers/2608.21204"),
+    render("/reports/2026-08-28"),
+    render("/papers/2608.27033"),
     render("/papers/tau0-vla"),
     render("/reports/2026-07-23"),
     render("/papers"),
@@ -93,21 +93,22 @@ test("renders public report, database, paper, and company routes", async () => {
     ]);
 
   assert.match(archiveHtml, /论文日报/);
+  assert.match(archiveHtml, /2026\.08\.28/);
   assert.match(archiveHtml, /2026\.08\.24/);
   assert.match(archiveHtml, /2026\.08\.21/);
   assert.match(archiveHtml, /2026\.08\.14/);
   assert.match(archiveHtml, /2026\.08\.07/);
   assert.match(archiveHtml, /2026\.07\.24/);
   assert.doesNotMatch(archiveHtml, /周六补跑|补跑/);
-  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/08\/24/);
-  assert.match(latestDetailHtml, /Beyond Imitation/);
-  assert.match(latestDetailHtml, /ViTacPhys/);
-  assert.match(latestDetailHtml, /The Imitator Game/);
-  assert.match(latestDetailHtml, /20,000\+/);
+  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/08\/28/);
+  assert.match(latestDetailHtml, /Riemann-1\.0/);
+  assert.match(latestDetailHtml, /TacForcing/);
+  assert.match(latestDetailHtml, /Memory Anchors/);
+  assert.match(latestDetailHtml, /20 万小时/);
   assert.doesNotMatch(latestDetailHtml, /综合分|候选论文|内部评分/);
-  assert.match(latestPaperHtml, /Georgia Institute of Technology/);
-  assert.match(latestPaperHtml, /Q-Planning/);
-  assert.match(latestPaperHtml, /40%→90%/);
+  assert.match(latestPaperHtml, /Riemann Dynamics/);
+  assert.match(latestPaperHtml, /渐进式预训练/);
+  assert.match(latestPaperHtml, /RoboCasa-365/);
   assert.match(officialPaperHtml, /OFFICIAL PAPER/);
   assert.match(officialPaperHtml, /40,115 小时/);
   assert.match(officialPaperHtml, /github\.com\/sii-research\/tau-0-vla/);
@@ -254,6 +255,7 @@ function imageDimensions(buffer) {
 test("enforces selected-paper figure quality manifests", async () => {
   const root = new URL("../", import.meta.url);
   const manifests = [
+    { file: "2026-08-28.json", route: "/reports/2026-08-28", assetDate: "2026-08-28", count: 20, minWidth: 700 },
     { file: "2026-08-24.json", route: "/reports/2026-08-24", assetDate: "2026-08-24", count: 8, minWidth: 700 },
     { file: "2026-08-21.json", route: "/reports/2026-08-21", assetDate: "2026-08-21", count: 14, minWidth: 700 },
     { file: "2026-08-17.json", route: "/reports/2026-08-17", assetDate: "2026-08-17", count: 14, minWidth: 700 },
