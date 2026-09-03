@@ -1,0 +1,66 @@
+{
+  "reportDate": "2026-08-31",
+  "reviewedAt": "2026-09-04",
+  "papers": [
+    {
+      "paperId": "2608.29601",
+      "figures": [{ "file": "2608.29601-fig1.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2608.29601v1/teaser.png", "sourceType": "arxiv_html_figure", "width": 2045, "height": 1377, "caption": "Figure 1: N0-Foundation 的触觉硬件、NeoData、NeoForce 表征学习与评价总览。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29242",
+      "figures": [{ "file": "2608.29242-fig2.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2608.29242v1/method_figure_v2.png", "sourceType": "arxiv_html_figure", "width": 2045, "height": 585, "caption": "Figure 2: AnyWorld 的动作、相机和本体因子化世界模型。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29768",
+      "figures": [{ "file": "2608.29768-fig3.png", "figureNumber": "3", "sourceUrl": "https://arxiv.org/html/2608.29768v1/architecture.png", "sourceType": "arxiv_html_figure", "width": 2027, "height": 1654, "caption": "Figure 3: SmoothRL 的冻结基础策略、残差 actor/critic 与异步动作分段。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29749",
+      "figures": [{ "file": "2608.29749-fig1.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2608.29749v1/intro.png", "sourceType": "arxiv_html_figure", "width": 1244, "height": 429, "caption": "Figure 1: DriftingVLA 的分布漂移动作专家与逐维时间调度。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29432",
+      "figures": [{ "file": "2608.29432-fig1.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2608.29432v1/smile_architecture.png", "sourceType": "arxiv_html_figure", "width": 957, "height": 1062, "caption": "Figure 1: SMILE 以 B-spline 控制系数替代逐步动作预测。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29967",
+      "figures": [{ "file": "2608.29967-fig1.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2608.29967v1/figure/fig1.pipeline.png", "sourceType": "arxiv_html_figure", "width": 1047, "height": 1258, "caption": "Figure 1: CorrectVLA 从语言反馈解析到动作校正的完整管线。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29537",
+      "figures": [{ "file": "2608.29537-fig1.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/pdf/2608.29537v1", "sourceType": "arxiv_pdf_figure", "width": 1535, "height": 855, "caption": "Figure 1: AGM 的子目标序列、事件验证和可回滚进度指针。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.28578",
+      "figures": [{ "file": "2608.28578-fig3.png", "figureNumber": "3", "sourceUrl": "https://arxiv.org/pdf/2608.28578v1", "sourceType": "arxiv_pdf_figure", "width": 1360, "height": 310, "caption": "Figure 3: Aero Hand Open 硬件、MuJoCo/Brax 仿真和真机部署栈。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.28570",
+      "figures": [{ "file": "2608.28570-fig4.png", "figureNumber": "4", "sourceUrl": "https://arxiv.org/html/2608.28570v1/figures/core_components.png", "sourceType": "arxiv_html_figure", "width": 2442, "height": 550, "caption": "Figure 4: ChainSplat 的运动链、链节 Gaussian 与两阶段系统辨识。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.28108",
+      "figures": [{ "file": "2608.28108-fig1.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2608.28108v1/deicticvla_system_overview.png", "sourceType": "arxiv_html_figure", "width": 2030, "height": 1099, "caption": "Figure 1: DeicticVLA 的指示输入、mask grounding 与四种提示方式。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.28718",
+      "figures": [{ "file": "2608.28718-fig1.png", "figureNumber": "1", "sourceUrl": "https://arxiv.org/html/2608.28718v1/fig1.png", "sourceType": "arxiv_html_figure", "width": 4468, "height": 2479, "caption": "Figure 1: RoboPhys-3D 从多视角生成、3D 重建到物理指标和下游验证。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29078",
+      "figures": [{ "file": "2608.29078-fig2.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2608.29078v1/figures/system_overview.png", "sourceType": "arxiv_html_figure", "width": 2332, "height": 1112, "caption": "Figure 2: DREAM 的数字副本、TAMP/MimicGen 数据生成与真机部署管线。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29208",
+      "figures": [{ "file": "2608.29208-fig2.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2608.29208v1/Method_overview.png", "sourceType": "arxiv_html_figure", "width": 1559, "height": 512, "caption": "Figure 2: AdaVLA 的曲率自适应动作求解和 VLM 通道裁剪。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.29487",
+      "figures": [{ "file": "2608.29487-fig5.png", "figureNumber": "5", "sourceUrl": "https://arxiv.org/html/2608.29487v1/suitcase-timing.png", "sourceType": "arxiv_html_figure", "width": 2012, "height": 706, "caption": "Figure 5: Blind Dexterity 在行李箱任务中通过多次接触形成主动感知。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    },
+    {
+      "paperId": "2608.28140",
+      "figures": [{ "file": "2608.28140-fig2.png", "figureNumber": "2", "sourceUrl": "https://arxiv.org/html/2608.28140v1/main_diagram_nord_v3.png", "sourceType": "arxiv_html_figure", "width": 1192, "height": 627, "caption": "Figure 2: Contact-Guided Exploration 的接触候选、多 critic 和全身控制架构。", "visualReview": "passed", "containsPageHeader": false, "completeFrame": true }]
+    }
+  ]
+}

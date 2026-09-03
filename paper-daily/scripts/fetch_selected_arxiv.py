@@ -142,15 +142,15 @@ def figure_candidates(page_html: str, base_url: str) -> list[dict[str, Any]]:
             continue
         caption_match = re.search(r"<figcaption\b[^>]*>(.*?)</figcaption>", block, flags=re.I | re.S)
         caption = strip_tags(caption_match.group(1)) if caption_match else ""
-        number_match = re.search(r"Figure\s+(\d+)", caption, flags=re.I)
-        number = number_match.group(1) if number_match else str(index)
+        number_match = re.search(r"(?:Figure|Fig\.)\s+(\d+[a-z]?)", caption, flags=re.I)
+        number = number_match.group(1).lower() if number_match else str(index)
         lowered = caption.lower()
         score = 0
         # Prefer an actual method/architecture overview, then an early visual
         # abstract.  Word boundaries matter here: e.g. "foundation models" or
         # "different methods" in a result caption must not look like a method
         # diagram merely because they contain the substring ``model``/``method``.
-        if re.search(r"\b(overview|framework|architecture|pipeline|block diagram|interface)\b", lowered):
+        if re.search(r"\b(overview|framework|architecture|pipeline|block diagram|interface|core components)\b", lowered):
             score += 24
         if re.search(r"\b(method|approach|system)\b", lowered):
             score += 10

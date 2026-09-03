@@ -18,6 +18,7 @@ import { paperDaily20260817 } from "./paper-daily-2026-08-17";
 import { paperDaily20260821 } from "./paper-daily-2026-08-21";
 import { paperDaily20260824 } from "./paper-daily-2026-08-24";
 import { paperDaily20260828 } from "./paper-daily-2026-08-28";
+import { paperDaily20260831 } from "./paper-daily-2026-08-31";
 
 export const paperTaxonomy = {
   research: {
@@ -1231,6 +1232,18 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-08-31",
+    date: "2026.08.31",
+    weekday: "周一",
+    range: "2026.08.28 - 2026.08.30",
+    title: "触觉基础设施、跨场景世界生成与闭环执行",
+    summary:
+      "本期收录十五篇论文，覆盖视觉—触觉基础模型、人类视频世界模型、VLA 在线强化学习、动作生成加速、可验证记忆、灵巧手与 Real2Sim2Real。",
+    overview:
+      "8 月 28–30 日的工作分别讨论了触觉和人类视频如何扩展机器人数据，动作块在异步执行、语言纠错和连续曲线表示中如何被优化，以及记忆、数字副本和接触探索如何进入真实机器人闭环。",
+    papers: paperDaily20260831.map(enrichPaper),
+  },
   {
     slug: "2026-08-28",
     date: "2026.08.28",
