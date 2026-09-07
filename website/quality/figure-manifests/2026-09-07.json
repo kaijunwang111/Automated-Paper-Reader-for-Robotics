@@ -1,0 +1,108 @@
+{
+  "reportDate": "2026-09-07",
+  "reviewedAt": "2026-09-07T23:00:00+08:00",
+  "papers": [
+    {
+      "paperId": "2609.05266",
+      "figures": [
+        {
+          "file": "2609.05266-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.05266v1/pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 994,
+          "height": 378,
+          "caption": "Figure 2: Overview of TacPAC. Our method uses a three-expert Mixture-of-Transformers architecture: a video expert predicts future visual and tactile observations, an action expert conditions on these predictions to generate the planned action chunk 𝐚 ^ \\hat{\\mathbf{a}} , and a tactile expert outputs a delta action Δ ​ 𝐚 \\Delta\\mathbf{a} that corrects 𝐚 ^ \\hat{\\mathbf{a}} from the cached tactile–action KV and the current tactile observation. Since the cache is reused, this correction runs asynchronously at the tactile frame rate without rerunning the other two experts. Stage 1 trains the video and action experts. Stage 2 freezes them and trains only the tactile expert.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.05401",
+      "figures": [
+        {
+          "file": "2609.05401-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.05401v1/pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1280,
+          "height": 445,
+          "caption": "Figure 2: Data construction and evaluation pipeline. Paraphrases are generated from the original instruction using three strategies of increasing linguistic divergence: lexical substitution, syntactic restructuring, and action-goal perspective shift. After semantic filtering via an LLM ensemble, each trajectory is evaluated under the remaining paraphrases using SCR and FR to measure robustness to linguistic variation, and ME to measure prediction accuracy.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.05376",
+      "figures": [
+        {
+          "file": "2609.05376-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.05376v1/ACT-Modified_System_Architecture.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1204,
+          "height": 685,
+          "caption": "Fig. 1: ACT-Modified architecture. The full camera observation and phase-selected visual prompt are encoded into the visual memory consumed by the ACT transformer decoder. A phase predictor selects the object or receptacle prompt according to the current manipulation phase, while robot proprioception ( qpos ) provides state conditioning. The decoder combines visual memory, learned queries, cross-attention, and positional embeddings to predict an action sequence. The action-sequence encoder and CLS latent path form the CVAE posterior during training only; during inference, future actions are unavailable and the latent is fixed to the prior mean z = 0 z=0 .",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.04893",
+      "figures": [
+        {
+          "file": "2609.04893-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.04893v1/figures/architecture.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2604,
+          "height": 1368,
+          "caption": "Fig. 2 : Dense LSS architecture (Stage 2, training only). A frozen DINO+SigLIP encoder and a frozen T5-XXL command encoder condition the 2B diffusion-transformer backbone, which produces K = 16 K{=}16 action tokens Z t ∈ ℝ 2176 Z_{t}\\in\\mathbb{R}^{2176} supervised by the flow-matching loss L flow L_{\\text{flow}} . In parallel, the LSAHead projection g ϕ g_{\\phi} maps each action token into T5 space and a cosine-distance loss aligns it to the reasoning embedding of its own manipulation phase, e phase ​ ( t ) e_{\\text{phase}(t)} (straddling tokens masked by m t m_{t} ). The combined objective is L total = L flow + λ ​ L LSS L_{\\text{total}}=L_{\\text{flow}}+\\lambda L_{\\text{LSS}} . Pooled LSS uses the identical architecture but replaces the per-phase targets with a single mean-pooled episode embedding (( 1 )). The entire LSS apparatus (orange) is discarded at inference, leaving the unmodified base policy.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.05282",
+      "figures": [
+        {
+          "file": "2609.05282-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.05282v1/fig_pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2035,
+          "height": 332,
+          "caption": "Fig. 2: System overview. The robot’s camera, fingertip forces F F (estimated from the raw Xela taxels), and joint states feed either the teleoperation interface (Meta Quest 3, during demonstration collection) or the learned policy (GR00T with the temporal tactile encoder TTE, at evaluation time). Both produce the same references: a desired head orientation R h R_{h} , tracked by the head controller ( q h r ​ e ​ f q_{h}^{ref} ), and Cartesian hand poses P r P_{r} , P l P_{l} . The compliance module converts the hand references into compliant references P r , c P_{r,c} , P l , c P_{l,c} based on the measured fingertip forces (Eq. 4 ); the torso-and-arms controller then computes the torso and arm joint references q t r ​ e ​ f q_{t}^{ref} , q r r ​ e ​ f q_{r}^{ref} , q l r ​ e ​ f q_{l}^{ref} sent to the robot.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.04759",
+      "figures": [
+        {
+          "file": "2609.04759-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.04759v1/figure/method_overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 8268,
+          "height": 3544,
+          "caption": "Fig. 2: Overview of the proposed method. Top left : Visual encoder extracts point-cloud features and fuses them with the robot state to obtain the observation 𝐨 t \\mathbf{o}_{t} . Top right : A diffusion policy denoise Gaussian noise to predict an action chunk. Bottom : Diffused scalar field identifies the region ℛ t + 1 \\mathcal{R}_{t+1} , which is registered to the reference region ℛ t \\mathcal{R}_{t} to estimate arm motion. The estimated transformation is applied to generate the adapted execution trajectory.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}

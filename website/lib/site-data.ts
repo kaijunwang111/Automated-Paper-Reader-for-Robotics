@@ -19,6 +19,7 @@ import { paperDaily20260821 } from "./paper-daily-2026-08-21";
 import { paperDaily20260824 } from "./paper-daily-2026-08-24";
 import { paperDaily20260828 } from "./paper-daily-2026-08-28";
 import { paperDaily20260831 } from "./paper-daily-2026-08-31";
+import { paperDaily20260907 } from "./paper-daily-2026-09-07";
 
 export const paperTaxonomy = {
   research: {
@@ -1233,6 +1234,18 @@ function enrichPaper(paper: Paper): Paper {
 
 export const reports: Report[] = [
   {
+    slug: "2026-09-07",
+    date: "2026.09.07",
+    weekday: "周一",
+    range: "2026.09.04 - 2026.09.06",
+    title: "执行期触觉、条件视觉定位与低成本语义监督",
+    summary:
+      "本期从 200 篇窗口候选中严格筛出六篇全文可核验论文，覆盖触觉闭环校正、人机递物、视觉干扰鲁棒性、动态穿衣、训练期语义脚手架与奖励模型语言稳定性。",
+    overview:
+      "9 月 4 日的工作集中讨论三类部署瓶颈：触觉如何在动作块执行中及时修正、视觉与语义条件如何避免选错目标，以及人或语言变化如何被纳入可验证的鲁棒性评价；周末无新的 arXiv v1 记录。",
+    papers: paperDaily20260907.map(enrichPaper),
+  },
+  {
     slug: "2026-08-31",
     date: "2026.08.31",
     weekday: "周一",
@@ -1575,7 +1588,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.08.24";
+export const companyTrackerLastChecked = "2026.09.07";
 
 export const companyUpdates: CompanyUpdate[] = [
   {
@@ -1594,13 +1607,13 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "NVIDIA Robotics",
     shortName: "NV",
     color: "#6ea51f",
-    date: "2026.07.22",
-    category: "Open Source",
-    title: "开源 GPU 加速医疗机器人物理仿真框架",
+    date: "2026.08.25",
+    category: "Edge Compute",
+    title: "发布 Jetson Orin Nano 2 入门级机器人计算平台",
     summary:
-      "NVIDIA 在 Isaac for Healthcare 中开源医疗物理仿真能力，用于建模解剖结构与器械交互、生成稀缺场景并训练或评估机器人策略。",
-    url: "https://blogs.nvidia.com/blog/medical-physics-simulation-open-source/",
-    source: "NVIDIA Robotics Blog",
+      "官方称 Orin Nano 2 提供 78 TOPS、8GB 内存与 8 核 Arm CPU，相对 Orin Nano Super 推理性能翻倍，并在同等性能下节能 40%；开发套件预计 2027 年上半年上市，当前不是已交付状态。",
+    url: "https://nvidianews.nvidia.com/news/nvidia-announces-jetson-orin-nano-2-robotics-computer-to-redefine-entry-level-edge-ai",
+    source: "NVIDIA Newsroom",
   },
   {
     company: "Tesla Optimus",
@@ -1618,24 +1631,24 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "自变量机器人",
     shortName: "X²",
     color: "#168d84",
-    date: "2026.07.02",
-    category: "Action Tokenizer",
-    title: "发布跨模态具身动作分词器 X-Tokenizer",
+    date: "2026.09.02",
+    category: "Dexterous Interface",
+    title: "发布 TwinDEX 穿戴采集与机器人执行成对接口",
     summary:
-      "将动作离散化重新定义为多模态语义接口学习，官方披露多模态对齐与长程任务指标提升，后续应重点核验对照设置与真机泛化。",
-    url: "https://x2robot.com/news",
-    source: "X Square Robot",
+      "TwinDEX 由两套协同设计的三指九自由度接口组成：一套穿戴式设备采集人类操作，一套部署在机器人端；官方页目前只给出定位与日期，尚无公开规模化评测。",
+    url: "https://x2robot.com/research",
+    source: "X Square Robot Research",
   },
   {
     company: "智元机器人",
     shortName: "AG",
     color: "#2765d8",
-    date: "2026.08.20",
-    category: "Manufacturing",
-    title: "披露上半年人形机器人出货与产线部署",
+    date: "2026.09.01",
+    category: "Open Dataset",
+    title: "开源 AGIBOT WORLD 2026 Theme 3 真机强化学习数据",
     summary:
-      "智元援引 Counterpoint Research 称其 2026 年上半年出货约 9,700 台、占全球 43% 以上；官方同时披露 G2 已进入龙旗科技消费电子产线执行生产任务，这些数字按公司引用的第三方口径记录。",
-    url: "https://www.agibot.com/article/231/detail/89.html",
+      "首批覆盖 14 项工业与家庭任务、11,430 条真机轨迹，包含专家示范、1,024 条成功 rollout、1,369 条失败 rollout 和人在闭环纠正，并标注进度、错误、扰动与干预。",
+    url: "https://www.agibot.com/article/231/detail/95.html",
     source: "AGIBOT News",
   },
   {
@@ -1726,12 +1739,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "Figure AI",
     shortName: "FI",
     color: "#1f2937",
-    date: "2026.06.30",
-    category: "Industrial Deployment",
-    title: "Figure 03 搭载 Helix 02 进入 BMW 物流工序",
+    date: "2026.09.03",
+    category: "Compute Partnership",
+    title: "与 Nscale 签署最高 10 万张 Vera Rubin GPU 合作",
     summary:
-      "Figure 展示了 Figure 03 在 BMW Spartanburg 工厂执行零件排序与搬运：同一像素到动作策略协调手、臂、躯干和步态，在抓放薄壁零件与拖动重型料车之间切换；当前公开材料属于工厂演示，尚未披露规模化运行数据。",
-    url: "https://www.figure.ai/news/f-03-at-bmw",
+      "Figure 称初始部署计划自 2027 年下半年开始，计算承诺约 35 亿美元并拟扩至 60 亿美元以上，用于训练 Helix；GPU 数量、金额与进度均属前瞻计划，并非当前已到位算力。",
+    url: "https://www.figure.ai/news/figure-and-nscale-sign-strategic-partnership",
     source: "Figure News",
   },
   {
@@ -1750,12 +1763,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "Skild AI",
     shortName: "SK",
     color: "#5850a8",
-    date: "2026.04.15",
-    category: "Warehouse Deployment",
-    title: "收购 Zebra 机器人业务，推进 Skild Brain 仓储部署",
+    date: "2026.08.18",
+    category: "Foundation Model",
+    title: "发布从单段视频示范进行上下文学习的 S1",
     summary:
-      "Skild AI 收购原 Fetch Robotics 业务，计划把跨本体 Skild Brain 接入既有仓储机器人与 Symmetry 调度平台；这为模型带来真实部署与数据闭环入口，但跨本体迁移效果仍需后续运行指标验证。",
-    url: "https://www.skild.ai/blogs/skild-zebra",
+      "S1 以单段视觉示范驱动最长约十分钟的未见长程任务；官方内部评测称 10 万小时预训练时未见任务累计步骤成功率为 66%，语言提示基线为 9%，但任务集与完整独立复现尚未公开。",
+    url: "https://www.skild.ai/blogs/s1",
     source: "Skild AI Blog",
   },
   {
@@ -1786,12 +1799,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "银河通用 Galbot",
     shortName: "GB",
     color: "#3154a5",
-    date: "2026.01.18",
-    category: "Heavy-Duty Humanoid",
-    title: "推出双臂重载机器人 Galbot S1",
+    date: "2026.09.03",
+    category: "Consumer Product",
+    title: "开放原生智能体机器人“银河星仔”预订",
     summary:
-      "银河通用将 S1 定位为工业重载具身机器人，双臂面向搬运和持续作业；公开口径强调零遥操、自主运行与 50 kg 双臂负载，仍需用具体产线任务、连续运行日志和失败恢复数据判断实际能力。",
-    url: "https://www.galbot.com/s1",
+      "银河通用官网将“银河星仔”称为原生智能体机器人并开放预订；当前公开页面以产品信号为主，未给出可核验的硬件参数、交付规模和闭环任务成功率。",
+    url: "https://www.galbot.com/news/",
     source: "Galbot Official",
   },
   {
@@ -1834,12 +1847,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "灵初智能 PsiBot",
     shortName: "PS",
     color: "#0f766e",
-    date: "2026.07.14",
-    category: "Open Source",
-    title: "开源双灵巧手全栈系统 EgoSteer",
+    date: "2026.08.27",
+    category: "Financing",
+    title: "完成过亿美元融资，投入世界模型与产业部署",
     summary:
-      "EgoSteer 将 9,600 小时第一人称人手数据、187 小时真机数据与人在闭环 DAgger 串成双灵巧手训练栈；官方已开放模型、训练推理、遥操与数据处理代码，数据仍标注为后续开放。",
-    url: "https://www.psibot.ai/%E7%81%B5%E5%88%9D%E6%99%BA%E8%83%BD%E4%B8%8E%E5%8C%97%E5%A4%A7-%E7%81%B5%E5%88%9D%E8%81%94%E5%90%88%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%85%B1%E5%90%8C%E5%8F%91%E5%B8%83%E5%B9%B6%E5%BC%80%E6%BA%90%E5%8F%8C/",
+      "公司称本轮资金将用于 Psi-R2 操作策略、Psi-W0 动作条件世界模型、人类数据管线及物流/先进制造落地；融资金额与用途按官方公告记录，不据此推断技术效果。",
+    url: "https://www.psibot.ai/%E7%81%B5%E5%88%9D%E6%99%BA%E8%83%BD%E5%B7%B2%E5%AE%8C%E6%88%90%E8%BF%87%E4%BA%BF%E7%BE%8E%E5%85%83%E8%9E%8D%E8%B5%84%EF%BC%8C%E4%BA%A7%E4%B8%9A%E9%BE%99%E5%A4%B4%E8%81%9A%E5%8A%9B%E5%8A%A0%E6%8C%81/",
     source: "PsiBot News",
   },
   {

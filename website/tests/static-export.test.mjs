@@ -36,6 +36,8 @@ test("exports every public route as static HTML", async () => {
     "companies/index.html",
     "papers/index.html",
     "reports/index.html",
+    "reports/2026-09-07/index.html",
+    "papers/2609.05266/index.html",
     "reports/2026-08-24/index.html",
     "papers/2608.21204/index.html",
     "reports/2026-08-14/index.html",
