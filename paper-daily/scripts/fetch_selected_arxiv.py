@@ -138,6 +138,11 @@ def figure_candidates(page_html: str, base_url: str) -> list[dict[str, Any]]:
     for index, match in enumerate(re.finditer(r"<figure\b[^>]*>(.*?)</figure>", page_html, flags=re.I | re.S), 1):
         block = match.group(1)
         sources = re.findall(r"<img\b[^>]*?src=[\"']([^\"']+)[\"']", block, flags=re.I)
+        sources += re.findall(
+            r"<object\b[^>]*?type=[\"']image/svg\+xml[\"'][^>]*?data=[\"']([^\"']+)[\"']",
+            block,
+            flags=re.I,
+        )
         if len(sources) != 1:
             continue
         caption_match = re.search(r"<figcaption\b[^>]*>(.*?)</figcaption>", block, flags=re.I | re.S)
@@ -171,7 +176,11 @@ def figure_candidates(page_html: str, base_url: str) -> list[dict[str, Any]]:
                 "score": score,
             }
         )
-    return sorted(candidates, key=lambda item: (item["score"], -int(item["figure_number"])), reverse=True)
+    def figure_order(item: dict[str, Any]) -> int:
+        match = re.match(r"\d+", str(item["figure_number"]))
+        return int(match.group(0)) if match else 10_000
+
+    return sorted(candidates, key=lambda item: (item["score"], -figure_order(item)), reverse=True)
 
 
 def image_dimensions(data: bytes) -> tuple[int, int]:
@@ -195,13 +204,28 @@ def image_dimensions(data: bytes) -> tuple[int, int]:
                 width = int.from_bytes(data[offset + 5:offset + 7], "big")
                 return width, height
             offset += max(2, length)
+    if data.lstrip().startswith(b"<svg"):
+        svg = data.decode("utf-8", errors="ignore")
+        width_match = re.search(r"\bwidth=[\"']([0-9.]+)", svg, flags=re.I)
+        height_match = re.search(r"\bheight=[\"']([0-9.]+)", svg, flags=re.I)
+        if width_match and height_match:
+            return round(float(width_match.group(1))), round(float(height_match.group(1)))
+        viewbox_match = re.search(
+            r"\bviewBox=[\"']\s*[-0-9.]+\s+[-0-9.]+\s+([0-9.]+)\s+([0-9.]+)\s*[\"']",
+            svg,
+            flags=re.I,
+        )
+        if viewbox_match:
+            return round(float(viewbox_match.group(1))), round(float(viewbox_match.group(2)))
     raise ValueError("unsupported image format")
 
 
 def extension_for(url: str, content_type: str) -> str:
     suffix = Path(urlparse(url).path).suffix.lower()
-    if suffix in {".png", ".jpg", ".jpeg"}:
+    if suffix in {".png", ".jpg", ".jpeg", ".svg"}:
         return ".jpg" if suffix == ".jpeg" else suffix
+    if "svg" in content_type:
+        return ".svg"
     return ".jpg" if "jpeg" in content_type else ".png"
 
 
@@ -240,7 +264,9 @@ def main() -> None:
             except Exception as exc:
                 print(f"{paper_id}: skipped figure {candidate['figure_number']}: {exc}")
                 continue
-            if width < 700 or height < 180:
+            is_svg = Path(urlparse(candidate["source_url"]).path).suffix.lower() == ".svg"
+            min_width, min_height = (200, 100) if is_svg else (700, 180)
+            if width < min_width or height < min_height:
                 print(f"{paper_id}: skipped small figure {candidate['figure_number']} {width}x{height}")
                 continue
             extension = extension_for(candidate["source_url"], image_response.headers.get("Content-Type", ""))

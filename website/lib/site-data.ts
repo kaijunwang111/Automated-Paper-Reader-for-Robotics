@@ -19,6 +19,7 @@ import { paperDaily20260821 } from "./paper-daily-2026-08-21";
 import { paperDaily20260824 } from "./paper-daily-2026-08-24";
 import { paperDaily20260828 } from "./paper-daily-2026-08-28";
 import { paperDaily20260831 } from "./paper-daily-2026-08-31";
+import { paperDaily20260904 } from "./paper-daily-2026-09-04";
 import { paperDaily20260907 } from "./paper-daily-2026-09-07";
 
 export const paperTaxonomy = {
@@ -1238,12 +1239,24 @@ export const reports: Report[] = [
     date: "2026.09.07",
     weekday: "周一",
     range: "2026.09.04 - 2026.09.06",
-    title: "执行期触觉、条件视觉定位与低成本语义监督",
+    title: "执行期触觉、失败恢复与低成本语义监督",
     summary:
-      "本期从 200 篇窗口候选中严格筛出六篇全文可核验论文，覆盖触觉闭环校正、人机递物、视觉干扰鲁棒性、动态穿衣、训练期语义脚手架与奖励模型语言稳定性。",
+      "本期收录六篇论文，覆盖触觉闭环校正、人机递物、视觉干扰鲁棒性、失败恢复、训练期语义脚手架与奖励模型语言稳定性。",
     overview:
-      "9 月 4 日的工作集中讨论三类部署瓶颈：触觉如何在动作块执行中及时修正、视觉与语义条件如何避免选错目标，以及人或语言变化如何被纳入可验证的鲁棒性评价；周末无新的 arXiv v1 记录。",
+      "9 月 4 日的新工作集中讨论三类部署瓶颈：触觉如何在动作块执行中及时修正、视觉与语言条件如何避免错误判断，以及失败后状态能否被识别并恢复；周末无新的 arXiv v1 记录。",
     papers: paperDaily20260907.map(enrichPaper),
+  },
+  {
+    slug: "2026-09-04",
+    date: "2026.09.04",
+    weekday: "周五",
+    range: "2026.08.31 - 2026.09.03",
+    title: "视频规模化、跨本体迁移与接触闭环",
+    summary:
+      "本期收录十九篇论文，覆盖大规模 world-action 预训练、精密接触与灵巧操作、跨本体 VLA、训练期结构监督、世界模型后训练及双臂数据闭环。",
+    overview:
+      "8 月 31 日至 9 月 3 日的新工作集中在把第一视角视频、跨本体轨迹和失败数据分别放到合适的训练阶段，并进一步让几何、力、触觉、历史和执行后果进入真实机器人闭环。",
+    papers: paperDaily20260904.map(enrichPaper),
   },
   {
     slug: "2026-08-31",

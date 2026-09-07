@@ -1,0 +1,329 @@
+{
+  "reportDate": "2026-09-04",
+  "reviewedAt": "2026-09-07",
+  "papers": [
+    {
+      "paperId": "2609.00188",
+      "figures": [
+        {
+          "file": "2609.00188-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.00188v1/main_architecture_2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1507,
+          "height": 817,
+          "caption": "Figure 2: Slow-Fast dual-system architecture. The Slow DiT processes observations, robot state, language instruction, along with noisy video and action tokens, to jointly predict future video latents and their corresponding actions (serves only as auxiliary supervision for video-action alignment). Concurrently, the Fast DiT ingests the updated observation and state, conditioned on the Slow DiT’s video K/V caches, to generate fine-grained final actions for high-frequency closed-loop control.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.30237",
+      "figures": [
+        {
+          "file": "2608.30237-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.30237v1/motus2_overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1407,
+          "height": 714,
+          "caption": "Figure 1 : Motus2 overview. A single general world model with one shared parameter set exposes three control interfaces. The policy generates action chunks from language, current robot observations, and the selected visual working-memory context; the simulator predicts future visual states under candidate actions; and the evaluator assesses the resulting branches for planning and policy optimization.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.01596",
+      "figures": [
+        {
+          "file": "2609.01596-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2609.01596v1/Pipeline0828.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1377,
+          "height": 924,
+          "caption": "Figure 3 : Overview of Facet-0. (a) Visual–language context, robot state, and wrench history form a shared semantic–contact representation for coarse-to-fine action–wrench decoding. (b) Structured attention shares the visual–language prefix while separating the action–wrench and causal VQA paths. (c) Phase-segmented rollouts train an Action–Wrench Critic; contact-selective credit then refines the shared action expert. (d) A bounded local actor reuses the frozen representation and policy reference; its critics evaluate executable actions, while its auxiliary wrench prediction remains non-commanded.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.01938",
+      "figures": [
+        {
+          "file": "2609.01938-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.01938v1/figures/method2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2002,
+          "height": 1220,
+          "caption": "Figure 2: DemoMimic Framework . DemoMimic consists of (A) dataset generation and (B) imitation learning policy training . ( A.1 ) DemoMimic first retargets human data to generate robot reference trajectories, which are augmented through scaling and geometric transformations for objects of different sizes. ( A.2 ) Due to embodiment gaps between humans and robots, these trajectories cannot reliably complete the task and are used instead as priors for residual reinforcement learning. ( A.3 ) the trained RL policy π RL \\pi_{\\mathrm{RL}} is rolled out from diverse initial states to generate an observation–action dataset 𝒟 R ​ L \\mathcal{D}_{RL} , for imitation learning without privileged simulator state information. ( B ) For each task, we collect the initial RGB frames from the RL rollouts and augment them using Cosmos to train a high-level policy, π H \\pi_{H} , which predicts wrist reference trajectories τ ^ H \\hat{\\tau}_{H} . We then train a low-level policy, π L \\pi_{L} , using wrist-depth images, robot states, and human references. ( C ) At inference, π H \\pi_{H} predicts an open-loop wrist reference from the initial ego-view image. This reference conditions π L \\pi_{L} to generate precise actions from wrist-mounted depth cameras.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.04193",
+      "figures": [
+        {
+          "file": "2609.04193-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.04193v1/gift-framework.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2039,
+          "height": 1315,
+          "caption": "Fig. 2: Overview of GIFT. Given the observation, instruction and robot state, GIFT attaches three training objectives to the intermediate visual tokens of a policy: geometry alignment with a frozen geometric foundation model, object-centric affordance prediction, and instruction-conditioned goal-region prediction. The default no-injection design does not route auxiliary predictions into the action pathway; the auxiliary objectives shape the shared intermediate features only through their training gradients. We instantiate the same principle in a VLA (top) and two WAM action formulations (bottom).",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.02546",
+      "figures": [
+        {
+          "file": "2609.02546-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.02546v1/teaser_HD.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2027,
+          "height": 950,
+          "caption": "Figure 1: Overview of our controlled study. We distinguish strict zero-shot transfer , where the target robot is absent from all training data, from pretrain-exposed zero-shot transfer . Under a controlled benchmark, we conduct fine-grained analyses across four embodiment shift categories, covering four research questions (RQ) on state-action representations, source-embodiment diversity, auxiliary co-training, and target-embodiment exposure.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.03199",
+      "figures": [
+        {
+          "file": "2609.03199-fig4.png",
+          "figureNumber": "4",
+          "sourceUrl": "https://arxiv.org/html/2609.03199v1/retrieval_examples.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1584,
+          "height": 727,
+          "caption": "Figure 4: Given a query demonstration video of knife cutting, we show the corresponding top-3 retrieved videos from each baseline method compared with RoboTok. Next to each retrieved video, we display its hand trajectories along with the estimated human torso frame. RoboTok retrieves based on the egocentric representation of hand trajectories and retrieves more relevant demonstrations than the baselines according to manipulation behavior.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.30643",
+      "figures": [
+        {
+          "file": "2608.30643-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2608.30643v1/fig2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1276,
+          "height": 631,
+          "caption": "Figure 2: Overview of Temporal Forcing. (a) The History Pathway compresses K K past frames per camera into gist tokens and summarizes them into the History Latent Representation and 16 tokens (Sec. 3.3 ). (b) 4D Representation Acquisition uses a pretrained 4D foundation model to extract Causal Geometric Features and Dense Geometric Features, visualized here as their top three PCA components (Sec. 3.2 ). (c) Temporal Alignment aligns the History Latent Representation with the Causal Geometric Features, while Current-Frame Alignment aligns current-frame image tokens with the Dense Geometric Features (Sec. 3.4 ). Gated fusion (zero-init) injects the 16 tokens without extending the backbone sequence (Sec. 3.3 ). The pretrained 4D foundation model and all alignment heads are training-only.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.04096",
+      "figures": [
+        {
+          "file": "2609.04096-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.04096v1/teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 993,
+          "height": 248,
+          "caption": "Fig. 1 : Adaptive vision-language grasping. (a) Real-world grasping occurs under diverse contextual conditions and task-dependent factors, each of which can substantially alter the desired grasp strategy. (b) End-to-end VLG policies typically entangle these factors within a single network trained on large-scale multimodal data, which limits their adaptability to unseen task contexts. In contrast, (c) AdaRoboVLG decouples task-dependent understanding from physical grasp synthesis: foundation-model priors construct a structured grasp interface, from which a generalizable base policy synthesizes executable grasp poses.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.03889",
+      "figures": [
+        {
+          "file": "2609.03889-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2609.03889v1/Pics/framework.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 4200,
+          "height": 1479,
+          "caption": "Figure 3: FWBC-VLA framework introduces a sensorless, force-aware interface between the VLA and WBC policies. The estimator transforms proprioceptive states into causal interaction representations, which are shared across two branches: interaction-conditioned action generation for VLA, and task-relevant body compensation for WBC.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.03591",
+      "figures": [
+        {
+          "file": "2609.03591-fig4.png",
+          "figureNumber": "4",
+          "sourceUrl": "https://arxiv.org/html/2609.03591v1/images/model.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 4258,
+          "height": 1184,
+          "caption": "Fig. 4 : Two-stage full-parameter training of XR-2. Both stages use the same VLM + action-expert architecture with all parameters trainable (flames); dashed tokens are model outputs. (a) Stage 1 fits offline teleoperated demonstrations 𝒟 demo \\mathcal{D}_{\\mathrm{demo}} on expert-visited states. (b) Stage 2 initializes from Stage 1, rolls out the policy, collects expert corrections a expert a_{\\mathrm{expert}} on the visited states, and retrains on the aggregated data—aligning training with the policy’s own state distribution.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.03681",
+      "figures": [
+        {
+          "file": "2609.03681-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.03681v1/framework.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1909,
+          "height": 904,
+          "caption": "Figure 2 : Overview of WISE. Scheduled world-model imagination evaluates candidate actions through bounded imagined futures and converts their relative outcomes into feedback for VLA policy refinement.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.03142",
+      "figures": [
+        {
+          "file": "2609.03142-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.03142v1/figures/teaser_v1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 3516,
+          "height": 794,
+          "caption": "Figure 1: Two failure modes of modality entanglement. (a-b) Nuisance sensitivity: distractors in a task-irrelevant wrist camera break navigation despite an unchanged head camera. (c-d) Single-modality insufficiency: when a deeper-placed target makes the shelf board occlude the head camera, the policy stops despite an intact wrist view.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.02531",
+      "figures": [
+        {
+          "file": "2609.02531-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.02531v1/diagram_sa-wam.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2029,
+          "height": 847,
+          "caption": "Fig. 2 : SA-WAM architecture. SA-WAM injects geometry into the WAM latent sequence as tokenizer-compatible frames paired with each RGB view, while the proprioception ( q t q_{t} ) and action chunk ( a t a_{t} ) are inserted directly into dedicated positions in the latent sequence. The conditioning signals include the task description ( t ​ a ​ s ​ k task ), one RGB frame per view ( v t c v_{t}^{c} ) interleaved with its corresponding 3D modality ( g t c g_{t}^{c} ) and the proprioceptive information at time t t ( q t q_{t} ). The action chunk, future-state RGB ( v t ′ c v_{t^{\\prime}}^{c} ), and future depth ( g t ′ c g_{t^{\\prime}}^{c} ) frames undergo the denoising process. The decoding phase is optional at inference time.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.02159",
+      "figures": [
+        {
+          "file": "2609.02159-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2609.02159v1/method_framework.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1725,
+          "height": 1040,
+          "caption": "Figure 3 : Method overview of WCD. At each decision step m m , the frozen WAM samples N N future–action candidates and selects one via pre-execution internal signals ( Phase 1 ). After execution, the realized observation z real m , 1 : K z^{\\mathrm{real}}_{m,1:K} audits the selected imagination, yielding a self-supervised backward error b m b_{m} that is reliable but causally delayed ( Phase 2 ). WCD accumulates these mismatch labels in a replay buffer to train an online predictor f ψ f_{\\psi} , amortizing the delayed signal into a planning-time video score s m + 1 , n v , pred s^{v,\\mathrm{pred}}_{m+1,n} for future candidate ranking ( Phase 3 ).",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.00908",
+      "figures": [
+        {
+          "file": "2609.00908-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.00908v1/fig1_v3.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1837,
+          "height": 459,
+          "caption": "Fig. 2 : Method Overview. Our framework dynamically determines action chunk sizes by monitoring the cross-attention entropy within the action expert. Conditioned on VLM states, the action expert identifies chunk boundaries by monitoring attention focus. This enables adaptive execution across task stages.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.03715",
+      "figures": [
+        {
+          "file": "2609.03715-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2609.03715v1/fig_scaling.svg",
+          "sourceType": "arxiv_html_figure",
+          "width": 4187,
+          "height": 2688,
+          "caption": "Fig. 3: Success versus total parameters (log scale), 2,000 rollouts per point. Performance saturates near 1M parameters; below 0.25M it collapses, and the long-horizon suite (orange) falls first.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.31167",
+      "figures": [
+        {
+          "file": "2608.31167-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.31167v1/figures/chase_sun.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1885,
+          "height": 1313,
+          "caption": "Fig. 1: Kuafu preserves the SUN Program across language grounding, MPC feasibility screening, policy learning, and monitored data generation. Downstream visual-policy training and zero-shot deployment rely exclusively on the generated observations and actions, unaware of the original program.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2608.30289",
+      "figures": [
+        {
+          "file": "2608.30289-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2608.30289v1/figure/fig1_teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2412,
+          "height": 1091,
+          "caption": "Figure 1: CometVLA overview.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}

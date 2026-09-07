@@ -1,6 +1,6 @@
 {
   "reportDate": "2026-09-07",
-  "reviewedAt": "2026-09-07T23:00:00+08:00",
+  "reviewedAt": "2026-09-07",
   "papers": [
     {
       "paperId": "2609.05266",
@@ -88,16 +88,16 @@
       ]
     },
     {
-      "paperId": "2609.04759",
+      "paperId": "2609.05178",
       "figures": [
         {
-          "file": "2609.04759-fig2.png",
-          "figureNumber": "2",
-          "sourceUrl": "https://arxiv.org/html/2609.04759v1/figure/method_overview.png",
+          "file": "2609.05178-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.05178v1/motivationv3.png",
           "sourceType": "arxiv_html_figure",
-          "width": 8268,
-          "height": 3544,
-          "caption": "Fig. 2: Overview of the proposed method. Top left : Visual encoder extracts point-cloud features and fuses them with the robot state to obtain the observation 𝐨 t \\mathbf{o}_{t} . Top right : A diffusion policy denoise Gaussian noise to predict an action chunk. Bottom : Diffused scalar field identifies the region ℛ t + 1 \\mathcal{R}_{t+1} , which is registered to the reference region ℛ t \\mathcal{R}_{t} to estimate arm motion. The estimated transformation is applied to generate the adapted execution trajectory.",
+          "width": 2034,
+          "height": 911,
+          "caption": "Figure 1: Overview of LIBERO-Recover. LIBERO-Recover collects failure scenarios from SOTA models and expert recovery trajectories via human teleoperation. The radar chart reveals existing models’ limitations in failure recovery.",
           "visualReview": "passed",
           "containsPageHeader": false,
           "completeFrame": true

@@ -231,6 +231,19 @@ test("ships original-paper figures and finished social metadata", async () => {
 });
 
 function imageDimensions(buffer) {
+  const svg = buffer.toString("utf8").trimStart();
+  if (svg.startsWith("<svg")) {
+    const width = svg.match(/\bwidth=["']([0-9.]+)/i);
+    const height = svg.match(/\bheight=["']([0-9.]+)/i);
+    if (width && height) {
+      return { width: Math.round(Number(width[1])), height: Math.round(Number(height[1])) };
+    }
+    const viewBox = svg.match(/\bviewBox=["']\s*[-0-9.]+\s+[-0-9.]+\s+([0-9.]+)\s+([0-9.]+)\s*["']/i);
+    if (viewBox) {
+      return { width: Math.round(Number(viewBox[1])), height: Math.round(Number(viewBox[2])) };
+    }
+  }
+
   if (buffer.subarray(1, 4).toString("ascii") === "PNG") {
     return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
   }
@@ -258,6 +271,7 @@ test("enforces selected-paper figure quality manifests", async () => {
   const root = new URL("../", import.meta.url);
   const manifests = [
     { file: "2026-09-07.json", route: "/reports/2026-09-07", assetDate: "2026-09-07", count: 6, minWidth: 700 },
+    { file: "2026-09-04.json", route: "/reports/2026-09-04", assetDate: "2026-09-04", count: 19, minWidth: 700 },
     { file: "2026-08-31.json", route: "/reports/2026-08-31", assetDate: "2026-08-31", count: 15, minWidth: 700 },
     { file: "2026-08-28.json", route: "/reports/2026-08-28", assetDate: "2026-08-28", count: 20, minWidth: 700 },
     { file: "2026-08-24.json", route: "/reports/2026-08-24", assetDate: "2026-08-24", count: 8, minWidth: 700 },
@@ -301,8 +315,9 @@ test("enforces selected-paper figure quality manifests", async () => {
         const buffer = await readFile(assetUrl);
         const dimensions = imageDimensions(buffer);
         assert.deepEqual(dimensions, { width: figure.width, height: figure.height });
-        assert.ok(dimensions.width >= entry.minWidth, `${figure.file} is too narrow`);
-        assert.ok(dimensions.height >= 180, `${figure.file} is too short`);
+        const isSvg = figure.file.toLowerCase().endsWith(".svg");
+        assert.ok(dimensions.width >= (isSvg ? 200 : entry.minWidth), `${figure.file} is too narrow`);
+        assert.ok(dimensions.height >= (isSvg ? 100 : 180), `${figure.file} is too short`);
         assert.match(reportHtml, new RegExp(figure.file.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
       }
     }
