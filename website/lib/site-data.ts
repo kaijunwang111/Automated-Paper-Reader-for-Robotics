@@ -21,6 +21,7 @@ import { paperDaily20260828 } from "./paper-daily-2026-08-28";
 import { paperDaily20260831 } from "./paper-daily-2026-08-31";
 import { paperDaily20260904 } from "./paper-daily-2026-09-04";
 import { paperDaily20260907 } from "./paper-daily-2026-09-07";
+import { paperDaily20260911 } from "./paper-daily-2026-09-11";
 
 export const paperTaxonomy = {
   research: {
@@ -1234,6 +1235,18 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-09-11",
+    date: "2026.09.11",
+    weekday: "周五",
+    range: "2026.09.07 - 2026.09.10",
+    title: "上下文模仿、接触表征与高效策略后训练",
+    summary:
+      "本期收录十篇论文，覆盖演示检索、视触觉灵巧操作、零样本装配、人类视频预训练、世界模型优化、记忆预测与高速动作生成。",
+    overview:
+      "9 月 7 日至 10 日的新工作集中在三条主线：让示范与人类视频更有效地进入 VLA，让触觉、力觉和未来预测形成物理闭环，以及通过数据筛选、记忆和单步生成降低后训练与部署成本。",
+    papers: paperDaily20260911.map(enrichPaper),
+  },
   {
     slug: "2026-09-07",
     date: "2026.09.07",

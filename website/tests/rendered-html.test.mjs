@@ -37,8 +37,8 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /检索论文数据库/);
   assert.match(html, /查看更多公司动态/);
   assert.equal((html.match(/<article class="company-card company-card-compact">/g) ?? []).length, 5);
-  assert.match(html, /2026\.09\.07/);
-  assert.match(html, /周一/);
+  assert.match(html, /2026\.09\.11/);
+  assert.match(html, /周五/);
   assert.doesNotMatch(html, /周六补跑|补跑|href="\/about"/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
   assert.doesNotMatch(html, /codex-preview|SkeletonPreview|react-loading-skeleton/);
@@ -48,8 +48,8 @@ test("renders public report, database, paper, and company routes", async () => {
   const [archive, latestDetail, latestPaper, officialPaper, detail, database, paper, contactPaper, excludedPaper, navigationPaper, traversabilityPaper, memoryPaper, companies, removedAbout] =
     await Promise.all([
     render("/reports"),
-    render("/reports/2026-09-07"),
-    render("/papers/2609.05266"),
+    render("/reports/2026-09-11"),
+    render("/papers/2609.07581"),
     render("/papers/tau0-vla"),
     render("/reports/2026-07-23"),
     render("/papers"),
@@ -93,6 +93,7 @@ test("renders public report, database, paper, and company routes", async () => {
     ]);
 
   assert.match(archiveHtml, /论文日报/);
+  assert.match(archiveHtml, /2026\.09\.11/);
   assert.match(archiveHtml, /2026\.09\.07/);
   assert.match(archiveHtml, /2026\.08\.31/);
   assert.match(archiveHtml, /2026\.08\.28/);
@@ -102,15 +103,15 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(archiveHtml, /2026\.08\.07/);
   assert.match(archiveHtml, /2026\.07\.24/);
   assert.doesNotMatch(archiveHtml, /周六补跑|补跑/);
-  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/09\/07/);
-  assert.match(latestDetailHtml, /TacPAC/);
-  assert.match(latestDetailHtml, /Temporal Tactile Encoding/);
-  assert.match(latestDetailHtml, /RoboRMBench/i);
-  assert.match(latestDetailHtml, /32\.9 Hz/);
+  assert.match(latestDetailHtml, /REPORT (?:<!-- -->)?2026\/09\/11/);
+  assert.match(latestDetailHtml, /ICI-VLA/);
+  assert.match(latestDetailHtml, /DeCAL/);
+  assert.match(latestDetailHtml, /IMLE-VLA/);
+  assert.match(latestDetailHtml, /55 Hz/);
   assert.doesNotMatch(latestDetailHtml, /综合分|候选论文|内部评分/);
-  assert.match(latestPaperHtml, /Fudan University/);
-  assert.match(latestPaperHtml, /规划期 tactile cache/);
-  assert.match(latestPaperHtml, /32\.9 Hz/);
+  assert.match(latestPaperHtml, /Wuhan University/);
+  assert.match(latestPaperHtml, /语义检索、时序对齐/);
+  assert.match(latestPaperHtml, /83\.2%/);
   assert.match(officialPaperHtml, /OFFICIAL PAPER/);
   assert.match(officialPaperHtml, /40,115 小时/);
   assert.match(officialPaperHtml, /github\.com\/sii-research\/tau-0-vla/);
