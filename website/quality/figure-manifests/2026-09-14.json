@@ -1,0 +1,176 @@
+{
+  "reportDate": "2026-09-14",
+  "reviewedAt": "2026-09-16",
+  "papers": [
+    {
+      "paperId": "2609.13053",
+      "figures": [
+        {
+          "file": "2609.13053-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.13053v1/overview_new.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2048,
+          "height": 762,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12898",
+      "figures": [
+        {
+          "file": "2609.12898-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.12898v1/unipart_teaser.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2034,
+          "height": 1785,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12894",
+      "figures": [
+        {
+          "file": "2609.12894-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.12894v1/figures/box_0.1_experiment_clear.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 4821,
+          "height": 917,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12749",
+      "figures": [
+        {
+          "file": "2609.12749-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.12749v1/real_world_task_description.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1736,
+          "height": 735,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12641",
+      "figures": [
+        {
+          "file": "2609.12641-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.12641v1/f1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2326,
+          "height": 824,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12634",
+      "figures": [
+        {
+          "file": "2609.12634-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.12634v1/framwork_marged.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1403,
+          "height": 839,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12549",
+      "figures": [
+        {
+          "file": "2609.12549-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2609.12549v1/pipeline1_new.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1418,
+          "height": 945,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12498",
+      "figures": [
+        {
+          "file": "2609.12498-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.12498v1/teaser2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1600,
+          "height": 900,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12433",
+      "figures": [
+        {
+          "file": "2609.12433-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.12433v1/teaser_v1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2039,
+          "height": 726,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.12316",
+      "figures": [
+        {
+          "file": "2609.12316-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.12316v1/figure2_v7.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2023,
+          "height": 460,
+          "caption": "Selected method or experiment figure from the official arXiv HTML.",
+        "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}

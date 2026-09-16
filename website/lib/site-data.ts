@@ -22,6 +22,7 @@ import { paperDaily20260831 } from "./paper-daily-2026-08-31";
 import { paperDaily20260904 } from "./paper-daily-2026-09-04";
 import { paperDaily20260907 } from "./paper-daily-2026-09-07";
 import { paperDaily20260911 } from "./paper-daily-2026-09-11";
+import { paperDaily20260914 } from "./paper-daily-2026-09-14";
 
 export const paperTaxonomy = {
   research: {
@@ -1236,6 +1237,18 @@ function enrichPaper(paper: Paper): Paper {
 
 export const reports: Report[] = [
   {
+    slug: "2026-09-14",
+    date: "2026.09.14",
+    weekday: "周一",
+    range: "2026.09.11 - 2026.09.13",
+    title: "统一世界动作模型、视觉去捷径与规模化触觉",
+    summary:
+      "本期复筛 200 篇候选后收录十篇，覆盖统一 WAM、开放词汇 3D 部件、视觉鲁棒 VLA、触觉预训练、柔性物体与多本体 sim-to-real。",
+    overview:
+      "周末无新增记录，本期论文全部来自 9 月 11 日自然日。重点不是填满配额，而是保留具有真实机器人、明确试验协议或关键消融的工作；一篇真实结果仍含 TODO 占位符的稿件被排除。",
+    papers: paperDaily20260914.map(enrichPaper),
+  },
+  {
     slug: "2026-09-11",
     date: "2026.09.11",
     weekday: "周五",
@@ -1614,7 +1627,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.09.07";
+export const companyTrackerLastChecked = "2026.09.14";
 
 export const companyUpdates: CompanyUpdate[] = [
   {
@@ -1669,12 +1682,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "智元机器人",
     shortName: "AG",
     color: "#2765d8",
-    date: "2026.09.01",
-    category: "Open Dataset",
-    title: "开源 AGIBOT WORLD 2026 Theme 3 真机强化学习数据",
+    date: "2026.09.11",
+    category: "World Action Model",
+    title: "发布原生世界动作模型 GE-Act 2.0",
     summary:
-      "首批覆盖 14 项工业与家庭任务、11,430 条真机轨迹，包含专家示范、1,024 条成功 rollout、1,369 条失败 rollout 和人在闭环纠正，并标注进度、错误、扰动与干预。",
-    url: "https://www.agibot.com/article/231/detail/95.html",
+      "官方称 GE-Act 2.0 从头联合学习视频与动作，在 100 项零样本任务、20 类技能和两种本体上评测；数据扩展至 3 万小时后，G1/G2 成功率由 17.1/13.4 提至 44.1/31.1，104 ms 动作块延迟为 RTX 5090 口径。",
+    url: "https://www.agibot.com/article/231/detail/120.html",
     source: "AGIBOT News",
   },
   {
@@ -1789,12 +1802,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "Skild AI",
     shortName: "SK",
     color: "#5850a8",
-    date: "2026.08.18",
-    category: "Foundation Model",
-    title: "发布从单段视频示范进行上下文学习的 S1",
+    date: "2026.09.10",
+    category: "Real Deployment",
+    title: "披露 S1 商业部署与 Blackwell 装配场景",
     summary:
-      "S1 以单段视觉示范驱动最长约十分钟的未见长程任务；官方内部评测称 10 万小时预训练时未见任务累计步骤成功率为 66%，语言提示基线为 9%，但任务集与完整独立复现尚未公开。",
-    url: "https://www.skild.ai/blogs/s1",
+      "Skild 称十个月内覆盖 60 多个付费客户、约九成收入来自操作任务，并与 NVIDIA、Foxconn 将 Skild Brain 部署到 Blackwell 双臂装配；营收与客户数均为公司自报，未给出独立成功率审计。",
+    url: "https://skild.ai/blogs/skild-crosses-100m-arr",
     source: "Skild AI Blog",
   },
   {
