@@ -23,6 +23,7 @@ import { paperDaily20260904 } from "./paper-daily-2026-09-04";
 import { paperDaily20260907 } from "./paper-daily-2026-09-07";
 import { paperDaily20260911 } from "./paper-daily-2026-09-11";
 import { paperDaily20260914 } from "./paper-daily-2026-09-14";
+import { paperDaily20260918 } from "./paper-daily-2026-09-18";
 
 export const paperTaxonomy = {
   research: {
@@ -1236,6 +1237,18 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-09-18",
+    date: "2026.09.18",
+    weekday: "周五",
+    range: "2026.09.14 - 2026.09.17",
+    title: "世界动作模型、触觉迁移与高效真机后训练",
+    summary:
+      "本期从四个自然日的 800 篇候选中收录十六篇，覆盖多模态 WAM、触觉/人类视频迁移、真机强化学习、VLA 边缘推理与灵巧手后训练。",
+    overview:
+      "本期工作集中在三条可验证主线：用世界状态变化连接异构数据与动作学习，把触觉、时间历史和全身运动先验显式写入策略，以及通过量化筛选、本地预测和结构化后训练降低真实部署成本。全部条目均经全文复核并包含真实机器人证据。",
+    papers: paperDaily20260918.map(enrichPaper),
+  },
   {
     slug: "2026-09-14",
     date: "2026.09.14",
