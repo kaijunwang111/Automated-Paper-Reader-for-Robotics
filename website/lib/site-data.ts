@@ -24,6 +24,7 @@ import { paperDaily20260907 } from "./paper-daily-2026-09-07";
 import { paperDaily20260911 } from "./paper-daily-2026-09-11";
 import { paperDaily20260914 } from "./paper-daily-2026-09-14";
 import { paperDaily20260918 } from "./paper-daily-2026-09-18";
+import { paperDaily20260921 } from "./paper-daily-2026-09-21";
 
 export const paperTaxonomy = {
   research: {
@@ -1238,6 +1239,18 @@ function enrichPaper(paper: Paper): Paper {
 
 export const reports: Report[] = [
   {
+    slug: "2026-09-21",
+    date: "2026.09.21",
+    weekday: "周一",
+    range: "2026.09.18 - 2026.09.20",
+    title: "子任务价值学习、接触表征与人机动作迁移",
+    summary:
+      "本期收录六篇经全文核对的机器人论文，覆盖长程子任务强化学习、力觉预测、几何潜动作与世界动作模型。",
+    overview:
+      "六篇工作均包含真实机器人闭环评测。重点分别落在长程任务的局部信用分配、未来接触与运动表示，以及把人类视频中的手部变化转成可训练的机器人控制信号。各篇的基线、消融和适用边界在详情中分开呈现。",
+    papers: paperDaily20260921.map(enrichPaper),
+  },
+  {
     slug: "2026-09-18",
     date: "2026.09.18",
     weekday: "周五",
@@ -1640,7 +1653,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.09.14";
+export const companyTrackerLastChecked = "2026.09.21";
 
 export const companyUpdates: CompanyUpdate[] = [
   {
@@ -1779,24 +1792,24 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "Sharpa",
     shortName: "SH",
     color: "#d84478",
-    date: "2026.06.01",
-    category: "Tactile Manipulation",
-    title: "Wave 灵巧手接入 Isaac GR00T 参考人形机器人",
+    date: "2026.09.15",
+    category: "Dexterous World Model",
+    title: "介绍 WM-Craftnet 触视觉世界模型",
     summary:
-      "Sharpa 宣布将带触觉的 Wave 五指灵巧手集成到 Isaac GR00T 参考人形平台，重点信号是灵巧手、触觉感知与机器人模型开发流程的标准化衔接。",
-    url: "https://www.sharpa.com/blogs/news/sharpa-brings-dexterous-tactile-manipulation-to-the-nvidia",
-    source: "Sharpa News",
+      "Sharpa 研究页介绍将腕部深度、触觉、本体状态与动作历史融合到递归世界表征，用于 Wave 灵巧手掌内旋转；175/200 次真机旋转成功是团队披露的测试结果。",
+    url: "https://www.sharpa.com/blogs/research/wm-craftnet-world-synesthesia-model-for-robust-and-generalizable-dexterous-in-hand-manipulation",
+    source: "Sharpa Research",
   },
   {
     company: "Figure AI",
     shortName: "FI",
     color: "#1f2937",
-    date: "2026.09.03",
-    category: "Compute Partnership",
-    title: "与 Nscale 签署最高 10 万张 Vera Rubin GPU 合作",
+    date: "2026.09.17",
+    category: "Humanoid Foundation Model",
+    title: "发布 Helix 2.5 的 30 户家庭零样本评测",
     summary:
-      "Figure 称初始部署计划自 2027 年下半年开始，计算承诺约 35 亿美元并拟扩至 60 亿美元以上，用于训练 Helix；GPU 数量、金额与进度均属前瞻计划，并非当前已到位算力。",
-    url: "https://www.figure.ai/news/figure-and-nscale-sign-strategic-partnership",
+      "Figure 称 Helix 2.5 在 30 个未见家庭执行整理、叠毛巾与铺床；同任务数据和架构的对照中，Index 人类视频预训练使完整任务成功率由 9% 升至 56%。数字来自公司盲测披露。",
+    url: "https://www.figure.ai/news/helix-2.5-zero-shot-30-home-generalization",
     source: "Figure News",
   },
   {
@@ -1899,25 +1912,25 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "灵初智能 PsiBot",
     shortName: "PS",
     color: "#0f766e",
-    date: "2026.08.27",
-    category: "Financing",
-    title: "完成过亿美元融资，投入世界模型与产业部署",
+    date: "2026.09.20",
+    category: "Human-Robot Data Alignment",
+    title: "发布 Psi-R2.5 人机强配对数据路线",
     summary:
-      "公司称本轮资金将用于 Psi-R2 操作策略、Psi-W0 动作条件世界模型、人类数据管线及物流/先进制造落地；融资金额与用途按官方公告记录，不据此推断技术效果。",
-    url: "https://www.psibot.ai/%E7%81%B5%E5%88%9D%E6%99%BA%E8%83%BD%E5%B7%B2%E5%AE%8C%E6%88%90%E8%BF%87%E4%BA%BF%E7%BE%8E%E5%85%83%E8%9E%8D%E8%B5%84%EF%BC%8C%E4%BA%A7%E4%B8%9A%E9%BE%99%E5%A4%B4%E8%81%9A%E5%8A%9B%E5%8A%A0%E6%8C%81/",
+      "灵初发布 Psi-R2.5 技术说明，把人类与机器人逐帧强配对数据、细粒度语言标注和多任务真机评测纳入训练路线；研究说明尚未提供可独立复核的完整论文实验表。",
+    url: "https://www.psibot.ai/category/news_zh/",
     source: "PsiBot News",
   },
   {
     company: "舞肌科技 WUJI",
     shortName: "WJ",
     color: "#d33b32",
-    date: "2026.08.03",
-    category: "Open Source",
-    title: "Wuji Hand 2 开放首版指尖触觉接口",
+    date: "2026.08.31",
+    category: "Dexterous SDK",
+    title: "Wuji SDK 扩展 Hand 2 诊断与轨迹回放",
     summary:
-      "Wuji SDK v2026.8.3 首次提供五指自描述触觉流、重标定和状态查询接口，并同步修复 Hand 2 连接与固件升级问题；官方仍将 Hand 2 标为 Beta 1，物理参数会继续迭代。",
-    url: "https://docs.wuji.tech/docs/en/wuji-sdk/latest/release-notes/",
-    source: "WUJI Docs",
+      "官方 v2026.8.31 版本增加 Hand 2 关节诊断解码、固件日志导出与 1 kHz 有界内存轨迹回放示例，并改善拇指到指尖的重定向接触。",
+    url: "https://github.com/wuji-technology/wuji-sdk/releases/tag/v2026.8.31",
+    source: "WUJI GitHub",
   },
   {
     company: "腾讯 Robotics X",

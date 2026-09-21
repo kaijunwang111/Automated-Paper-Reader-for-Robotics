@@ -1,0 +1,108 @@
+{
+  "reportDate": "2026-09-21",
+  "reviewedAt": "2026-09-21T16:33:51.177859+00:00",
+  "papers": [
+    {
+      "paperId": "2609.22085",
+      "figures": [
+        {
+          "file": "2609.22085-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.22085v1/arch_attention.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2024,
+          "height": 496,
+          "caption": "Figure 2: SeeQ value-function architecture, active-subtask text prediction followed by scalar action value.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.21753",
+      "figures": [
+        {
+          "file": "2609.21753-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.21753v1/psr_pretraining_overview_final_20260908.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 907,
+          "height": 307,
+          "caption": "Fig. 2: Predictive sensorimotor pretraining targets and hierarchical representation integration.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.21788",
+      "figures": [
+        {
+          "file": "2609.21788-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.21788v1/parts_architecture_v2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 840,
+          "height": 290,
+          "caption": "Fig. 2: PARTS selector, verifier, reset and targeted residual reinforcement learning architecture.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.21948",
+      "figures": [
+        {
+          "file": "2609.21948-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.21948v1/Stage1_v2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1342,
+          "height": 423,
+          "caption": "Fig. 2: GALA visual and geometric latent action learning with UEMR.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.21474",
+      "figures": [
+        {
+          "file": "2609.21474-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.21474v1/figure2_architecture.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1920,
+          "height": 1280,
+          "caption": "Fig. 2: MT-WAM training targets, dual-stream branch and direct action inference.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.21514",
+      "figures": [
+        {
+          "file": "2609.21514-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.21514v1/method_overview_pdf.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2048,
+          "height": 756,
+          "caption": "Fig. 2: Skel-WAM Video–Keypoint MoT, human-robot cotraining and robot-only Action Expert.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}
