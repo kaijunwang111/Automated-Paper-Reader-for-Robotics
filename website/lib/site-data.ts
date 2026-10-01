@@ -25,6 +25,8 @@ import { paperDaily20260911 } from "./paper-daily-2026-09-11";
 import { paperDaily20260914 } from "./paper-daily-2026-09-14";
 import { paperDaily20260918 } from "./paper-daily-2026-09-18";
 import { paperDaily20260921 } from "./paper-daily-2026-09-21";
+import { paperDaily20260925 } from "./paper-daily-2026-09-25";
+import { paperDaily20260928 } from "./paper-daily-2026-09-28";
 
 export const paperTaxonomy = {
   research: {
@@ -1239,15 +1241,31 @@ function enrichPaper(paper: Paper): Paper {
 
 export const reports: Report[] = [
   {
+    slug: "2026-09-28", date: "2026.09.28", weekday: "周一",
+    range: "2026.09.25 - 2026.09.27",
+    title: "预测表示、触觉对齐与连续策略学习",
+    summary: "七篇论文涉及开放数据 WAM、真实机器人自主练习、人机触觉对齐、触觉融合比较、记忆与自适应推理。",
+    overview: "这些工作分别研究如何让未来预测服务当前动作、如何把接触和历史信息用于闭环控制，以及如何降低在线练习与去噪推理的成本。实验介绍区分完成分、成功率与展示片段，并列出相应基线和消融。",
+    papers: paperDaily20260928.map(enrichPaper),
+  },
+  {
+    slug: "2026-09-25", date: "2026.09.25", weekday: "周五",
+    range: "2026.09.21 - 2026.09.24",
+    title: "视触觉世界模型、接触控制与高效策略优化",
+    summary: "九篇论文覆盖触觉世界预测、牵引示教与强化学习、精密插装、人机接触迁移、滚动世界模型及动作表示。",
+    overview: "从传感与示教接口到策略训练，这些方法尝试改善接触操作的数据、表示和执行。详情展开真机试验设置、控制栈差异、数据预算及各模块消融，帮助判断结果适用的条件。",
+    papers: paperDaily20260925.map(enrichPaper),
+  },
+  {
     slug: "2026-09-21",
     date: "2026.09.21",
     weekday: "周一",
     range: "2026.09.18 - 2026.09.20",
     title: "子任务价值学习、接触表征与人机动作迁移",
     summary:
-      "本期收录六篇经全文核对的机器人论文，覆盖长程子任务强化学习、力觉预测、几何潜动作与世界动作模型。",
+      "十二篇论文覆盖长程子任务强化学习、接触与力觉表示、人类操作数据、可变柔顺控制及世界动作模型。",
     overview:
-      "六篇工作均包含真实机器人闭环评测。重点分别落在长程任务的局部信用分配、未来接触与运动表示，以及把人类视频中的手部变化转成可训练的机器人控制信号。各篇的基线、消融和适用边界在详情中分开呈现。",
+      "这些工作分别关注长程任务的局部信用分配、未来接触与运动表示、人类示范到机器人控制的迁移，以及真实环境中的策略适配。各篇展开数据组成、方法结构、实验对照与适用边界。",
     papers: paperDaily20260921.map(enrichPaper),
   },
   {
@@ -1653,7 +1671,7 @@ export const reports: Report[] = [
   },
 ];
 
-export const companyTrackerLastChecked = "2026.09.21";
+export const companyTrackerLastChecked = "2026.10.01";
 
 export const companyUpdates: CompanyUpdate[] = [
   {
@@ -1672,13 +1690,12 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "NVIDIA Robotics",
     shortName: "NV",
     color: "#6ea51f",
-    date: "2026.08.25",
-    category: "Edge Compute",
-    title: "发布 Jetson Orin Nano 2 入门级机器人计算平台",
-    summary:
-      "官方称 Orin Nano 2 提供 78 TOPS、8GB 内存与 8 核 Arm CPU，相对 Orin Nano Super 推理性能翻倍，并在同等性能下节能 40%；开发套件预计 2027 年上半年上市，当前不是已交付状态。",
-    url: "https://nvidianews.nvidia.com/news/nvidia-announces-jetson-orin-nano-2-robotics-computer-to-redefine-entry-level-edge-ai",
-    source: "NVIDIA Newsroom",
+    date: "2026.09.22",
+    category: "Robotics Software",
+    title: "Isaac ROS 5.0 增加 agent 工作流与 ROS Lyrical 支持",
+    summary: "新版支持 ROS Lyrical / Ubuntu 24.04，提供安装、操作和 FoundationStereo 微调工作流，以及可由 agent 使用的 FoundationPose 推理库；属于开发与部署工具更新，不是机器人任务成功率发布。",
+    url: "https://blogs.nvidia.com/blog/isaac-ros-5-0-agentic-open-source-robotics/",
+    source: "NVIDIA Blog",
   },
   {
     company: "Tesla Optimus",
@@ -1708,24 +1725,22 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "智元机器人",
     shortName: "AG",
     color: "#2765d8",
-    date: "2026.09.11",
-    category: "World Action Model",
-    title: "发布原生世界动作模型 GE-Act 2.0",
-    summary:
-      "官方称 GE-Act 2.0 从头联合学习视频与动作，在 100 项零样本任务、20 类技能和两种本体上评测；数据扩展至 3 万小时后，G1/G2 成功率由 17.1/13.4 提至 44.1/31.1，104 ms 动作块延迟为 RTX 5090 口径。",
-    url: "https://www.agibot.com/article/231/detail/120.html",
+    date: "2026.09.24",
+    category: "Commercial Deployment",
+    title: "与长隆公布超过 300 台机器人的园区部署",
+    summary: "智元与长隆称机器人覆盖表演、科普、导览和酒店服务，并结合 5G-A 网络、多机协调与运营安全措施。数量为官方部署口径，公开稿未提供长周期自主运行率或任务成功率。",
+    url: "https://www.agibot.com/article/231/detail/123.html",
     source: "AGIBOT News",
   },
   {
     company: "LingBot",
     shortName: "LB",
     color: "#d76a3b",
-    date: "2026.07.25",
-    category: "Open Source",
-    title: "LingBot-VLA 2.0 发布 RoboTwin 后训练权重",
-    summary:
-      "VLA 2.0 使用约 60,000 小时预训练数据、55D 统一动作空间与 MoE action expert，新权重补齐了 RoboTwin 50 任务的后训练示例。",
-    url: "https://github.com/robbyant/lingbot-vla-v2",
+    date: "2026.09.22",
+    category: "Training Infrastructure",
+    title: "LingBot-VLA 2.0 开源 Distributed Muon 配置",
+    summary: "单节点 H20 示例中每迭代 5.93 秒降至 4.31 秒，吞吐提升约 37.6%；RoboTwin clean/random 成功率同时由 93.52/92.80 降至 91.56/91.34。需 FSDP2 和至少两个数据并行 rank。",
+    url: "https://github.com/Robbyant/lingbot-vla-v2",
     source: "Robbyant GitHub",
   },
   {
@@ -1744,12 +1759,11 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "逐际动力",
     shortName: "LX",
     color: "#7455c7",
-    date: "2026.07.15",
-    category: "Humanoid VLA",
-    title: "COSA 0.5 更新人形 VLA 全身能力",
-    summary:
-      "官方发布 COSA 0.5，并将更新重点概括为人形 VLA V³-0 的全身能力升级；当前先记录为产品版本信号，后续关注真机任务、评测设置与接口开放度。",
-    url: "https://www.limxdynamics.com/zh/news/BK000067",
+    date: "2026.09.24",
+    category: "Robot Application",
+    title: "TRON 2 轮足平台用于网球陪练机器人",
+    summary: "逐际与 Enhanced Robotics 展示 TENNIIX ULTRA MAX，将 TRON 2 轮足底盘、球轨迹感知和发球系统集成，用于现场多回合陪练。它是移动发球训练系统，不应解读成人形机器人持拍击球；尚无公开标准化评测。",
+    url: "https://www.limxdynamics.com/en/news/BK000124",
     source: "LimX Dynamics News",
   },
   {
@@ -1828,12 +1842,11 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "Skild AI",
     shortName: "SK",
     color: "#5850a8",
-    date: "2026.09.10",
-    category: "Real Deployment",
-    title: "披露 S1 商业部署与 Blackwell 装配场景",
-    summary:
-      "Skild 称十个月内覆盖 60 多个付费客户、约九成收入来自操作任务，并与 NVIDIA、Foxconn 将 Skild Brain 部署到 Blackwell 双臂装配；营收与客户数均为公司自报，未给出独立成功率审计。",
-    url: "https://skild.ai/blogs/skild-crosses-100m-arr",
+    date: "2026.09.23",
+    category: "Reinforcement Learning",
+    title: "展示机器人足球的 Physical Self-Play 后训练",
+    summary: "以进球为目标，在 Isaac Sim 中对抗策略的近期版本，官方称累计约 140 年模拟交互后迁移到人形机器人。文章属于研究预览和真机视频展示，未发布完整对照、样本数及跨任务成功率。",
+    url: "https://www.skild.ai/blogs/physical-self-play",
     source: "Skild AI Blog",
   },
   {
@@ -1912,11 +1925,10 @@ export const companyUpdates: CompanyUpdate[] = [
     company: "灵初智能 PsiBot",
     shortName: "PS",
     color: "#0f766e",
-    date: "2026.09.20",
+    date: "2026.09.28",
     category: "Human-Robot Data Alignment",
-    title: "发布 Psi-R2.5 人机强配对数据路线",
-    summary:
-      "灵初发布 Psi-R2.5 技术说明，把人类与机器人逐帧强配对数据、细粒度语言标注和多任务真机评测纳入训练路线；研究说明尚未提供可独立复核的完整论文实验表。",
+    title: "Psi-R2.5 正式发布，介绍逆向生成人机强配对数据",
+    summary: "先由真实机器人轨迹反向生成人类示范，再蒸馏人机数据转换模型；双层规划/控制模型配合 HIL+RL 后训练。官方介绍 50 项真机任务，但未给出完整逐任务分母和独立对照，不能把展示中的 99% 视作普遍成功率。",
     url: "https://www.psibot.ai/category/news_zh/",
     source: "PsiBot News",
   },

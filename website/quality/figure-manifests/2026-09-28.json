@@ -1,0 +1,139 @@
+{
+  "reportDate": "2026-09-28",
+  "reviewedAt": "2026-10-01",
+  "papers": [
+    {
+      "paperId": "2609.31394",
+      "figures": [
+        {
+          "file": "2609.31394-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.31394v1/figure1.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1610,
+          "height": 624,
+          "caption": "Figure 1: Architecture overview of InternW0- Δ \\Delta . A frozen Wan VAE encodes sparse visual memory comprising anchor (A), recent (R), and current (C) observations. The pretrained Wan2.2-TI2V-5B video expert and the ActionDiT action expert are coupled through 30 directed Mixture-of-Transformers (MoT) blocks. T5 instruction embeddings condition the video expert, while a frozen VLM provides task-conditioned scene semantics to the action expert; current proprioception is independently projected for both experts. Causal Imprint tokens encode change-oriented predictive features from recent and current observations to guide action generation.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.32069",
+      "figures": [
+        {
+          "file": "2609.32069-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.32069v1/find-overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 864,
+          "height": 351,
+          "caption": "Fig. 1: Overview of FIND . (a) The agentic loop identifies feasible tasks in the persistent workspace, prioritizes practice based on recent task performance, and uses paired pre- and post-execution observations for VLM-based binary outcome evaluation. (b) A frozen VLA provides base actions, while a learned residual policy applies corrective actions through a critic-based execution gate. (c) Residual actor–critic learning runs asynchronously using mixed offline demonstrations and autonomously collected online experience, closing the loop between real-world practice, self-evaluation, and policy improvement.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.30969",
+      "figures": [
+        {
+          "file": "2609.30969-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/pdf/2609.30969#page=1",
+          "sourceType": "arxiv_pdf_crop",
+          "width": 844,
+          "height": 860,
+          "caption": "Fig. 1: An overview of TACTIC. We study the effect of five tactile encoders paired with five multimodal fusion methods, tested on four different challenging contact-rich manipulation tasks.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "pdfPage": 1,
+          "cropBox": [
+            330,
+            169,
+            541,
+            384
+          ],
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.30959",
+      "figures": [
+        {
+          "file": "2609.30959-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.30959v1/pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1967,
+          "height": 1829,
+          "caption": "Fig. 2: Tactile co-training pipeline. Top: human demonstrations collected with a tactile glove and hand tracking ( blue ) and robot demonstrations teleoperated on the ORCA Hand ( green ) are brought into a shared co-training dataset. Each stream provides object-centric point clouds, per-finger tactile activations, and action trajectories ( t 1 t_{1} reach, t 2 t_{2} grasp, t 3 t_{3} lift/place) for the drill, strawberry, and Lego tasks. Visual alignment, tactile alignment, and kinematic retargeting map the human modalities into the robot’s observation and action spaces. Middle: a diffusion transformer policy encodes point-cloud, proprioception, and tactile tokens as context and denoises 64-step action chunks with consistency flow matching. Bottom: the co-trained policies are deployed on the robot on all three tasks.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.33748",
+      "figures": [
+        {
+          "file": "2609.33748-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.33748v1/figure2_2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1404,
+          "height": 992,
+          "caption": "Figure 2: Budget-aligned distillation and adaptive inference. (a) Teacher-trajectory displacements supervise finite-interval updates. (b) Shared LoRA adapters support multiple budgets, while teacher dynamics and student-teacher agreement provide offline risk and benefit targets. (c) Single-preview scheduling and recycling require exactly K ⋆ K^{\\star} denoising evaluations, without online teacher access or candidate rollouts.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.32155",
+      "figures": [
+        {
+          "file": "2609.32155-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.32155v1/figures/mainfigfinal.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2413,
+          "height": 1001,
+          "caption": "Figure 2: RecastVLA overview. (a) Depth-specific slot interfaces read a shared state held fixed throughout action generation. (b) Features across depths and flow evaluations define one joint update for the next call. (c) Subsequent action losses train the initialization, interfaces, and update rule through these state transitions.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.32779",
+      "figures": [
+        {
+          "file": "2609.32779-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.32779v1/method.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1097,
+          "height": 431,
+          "caption": "Figure 2 : Copper-Policy overview. An online compactor produces the World representation z t z_{t} (blue), while a spatial encoder and grid sampler produce current-frame tokens v t v_{t} (gray). An EMA compactor supplies stop-gradient targets z ~ t + 1 : t + H f \\tilde{z}_{t+1:t+H_{f}} . The Future Expert predicts these targets, and the Action Expert decodes the action chunk (orange) with access to the robot state q t q_{t} .",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    }
+  ]
+}

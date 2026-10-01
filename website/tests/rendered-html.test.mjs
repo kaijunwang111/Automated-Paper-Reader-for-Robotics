@@ -37,7 +37,7 @@ test("server-renders the finished research portal", async () => {
   assert.match(html, /检索论文数据库/);
   assert.match(html, /查看更多公司动态/);
   assert.equal((html.match(/<article class="company-card company-card-compact">/g) ?? []).length, 5);
-  assert.match(html, /2026\.09\.21/);
+  assert.match(html, /2026\.09\.28/);
   assert.match(html, /周一/);
   assert.doesNotMatch(html, /周六补跑|补跑|href="\/about"/);
   assert.doesNotMatch(html, /evidence score|综合分|可执行的研究判断|OUR FILTER/);
@@ -110,7 +110,7 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(latestDetailHtml, /SeeQ/);
   assert.match(latestDetailHtml, /PSR/);
   assert.match(latestDetailHtml, /Skel-WAM/);
-  assert.match(latestDetailHtml, /六篇/);
+  assert.match(latestDetailHtml, /十二篇/);
   assert.doesNotMatch(latestDetailHtml, /综合分|候选论文|内部评分/);
   assert.match(latestPaperHtml, /Carnegie Mellon University/);
   assert.match(latestPaperHtml, /子任务/);
@@ -179,8 +179,8 @@ test("renders public report, database, paper, and company routes", async () => {
   assert.match(memoryPaperHtml, /单个 episode 内完整力历史/);
   assert.match(companiesHtml, /Physical Intelligence/);
   assert.match(companiesHtml, /每周一/);
-  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.09\.21/);
-  assert.match(companiesHtml, /Jetson Orin Nano 2/);
+  assert.match(companiesHtml, /最近检查：(?:<!-- -->)?2026\.10\.01/);
+  assert.match(companiesHtml, /Isaac ROS 5\.0/);
   assert.match(companiesHtml, /Fremont 开始 Optimus 工厂施工与产线安装/);
   assert.match(companiesHtml, /LingBot-VLA 2\.0/);
   assert.match(companiesHtml, /TRACKING (?:<!-- -->)?24(?:<!-- -->)? COMPANIES/);
@@ -274,7 +274,9 @@ function imageDimensions(buffer) {
 test("enforces selected-paper figure quality manifests", async () => {
   const root = new URL("../", import.meta.url);
   const manifests = [
-    { file: "2026-09-21.json", route: "/reports/2026-09-21", assetDate: "2026-09-21", count: 6, minWidth: 700 },
+    { file: "2026-09-28.json", route: "/reports/2026-09-28", assetDate: "2026-09-28", count: 7, minWidth: 700 },
+    { file: "2026-09-25.json", route: "/reports/2026-09-25", assetDate: "2026-09-25", count: 9, minWidth: 700 },
+    { file: "2026-09-21.json", route: "/reports/2026-09-21", assetDate: "2026-09-21", count: 12, minWidth: 700 },
     { file: "2026-09-18.json", route: "/reports/2026-09-18", assetDate: "2026-09-18", count: 16, minWidth: 700 },
     { file: "2026-09-07.json", route: "/reports/2026-09-07", assetDate: "2026-09-07", count: 6, minWidth: 700 },
     { file: "2026-09-04.json", route: "/reports/2026-09-04", assetDate: "2026-09-04", count: 19, minWidth: 700 },

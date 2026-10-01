@@ -1,0 +1,175 @@
+{
+  "reportDate": "2026-09-25",
+  "reviewedAt": "2026-10-01",
+  "papers": [
+    {
+      "paperId": "2609.24976",
+      "figures": [
+        {
+          "file": "2609.24976-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.24976v1/architecture.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1600,
+          "height": 900,
+          "caption": "Figure 1 : Overall architecture of Dex Tac WAM . A two-block transformer design. Left: the World-Model Transformer ( × N \\times N ) fuses vision and bimanual tactile tokens through per-modality self-attention and a shared cross-modality self-attention, producing predictive latents that form a joint visuo-tactile world state. Right: the Action Model ( × N \\times N ) cross-attends to the World-Model latents with per-modality K/V RMS normalization, conditioned on a state token from proprioception, and predicts contact force, action, and next-state. Inputs are head-view RGB and left/right dexterous tactile streams encoded by lightweight encoders, together with raw state observations.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.24660",
+      "figures": [
+        {
+          "file": "2609.24660-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.24660v1/pipeline.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1287,
+          "height": 376,
+          "caption": "Fig. 2 : Touch2Robot pipeline. Human motion, tactile preference, and object motion train object-specific RL teachers to learn physically feasible robot interactions. Their behaviors are distilled into a unified, geometry-conditioned retargeter. During collection, simulator-based contact reconstruction provides target-hand feedback for online human adaptation.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.25630",
+      "figures": [
+        {
+          "file": "2609.25630-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/pdf/2609.25630#page=2",
+          "sourceType": "arxiv_pdf_crop",
+          "width": 1200,
+          "height": 672,
+          "caption": "Figure 1: PAKT kinesthetic teaching, control stack and policy learning.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "pdfPage": 2,
+          "cropBox": [
+            106,
+            207,
+            506,
+            431
+          ],
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.24511",
+      "figures": [
+        {
+          "file": "2609.24511-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.24511v1/figures/fig01.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 4000,
+          "height": 2657,
+          "caption": "Fig. 1: Overview of learning precision insertion in simulation and deploying it on a real robot. (a) The robot platform with fingertip force sensors, shown alongside standard insertion workpieces and the ManipulationNet Peg-in-Hole Assembly benchmark board [ 45 ] . (b) Five hole geometries and four clearance levels of the standard insertion workpieces fabricated for this study. The bottom row illustrates the square-hole task, with close-up views showing progressively tighter clearances. (c) Asymmetric actor–critic training in simulation: the actor uses deployable observations, the critic additionally uses simulation state to estimate value, and PPO updates the policy under observation and dynamics randomization. (d) Real-world deployment: the trained policy generates mean actions from the robot state, calibrated target, and fingertip force. Postprocessing converts these actions into end-effector pose commands executed by a Cartesian impedance controller, without real-world demonstrations or policy fine-tuning.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.28811",
+      "figures": [
+        {
+          "file": "2609.28811-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.28811v1/architecture.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 840,
+          "height": 687,
+          "caption": "Fig. 2: Overview of the DeltaWAM architecture. (a) Three architectural variants: Anchor-Shared, Separated, and Action-Shared. (b) Detailed Anchor-Shared architecture, where the Anchor Network and Action DiT retain stream-specific transformations while interacting through layer-wise shared self-attention. (c) Structured attention masks regulating information flow among anchor, delta, and action tokens.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.29760",
+      "figures": [
+        {
+          "file": "2609.29760-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2609.29760v1/figures/vista_model_2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1182,
+          "height": 542,
+          "caption": "Fig. 3 : The VisTA model consists of sensor-specific CNN encoders and joint self-attention fusion. The high number of fused conditioning tokens 𝐂 \\mathbf{C} , then conditions a flow matching transformer.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.29000",
+      "figures": [
+        {
+          "file": "2609.29000-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.29000v1/framework.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 888,
+          "height": 489,
+          "caption": "Fig. 1 : Overview of Predictive Action Chunk Learning (PACL). PACL improves a pretrained policy from human demonstrations and mixed-quality deployment rollouts using a Q-conditioned diffusion actor and a predictive chunk-level critic. The critic evaluates temporally extended actions through TD learning augmented with future latent prediction.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.30247",
+      "figures": [
+        {
+          "file": "2609.30247-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.30247v1/rollingwam-framework.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1550,
+          "height": 708,
+          "caption": "Fig. 2: Rolling-WAM framework. (a) Video and action experts jointly predict flow velocities using masked joint attention and cross-attention to text and state context, conditioned on the current camera observation and per-chunk noise levels shared by video and actions. (b) Rolling inference denoises the window, executes the first action chunk, and shifts the retained future chunks while appending a new chunk initialized with Gaussian noise. (c) The same attention mask is used during training and inference.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    },
+    {
+      "paperId": "2609.27513",
+      "figures": [
+        {
+          "file": "2609.27513-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.27513v1/figures/overview.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 3762,
+          "height": 2076,
+          "caption": "Fig. 1: BAAT tokenizer training and downstream policy learning. Soft-DTW supplies behavioral correspondence between action chunks; alignment constrains their quantized coordinates jointly with reconstruction. Each latent slot contains four FSQ factors. The diffusion decoder conditions on executed action history, indicated by A t − 1 A_{t-1} in the schematic.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true,
+          "reviewNote": "Original full method/overview frame inspected in contact sheet; PDF crops additionally inspected individually. No page header."
+        }
+      ]
+    }
+  ]
+}
