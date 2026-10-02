@@ -1,0 +1,176 @@
+{
+  "reportDate": "2026-10-02",
+  "reviewedAt": "2026-10-02T16:10:00Z",
+  "papers": [
+    {
+      "paperId": "2609.35761",
+      "figures": [
+        {
+          "file": "2609.35761-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.35761v1/data_collection_devices.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1401,
+          "height": 611,
+          "caption": "DexRoam data collection system: follow-style whole-body teleoperation and tracker-free egocentric human capture.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.35200",
+      "figures": [
+        {
+          "file": "2609.35200-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.35200v1/figures/architecture-backup.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2109,
+          "height": 642,
+          "caption": "Overview of ReCAT: modality encoders, visual compressor, recurrent memory, and flow-matching action head.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.37398",
+      "figures": [
+        {
+          "file": "2609.37398-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.37398v1/figures/overviewV2.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1988,
+          "height": 979,
+          "caption": "Overview of DEWO: matched continuation exploration, selective visual/action supervision, and value-gated success conditioning.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2610.00801",
+      "figures": [
+        {
+          "file": "2610.00801-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2610.00801v1/archi.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1642,
+          "height": 727,
+          "caption": "ECoMEM separates explicit memory construction from learned memory use inside a vision-language-action model.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2610.02204",
+      "figures": [
+        {
+          "file": "2610.02204-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2610.02204v1/pipeline-0930.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 2038,
+          "height": 906,
+          "caption": "RPG uses privileged execution and video analysis to develop, validate, merge, and retain shared skill revisions.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2610.01178",
+      "figures": [
+        {
+          "file": "2610.01178-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/pdf/2610.01178",
+          "sourceType": "arxiv_pdf_exact_figure_crop",
+          "width": 709,
+          "height": 352,
+          "caption": "Overview of Recova: digital-twin recovery development, parallel automated DAgger, and learned real-robot recovery skills.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.35450",
+      "figures": [
+        {
+          "file": "2609.35450-fig2.png",
+          "figureNumber": "2",
+          "sourceUrl": "https://arxiv.org/html/2609.35450v1/Fig2_method.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 1600,
+          "height": 900,
+          "caption": "Overview of Uni-VLaT: whole-body tactile action conditioning and training-time future tactile, proprioceptive, and visual prediction.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2609.35249",
+      "figures": [
+        {
+          "file": "2609.35249-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2609.35249v1/figures/pipeline_V25.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 4003,
+          "height": 1569,
+          "caption": "Spatial Grafting binds reconstruction features to metric robot-relative locations and injects them into late flow-action blocks.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2610.00913",
+      "figures": [
+        {
+          "file": "2610.00913-fig3.png",
+          "figureNumber": "3",
+          "sourceUrl": "https://arxiv.org/html/2610.00913v1/images/method_v02.png",
+          "sourceType": "arxiv_html_figure",
+          "width": 4499,
+          "height": 2305,
+          "caption": "eRLT constructs an action-relevant RL token through multi-layer token routing, offline action prediction, and online critic adaptation.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    },
+    {
+      "paperId": "2610.00899",
+      "figures": [
+        {
+          "file": "2610.00899-fig1.png",
+          "figureNumber": "1",
+          "sourceUrl": "https://arxiv.org/html/2610.00899v1/overview_fig.svg",
+          "sourceType": "arxiv_html_vector_figure_render",
+          "width": 1248,
+          "height": 690,
+          "caption": "TOAST samples multiple token sequences that decode to the same quantized action trajectory during policy training.",
+          "visualReview": "passed",
+          "containsPageHeader": false,
+          "completeFrame": true
+        }
+      ]
+    }
+  ]
+}

@@ -274,6 +274,7 @@ function imageDimensions(buffer) {
 test("enforces selected-paper figure quality manifests", async () => {
   const root = new URL("../", import.meta.url);
   const manifests = [
+    { file: "2026-10-02.json", route: "/reports/2026-10-02", assetDate: "2026-10-02", count: 10, minWidth: 700 },
     { file: "2026-09-28.json", route: "/reports/2026-09-28", assetDate: "2026-09-28", count: 7, minWidth: 700 },
     { file: "2026-09-25.json", route: "/reports/2026-09-25", assetDate: "2026-09-25", count: 9, minWidth: 700 },
     { file: "2026-09-21.json", route: "/reports/2026-09-21", assetDate: "2026-09-21", count: 12, minWidth: 700 },

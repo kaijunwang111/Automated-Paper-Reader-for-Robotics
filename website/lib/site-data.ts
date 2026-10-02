@@ -27,6 +27,7 @@ import { paperDaily20260918 } from "./paper-daily-2026-09-18";
 import { paperDaily20260921 } from "./paper-daily-2026-09-21";
 import { paperDaily20260925 } from "./paper-daily-2026-09-25";
 import { paperDaily20260928 } from "./paper-daily-2026-09-28";
+import { paperDaily20261002 } from "./paper-daily-2026-10-02";
 
 export const paperTaxonomy = {
   research: {
@@ -1240,6 +1241,14 @@ function enrichPaper(paper: Paper): Paper {
 }
 
 export const reports: Report[] = [
+  {
+    slug: "2026-10-02", date: "2026.10.02", weekday: "周五",
+    range: "2026.09.28 - 2026.10.01",
+    title: "全身示范、长期记忆与失败恢复",
+    summary: "十篇论文覆盖人类全身与触觉示范、三维/记忆表征、世界模型后训练、在线强化学习、技能改进与失败恢复。",
+    overview: "本期工作围绕接触、历史和失败展开：人类全身与分布式触觉提供新监督，三维嫁接、显式/递归记忆和动作分词改善策略表征，部署经验与在线强化学习用于后训练，另两项系统在仿真中验证技能修改或恢复策略后迁移到真实机器人。各条目均核对试验分母、成功判据、直接基线和适用边界。",
+    papers: paperDaily20261002.map(enrichPaper),
+  },
   {
     slug: "2026-09-28", date: "2026.09.28", weekday: "周一",
     range: "2026.09.25 - 2026.09.27",
